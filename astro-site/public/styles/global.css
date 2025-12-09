@@ -295,6 +295,16 @@ h3 {
 #logo_img img {
     max-height: 50px;
     width: auto;
+    transition: transform var(--transition-fast);
+    /* Optimización para mantener nitidez en el escalado */
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+#logo_img a:hover img {
+    transform: scale(1.05) translateZ(0);
 }
 
 /* Mobile Menu Button */
@@ -366,12 +376,14 @@ h3 {
     #site-navigation {
         display: flex;
         align-items: center;
+        margin-left: auto;
     }
 }
 
 .main-menu {
     display: flex;
     gap: 5px;
+    justify-content: flex-end;
 }
 
 .main-menu li a {

@@ -3,38 +3,52 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const steps = [
+const modelos = [
   {
-    number: '01',
-    title: 'Briefing',
-    description: 'Nos cuentas tu proyecto, objetivos y necesidades. Hacemos las preguntas necesarias para entender bien el contexto y los requerimientos.'
+    icon: '/images/icon_presupuesto.png',
+    title: 'Presupuesto por proyecto',
+    description: 'El clásico en el sector. Tu cliente te pide y tú nos cuentas qué necesitas.'
   },
   {
-    number: '02',
-    title: 'Propuesta',
-    description: 'Te enviamos una propuesta detallada con alcance, timing y presupuesto. Sin letra pequeña ni sorpresas.'
+    icon: '/images/icon_bolsa_horas.png',
+    title: 'Bolsa de horas científicas',
+    description: 'Si tienes varios frentes abiertos donde necesites soporte del departamento médico, puedes elegir un pack a tu medida.'
   },
   {
-    number: '03',
-    title: 'Desarrollo',
-    description: 'Trabajamos en tu proyecto con comunicación constante. Te mantenemos informado del progreso y resolvemos dudas al momento.'
+    icon: '/images/icon_implant.png',
+    title: 'Implant científico temporal',
+    description: 'Si tienes una baja en el equipo médico o buscas cubrir un puesto de redacción científica de manera temporal.'
   },
   {
-    number: '04',
-    title: 'Revisión',
-    description: 'Entregamos el trabajo y lo revisamos juntos. Incorporamos tus comentarios hasta que quedes 100% satisfecho.'
+    icon: '/images/icon_mentoring.png',
+    title: 'Fee mensual de mentoring científico',
+    description: 'Si tu equipo científico es junior y necesita la sombra de un buen maestro para florecer con energía.'
+  }
+];
+
+const ventajas = [
+  {
+    icon: '/images/icon_vision_global.png',
+    title: 'Visión global del proyecto'
   },
   {
-    number: '05',
-    title: 'Entrega Final',
-    description: 'Entregamos todos los archivos en los formatos que necesites. Documentamos todo y quedamos disponibles para seguimiento.'
+    icon: '/images/icon_respuesta_rapida.png',
+    title: 'Respuesta rápida ante imprevistos'
+  },
+  {
+    icon: '/images/icon_cobertura.png',
+    title: 'Cobertura 100% de necesidades'
+  },
+  {
+    icon: '/images/icon_inteligencia.png',
+    title: 'Inteligencia colaborativa'
   }
 ];
 ---
 
 <Layout 
   title="Así Trabajamos - Synuptic"
-  description="Conoce nuestro proceso de trabajo. Transparencia, comunicación constante y calidad garantizada en cada proyecto."
+  description="Conoce cómo trabajamos: soluciones rápidas y precisas para agencias. Modelos flexibles de contratación adaptados a tus necesidades."
 >
   <div id="wrap_all">
     <Header />
@@ -43,77 +57,61 @@ const steps = [
       <!-- Hero Section -->
       <section class="page-hero">
         <div class="cesis_container">
-          <h1>Así Trabajamos</h1>
+          <h1>Trabajamos para ofrecer soluciones rápidas y precisas</h1>
           <div class="line-divider center"></div>
           <p class="page-hero__subtitle">
-            Nuestro proceso está diseñado para que trabajes con nosotros como si fuéramos 
-            parte de tu equipo. Transparencia, agilidad y sin complicaciones.
+            Conocemos el ritmo frenético de las agencias. Por eso, procuramos que contratarnos no te suponga un esfuerzo extra.
           </p>
+          <p class="page-hero__lema">¡Siente la sinapsis!</p>
         </div>
       </section>
 
-      <!-- Process Timeline -->
-      <section class="section process-section">
+      <!-- Modelos de Contratación -->
+      <section class="section modelos-section">
         <div class="cesis_container">
-          <div class="timeline">
-            {steps.map((step, index) => (
-              <div class={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
-                <div class="timeline-content">
-                  <span class="timeline-number">{step.number}</span>
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </div>
+          <h2 class="text-center">Cómo activar la sinapsis</h2>
+          <div class="line-divider center"></div>
+          
+          <div class="modelos-grid">
+            {modelos.map((modelo) => (
+              <div class="modelo-card">
+                <img src={modelo.icon} alt={modelo.title} class="modelo-icon" />
+                <h3>{modelo.title}</h3>
+                <p>{modelo.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <!-- Values Section -->
-      <section class="section section--gray values-section">
-        <div class="cesis_container">
-          <h2 class="text-center">Nuestra Filosofía</h2>
-          <div class="line-divider center"></div>
-          
-          <div class="values-grid">
-            <div class="value-card">
-              <h3>🤝 Colaboración</h3>
-              <p>Trabajamos contigo, no para ti. Somos una extensión de tu equipo.</p>
-            </div>
-            <div class="value-card">
-              <h3>⚡ Agilidad</h3>
-              <p>Respuestas rápidas, plazos cumplidos y flexibilidad ante los cambios.</p>
-            </div>
-            <div class="value-card">
-              <h3>🔬 Rigor</h3>
-              <p>Precisión científica en cada contenido. Sin errores, sin ambigüedades.</p>
-            </div>
-          </div>
+      <!-- Social Proof Section -->
+      <section class="section section--gray social-proof-section">
+        <div class="cesis_container text-center">
+          <p class="social-proof__highlight">
+            Desde 2015... <span class="highlight-number">más de 30 agencias y consultoras</span> ya han confiado en nuestra experiencia
+          </p>
+          <p class="social-proof__question">¿Quieres ser la siguiente?</p>
+          <a href="/#contact" class="btn">
+            <span class="btn-icon">✉</span>
+            <span>Contactar</span>
+          </a>
         </div>
       </section>
 
-      <!-- External Resource -->
-      <section class="section external-section">
-        <div class="cesis_container text-center">
-          <h2>Buenas Prácticas</h2>
+      <!-- Ventajas Section -->
+      <section class="section ventajas-section">
+        <div class="cesis_container">
+          <h2 class="text-center">Contar con nosotros son todo ventajas, la ciencia dejará de darte dolor de cabeza</h2>
           <div class="line-divider center"></div>
-          <p>
-            Seguimos las directrices GPP3 (Good Publication Practice) de la ISMPP, 
-            el estándar internacional para la publicación ética en ciencias de la salud.
-          </p>
-          <a 
-            href="https://www.ismpp.org/gpp3" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="btn btn--external"
-          >
-            <span>Ver directrices GPP3</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-          </a>
+          
+          <div class="ventajas-grid">
+            {ventajas.map((ventaja) => (
+              <div class="ventaja-item">
+                <img src={ventaja.icon} alt={ventaja.title} class="ventaja-icon" />
+                <span class="ventaja-title">{ventaja.title}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -144,13 +142,17 @@ const steps = [
   }
   
   .page-hero h1 {
-    font-size: 48px;
+    font-size: 42px;
     margin-bottom: 16px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.2;
   }
   
   @media (max-width: 767px) {
     .page-hero h1 {
-      font-size: 32px;
+      font-size: 28px;
     }
   }
   
@@ -172,173 +174,177 @@ const steps = [
     }
   }
   
-  .process-section {
-    padding: 80px 0;
-  }
-  
-  .timeline {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, #95cca5 0%, #1a3865 100%);
-    border-radius: 2px;
-  }
-  
-  @media (max-width: 767px) {
-    .timeline::before {
-      left: 20px;
-    }
-  }
-  
-  .timeline-item {
-    position: relative;
-    padding: 20px 0;
-    width: 50%;
-  }
-  
-  .timeline-item.left {
-    padding-right: 50px;
-    text-align: right;
-  }
-  
-  .timeline-item.right {
-    left: 50%;
-    padding-left: 50px;
-    text-align: left;
-  }
-  
-  @media (max-width: 767px) {
-    .timeline-item,
-    .timeline-item.left,
-    .timeline-item.right {
-      width: 100%;
-      left: 0;
-      padding-left: 60px;
-      padding-right: 0;
-      text-align: left;
-    }
-  }
-  
-  .timeline-content {
-    background: #fff;
-    border: 1px solid #edf0f7;
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    position: relative;
-  }
-  
-  .timeline-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
+  .page-hero__lema {
+    font-size: 28px;
     font-weight: 700;
     color: #95cca5;
-    opacity: 0.5;
-    position: absolute;
-    top: -10px;
-    right: 16px;
-  }
-  
-  .timeline-item.right .timeline-number {
-    left: 16px;
-    right: auto;
+    margin-top: 24px;
+    font-style: italic;
   }
   
   @media (max-width: 767px) {
-    .timeline-number {
-      right: 16px;
-      left: auto;
+    .page-hero__lema {
+      font-size: 22px;
     }
   }
   
-  .timeline-content h3 {
-    font-size: 22px;
-    color: #1a3865;
-    margin-bottom: 12px;
-  }
-  
-  .timeline-content p {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.6;
-    margin: 0;
-  }
-  
-  .values-section {
+  /* Modelos de Contratación */
+  .modelos-section {
     padding: 80px 0;
   }
   
-  .values-section h2 {
+  .modelos-section h2 {
     margin-bottom: 16px;
   }
   
-  .values-grid {
+  .modelos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
     margin-top: 40px;
   }
   
-  .value-card {
-    background: #fff;
-    border-radius: 12px;
+  @media (max-width: 767px) {
+    .modelos-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .modelo-card {
+    background: var(--color-bg, #fff);
+    border: 1px solid var(--color-border, #edf0f7);
+    border-radius: 16px;
     padding: 32px;
     text-align: center;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
-  .value-card h3 {
+  .modelo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+  
+  .modelo-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 16px;
+  }
+  
+  .modelo-card h3 {
     font-size: 20px;
-    color: #1a3865;
+    color: var(--color-primary, #1a3865);
     margin-bottom: 12px;
   }
   
-  .value-card p {
+  .modelo-card p {
     font-size: 15px;
-    color: #555;
+    color: var(--color-text-secondary, #555);
     line-height: 1.6;
     margin: 0;
   }
   
-  .external-section {
+  /* Social Proof */
+  .social-proof-section {
     padding: 80px 0;
   }
   
-  .external-section h2 {
+  .social-proof__highlight {
+    font-size: 28px;
+    line-height: 1.5;
+    color: var(--color-text, #333);
+    max-width: 800px;
+    margin: 0 auto 24px;
+  }
+  
+  @media (max-width: 767px) {
+    .social-proof__highlight {
+      font-size: 22px;
+    }
+  }
+  
+  .highlight-number {
+    color: var(--color-accent, #95cca5);
+    font-weight: 700;
+  }
+  
+  .social-proof__question {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-primary, #1a3865);
+    margin-bottom: 32px;
+  }
+  
+  @media (max-width: 767px) {
+    .social-proof__question {
+      font-size: 20px;
+    }
+  }
+  
+  /* Ventajas */
+  .ventajas-section {
+    padding: 80px 0;
+  }
+  
+  .ventajas-section h2 {
     margin-bottom: 16px;
-  }
-  
-  .external-section p {
     max-width: 700px;
-    margin: 0 auto 32px;
-    font-size: 18px;
-    line-height: 1.7;
+    margin-left: auto;
+    margin-right: auto;
   }
   
-  .btn--external {
-    display: inline-flex;
+  .ventajas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-top: 48px;
+  }
+  
+  @media (max-width: 991px) {
+    .ventajas-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 575px) {
+    .ventajas-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .ventaja-item {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
+    text-align: center;
+    gap: 16px;
   }
   
-  .btn--external svg {
+  .ventaja-icon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    display: block;
+    padding: 15px;
+    background: linear-gradient(135deg, rgba(149,204,165,0.15) 0%, rgba(26,56,101,0.1) 100%);
+    border-radius: 50%;
     transition: transform 0.3s ease;
   }
   
-  .btn--external:hover svg {
-    transform: translate(2px, -2px);
+  .ventaja-item:hover .ventaja-icon {
+    transform: scale(1.1);
   }
   
+  .ventaja-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-text, #333);
+    line-height: 1.4;
+  }
+  
+  /* CTA */
   .cta-section {
     padding: 80px 0;
   }
@@ -350,6 +356,6 @@ const steps = [
   .cta-section p {
     font-size: 18px;
     margin-bottom: 24px;
-    color: #555;
+    color: var(--color-text-secondary, #555);
   }
 </style>

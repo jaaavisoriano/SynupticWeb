@@ -5,36 +5,32 @@ import Footer from '../components/Footer.astro';
 
 const faqs = [
   {
-    question: '¿Trabajáis directamente con laboratorios farmacéuticos?',
-    answer: 'No. Trabajamos exclusivamente con agencias de marketing, publicidad y comunicación del sector salud. Esto nos permite mantener el foco en nuestro trabajo sin conflictos de interés.'
+    question: 'En la agencia tenemos un acuerdo de confidencialidad con los clientes muy estricto, ¿trabajar con vosotros puede suponer un problema?',
+    answer: 'Por supuesto que no. Antes de empezar a colaborar con un nuevo cliente, siempre firmamos un acuerdo marco de confidencialidad que garantiza la protección de toda la información sensible. Tratamos cada proyecto con la máxima discreción y profesionalidad.'
   },
   {
-    question: '¿Qué tipos de proyectos aceptáis?',
-    answer: 'Aceptamos todo tipo de proyectos de contenido médico: publicaciones científicas, materiales promocionales, contenido digital, documentación regulatoria, formaciones... Si tiene que ver con comunicación en salud, probablemente podamos ayudarte.'
+    question: 'Estamos buscando un perfil para cubrir una baja en el departamento científico de nuestra agencia, ¿podéis ayudarnos con eso?',
+    answer: 'Por supuesto, en este caso tienes varias opciones. Una es contarnos tus necesidades y valorar la conveniencia de contratar una bolsa de horas científicas para cubrir el trabajo durante la ausencia. La otra opción es ayudarte a "fichar" a un talento científico a través de nuestra red de profesionales especializados en healthcare.'
   },
   {
-    question: '¿Cuánto cuesta un proyecto con Synuptic?',
-    answer: 'Cada proyecto es diferente. Trabajamos con presupuestos cerrados o por horas, según lo que más convenga en cada caso. Cuéntanos tu proyecto y te enviamos una propuesta sin compromiso.'
+    question: 'Mi cliente me ha encargado traducir materiales internacionales para el mercado español, ¿podéis hacer este trabajo?',
+    answer: 'Sin duda. Aunque es muy importante tener en cuenta que este tipo de encargo no supone solo la traducción del inglés al español. Hay que adaptar los mensajes a la normativa nacional, revisar las referencias bibliográficas, ajustar los datos de prescripción al mercado local y asegurar que todo cumple con el código AEMPS.'
   },
   {
-    question: '¿Cuáles son vuestros plazos de entrega?',
-    answer: 'Depende del volumen y complejidad del proyecto. Somos conocidos por nuestra agilidad y capacidad de adaptación a plazos ajustados. Siempre intentamos cuadrar con tus necesidades.'
+    question: '¿Podéis estar presentes en las reuniones con nuestros clientes? Nosotros no nos vemos capaces de contar la "parte científica" del proyecto.',
+    answer: 'Claro que sí. Nos encanta ayudaros desde que recibís el briefing hasta que se presenta la propuesta al cliente. Podemos asistir a reuniones, resolver dudas científicas en tiempo real y aportar credibilidad técnica a vuestras propuestas. Trabajamos como una extensión de vuestro equipo.'
   },
   {
-    question: '¿Trabajáis en inglés?',
-    answer: 'Sí. Trabajamos tanto en español como en inglés. También podemos gestionar traducciones y adaptaciones de materiales entre ambos idiomas.'
+    question: '¿Podéis encargaros de coordinar a un grupo de expertos para crear los contenidos de un proyecto?',
+    answer: 'Nos encanta coordinar a los expertos y ayudarles en todo lo que puedan necesitar. Gestionamos las agendas, facilitamos la comunicación, realizamos las entrevistas, sintetizamos sus aportaciones y nos aseguramos de que los contenidos finales reflejen fielmente su conocimiento y experiencia.'
   },
   {
-    question: '¿Qué áreas terapéuticas conocéis?',
-    answer: 'Tenemos experiencia en múltiples áreas: oncología, neurología, cardiología, dermatología, oftalmología, neumología, inmunología... Si es un área nueva para nosotros, nos formamos antes de empezar.'
+    question: '¿Cómo se elaboran los presupuestos?',
+    answer: 'Trabajamos con un tarifario en función de la tarea científica a realizar en cada proyecto. En base a la petición, se estima el tiempo necesario para completar el trabajo con la calidad que nos caracteriza. Siempre ofrecemos presupuestos cerrados y transparentes, sin sorpresas.'
   },
   {
-    question: '¿Cómo garantizáis la calidad?',
-    answer: 'Todo nuestro trabajo pasa por un proceso de revisión interno antes de la entrega. Además, seguimos las directrices GPP3 y los estándares de la EMWA para asegurar la calidad científica y ética.'
-  },
-  {
-    question: '¿Podéis firmar acuerdos de confidencialidad?',
-    answer: 'Por supuesto. Es lo habitual en nuestro sector. Firmamos NDAs sin problema y tratamos toda la información de los proyectos con la máxima confidencialidad.'
+    question: '¿Cómo estar seguros de que no trabajáis con nuestra competencia, por ejemplo, preparando un concurso?',
+    answer: 'Trabajamos con muchas agencias y para muchos laboratorios, por lo que es imprescindible comunicar cualquier conflicto de intereses desde el primer momento. Siempre sabréis si nos ha contactado otra agencia antes para el mismo proyecto y respetaremos vuestra prioridad.'
   }
 ];
 ---
@@ -50,12 +46,8 @@ const faqs = [
       <!-- Hero Section -->
       <section class="page-hero">
         <div class="cesis_container">
-          <h1>Dudas Razonables</h1>
+          <h1>Si aún te quedan dudas, aquí damos respuesta a las preguntas más frecuentes de nuestros clientes</h1>
           <div class="line-divider center"></div>
-          <p class="page-hero__subtitle">
-            Las preguntas que más nos hacen nuestros clientes. 
-            Si no encuentras la tuya, escríbenos y te la resolvemos.
-          </p>
         </div>
       </section>
 
@@ -108,12 +100,9 @@ const faqs = [
       <!-- CTA Section -->
       <section class="section cta-section">
         <div class="cesis_container text-center">
-          <h2>¿Más preguntas?</h2>
-          <div class="line-divider center"></div>
-          <p>Escríbenos y te respondemos encantados.</p>
-          <a href="/#contact" class="btn">
-            <span class="btn-icon">✉</span>
-            <span>Contactar</span>
+          <a href="/#contact" class="btn btn--large">
+            <span class="btn-icon">💬</span>
+            <span>Tengo otras dudas</span>
           </a>
         </div>
       </section>
@@ -154,13 +143,18 @@ const faqs = [
   }
   
   .page-hero h1 {
-    font-size: 48px;
+    font-size: 36px;
     margin-bottom: 16px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.3;
+    font-weight: 600;
   }
   
   @media (max-width: 767px) {
     .page-hero h1 {
-      font-size: 32px;
+      font-size: 24px;
     }
   }
   
@@ -168,18 +162,9 @@ const faqs = [
     background: #95cca5;
   }
   
-  .page-hero__subtitle {
-    font-size: 20px;
-    max-width: 700px;
-    margin: 0 auto;
-    opacity: 0.9;
-    line-height: 1.6;
-  }
-  
-  @media (max-width: 767px) {
-    .page-hero__subtitle {
-      font-size: 16px;
-    }
+  .btn--large {
+    padding: 20px 40px;
+    font-size: 18px;
   }
   
   .faq-section {

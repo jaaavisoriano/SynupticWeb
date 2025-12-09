@@ -3,28 +3,68 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const values = [
+const teamMembers = [
   {
-    title: 'Científicos de formación',
-    description: 'Somos biólogos, farmacéuticos, biotecnólogos y profesionales de la salud. Hablamos el idioma de la ciencia.',
-    icon: '🔬'
+    name: 'Almudena Vindel',
+    role: 'Coordinación del talento y psicología de clientes',
+    bio: 'Licenciada en Periodismo. Nuestra experta en coordinación del talento y psicología de clientes. Le encanta usar la danza oriental para alinear sus chakras y quitarse el estrés.',
+    image: '/images/Almu_600x600.jpg'
   },
   {
-    title: 'Marketeros por experiencia',
-    description: 'Más de 10 años trabajando en agencias de marketing farmacéutico nos han enseñado a pensar en resultados.',
-    icon: '📊'
+    name: 'Ana Bernal',
+    role: 'Contenidos y tendencias de actualidad',
+    bio: 'Graduada por partida doble en Farmacia y Biotecnología. Nuestra experta más internacional... Le fascina perderse (y reencontrarse) en la naturaleza...',
+    image: '/images/Ana_600x600.jpg'
   },
   {
-    title: 'Freelancers con propósito',
-    description: 'Elegimos trabajar así porque creemos en la flexibilidad, la autonomía y hacer las cosas bien.',
-    icon: '✨'
+    name: 'Cristina Palacios',
+    role: 'Contenidos y divulgación científica',
+    bio: 'Graduada en Biotecnología... Le apasiona subirse a un escenario y deleitarnos con su voz de RockStar.',
+    image: '/images/Cris_600x600.jpg'
+  },
+  {
+    name: 'Fernando Blanco',
+    role: 'Desarrollo de nuevos fármacos y atención farmacéutica',
+    bio: 'Doctor en Química Orgánica... Con una mano en las teclas y otra en la guitarra, si no lo encuentras en la botica andará perdido en la montaña.',
+    image: '/images/Fer_600x600.jpg'
+  },
+  {
+    name: 'Isabel Martín',
+    role: 'Liderazgo científico y soporte estratégico',
+    bio: 'Doctora en Biología... Con la vocación dividida entre la curiosidad y la creatividad.',
+    image: '/images/Isa_600x600.jpg'
+  },
+  {
+    name: 'Lucía Gregorio',
+    role: 'Contenidos y soporte digital',
+    bio: 'Doctora en Biología Molecular... Le encanta enredarse en la esterilla de yoga y defiende en cuerpo y alma el #madeinspain.',
+    image: '/images/Lucia_600x600.jpg'
+  },
+  {
+    name: 'Roberto Moreno',
+    role: 'Contenidos y nuevos fármacos',
+    bio: 'Doctor en Biociencias Moleculares... Le encanta descubrir nuevos lugares y disfrutar en modo gourmet.',
+    image: '/images/Rober_600x600.jpg'
+  },
+  {
+    name: 'Rosa Acebal',
+    role: 'Contenidos y visión clínica',
+    bio: 'Médica especialista en Medicina Interna... Disfruta trabajando desde la paz que le aportan su taza de té y su lista de éxitos de Spotify.',
+    image: '/images/Rosa_600x600.jpg'
   }
 ];
+
+const leader = {
+  name: 'Carolina Egea',
+  role: 'Impulsora del proyecto',
+  image: '/images/Carol_600x600.jpg',
+  quote: '«Hace ya más de 15 años que colgué la bata y me reinventé, primero como redactora científica y luego como consultora estratégica. En todo este tiempo, puedo presumir de haberme rodeado siempre de gente maravillosa que me ha ayudado a crecer y a conocerme a mí misma para elegir mi camino. Ahora, me toca a mí liderar un equipo con luz propia que me acompaña en esta aventura, creciendo juntos en la misma dirección. No puedo estar más orgullosa de lo que tenemos en Synuptic y espero que sigamos haciendo, por mucho tiempo, esto que tanto nos gusta, que es traducir la ciencia en beneficios reales para los pacientes.»'
+};
 ---
 
 <Layout 
   title="SynupTeam - Synuptic"
-  description="Conoce al equipo de Synuptic. Científicos y marketeros unidos para crear contenido médico de calidad."
+  description="Conoce al equipo de Synuptic. El SynupTeam es gente maravillosa, de formación científica, pero con un puntito de creatividad."
 >
   <div id="wrap_all">
     <Header />
@@ -33,64 +73,87 @@ const values = [
       <!-- Hero Section -->
       <section class="page-hero">
         <div class="cesis_container">
-          <h1>SynupTeam</h1>
+          <span class="hero-label">SYNUPTEAM</span>
+          <h1>En Synuptic valoramos, ante todo, a las personas</h1>
           <div class="line-divider center"></div>
-          <p class="page-hero__subtitle">
-            Un equipo multidisciplinar de científicos que han decidido poner su conocimiento 
-            al servicio de la comunicación médica efectiva.
+          <p class="hero-subtitle">
+            El SynupTeam es gente maravillosa, de formación científica, pero con un puntito de creatividad 
+            que hará que tus proyectos healthcare brillen con luz propia.
           </p>
         </div>
       </section>
 
-      <!-- Team Values -->
+      <!-- Quote Banner -->
+      <section class="section--primary quote-banner">
+        <div class="cesis_container">
+          <h3>"El talento gana partidos, pero el trabajo en equipo y la inteligencia ganan campeonatos"</h3>
+          <p>— Michael Jordan</p>
+        </div>
+      </section>
+
+      <!-- Team Grid Section -->
       <section class="section team-section">
         <div class="cesis_container">
-          <h2 class="text-center">Quiénes Somos</h2>
+          <h2 class="text-center">Nuestro fantástico SynupTeam</h2>
           <div class="line-divider center"></div>
           
           <div class="team-grid">
-            {values.map((value) => (
-              <div class="team-card">
-                <span class="team-card__icon">{value.icon}</span>
-                <h3>{value.title}</h3>
-                <p>{value.description}</p>
+            {teamMembers.map((member) => (
+              <div class="team-flip-box">
+                <div class="team-flip-box__inner">
+                  <div class="team-flip-box__front">
+                    <div class="team-flip-box__image">
+                      <img 
+                        src={member.image} 
+                        alt={member.name}
+                        width="300"
+                        height="300"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="team-flip-box__info">
+                      <h3 class="team-flip-box__name">{member.name}</h3>
+                      <span class="team-flip-box__role">{member.role}</span>
+                    </div>
+                  </div>
+                  <div class="team-flip-box__back">
+                    <h3 class="team-flip-box__name">{member.name}</h3>
+                    <span class="team-flip-box__role">{member.role}</span>
+                    <p class="team-flip-box__bio">{member.bio}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <!-- About Team Section -->
-      <section class="section section--gray about-team-section">
+      <!-- Leader Section -->
+      <section class="section section--gray leader-section">
         <div class="cesis_container">
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="team-image">
+          <h2 class="text-center">Y... {leader.name} como impulsora del proyecto</h2>
+          <div class="line-divider center"></div>
+          
+          <div class="leader-wrapper">
+            <div class="leader-card">
+              <div class="leader-image-container">
                 <img 
-                  src="/images/Que-somos_600x800-1.jpg" 
-                  alt="El equipo de Synuptic"
-                  width="600"
-                  height="800"
+                  src={leader.image} 
+                  alt={leader.name}
+                  width="400"
+                  height="400"
                   loading="lazy"
-                >
+                />
+              </div>
+              <div class="leader-name-badge">
+                <span class="leader-crown">👑</span>
+                <span class="leader-name">{leader.name}</span>
               </div>
             </div>
-            <div class="col-sm-6 about-team-content">
-              <h2>Nuestra Historia</h2>
-              <div class="line-divider"></div>
-              <p>
-                Synuptic nació en 2015 de la mano de profesionales que compartían una visión: 
-                <strong>la comunicación médica debía ser diferente</strong>. Rigurosa sin ser aburrida, 
-                creativa sin perder la precisión.
-              </p>
-              <p>
-                Desde entonces, hemos colaborado con decenas de agencias de marketing farmacéutico, 
-                ayudándoles a crear contenidos que realmente conectan con los profesionales sanitarios.
-              </p>
-              <p>
-                Hoy seguimos siendo un equipo pequeño por elección, porque creemos que 
-                <strong>la calidad importa más que la cantidad</strong>.
-              </p>
+            <div class="leader-content">
+              <blockquote class="leader-quote">
+                {leader.quote}
+              </blockquote>
             </div>
           </div>
         </div>
@@ -101,7 +164,7 @@ const values = [
         <div class="cesis_container text-center">
           <h2>Conéctate con Nosotros</h2>
           <div class="line-divider center"></div>
-          <p>
+          <p class="connect-text">
             Síguenos en LinkedIn para conocer nuestro día a día, 
             artículos interesantes y novedades del sector.
           </p>
@@ -124,7 +187,7 @@ const values = [
         <div class="cesis_container text-center">
           <h2>¿Quieres conocernos mejor?</h2>
           <div class="line-divider center"></div>
-          <p>Escríbenos y charlamos sobre cómo podemos ayudarte.</p>
+          <p class="cta-text">Escríbenos y charlamos sobre cómo podemos ayudarte.</p>
           <a href="/#contact" class="btn">
             <span class="btn-icon">✉</span>
             <span>Contactar</span>
@@ -138,29 +201,45 @@ const values = [
 </Layout>
 
 <style>
+  /* Hero Section */
   .page-hero {
-    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    background: linear-gradient(135deg, var(--color-primary, #1a3865) 0%, #2c5282 100%);
     color: #fff;
     padding: 120px 0 80px;
     text-align: center;
   }
   
-  .page-hero h1 {
-    font-size: 48px;
+  .hero-label {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.8;
     margin-bottom: 16px;
+  }
+  
+  .page-hero h1 {
+    font-size: 42px;
+    margin-bottom: 16px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.2;
+    color: #fff;
   }
   
   @media (max-width: 767px) {
     .page-hero h1 {
-      font-size: 32px;
+      font-size: 28px;
     }
   }
   
   .page-hero .line-divider {
-    background: #95cca5;
+    background: var(--color-accent, #95cca5);
   }
   
-  .page-hero__subtitle {
+  .hero-subtitle {
     font-size: 20px;
     max-width: 700px;
     margin: 0 auto;
@@ -169,11 +248,12 @@ const values = [
   }
   
   @media (max-width: 767px) {
-    .page-hero__subtitle {
+    .hero-subtitle {
       font-size: 16px;
     }
   }
   
+  /* Team Section */
   .team-section {
     padding: 80px 0;
   }
@@ -184,82 +264,244 @@ const values = [
   
   .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-    margin-top: 40px;
+    margin-top: 48px;
   }
   
-  .team-card {
-    background: #fff;
-    border: 1px solid #edf0f7;
-    border-radius: 12px;
-    padding: 32px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .team-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-  }
-  
-  .team-card__icon {
-    font-size: 48px;
-    display: block;
-    margin-bottom: 16px;
-  }
-  
-  .team-card h3 {
-    font-size: 20px;
-    color: #1a3865;
-    margin-bottom: 12px;
-  }
-  
-  .team-card p {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.6;
-    margin: 0;
-  }
-  
-  .about-team-section {
-    padding: 80px 0;
-  }
-  
-  .about-team-section .row {
-    align-items: center;
-  }
-  
-  .team-image img {
-    border-radius: 8px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    width: 100%;
-    height: auto;
-  }
-  
-  .about-team-content {
-    padding-left: 40px;
-  }
-  
-  @media (max-width: 767px) {
-    .about-team-content {
-      padding-left: 0;
-      margin-top: 32px;
+  @media (max-width: 1100px) {
+    .team-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   
-  .about-team-content h2 {
-    margin-bottom: 16px;
+  @media (max-width: 850px) {
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
   
-  .about-team-content p {
+  @media (max-width: 575px) {
+    .team-grid {
+      grid-template-columns: 1fr;
+      max-width: 350px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  
+  /* Team Flip Box */
+  .team-flip-box {
+    perspective: 1000px;
+    min-height: 380px;
+  }
+  
+  .team-flip-box__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 380px;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+  }
+  
+  .team-flip-box:hover .team-flip-box__inner {
+    transform: rotateY(180deg);
+  }
+  
+  .team-flip-box__front,
+  .team-flip-box__back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-height: 380px;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  
+  .team-flip-box__front {
+    background: var(--color-bg, #fff);
+    border: 1px solid var(--color-border, #edf0f7);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .team-flip-box__image {
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .team-flip-box__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+  
+  .team-flip-box__info {
+    padding: 20px;
+    text-align: center;
+    background: var(--color-bg, #fff);
+  }
+  
+  .team-flip-box__name {
     font-size: 17px;
-    line-height: 1.7;
-    color: #333;
+    color: var(--color-primary, #1a3865);
+    margin: 0 0 6px 0;
+  }
+  
+  .team-flip-box__role {
+    font-size: 13px;
+    color: var(--color-accent, #95cca5);
+    font-weight: 600;
+    display: block;
+    line-height: 1.4;
+  }
+  
+  .team-flip-box__back {
+    background: linear-gradient(135deg, var(--color-primary, #1a3865) 0%, #2c5282 100%);
+    color: #fff;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 28px;
+    text-align: center;
+  }
+  
+  .team-flip-box__back .team-flip-box__name {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  
+  .team-flip-box__back .team-flip-box__role {
     margin-bottom: 16px;
   }
   
+  .team-flip-box__bio {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.95;
+    margin: 0;
+  }
+  
+  /* Leader Section */
+  .leader-section {
+    padding: 80px 0;
+  }
+  
+  .leader-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .leader-wrapper {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 48px;
+  }
+  
+  @media (max-width: 900px) {
+    .leader-wrapper {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+  
+  .leader-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .leader-image-container {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  }
+  
+  .leader-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .leader-name-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%);
+    color: var(--color-primary, #1a3865);
+    font-size: 18px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 50px;
+    margin-top: -24px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 15px rgba(255, 183, 0, 0.4);
+  }
+  
+  .leader-crown {
+    font-size: 22px;
+  }
+  
+  .leader-content {
+    text-align: left;
+  }
+  
+  @media (max-width: 900px) {
+    .leader-content {
+      text-align: center;
+    }
+  }
+  
+  .leader-quote {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--color-text, #333);
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+    position: relative;
+  }
+  
+  .leader-quote::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--color-accent, #95cca5);
+    border-radius: 2px;
+  }
+  
+  @media (max-width: 900px) {
+    .leader-quote::before {
+      display: none;
+    }
+    
+    .leader-quote {
+      padding: 0 20px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .leader-quote {
+      font-size: 16px;
+    }
+  }
+  
+  /* Connect Section */
   .connect-section {
     padding: 80px 0;
   }
@@ -268,7 +510,7 @@ const values = [
     margin-bottom: 16px;
   }
   
-  .connect-section p {
+  .connect-text {
     max-width: 600px;
     margin: 0 auto 32px;
     font-size: 18px;
@@ -280,15 +522,15 @@ const values = [
     align-items: center;
     gap: 10px;
     background: #0077B5;
-    color: #fff;
-    border: none;
+    border-color: #0077B5;
   }
   
   .btn--linkedin:hover {
     background: #005885;
-    color: #fff;
+    border-color: #005885;
   }
   
+  /* CTA Section */
   .cta-section {
     padding: 80px 0;
   }
@@ -297,9 +539,46 @@ const values = [
     margin-bottom: 16px;
   }
   
-  .cta-section p {
+  .cta-text {
     font-size: 18px;
     margin-bottom: 24px;
-    color: #555;
+    color: var(--color-text-secondary, #555);
+  }
+  
+  /* Mobile touch support */
+  @media (hover: none) and (pointer: coarse) {
+    .team-flip-box.is-flipped .team-flip-box__inner {
+      transform: rotateY(180deg);
+    }
   }
 </style>
+
+<script>
+  // Touch support for flip boxes on mobile
+  function initTeamFlipBoxes() {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    if (isTouchDevice) {
+      const flipBoxes = document.querySelectorAll('.team-flip-box');
+      
+      flipBoxes.forEach(box => {
+        box.addEventListener('click', (e) => {
+          // Close all other boxes
+          flipBoxes.forEach(otherBox => {
+            if (otherBox !== box) {
+              otherBox.classList.remove('is-flipped');
+            }
+          });
+          // Toggle current box
+          box.classList.toggle('is-flipped');
+        });
+      });
+    }
+  }
+  
+  // Run on initial load
+  initTeamFlipBoxes();
+  
+  // Run after Astro page transitions
+  document.addEventListener('astro:page-load', initTeamFlipBoxes);
+</script>
