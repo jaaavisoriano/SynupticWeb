@@ -1,0 +1,35 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "Synuptic - Medical Writing & Healthcare Strategy",
+  description = "Creamos textos médicos y diseñamos estrategias healthcare como si fuéramos parte de tu departamento científico."
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/images/favicon.png">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Raleway:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="/styles/global.css">
+</head>
+<body>
+  <slot />
+  <script src="/scripts/animations.js" is:inline></script>
+</body>
+</html>

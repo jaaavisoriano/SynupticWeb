@@ -1,0 +1,355 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const steps = [
+  {
+    number: '01',
+    title: 'Briefing',
+    description: 'Nos cuentas tu proyecto, objetivos y necesidades. Hacemos las preguntas necesarias para entender bien el contexto y los requerimientos.'
+  },
+  {
+    number: '02',
+    title: 'Propuesta',
+    description: 'Te enviamos una propuesta detallada con alcance, timing y presupuesto. Sin letra pequeña ni sorpresas.'
+  },
+  {
+    number: '03',
+    title: 'Desarrollo',
+    description: 'Trabajamos en tu proyecto con comunicación constante. Te mantenemos informado del progreso y resolvemos dudas al momento.'
+  },
+  {
+    number: '04',
+    title: 'Revisión',
+    description: 'Entregamos el trabajo y lo revisamos juntos. Incorporamos tus comentarios hasta que quedes 100% satisfecho.'
+  },
+  {
+    number: '05',
+    title: 'Entrega Final',
+    description: 'Entregamos todos los archivos en los formatos que necesites. Documentamos todo y quedamos disponibles para seguimiento.'
+  }
+];
+---
+
+<Layout 
+  title="Así Trabajamos - Synuptic"
+  description="Conoce nuestro proceso de trabajo. Transparencia, comunicación constante y calidad garantizada en cada proyecto."
+>
+  <div id="wrap_all">
+    <Header />
+    
+    <main id="main-content">
+      <!-- Hero Section -->
+      <section class="page-hero">
+        <div class="cesis_container">
+          <h1>Así Trabajamos</h1>
+          <div class="line-divider center"></div>
+          <p class="page-hero__subtitle">
+            Nuestro proceso está diseñado para que trabajes con nosotros como si fuéramos 
+            parte de tu equipo. Transparencia, agilidad y sin complicaciones.
+          </p>
+        </div>
+      </section>
+
+      <!-- Process Timeline -->
+      <section class="section process-section">
+        <div class="cesis_container">
+          <div class="timeline">
+            {steps.map((step, index) => (
+              <div class={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
+                <div class="timeline-content">
+                  <span class="timeline-number">{step.number}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Values Section -->
+      <section class="section section--gray values-section">
+        <div class="cesis_container">
+          <h2 class="text-center">Nuestra Filosofía</h2>
+          <div class="line-divider center"></div>
+          
+          <div class="values-grid">
+            <div class="value-card">
+              <h3>🤝 Colaboración</h3>
+              <p>Trabajamos contigo, no para ti. Somos una extensión de tu equipo.</p>
+            </div>
+            <div class="value-card">
+              <h3>⚡ Agilidad</h3>
+              <p>Respuestas rápidas, plazos cumplidos y flexibilidad ante los cambios.</p>
+            </div>
+            <div class="value-card">
+              <h3>🔬 Rigor</h3>
+              <p>Precisión científica en cada contenido. Sin errores, sin ambigüedades.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- External Resource -->
+      <section class="section external-section">
+        <div class="cesis_container text-center">
+          <h2>Buenas Prácticas</h2>
+          <div class="line-divider center"></div>
+          <p>
+            Seguimos las directrices GPP3 (Good Publication Practice) de la ISMPP, 
+            el estándar internacional para la publicación ética en ciencias de la salud.
+          </p>
+          <a 
+            href="https://www.ismpp.org/gpp3" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn--external"
+          >
+            <span>Ver directrices GPP3</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="section section--gray cta-section">
+        <div class="cesis_container text-center">
+          <h2>¿Empezamos?</h2>
+          <div class="line-divider center"></div>
+          <p>Cuéntanos tu proyecto y comenzamos con el primer paso.</p>
+          <a href="/#contact" class="btn">
+            <span class="btn-icon">✉</span>
+            <span>Contactar</span>
+          </a>
+        </div>
+      </section>
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    color: #fff;
+    padding: 120px 0 80px;
+    text-align: center;
+  }
+  
+  .page-hero h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  
+  @media (max-width: 767px) {
+    .page-hero h1 {
+      font-size: 32px;
+    }
+  }
+  
+  .page-hero .line-divider {
+    background: #95cca5;
+  }
+  
+  .page-hero__subtitle {
+    font-size: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 767px) {
+    .page-hero__subtitle {
+      font-size: 16px;
+    }
+  }
+  
+  .process-section {
+    padding: 80px 0;
+  }
+  
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #95cca5 0%, #1a3865 100%);
+    border-radius: 2px;
+  }
+  
+  @media (max-width: 767px) {
+    .timeline::before {
+      left: 20px;
+    }
+  }
+  
+  .timeline-item {
+    position: relative;
+    padding: 20px 0;
+    width: 50%;
+  }
+  
+  .timeline-item.left {
+    padding-right: 50px;
+    text-align: right;
+  }
+  
+  .timeline-item.right {
+    left: 50%;
+    padding-left: 50px;
+    text-align: left;
+  }
+  
+  @media (max-width: 767px) {
+    .timeline-item,
+    .timeline-item.left,
+    .timeline-item.right {
+      width: 100%;
+      left: 0;
+      padding-left: 60px;
+      padding-right: 0;
+      text-align: left;
+    }
+  }
+  
+  .timeline-content {
+    background: #fff;
+    border: 1px solid #edf0f7;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    position: relative;
+  }
+  
+  .timeline-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #95cca5;
+    opacity: 0.5;
+    position: absolute;
+    top: -10px;
+    right: 16px;
+  }
+  
+  .timeline-item.right .timeline-number {
+    left: 16px;
+    right: auto;
+  }
+  
+  @media (max-width: 767px) {
+    .timeline-number {
+      right: 16px;
+      left: auto;
+    }
+  }
+  
+  .timeline-content h3 {
+    font-size: 22px;
+    color: #1a3865;
+    margin-bottom: 12px;
+  }
+  
+  .timeline-content p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  .values-section {
+    padding: 80px 0;
+  }
+  
+  .values-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  
+  .value-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  
+  .value-card h3 {
+    font-size: 20px;
+    color: #1a3865;
+    margin-bottom: 12px;
+  }
+  
+  .value-card p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  .external-section {
+    padding: 80px 0;
+  }
+  
+  .external-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .external-section p {
+    max-width: 700px;
+    margin: 0 auto 32px;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+  
+  .btn--external {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .btn--external svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .btn--external:hover svg {
+    transform: translate(2px, -2px);
+  }
+  
+  .cta-section {
+    padding: 80px 0;
+  }
+  
+  .cta-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .cta-section p {
+    font-size: 18px;
+    margin-bottom: 24px;
+    color: #555;
+  }
+</style>

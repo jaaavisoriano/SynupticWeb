@@ -1,0 +1,27 @@
+{
+  "name": "simply-static-1-1765279653",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cd astro-site && npm run dev",
+    "build": "cd astro-site && npm run build",
+    "preview": "cd astro-site && npm run preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaaavisoriano/SynupticWeb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jaaavisoriano/SynupticWeb/issues"
+  },
+  "homepage": "https://github.com/jaaavisoriano/SynupticWeb#readme",
+  "dependencies": {
+    "astro": "^5.16.4"
+  }
+}

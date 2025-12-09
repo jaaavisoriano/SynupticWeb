@@ -1,0 +1,203 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Política de Privacidad - Synuptic"
+  description="Política de privacidad y protección de datos de Synuptic."
+>
+  <div id="wrap_all">
+    <Header />
+    
+    <main id="main-content">
+      <section class="page-hero">
+        <div class="cesis_container">
+          <h1>Política de Privacidad</h1>
+          <div class="line-divider center"></div>
+        </div>
+      </section>
+
+      <section class="section legal-section">
+        <div class="cesis_container">
+          <div class="legal-content">
+            
+            <h2>1. Responsable del Tratamiento</h2>
+            <ul>
+              <li><strong>Identidad:</strong> Sinergias en Salud S.L. (Synuptic)</li>
+              <li><strong>Dirección:</strong> C/ Zurbano, 48 - 28010 Madrid</li>
+              <li><strong>Email:</strong> hola@synuptic.es</li>
+              <li><strong>Teléfono:</strong> +34 690 009 731</li>
+            </ul>
+
+            <h2>2. Datos que Recopilamos</h2>
+            <p>
+              En Synuptic podemos recopilar los siguientes tipos de datos personales:
+            </p>
+            <ul>
+              <li><strong>Datos identificativos:</strong> nombre, apellidos, email, teléfono.</li>
+              <li><strong>Datos profesionales:</strong> empresa, cargo, sector de actividad.</li>
+              <li><strong>Datos de navegación:</strong> dirección IP, tipo de navegador, páginas visitadas.</li>
+            </ul>
+
+            <h2>3. Finalidad del Tratamiento</h2>
+            <p>Los datos personales que nos facilites serán tratados para las siguientes finalidades:</p>
+            <ul>
+              <li>Gestionar las consultas y solicitudes de contacto.</li>
+              <li>Enviar presupuestos y propuestas comerciales solicitadas.</li>
+              <li>Gestionar la relación contractual con nuestros clientes.</li>
+              <li>Enviar comunicaciones comerciales (solo con consentimiento previo).</li>
+              <li>Realizar análisis estadísticos de navegación.</li>
+            </ul>
+
+            <h2>4. Legitimación del Tratamiento</h2>
+            <p>La base legal para el tratamiento de tus datos es:</p>
+            <ul>
+              <li><strong>Consentimiento:</strong> cuando nos envías una consulta o te suscribes a comunicaciones.</li>
+              <li><strong>Ejecución de contrato:</strong> cuando existe una relación comercial.</li>
+              <li><strong>Interés legítimo:</strong> para análisis estadísticos y mejora de servicios.</li>
+            </ul>
+
+            <h2>5. Conservación de Datos</h2>
+            <p>
+              Los datos personales se conservarán mientras exista una relación comercial con nosotros 
+              o mientras no solicites su supresión. Los datos de contacto de clientes se conservarán 
+              durante el tiempo legalmente establecido para cumplir con obligaciones fiscales y mercantiles.
+            </p>
+
+            <h2>6. Destinatarios de los Datos</h2>
+            <p>
+              Tus datos no serán cedidos a terceros, salvo obligación legal. Podemos compartir datos 
+              con proveedores de servicios que nos ayudan a gestionar nuestra actividad (hosting, 
+              email marketing, etc.), siempre bajo las garantías adecuadas.
+            </p>
+
+            <h2>7. Tus Derechos</h2>
+            <p>Puedes ejercer los siguientes derechos:</p>
+            <ul>
+              <li><strong>Acceso:</strong> conocer qué datos personales tenemos sobre ti.</li>
+              <li><strong>Rectificación:</strong> modificar datos inexactos o incompletos.</li>
+              <li><strong>Supresión:</strong> solicitar la eliminación de tus datos.</li>
+              <li><strong>Oposición:</strong> oponerte al tratamiento de tus datos.</li>
+              <li><strong>Limitación:</strong> solicitar que limitemos el tratamiento.</li>
+              <li><strong>Portabilidad:</strong> recibir tus datos en formato estructurado.</li>
+            </ul>
+            <p>
+              Para ejercer estos derechos, envía un email a <a href="mailto:hola@synuptic.es">hola@synuptic.es</a> 
+              indicando el derecho que deseas ejercer y adjuntando copia de tu DNI.
+            </p>
+
+            <h2>8. Medidas de Seguridad</h2>
+            <p>
+              Hemos implementado las medidas técnicas y organizativas necesarias para garantizar 
+              la seguridad de tus datos personales y evitar su alteración, pérdida, tratamiento 
+              o acceso no autorizado.
+            </p>
+
+            <h2>9. Modificaciones de esta Política</h2>
+            <p>
+              Synuptic se reserva el derecho a modificar esta Política de Privacidad para adaptarla 
+              a novedades legislativas o jurisprudenciales. En tales supuestos, se anunciará en esta 
+              página los cambios introducidos con razonable antelación a su puesta en práctica.
+            </p>
+
+            <h2>10. Reclamaciones</h2>
+            <p>
+              Si consideras que hemos tratado tus datos de forma inadecuada, puedes presentar una 
+              reclamación ante la <a href="https://www.aepd.es/" target="_blank" rel="noopener noreferrer">
+              Agencia Española de Protección de Datos (AEPD)</a>.
+            </p>
+
+            <p class="legal-date">
+              <em>Última actualización: Diciembre 2024</em>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    color: #fff;
+    padding: 120px 0 60px;
+    text-align: center;
+  }
+  
+  .page-hero h1 {
+    font-size: 42px;
+    margin-bottom: 16px;
+  }
+  
+  @media (max-width: 767px) {
+    .page-hero h1 {
+      font-size: 28px;
+    }
+  }
+  
+  .page-hero .line-divider {
+    background: #95cca5;
+  }
+  
+  .legal-section {
+    padding: 60px 0 80px;
+  }
+  
+  .legal-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .legal-content h2 {
+    font-size: 22px;
+    color: #1a3865;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #95cca5;
+  }
+  
+  .legal-content h2:first-child {
+    margin-top: 0;
+  }
+  
+  .legal-content p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  
+  .legal-content ul {
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+  
+  .legal-content ul li {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .legal-content a {
+    color: #1a3865;
+    text-decoration: underline;
+  }
+  
+  .legal-content a:hover {
+    color: #95cca5;
+  }
+  
+  .legal-date {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #edf0f7;
+    color: #757575;
+  }
+</style>

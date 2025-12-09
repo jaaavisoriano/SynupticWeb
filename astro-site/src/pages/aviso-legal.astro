@@ -1,0 +1,179 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Aviso Legal - Synuptic"
+  description="Aviso legal y condiciones de uso del sitio web de Synuptic."
+>
+  <div id="wrap_all">
+    <Header />
+    
+    <main id="main-content">
+      <section class="page-hero">
+        <div class="cesis_container">
+          <h1>Aviso Legal</h1>
+          <div class="line-divider center"></div>
+        </div>
+      </section>
+
+      <section class="section legal-section">
+        <div class="cesis_container">
+          <div class="legal-content">
+            
+            <h2>1. Datos Identificativos</h2>
+            <p>
+              En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la 
+              Sociedad de la Información y de Comercio Electrónico (LSSICE), se informa a los usuarios 
+              de los datos del titular del presente sitio web:
+            </p>
+            <ul>
+              <li><strong>Denominación social:</strong> Sinergias en Salud S.L. (Synuptic)</li>
+              <li><strong>Domicilio social:</strong> C/ Zurbano, 48 - 28010 Madrid</li>
+              <li><strong>Correo electrónico:</strong> hola@synuptic.es</li>
+              <li><strong>Teléfono:</strong> +34 690 009 731</li>
+            </ul>
+
+            <h2>2. Objeto y Ámbito de Aplicación</h2>
+            <p>
+              El presente Aviso Legal regula el acceso y uso del sitio web www.synuptic.es (en adelante, 
+              el "Sitio Web"), que Synuptic pone a disposición de los usuarios de Internet.
+            </p>
+            <p>
+              El acceso al Sitio Web atribuye la condición de usuario e implica la aceptación plena y 
+              sin reservas de todas y cada una de las disposiciones incluidas en este Aviso Legal.
+            </p>
+
+            <h2>3. Propiedad Intelectual e Industrial</h2>
+            <p>
+              Todos los contenidos del Sitio Web, incluyendo, sin carácter limitativo, textos, 
+              fotografías, gráficos, imágenes, iconos, tecnología, software, enlaces y demás 
+              contenidos audiovisuales, así como su diseño gráfico y códigos fuente, son propiedad 
+              intelectual de Synuptic o de terceros.
+            </p>
+            <p>
+              Queda prohibida la reproducción, distribución, comunicación pública, transformación o 
+              cualquier otra actividad que se realice con los contenidos del Sitio Web sin la 
+              autorización expresa de Synuptic.
+            </p>
+
+            <h2>4. Condiciones de Uso</h2>
+            <p>El usuario se compromete a:</p>
+            <ul>
+              <li>Hacer un uso adecuado y lícito del Sitio Web.</li>
+              <li>No realizar actividades ilícitas ni contrarias a la buena fe.</li>
+              <li>No difundir contenidos que resulten ofensivos, violentos o discriminatorios.</li>
+              <li>No introducir o difundir virus informáticos o software dañino.</li>
+              <li>Respetar la propiedad intelectual e industrial.</li>
+            </ul>
+
+            <h2>5. Exclusión de Responsabilidad</h2>
+            <p>
+              Synuptic no garantiza la disponibilidad continua y permanente del Sitio Web, quedando 
+              exonerada de cualquier responsabilidad derivada de posibles daños y perjuicios causados 
+              por la falta de disponibilidad o continuidad del servicio.
+            </p>
+            <p>
+              Synuptic se reserva el derecho a modificar unilateralmente, en cualquier momento y sin 
+              previo aviso, la presentación y configuración del Sitio Web, así como los contenidos y 
+              servicios que en él se ofrecen.
+            </p>
+
+            <h2>6. Enlaces a Terceros</h2>
+            <p>
+              El Sitio Web puede contener enlaces a sitios web de terceros. Synuptic no asume 
+              responsabilidad alguna por el contenido, información o servicios que puedan aparecer 
+              en dichos sitios.
+            </p>
+
+            <h2>7. Legislación Aplicable y Jurisdicción</h2>
+            <p>
+              Las presentes condiciones se regirán por la legislación española. Para la resolución 
+              de cualquier controversia, las partes se someten a los Juzgados y Tribunales de Madrid.
+            </p>
+
+            <p class="legal-date">
+              <em>Última actualización: Diciembre 2024</em>
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    color: #fff;
+    padding: 120px 0 60px;
+    text-align: center;
+  }
+  
+  .page-hero h1 {
+    font-size: 42px;
+    margin-bottom: 16px;
+  }
+  
+  @media (max-width: 767px) {
+    .page-hero h1 {
+      font-size: 28px;
+    }
+  }
+  
+  .page-hero .line-divider {
+    background: #95cca5;
+  }
+  
+  .legal-section {
+    padding: 60px 0 80px;
+  }
+  
+  .legal-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .legal-content h2 {
+    font-size: 22px;
+    color: #1a3865;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #95cca5;
+  }
+  
+  .legal-content h2:first-child {
+    margin-top: 0;
+  }
+  
+  .legal-content p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  
+  .legal-content ul {
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+  
+  .legal-content ul li {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .legal-date {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #edf0f7;
+    color: #757575;
+  }
+</style>

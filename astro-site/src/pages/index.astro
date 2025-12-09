@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import About from '../components/sections/About.astro';
+import Partner from '../components/sections/Partner.astro';
+import QuoteBanner from '../components/sections/QuoteBanner.astro';
+import WhatWeAre from '../components/sections/WhatWeAre.astro';
+import ClientTypes from '../components/sections/ClientTypes.astro';
+import Contact from '../components/sections/Contact.astro';
+---
+
+<Layout 
+  title="Synuptic - Medical Writing & Healthcare Strategy"
+  description="Creamos textos médicos y diseñamos estrategias healthcare como si fuéramos parte de tu departamento científico."
+>
+  <div id="wrap_all">
+    <Header />
+    
+    <main id="main-content">
+      <Hero />
+      <About />
+      <Partner />
+      <QuoteBanner />
+      <WhatWeAre />
+      <ClientTypes />
+      <Contact />
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  #wrap_all {
+    overflow-x: hidden;
+    padding-top: 80px; /* Account for fixed header */
+  }
+  
+  #main-content {
+    min-height: 100vh;
+  }
+</style>

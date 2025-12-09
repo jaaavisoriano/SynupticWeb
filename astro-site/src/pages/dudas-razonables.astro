@@ -1,0 +1,293 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const faqs = [
+  {
+    question: '¿Trabajáis directamente con laboratorios farmacéuticos?',
+    answer: 'No. Trabajamos exclusivamente con agencias de marketing, publicidad y comunicación del sector salud. Esto nos permite mantener el foco en nuestro trabajo sin conflictos de interés.'
+  },
+  {
+    question: '¿Qué tipos de proyectos aceptáis?',
+    answer: 'Aceptamos todo tipo de proyectos de contenido médico: publicaciones científicas, materiales promocionales, contenido digital, documentación regulatoria, formaciones... Si tiene que ver con comunicación en salud, probablemente podamos ayudarte.'
+  },
+  {
+    question: '¿Cuánto cuesta un proyecto con Synuptic?',
+    answer: 'Cada proyecto es diferente. Trabajamos con presupuestos cerrados o por horas, según lo que más convenga en cada caso. Cuéntanos tu proyecto y te enviamos una propuesta sin compromiso.'
+  },
+  {
+    question: '¿Cuáles son vuestros plazos de entrega?',
+    answer: 'Depende del volumen y complejidad del proyecto. Somos conocidos por nuestra agilidad y capacidad de adaptación a plazos ajustados. Siempre intentamos cuadrar con tus necesidades.'
+  },
+  {
+    question: '¿Trabajáis en inglés?',
+    answer: 'Sí. Trabajamos tanto en español como en inglés. También podemos gestionar traducciones y adaptaciones de materiales entre ambos idiomas.'
+  },
+  {
+    question: '¿Qué áreas terapéuticas conocéis?',
+    answer: 'Tenemos experiencia en múltiples áreas: oncología, neurología, cardiología, dermatología, oftalmología, neumología, inmunología... Si es un área nueva para nosotros, nos formamos antes de empezar.'
+  },
+  {
+    question: '¿Cómo garantizáis la calidad?',
+    answer: 'Todo nuestro trabajo pasa por un proceso de revisión interno antes de la entrega. Además, seguimos las directrices GPP3 y los estándares de la EMWA para asegurar la calidad científica y ética.'
+  },
+  {
+    question: '¿Podéis firmar acuerdos de confidencialidad?',
+    answer: 'Por supuesto. Es lo habitual en nuestro sector. Firmamos NDAs sin problema y tratamos toda la información de los proyectos con la máxima confidencialidad.'
+  }
+];
+---
+
+<Layout 
+  title="Dudas Razonables - Synuptic"
+  description="Preguntas frecuentes sobre nuestros servicios de medical writing y estrategia healthcare."
+>
+  <div id="wrap_all">
+    <Header />
+    
+    <main id="main-content">
+      <!-- Hero Section -->
+      <section class="page-hero">
+        <div class="cesis_container">
+          <h1>Dudas Razonables</h1>
+          <div class="line-divider center"></div>
+          <p class="page-hero__subtitle">
+            Las preguntas que más nos hacen nuestros clientes. 
+            Si no encuentras la tuya, escríbenos y te la resolvemos.
+          </p>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="section faq-section">
+        <div class="cesis_container">
+          <div class="faq-list">
+            {faqs.map((faq, index) => (
+              <div class="faq-item" data-index={index}>
+                <button class="faq-question" aria-expanded="false">
+                  <span>{faq.question}</span>
+                  <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="faq-answer">
+                  <p>{faq.answer}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- External Resource -->
+      <section class="section section--gray external-section">
+        <div class="cesis_container text-center">
+          <h2>Sector Farmacéutico</h2>
+          <div class="line-divider center"></div>
+          <p>
+            Si quieres conocer más sobre el sector farmacéutico español, 
+            te recomendamos visitar la web de la Asociación Española de Medicamentos Genéricos.
+          </p>
+          <a 
+            href="https://www.aeseg.es/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn--external"
+          >
+            <span>Visitar AESEG</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="section cta-section">
+        <div class="cesis_container text-center">
+          <h2>¿Más preguntas?</h2>
+          <div class="line-divider center"></div>
+          <p>Escríbenos y te respondemos encantados.</p>
+          <a href="/#contact" class="btn">
+            <span class="btn-icon">✉</span>
+            <span>Contactar</span>
+          </a>
+        </div>
+      </section>
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>
+
+<script>
+  // FAQ Accordion functionality
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.faq-item');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      
+      // Close all other items
+      document.querySelectorAll('.faq-item').forEach(otherItem => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('is-open');
+          otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        }
+      });
+      
+      // Toggle current item
+      item.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', !isExpanded);
+    });
+  });
+</script>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    color: #fff;
+    padding: 120px 0 80px;
+    text-align: center;
+  }
+  
+  .page-hero h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  
+  @media (max-width: 767px) {
+    .page-hero h1 {
+      font-size: 32px;
+    }
+  }
+  
+  .page-hero .line-divider {
+    background: #95cca5;
+  }
+  
+  .page-hero__subtitle {
+    font-size: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 767px) {
+    .page-hero__subtitle {
+      font-size: 16px;
+    }
+  }
+  
+  .faq-section {
+    padding: 80px 0;
+  }
+  
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .faq-item {
+    background: #fff;
+    border: 1px solid #edf0f7;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  
+  .faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a3865;
+    gap: 16px;
+  }
+  
+  .faq-question:hover {
+    background: #f7f9fb;
+  }
+  
+  .faq-icon {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    color: #95cca5;
+  }
+  
+  .faq-item.is-open .faq-icon {
+    transform: rotate(180deg);
+  }
+  
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .faq-item.is-open .faq-answer {
+    max-height: 500px;
+  }
+  
+  .faq-answer p {
+    padding: 0 24px 24px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+  }
+  
+  .external-section {
+    padding: 80px 0;
+  }
+  
+  .external-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .external-section p {
+    max-width: 700px;
+    margin: 0 auto 32px;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+  
+  .btn--external {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .btn--external svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .btn--external:hover svg {
+    transform: translate(2px, -2px);
+  }
+  
+  .cta-section {
+    padding: 80px 0;
+  }
+  
+  .cta-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .cta-section p {
+    font-size: 18px;
+    margin-bottom: 24px;
+    color: #555;
+  }
+</style>

@@ -1,0 +1,302 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const strategies = [
+  {
+    title: 'Posicionamiento de Producto',
+    description: 'Definimos el territorio competitivo y los mensajes clave que diferencian tu producto en el mercado.',
+    icon: '🎯'
+  },
+  {
+    title: 'Análisis de Mercado',
+    description: 'Estudiamos el panorama competitivo, identificamos oportunidades y anticipamos tendencias del sector.',
+    icon: '📈'
+  },
+  {
+    title: 'Planes de Comunicación',
+    description: 'Diseñamos estrategias omnicanal que conectan con los diferentes stakeholders del sector salud.',
+    icon: '📣'
+  },
+  {
+    title: 'Formación de Equipos',
+    description: 'Capacitamos a tus equipos comerciales y médicos con las herramientas y mensajes adecuados.',
+    icon: '👥'
+  }
+];
+---
+
+<Layout 
+  title="Estrategia Healthcare - Synuptic"
+  description="Consultoría estratégica para el sector salud. Posicionamiento de producto, análisis de mercado y planes de comunicación."
+>
+  <div id="wrap_all">
+    <Header />
+    
+    <main id="main-content">
+      <!-- Hero Section -->
+      <section class="page-hero">
+        <div class="cesis_container">
+          <h1>Estrategia Healthcare</h1>
+          <div class="line-divider center"></div>
+          <p class="page-hero__subtitle">
+            Diseñamos estrategias que conectan la ciencia con el mercado. 
+            Conocemos el sector salud desde dentro y sabemos cómo hacer que tu mensaje llegue.
+          </p>
+        </div>
+      </section>
+
+      <!-- Strategy Grid -->
+      <section class="section strategy-section">
+        <div class="cesis_container">
+          <h2 class="text-center">Áreas de Estrategia</h2>
+          <div class="line-divider center"></div>
+          
+          <div class="strategy-grid">
+            {strategies.map((strategy) => (
+              <div class="strategy-card">
+                <span class="strategy-card__icon">{strategy.icon}</span>
+                <h3>{strategy.title}</h3>
+                <p>{strategy.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Approach Section -->
+      <section class="section section--gray approach-section">
+        <div class="cesis_container">
+          <div class="row">
+            <div class="col-sm-6">
+              <h2>Nuestro Enfoque</h2>
+              <div class="line-divider"></div>
+              <p>
+                Combinamos el <strong>conocimiento científico</strong> con la <strong>visión de marketing</strong> 
+                para crear estrategias que funcionan. Entendemos tanto el lenguaje de los profesionales 
+                sanitarios como las necesidades del negocio.
+              </p>
+              <p>
+                Trabajamos como una extensión de tu equipo, aportando la perspectiva externa 
+                y la experiencia acumulada en más de 10 años en el sector.
+              </p>
+            </div>
+            <div class="col-sm-6">
+              <div class="approach-image">
+                <img 
+                  src="/images/Ilustracion_30-768x542.jpg" 
+                  alt="Enfoque estratégico"
+                  width="768"
+                  height="542"
+                  loading="lazy"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- External Resource -->
+      <section class="section external-section">
+        <div class="cesis_container text-center">
+          <h2>Actualidad del Sector</h2>
+          <div class="line-divider center"></div>
+          <p>
+            Nos mantenemos al día de las últimas tendencias y novedades del marketing farmacéutico 
+            a través de las principales publicaciones del sector.
+          </p>
+          <a 
+            href="https://www.pmfarma.es/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn--external"
+          >
+            <span>Visitar PMFARMA</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="section section--gray cta-section">
+        <div class="cesis_container text-center">
+          <h2>¿Hablamos de estrategia?</h2>
+          <div class="line-divider center"></div>
+          <p>Cuéntanos tu reto y diseñamos juntos la solución.</p>
+          <a href="/#contact" class="btn">
+            <span class="btn-icon">✉</span>
+            <span>Contactar</span>
+          </a>
+        </div>
+      </section>
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    color: #fff;
+    padding: 120px 0 80px;
+    text-align: center;
+  }
+  
+  .page-hero h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  
+  @media (max-width: 767px) {
+    .page-hero h1 {
+      font-size: 32px;
+    }
+  }
+  
+  .page-hero .line-divider {
+    background: #95cca5;
+  }
+  
+  .page-hero__subtitle {
+    font-size: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 767px) {
+    .page-hero__subtitle {
+      font-size: 16px;
+    }
+  }
+  
+  .strategy-section {
+    padding: 80px 0;
+  }
+  
+  .strategy-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  
+  .strategy-card {
+    background: #fff;
+    border: 1px solid #edf0f7;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .strategy-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+  
+  .strategy-card__icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 16px;
+  }
+  
+  .strategy-card h3 {
+    font-size: 20px;
+    color: #1a3865;
+    margin-bottom: 12px;
+  }
+  
+  .strategy-card p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .approach-section {
+    padding: 80px 0;
+  }
+  
+  .approach-section .row {
+    align-items: center;
+  }
+  
+  .approach-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .approach-section p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  
+  .approach-image img {
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    width: 100%;
+    height: auto;
+  }
+  
+  @media (max-width: 767px) {
+    .approach-image {
+      margin-top: 32px;
+    }
+  }
+  
+  .external-section {
+    padding: 80px 0;
+  }
+  
+  .external-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .external-section p {
+    max-width: 700px;
+    margin: 0 auto 32px;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+  
+  .btn--external {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .btn--external svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .btn--external:hover svg {
+    transform: translate(2px, -2px);
+  }
+  
+  .cta-section {
+    padding: 80px 0;
+  }
+  
+  .cta-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .cta-section p {
+    font-size: 18px;
+    margin-bottom: 24px;
+    color: #555;
+  }
+</style>

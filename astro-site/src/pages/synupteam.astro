@@ -1,0 +1,305 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const values = [
+  {
+    title: 'Científicos de formación',
+    description: 'Somos biólogos, farmacéuticos, biotecnólogos y profesionales de la salud. Hablamos el idioma de la ciencia.',
+    icon: '🔬'
+  },
+  {
+    title: 'Marketeros por experiencia',
+    description: 'Más de 10 años trabajando en agencias de marketing farmacéutico nos han enseñado a pensar en resultados.',
+    icon: '📊'
+  },
+  {
+    title: 'Freelancers con propósito',
+    description: 'Elegimos trabajar así porque creemos en la flexibilidad, la autonomía y hacer las cosas bien.',
+    icon: '✨'
+  }
+];
+---
+
+<Layout 
+  title="SynupTeam - Synuptic"
+  description="Conoce al equipo de Synuptic. Científicos y marketeros unidos para crear contenido médico de calidad."
+>
+  <div id="wrap_all">
+    <Header />
+    
+    <main id="main-content">
+      <!-- Hero Section -->
+      <section class="page-hero">
+        <div class="cesis_container">
+          <h1>SynupTeam</h1>
+          <div class="line-divider center"></div>
+          <p class="page-hero__subtitle">
+            Un equipo multidisciplinar de científicos que han decidido poner su conocimiento 
+            al servicio de la comunicación médica efectiva.
+          </p>
+        </div>
+      </section>
+
+      <!-- Team Values -->
+      <section class="section team-section">
+        <div class="cesis_container">
+          <h2 class="text-center">Quiénes Somos</h2>
+          <div class="line-divider center"></div>
+          
+          <div class="team-grid">
+            {values.map((value) => (
+              <div class="team-card">
+                <span class="team-card__icon">{value.icon}</span>
+                <h3>{value.title}</h3>
+                <p>{value.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- About Team Section -->
+      <section class="section section--gray about-team-section">
+        <div class="cesis_container">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="team-image">
+                <img 
+                  src="/images/Que-somos_600x800-1.jpg" 
+                  alt="El equipo de Synuptic"
+                  width="600"
+                  height="800"
+                  loading="lazy"
+                >
+              </div>
+            </div>
+            <div class="col-sm-6 about-team-content">
+              <h2>Nuestra Historia</h2>
+              <div class="line-divider"></div>
+              <p>
+                Synuptic nació en 2015 de la mano de profesionales que compartían una visión: 
+                <strong>la comunicación médica debía ser diferente</strong>. Rigurosa sin ser aburrida, 
+                creativa sin perder la precisión.
+              </p>
+              <p>
+                Desde entonces, hemos colaborado con decenas de agencias de marketing farmacéutico, 
+                ayudándoles a crear contenidos que realmente conectan con los profesionales sanitarios.
+              </p>
+              <p>
+                Hoy seguimos siendo un equipo pequeño por elección, porque creemos que 
+                <strong>la calidad importa más que la cantidad</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Connect Section -->
+      <section class="section connect-section">
+        <div class="cesis_container text-center">
+          <h2>Conéctate con Nosotros</h2>
+          <div class="line-divider center"></div>
+          <p>
+            Síguenos en LinkedIn para conocer nuestro día a día, 
+            artículos interesantes y novedades del sector.
+          </p>
+          <a 
+            href="https://www.linkedin.com/company/synuptic/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn btn--linkedin"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            <span>Seguir en LinkedIn</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="section section--gray cta-section">
+        <div class="cesis_container text-center">
+          <h2>¿Quieres conocernos mejor?</h2>
+          <div class="line-divider center"></div>
+          <p>Escríbenos y charlamos sobre cómo podemos ayudarte.</p>
+          <a href="/#contact" class="btn">
+            <span class="btn-icon">✉</span>
+            <span>Contactar</span>
+          </a>
+        </div>
+      </section>
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    color: #fff;
+    padding: 120px 0 80px;
+    text-align: center;
+  }
+  
+  .page-hero h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  
+  @media (max-width: 767px) {
+    .page-hero h1 {
+      font-size: 32px;
+    }
+  }
+  
+  .page-hero .line-divider {
+    background: #95cca5;
+  }
+  
+  .page-hero__subtitle {
+    font-size: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 767px) {
+    .page-hero__subtitle {
+      font-size: 16px;
+    }
+  }
+  
+  .team-section {
+    padding: 80px 0;
+  }
+  
+  .team-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  
+  .team-card {
+    background: #fff;
+    border: 1px solid #edf0f7;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .team-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+  
+  .team-card__icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 16px;
+  }
+  
+  .team-card h3 {
+    font-size: 20px;
+    color: #1a3865;
+    margin-bottom: 12px;
+  }
+  
+  .team-card p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  .about-team-section {
+    padding: 80px 0;
+  }
+  
+  .about-team-section .row {
+    align-items: center;
+  }
+  
+  .team-image img {
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    width: 100%;
+    height: auto;
+  }
+  
+  .about-team-content {
+    padding-left: 40px;
+  }
+  
+  @media (max-width: 767px) {
+    .about-team-content {
+      padding-left: 0;
+      margin-top: 32px;
+    }
+  }
+  
+  .about-team-content h2 {
+    margin-bottom: 16px;
+  }
+  
+  .about-team-content p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  
+  .connect-section {
+    padding: 80px 0;
+  }
+  
+  .connect-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .connect-section p {
+    max-width: 600px;
+    margin: 0 auto 32px;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+  
+  .btn--linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #0077B5;
+    color: #fff;
+    border: none;
+  }
+  
+  .btn--linkedin:hover {
+    background: #005885;
+    color: #fff;
+  }
+  
+  .cta-section {
+    padding: 80px 0;
+  }
+  
+  .cta-section h2 {
+    margin-bottom: 16px;
+  }
+  
+  .cta-section p {
+    font-size: 18px;
+    margin-bottom: 24px;
+    color: #555;
+  }
+</style>

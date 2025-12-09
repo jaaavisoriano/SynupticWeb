@@ -1,0 +1,121 @@
+---
+const legalLinks = [
+  { href: '/aviso-legal/', label: 'Aviso legal' },
+  { href: '/politica-privacidad/', label: 'Política de privacidad' },
+  { href: '/politica-de-cookies-ue/', label: 'Política de cookies (UE)' },
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer id="cesis_colophon" class="site-footer">
+  <div class="footer_main">
+    <div class="cesis_container">
+      <div class="row">
+        <!-- Logo & Legal Links -->
+        <div class="col-sm-4 footer-col">
+          <img 
+            src="/images/logo.svg" 
+            alt="Synuptic" 
+            class="footer-logo"
+            width="200"
+            height="72"
+          >
+          <div class="line-divider"></div>
+          <ul class="footer-links">
+            {legalLinks.map((link) => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Contact Info -->
+        <div class="col-sm-4 footer-col footer-contact">
+          <h3 class="text-center">¿Quieres conocernos?</h3>
+          <div class="contact-list">
+            <div class="contact-item">
+              <span class="contact-item__icon">📞</span>
+              <a href="tel:+34690009731" class="contact-item__text">+34 690009731</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-item__icon">✉️</span>
+              <a href="mailto:hola@synuptic.es" class="contact-item__text">hola@synuptic.es</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-item__icon">📍</span>
+              <span class="contact-item__text">c/ Zurbano, 48 - 28010 Madrid</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-item__icon">🚇</span>
+              <span class="contact-item__text">Metro Rubén Darío // Gregorio Marañón // Iglesia</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Map -->
+        <div class="col-sm-4 footer-col">
+          <div class="footer-map">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.879143113521!2d-3.6956054240158758!3d40.43367497143694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228f2ab0b0a11%3A0xae9ed7f61e1b69ae!2sCalle%20de%20Zurbano%2C%2048%2C%20Chamber%C3%AD%2C%2028010%20Madrid!5e0!3m2!1ses!2ses!4v1707399433337!5m2!1ses!2ses" 
+              width="600" 
+              height="250" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Ubicación de Synuptic en Madrid"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer_sub">
+    <div class="cesis_container">
+      <div class="footer_sub__text">
+        <span>©{currentYear} - Sinergias en Salud</span>
+      </div>
+      <div class="f_si">
+        <span class="cesis_social_icons cesis_simple">
+          <a 
+            href="https://www.linkedin.com/company/synuptic/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll to Top Button -->
+<a id="cesis_to_top" aria-label="Volver arriba">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 4l-8 8h5v8h6v-8h5z"/>
+  </svg>
+</a>
+
+<script>
+  // Scroll to top functionality
+  const scrollTopBtn = document.getElementById('cesis_to_top');
+  
+  if (scrollTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+    
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+</script>

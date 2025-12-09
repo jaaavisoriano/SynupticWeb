@@ -1,0 +1,170 @@
+---
+// Client Types - Flip Boxes
+const clientTypes = [
+  {
+    title: 'Agencia potente',
+    icon: '/images/Fuerza-300x300.png',
+    description: 'Las agencias de salud potentes cuentan con un buen equipo de trabajadores y tienen clientes farmacéuticos fidelizados. Trabajan con otras agencias de publicidad, comunicación o de servicios gráficos para completar su oferta.'
+  },
+  {
+    title: 'Agencia global',
+    icon: '/images/Mundo-300x300.png',
+    description: 'Las agencias de salud globales trabajan acuerdos internacionales con las casas matrices de las multinacionales farmacéuticas. El idioma de trabajo suele ser el inglés y sus equipos son muy numerosos.'
+  },
+  {
+    title: 'Agencia Boutique',
+    icon: '/images/Bombilla-300x300.png',
+    description: 'Las agencias boutique están formadas por unos pocos valientes que deciden emprender aventura en solitario. Tienen un conocimiento profundo de las necesidades del marketing farmacéutico y prefieren una red de freelances de confianza.'
+  },
+  {
+    title: 'Agencia Valiente',
+    icon: '/images/Bombilla2-300x300.png',
+    description: 'Las agencias valientes son aquellas del mundo del marketing, la publicidad o la comunicación que deciden entrar en el mercado de la salud. Les falta experiencia en el sector, pero tienen muchas ganas de crecer.'
+  },
+];
+---
+
+<section class="section section--gray clients-section">
+  <div class="cesis_container">
+    <div class="text-center mb-md">
+      <h2>¿Qué tipo de agencia eres?</h2>
+      <div class="line-divider center"></div>
+      <p class="clients-section__subtitle">Pasa el ratón por encima para descubrirlo</p>
+    </div>
+    
+    <div class="flip-boxes animate-stagger">
+      {clientTypes.map((client) => (
+        <div class="flip-box">
+          <div class="flip-box__inner">
+            <div class="flip-box__front">
+              <img 
+                src={client.icon} 
+                alt={client.title} 
+                class="flip-box__icon"
+                width="200"
+                height="200"
+                loading="lazy"
+              >
+              <h3 class="flip-box__title">{client.title}</h3>
+            </div>
+            <div class="flip-box__back">
+              <p class="flip-box__text">{client.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .clients-section {
+    padding: 80px 0;
+  }
+  
+  .clients-section__subtitle {
+    font-size: 18px;
+    color: #757575;
+    margin-bottom: 40px;
+  }
+  
+  .flip-boxes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  @media (min-width: 576px) {
+    .flip-boxes {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .flip-boxes {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  .flip-box {
+    perspective: 1000px;
+    height: 320px;
+  }
+  
+  .flip-box__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  
+  .flip-box:hover .flip-box__inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flip-box__front,
+  .flip-box__back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+  }
+  
+  .flip-box__front {
+    background: #fff;
+    border: 1px solid #edf0f7;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  
+  .flip-box__back {
+    background: #1a3865;
+    color: #fff;
+    transform: rotateY(180deg);
+  }
+  
+  .flip-box__icon {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 16px;
+    object-fit: contain;
+  }
+  
+  .flip-box__title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #1a3865;
+    margin: 0;
+    letter-spacing: 1px;
+  }
+  
+  .flip-box__text {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  /* Touch device support */
+  @media (hover: none) {
+    .flip-box__back {
+      display: none;
+    }
+    
+    .flip-box__front::after {
+      content: 'Toca para ver más';
+      display: block;
+      margin-top: 12px;
+      font-size: 12px;
+      color: #95cca5;
+    }
+  }
+</style>

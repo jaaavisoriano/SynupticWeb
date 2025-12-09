@@ -1,0 +1,137 @@
+---
+// What we are / aren't section
+const whatWeAre = [
+  'Somos un equipo multidisciplinar de científicos que trabajan los contenidos médicos adaptándolos a cada estrategia',
+  'Conocemos perfectamente la realidad de las agencias de marketing y publicidad farmacéutica',
+  'Tenemos experiencia en diferentes áreas terapéuticas y todo tipo de materiales',
+  'Somos muy flexibles y nos encanta colaborar con otros freelance y agencias',
+  'Respetamos los tiempos de nuestros clientes porque sabemos que trabajan para sus clientes',
+];
+
+const whatWeAreNot = [
+  'No tenemos jefes de cuentas ni comerciales: los propios científicos gestionan sus proyectos',
+  'No ofrecemos servicios de diseño, sólo contenidos',
+  'No aceptamos proyectos de clientes finales farmacéuticos',
+];
+---
+
+<section class="section what-section">
+  <div class="cesis_container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="what-section__card">
+          <h3>¿Qué somos?</h3>
+          <div class="line-divider"></div>
+          <ul>
+            {whatWeAre.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      
+      <div class="col-sm-4">
+        <div class="what-section__image">
+          <img 
+            src="/images/Que-somos_600x800-1.jpg" 
+            alt="Equipo de trabajo"
+            width="600"
+            height="800"
+            loading="lazy"
+          >
+        </div>
+      </div>
+      
+      <div class="col-sm-4">
+        <div class="what-section__card">
+          <h3>¿Qué no somos?</h3>
+          <div class="line-divider"></div>
+          <ul>
+            {whatWeAreNot.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .what-section {
+    background: #fff;
+    padding: 80px 0;
+  }
+  
+  .what-section .row {
+    align-items: stretch;
+  }
+  
+  .what-section__card {
+    background: #fff;
+    border: 1px solid #edf0f7;
+    border-radius: 8px;
+    padding: 32px;
+    height: 100%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  
+  .what-section__card h3 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    text-align: center;
+    color: #1a3865;
+  }
+  
+  .what-section__card .line-divider {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 24px;
+  }
+  
+  .what-section__card ul {
+    text-align: left;
+    padding-left: 0;
+  }
+  
+  .what-section__card ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 16px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .what-section__card ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #95cca5;
+    font-weight: bold;
+  }
+  
+  .what-section__image {
+    height: 100%;
+    min-height: 400px;
+  }
+  
+  .what-section__image img {
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  }
+  
+  @media (max-width: 767px) {
+    .what-section__image {
+      margin: 24px 0;
+      min-height: 300px;
+    }
+    
+    .what-section__card {
+      margin-bottom: 24px;
+    }
+  }
+</style>
