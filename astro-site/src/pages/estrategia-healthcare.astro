@@ -3,33 +3,42 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const strategies = [
+const services = [
   {
-    title: 'Posicionamiento de Producto',
-    description: 'Definimos el territorio competitivo y los mensajes clave que diferencian tu producto en el mercado.',
-    icon: '🎯'
+    title: 'Planes de marketing y posicionamiento de marca',
+    icon: '📊',
+    items: [
+      'Planes estratégicos.',
+      'Estrategias de lanzamiento y premarketing.',
+      'Posicionamiento de producto en el mercado.',
+      'Alianzas estratégicas con stakeholders sanitarios.',
+      'Creación y coordinación de equipos de proyecto.'
+    ]
   },
   {
-    title: 'Análisis de Mercado',
-    description: 'Estudiamos el panorama competitivo, identificamos oportunidades y anticipamos tendencias del sector.',
-    icon: '📈'
+    title: 'Formación de equipos científicos de agencias y laboratorios',
+    icon: '🎓',
+    items: [
+      'Soporte a la búsqueda de perfiles científicos y capacitación de nuevas incorporaciones.',
+      'Formación científica a miembros de otros departamentos de la agencia.',
+      'Formación médica de producto al personal del laboratorio.'
+    ]
   },
   {
-    title: 'Planes de Comunicación',
-    description: 'Diseñamos estrategias omnicanal que conectan con los diferentes stakeholders del sector salud.',
-    icon: '📣'
-  },
-  {
-    title: 'Formación de Equipos',
-    description: 'Capacitamos a tus equipos comerciales y médicos con las herramientas y mensajes adecuados.',
-    icon: '👥'
+    title: 'Metodologías y dinámicas en reuniones científicas',
+    icon: '🔬',
+    items: [
+      'Coordinación de grupos de trabajo con expertos.',
+      'Diseño de dinámicas de trabajo diferenciales y uso de metodologías innovadoras.',
+      'Moderación de sesiones de trabajo virtuales y presenciales.'
+    ]
   }
 ];
 ---
 
 <Layout 
   title="Estrategia Healthcare - Synuptic"
-  description="Consultoría estratégica para el sector salud. Posicionamiento de producto, análisis de mercado y planes de comunicación."
+  description="Asesoramos desde el conocimiento científico de la salud. Convertimos la ciencia en la mejor aliada de tus proyectos healthcare."
 >
   <div id="wrap_all">
     <Header />
@@ -38,99 +47,59 @@ const strategies = [
       <!-- Hero Section -->
       <section class="page-hero">
         <div class="cesis_container">
-          <h1>Estrategia Healthcare</h1>
+          <span class="page-hero__tag">ESTRATEGIA HEALTHCARE</span>
+          <h1>Asesoramos desde el conocimiento científico de la salud</h1>
           <div class="line-divider center"></div>
           <p class="page-hero__subtitle">
-            Diseñamos estrategias que conectan la ciencia con el mercado. 
-            Conocemos el sector salud desde dentro y sabemos cómo hacer que tu mensaje llegue.
+            Buscamos argumentos científicos para cimentar con una estrategia sólida la propuesta a tu cliente. Convertimos la ciencia en la mejor aliada de tus proyectos.
           </p>
+          <a href="/#contact" class="btn btn--hero">
+            <span>Necesito ayuda estratégica</span>
+          </a>
         </div>
       </section>
 
-      <!-- Strategy Grid -->
-      <section class="section strategy-section">
+      <!-- Services Section -->
+      <section class="section services-section">
         <div class="cesis_container">
-          <h2 class="text-center">Áreas de Estrategia</h2>
-          <div class="line-divider center"></div>
+          <p class="services-intro">Como consultores healthcare... <strong>diseñamos estrategias y dinámicas innovadoras</strong></p>
           
-          <div class="strategy-grid">
-            {strategies.map((strategy) => (
-              <div class="strategy-card">
-                <span class="strategy-card__icon">{strategy.icon}</span>
-                <h3>{strategy.title}</h3>
-                <p>{strategy.description}</p>
+          <div class="services-grid">
+            {services.map((service) => (
+              <div class="service-card">
+                <span class="service-card__icon">{service.icon}</span>
+                <h3>{service.title}</h3>
+                <ul class="service-card__list">
+                  {service.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <!-- Approach Section -->
-      <section class="section section--gray approach-section">
-        <div class="cesis_container">
-          <div class="row">
-            <div class="col-sm-6">
-              <h2>Nuestro Enfoque</h2>
-              <div class="line-divider"></div>
-              <p>
-                Combinamos el <strong>conocimiento científico</strong> con la <strong>visión de marketing</strong> 
-                para crear estrategias que funcionan. Entendemos tanto el lenguaje de los profesionales 
-                sanitarios como las necesidades del negocio.
-              </p>
-              <p>
-                Trabajamos como una extensión de tu equipo, aportando la perspectiva externa 
-                y la experiencia acumulada en más de 10 años en el sector.
-              </p>
-            </div>
-            <div class="col-sm-6">
-              <div class="approach-image">
-                <img 
-                  src="/images/Ilustracion_30-768x542.jpg" 
-                  alt="Enfoque estratégico"
-                  width="768"
-                  height="542"
-                  loading="lazy"
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- External Resource -->
-      <section class="section external-section">
+      <!-- Innovation Section -->
+      <section class="section section--gray innovation-section">
         <div class="cesis_container text-center">
-          <h2>Actualidad del Sector</h2>
+          <div class="innovation-icon">💡</div>
+          <h2>Además, innovamos con metodologías de otros sectores que aportan valor y frescura a las reuniones que lideramos</h2>
           <div class="line-divider center"></div>
-          <p>
-            Nos mantenemos al día de las últimas tendencias y novedades del marketing farmacéutico 
-            a través de las principales publicaciones del sector.
+          <p class="innovation-text">
+            Buscamos siempre las mejores herramientas para que tus reuniones de trabajo o advisory boards sean memorables y productivos. Nuestro objetivo es que una reunión de 3 horas dure un suspiro y el informe esté repleto de ideas y soluciones.
           </p>
-          <a 
-            href="https://www.pmfarma.es/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="btn btn--external"
-          >
-            <span>Visitar PMFARMA</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-          </a>
         </div>
       </section>
 
       <!-- CTA Section -->
-      <section class="section section--gray cta-section">
+      <section class="section cta-section">
         <div class="cesis_container text-center">
-          <h2>¿Hablamos de estrategia?</h2>
+          <h2>¿Necesitas apoyo estratégico?</h2>
           <div class="line-divider center"></div>
           <p>Cuéntanos tu reto y diseñamos juntos la solución.</p>
           <a href="/#contact" class="btn">
-            <span class="btn-icon">✉</span>
-            <span>Contactar</span>
+            <span>Necesito ayuda estratégica</span>
           </a>
         </div>
       </section>
@@ -148,9 +117,24 @@ const strategies = [
     text-align: center;
   }
   
+  .page-hero__tag {
+    display: inline-block;
+    background: rgba(149, 204, 165, 0.2);
+    color: #95cca5;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+  
   .page-hero h1 {
     font-size: 48px;
     margin-bottom: 16px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   @media (max-width: 767px) {
@@ -165,8 +149,8 @@ const strategies = [
   
   .page-hero__subtitle {
     font-size: 20px;
-    max-width: 700px;
-    margin: 0 auto;
+    max-width: 750px;
+    margin: 0 auto 32px;
     opacity: 0.9;
     line-height: 1.6;
   }
@@ -176,127 +160,185 @@ const strategies = [
       font-size: 16px;
     }
   }
-  
-  .strategy-section {
-    padding: 80px 0;
+
+  .btn--hero {
+    background: #95cca5;
+    color: #1a3865;
+    font-weight: 600;
+    padding: 16px 32px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: inline-block;
   }
   
-  .strategy-section h2 {
-    margin-bottom: 16px;
-  }
-  
-  .strategy-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    margin-top: 40px;
-  }
-  
-  .strategy-card {
+  .btn--hero:hover {
     background: #fff;
-    border: 1px solid #edf0f7;
-    border-radius: 12px;
-    padding: 32px;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  
+  .services-section {
+    padding: 80px 0;
+    background: #fff;
+  }
+  
+  .services-intro {
     text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .strategy-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-  }
-  
-  .strategy-card__icon {
-    font-size: 48px;
-    display: block;
+    font-size: 22px;
+    color: #1a3865;
     margin-bottom: 16px;
   }
   
-  .strategy-card h3 {
+  .services-intro strong {
+    color: #2c5282;
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+    margin-top: 48px;
+  }
+  
+  .service-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid #edf0f7;
+    border-radius: 16px;
+    padding: 36px;
+    text-align: left;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1a3865, #95cca5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  }
+  
+  .service-card:hover::before {
+    opacity: 1;
+  }
+  
+  .service-card__icon {
+    font-size: 42px;
+    display: block;
+    margin-bottom: 20px;
+  }
+  
+  .service-card h3 {
     font-size: 20px;
     color: #1a3865;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
+    line-height: 1.4;
   }
   
-  .strategy-card p {
+  .service-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .service-card__list li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 12px;
     font-size: 15px;
     color: #555;
     line-height: 1.6;
   }
   
-  .approach-section {
-    padding: 80px 0;
+  .service-card__list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #95cca5;
+    font-weight: 600;
   }
   
-  .approach-section .row {
-    align-items: center;
+  .service-card__list li:last-child {
+    margin-bottom: 0;
   }
   
-  .approach-section h2 {
-    margin-bottom: 16px;
+  .innovation-section {
+    padding: 100px 0;
+    background: linear-gradient(180deg, #f8fafc 0%, #edf0f7 100%);
   }
   
-  .approach-section p {
-    font-size: 17px;
-    line-height: 1.7;
-    color: #333;
-    margin-bottom: 16px;
+  .innovation-icon {
+    font-size: 64px;
+    margin-bottom: 24px;
+    animation: float 3s ease-in-out infinite;
   }
   
-  .approach-image img {
-    border-radius: 8px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    width: 100%;
-    height: auto;
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .innovation-section h2 {
+    font-size: 32px;
+    color: #1a3865;
+    max-width: 800px;
+    margin: 0 auto 20px;
+    line-height: 1.4;
   }
   
   @media (max-width: 767px) {
-    .approach-image {
-      margin-top: 32px;
+    .innovation-section h2 {
+      font-size: 24px;
     }
   }
   
-  .external-section {
-    padding: 80px 0;
-  }
-  
-  .external-section h2 {
-    margin-bottom: 16px;
-  }
-  
-  .external-section p {
-    max-width: 700px;
-    margin: 0 auto 32px;
+  .innovation-text {
     font-size: 18px;
-    line-height: 1.7;
-  }
-  
-  .btn--external {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .btn--external svg {
-    transition: transform 0.3s ease;
-  }
-  
-  .btn--external:hover svg {
-    transform: translate(2px, -2px);
+    color: #555;
+    max-width: 750px;
+    margin: 24px auto 0;
+    line-height: 1.8;
   }
   
   .cta-section {
+    background: #fff;
     padding: 80px 0;
   }
   
   .cta-section h2 {
+    color: #1a3865;
     margin-bottom: 16px;
   }
   
   .cta-section p {
     font-size: 18px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     color: #555;
+  }
+  
+  .cta-section .btn {
+    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    color: #fff;
+    padding: 16px 36px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  
+  .cta-section .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(26, 56, 101, 0.3);
   }
 </style>

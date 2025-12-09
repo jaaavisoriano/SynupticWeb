@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "setup": "cd astro-site && npm install",
     "dev": "cd astro-site && npm run dev",
     "build": "cd astro-site && npm run build",
     "preview": "cd astro-site && npm run preview",
+    "check": "cd astro-site && npm run check",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

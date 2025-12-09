@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from 'astro:transitions';
+
 interface Props {
   title?: string;
   description?: string;
@@ -27,6 +29,9 @@ const {
   
   <!-- Global Styles -->
   <link rel="stylesheet" href="/styles/global.css">
+  
+  <!-- View Transitions for smooth page navigation -->
+  <ClientRouter />
 </head>
 <body>
   <slot />

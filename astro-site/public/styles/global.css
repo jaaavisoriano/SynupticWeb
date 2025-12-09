@@ -30,9 +30,12 @@
     --spacing-lg: 64px;
     --spacing-xl: 100px;
 
-    /* Transitions */
+    /* Transitions - Premium smooth curves */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
+    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-premium: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* --------------------------------------------------------------------------
@@ -233,7 +236,7 @@ h3 {
     background: var(--color-primary);
     color: var(--color-white);
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all var(--transition-smooth), transform var(--transition-bounce);
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
@@ -241,10 +244,22 @@ h3 {
     background: var(--color-accent);
     border-color: var(--color-accent);
     color: var(--color-white);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.28), 0 12px 12px rgba(0, 0, 0, 0.24);
+}
+
+.btn:active {
+    transform: translateY(-1px) scale(1.01);
+    transition: all 0.1s ease;
 }
 
 .btn-icon {
     font-size: 18px;
+    transition: transform var(--transition-fast);
+}
+
+.btn:hover .btn-icon {
+    transform: scale(1.1);
 }
 
 /* --------------------------------------------------------------------------
@@ -316,6 +331,8 @@ h3 {
     height: 40px;
     cursor: pointer;
     z-index: 1001;
+    margin-left: auto;
+    order: 99;
 }
 
 @media (min-width: 992px) {
@@ -330,7 +347,7 @@ h3 {
     width: 24px;
     height: 2px;
     background: var(--color-primary);
-    transition: all var(--transition-fast);
+    transition: background 0.2s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .cesis_menu_button .lines::before,
@@ -341,7 +358,10 @@ h3 {
     width: 100%;
     height: 2px;
     background: var(--color-primary);
-    transition: all var(--transition-fast);
+    transition:
+        top 0.3s cubic-bezier(0.32, 0.72, 0, 1),
+        bottom 0.3s cubic-bezier(0.32, 0.72, 0, 1),
+        transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .cesis_menu_button .lines::before {
@@ -352,7 +372,7 @@ h3 {
     bottom: -7px;
 }
 
-/* Open state */
+/* Open state - smooth X animation */
 .cesis_menu_button.open .lines {
     background: transparent;
 }
@@ -420,36 +440,85 @@ h3 {
 
 /* Mobile Navigation */
 .header_mobile {
-    display: none;
     position: fixed;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
-    background: var(--color-white);
+    width: 50%;
+    max-width: 320px;
+    min-width: 280px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     z-index: 999;
-    padding-top: 80px;
+    padding-top: 100px;
+    padding-bottom: 30px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+
+    /* Exclude from View Transitions to prevent content flicker */
+    view-transition-name: none;
+
+    /* Simple slide animation */
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.35s ease-out, visibility 0s linear 0.35s;
 }
 
 .header_mobile.is-open {
-    display: block;
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.35s ease-out, visibility 0s linear 0s;
 }
+
+
 
 .mobile-menu {
     padding: var(--spacing-md);
 }
 
 .mobile-menu li {
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: none;
 }
 
 .mobile-menu li a {
     display: block;
-    padding: 16px 0;
-    font-size: 18px;
-    font-weight: 500;
+    padding: 18px 0;
+    font-size: 17px;
+    font-weight: 600;
     color: var(--color-primary);
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.mobile-menu li a:hover {
+    color: var(--color-accent);
+    padding-left: 10px;
+}
+
+/* LinkedIn icon in mobile menu */
+.tt-mobile-additional {
+    display: flex;
+    justify-content: center;
+    padding: var(--spacing-md);
+    margin-top: auto;
+}
+
+.tt-mobile-additional .cesis_social_icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-white);
+    transition: all 0.3s ease;
+}
+
+.tt-mobile-additional .cesis_social_icons a:hover {
+    background: var(--color-accent);
+    transform: scale(1.1);
 }
 
 /* Header Additional (Social icons) */
@@ -572,6 +641,12 @@ h3 {
 .about-section__image img {
     border-radius: 8px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.about-section__image img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
 }
 
 /* Quote Banner */
@@ -687,7 +762,7 @@ h3 {
 }
 
 .flip-box {
-    perspective: 1000px;
+    perspective: 1200px;
     min-height: 320px;
 }
 
@@ -696,12 +771,25 @@ h3 {
     width: 100%;
     height: 100%;
     min-height: 320px;
-    transition: transform 0.6s;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     transform-style: preserve-3d;
 }
 
 .flip-box:hover .flip-box__inner {
     transform: rotateY(180deg);
+}
+
+/* Premium hover lift effect for flip boxes */
+.flip-box:hover {
+    z-index: 10;
+}
+
+.flip-box__front {
+    transition: box-shadow var(--transition-smooth), transform var(--transition-smooth);
+}
+
+.flip-box:hover .flip-box__front {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .flip-box__front,
@@ -872,11 +960,29 @@ textarea.form-control {
 .footer-links a {
     font-size: 14px;
     color: var(--color-primary);
-    transition: color var(--transition-fast);
+    transition: color var(--transition-smooth), transform var(--transition-fast);
+    position: relative;
+    display: inline-block;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: width var(--transition-smooth);
 }
 
 .footer-links a:hover {
     color: var(--color-accent);
+    transform: translateX(3px);
+}
+
+.footer-links a:hover::after {
+    width: 100%;
 }
 
 .footer-contact h3 {
@@ -964,17 +1070,23 @@ textarea.form-control {
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transition: all var(--transition-fast);
+    transform: translateY(20px) scale(0.9);
+    transition: opacity var(--transition-smooth),
+        visibility var(--transition-smooth),
+        transform var(--transition-bounce),
+        background-color var(--transition-fast);
     z-index: 999;
 }
 
 #cesis_to_top.visible {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0) scale(1);
 }
 
 #cesis_to_top:hover {
     background: var(--color-accent);
+    transform: translateY(-3px) scale(1.1);
 }
 
 /* --------------------------------------------------------------------------
@@ -1313,4 +1425,113 @@ textarea.form-control {
 
 .fa-angle-up::before {
     content: "↑";
+}
+
+/* --------------------------------------------------------------------------
+   Astro View Transitions - Premium Page Animations
+   -------------------------------------------------------------------------- */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 400ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(root) {
+    animation-name: fade-out;
+}
+
+::view-transition-new(root) {
+    animation-name: fade-in;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Premium Card & Section Hover Effects
+   -------------------------------------------------------------------------- */
+.what-section__card {
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.what-section__card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.what-section__image img {
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.what-section__image img:hover {
+    transform: scale(1.02);
+}
+
+/* Quote Banner smooth text */
+.quote-banner h3,
+.quote-banner p {
+    transition: transform var(--transition-smooth);
+}
+
+.quote-banner:hover h3 {
+    transform: scale(1.01);
+}
+
+/* Social icons premium hover */
+.cesis_social_icons a {
+    transition: all var(--transition-smooth), transform var(--transition-bounce);
+}
+
+.cesis_social_icons a:hover {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* Contact form inputs focus */
+.form-control {
+    transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 3px rgba(149, 204, 165, 0.2);
+}
+
+/* Leader card premium effects */
+.leader-image-container {
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.leader-image-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* Partner logos hover */
+.partner-logo {
+    transition: transform var(--transition-smooth), opacity var(--transition-fast);
+}
+
+.partner-logo:hover {
+    transform: scale(1.05);
+    opacity: 1;
 }

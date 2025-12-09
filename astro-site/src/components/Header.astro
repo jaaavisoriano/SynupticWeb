@@ -27,9 +27,10 @@ const currentPath = Astro.url.pathname;
               >
             </a>
           </div>
-          <div class="cesis_menu_button cesis_mobile_menu_switch" id="mobile-menu-toggle">
-            <span class="lines"></span>
-          </div>
+        </div>
+        
+        <div class="cesis_menu_button cesis_mobile_menu_switch" id="mobile-menu-toggle">
+          <span class="lines"></span>
         </div>
         
         <div class="tt-header-additional tt-main-additional">
@@ -92,28 +93,64 @@ const currentPath = Astro.url.pathname;
 </div>
 
 <script>
-  // Mobile menu toggle
-  const menuToggle = document.getElementById('mobile-menu-toggle');
-  const mobileNav = document.getElementById('mobile-nav');
-  
-  if (menuToggle && mobileNav) {
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('open');
+  // Mobile menu toggle - compatible with View Transitions
+  function initMobileMenu() {
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    
+    if (!menuToggle || !mobileNav) return;
+    
+    // Clean up any existing state from previous navigation
+    menuToggle.classList.remove('open');
+    mobileNav.classList.remove('is-open');
+    document.body.style.overflow = '';
+    
+    // Remove old listeners by cloning the element
+    const newMenuToggle = menuToggle.cloneNode(true) as HTMLElement;
+    if (menuToggle.parentNode) {
+      menuToggle.parentNode.replaceChild(newMenuToggle, menuToggle);
+    }
+    
+    // Add fresh event listener
+    newMenuToggle.addEventListener('click', () => {
+      newMenuToggle.classList.toggle('open');
       mobileNav.classList.toggle('is-open');
       document.body.style.overflow = mobileNav.classList.contains('is-open') ? 'hidden' : '';
+    });
+    
+    // Close menu when clicking on a link (for smooth navigation)
+    const mobileLinks = mobileNav.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        newMenuToggle.classList.remove('open');
+        mobileNav.classList.remove('is-open');
+        document.body.style.overflow = '';
+      });
     });
   }
   
   // Sticky header shadow on scroll
-  const header = document.getElementById('cesis_header');
-  
-  if (header) {
+  function initHeaderScroll() {
+    const header = document.getElementById('cesis_header');
+    if (!header) return;
+    
+    // Use passive listener for better scroll performance
     window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
         header.classList.add('scrolled');
       } else {
         header.classList.remove('scrolled');
       }
-    });
+    }, { passive: true });
   }
+  
+  // Initialize on first load
+  initMobileMenu();
+  initHeaderScroll();
+  
+  // Re-initialize after View Transitions navigation
+  document.addEventListener('astro:page-load', () => {
+    initMobileMenu();
+    initHeaderScroll();
+  });
 </script>

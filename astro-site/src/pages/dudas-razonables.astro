@@ -117,19 +117,21 @@ const faqs = [
   document.querySelectorAll('.faq-question').forEach(button => {
     button.addEventListener('click', () => {
       const item = button.closest('.faq-item');
+      if (!item) return;
+      
       const isExpanded = button.getAttribute('aria-expanded') === 'true';
       
       // Close all other items
       document.querySelectorAll('.faq-item').forEach(otherItem => {
         if (otherItem !== item) {
           otherItem.classList.remove('is-open');
-          otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          otherItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
         }
       });
       
       // Toggle current item
       item.classList.toggle('is-open');
-      button.setAttribute('aria-expanded', !isExpanded);
+      button.setAttribute('aria-expanded', String(!isExpanded));
     });
   });
 </script>
@@ -183,6 +185,12 @@ const faqs = [
     margin-bottom: 16px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .faq-item:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
   }
   
   .faq-question {
@@ -199,6 +207,7 @@ const faqs = [
     font-weight: 600;
     color: #1a3865;
     gap: 16px;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .faq-question:hover {
@@ -207,7 +216,7 @@ const faqs = [
   
   .faq-icon {
     flex-shrink: 0;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     color: #95cca5;
   }
   
@@ -218,11 +227,13 @@ const faqs = [
   .faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    opacity: 0;
   }
   
   .faq-item.is-open .faq-answer {
     max-height: 500px;
+    opacity: 1;
   }
   
   .faq-answer p {

@@ -5,31 +5,38 @@ import Footer from '../components/Footer.astro';
 
 const services = [
   {
-    title: 'Publicaciones Científicas',
-    description: 'Artículos originales, revisiones sistemáticas, casos clínicos y abstracts para congresos.',
-    icon: '📄'
+    title: 'Contenidos de marketing farmacéutico',
+    icon: '📝',
+    items: [
+      'Redacción de textos científico-médicos adaptados a diferentes canales y audiencias: materiales promocionales, slidekits, pódcast, webs, guiones de vídeos, infografías científicas, etc.',
+      'Búsqueda de información científica y elaboración de dossieres bibliográficos para aprobaciones internas.',
+      'Soporte científico a los equipos creativos para crear campañas de comunicación.'
+    ]
   },
   {
-    title: 'Materiales Médico-Promocionales',
-    description: 'Ayudas visuales, monografías de producto, folletos y contenido para equipos de ventas.',
-    icon: '📊'
+    title: 'Formaciones en el sector salud',
+    icon: '🎓',
+    items: [
+      'Contenido formativo para actualizar a profesionales sanitarios (FMC, acreditada, específica de producto).',
+      'Materiales informativos para pacientes.',
+      'Materiales divulgativos para población general.'
+    ]
   },
   {
-    title: 'Documentación Regulatoria',
-    description: 'Informes de ensayos clínicos, documentación para agencias reguladoras y compliance.',
-    icon: '📋'
-  },
-  {
-    title: 'Contenido Digital',
-    description: 'Webs médicas, newsletters, e-learnings y contenido para redes sociales profesionales.',
-    icon: '💻'
+    title: 'Eventos, congresos y reuniones',
+    icon: '🎤',
+    items: [
+      'Coberturas de congresos médicos nacionales e internacionales.',
+      'Redacción de actas e informes de reuniones científicas y advisory boards.',
+      'Análisis de resultados de informes y encuestas pre y posteriores a la reunión.'
+    ]
   }
 ];
 ---
 
 <Layout 
   title="Medical Writing - Synuptic"
-  description="Servicios profesionales de redacción médica y científica. Publicaciones, materiales promocionales y documentación regulatoria."
+  description="Desarrollamos contenido científico para proyectos healthcare. Medical writing, formaciones en salud y cobertura de eventos médicos."
 >
   <div id="wrap_all">
     <Header />
@@ -38,67 +45,58 @@ const services = [
       <!-- Hero Section -->
       <section class="page-hero">
         <div class="cesis_container">
-          <h1>Medical Writing</h1>
+          <span class="page-hero__tag">MEDICAL WRITING</span>
+          <h1>Integramos la ciencia en tus proyectos healthcare</h1>
           <div class="line-divider center"></div>
           <p class="page-hero__subtitle">
-            Transformamos la ciencia en comunicación efectiva. Creamos contenido médico 
-            riguroso que conecta con tu audiencia y cumple con los más altos estándares.
+            Desarrollamos contenido científico, buscando el equilibrio entre la rigurosidad que requiere el departamento médico, la creatividad que demanda marketing, ¡y sin perder de vista a los "puntillosos" de regulatory!
           </p>
+          <a href="/#contact" class="btn btn--hero">
+            <span>Necesito un medical writer</span>
+          </a>
         </div>
       </section>
 
-      <!-- Services Grid -->
+      <!-- Services Section -->
       <section class="section services-section">
         <div class="cesis_container">
-          <h2 class="text-center">Nuestros Servicios</h2>
-          <div class="line-divider center"></div>
+          <p class="services-intro">Como medical writers... <strong>creamos contenidos de calidad adaptados a cada canal y target</strong></p>
           
           <div class="services-grid">
             {services.map((service) => (
               <div class="service-card">
                 <span class="service-card__icon">{service.icon}</span>
                 <h3>{service.title}</h3>
-                <p>{service.description}</p>
+                <ul class="service-card__list">
+                  {service.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <!-- External Resource -->
-      <section class="section section--gray external-section">
+      <!-- Áreas Terapéuticas Section -->
+      <section class="section section--gray areas-section">
         <div class="cesis_container text-center">
-          <h2>Estándares Internacionales</h2>
+          <h2>Trabajamos con cualquier área terapéutica que necesites</h2>
           <div class="line-divider center"></div>
-          <p>
-            Trabajamos siguiendo las directrices de la European Medical Writers Association (EMWA), 
-            garantizando los más altos estándares de calidad en comunicación médica.
+          <p class="areas-text">
+            Para hacer contenidos healthcare de calidad es fundamental contar con conocimientos científicos y de salud. En nuestro equipo, siempre encontrarás a un experto en el campo que necesites, desde la biología molecular a la salud pública.
           </p>
-          <a 
-            href="https://www.emwa.org/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="btn btn--external"
-          >
-            <span>Visitar EMWA</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
-          </a>
         </div>
       </section>
 
       <!-- CTA Section -->
       <section class="section cta-section">
         <div class="cesis_container text-center">
-          <h2>¿Necesitas un medical writer?</h2>
+          <h2>¿Listo para empezar?</h2>
           <div class="line-divider center"></div>
           <p>Cuéntanos tu proyecto y te ayudamos a hacerlo realidad.</p>
           <a href="/#contact" class="btn">
-            <span class="btn-icon">✉</span>
-            <span>Contactar</span>
+            <span>Necesito un medical writer</span>
           </a>
         </div>
       </section>
@@ -116,14 +114,28 @@ const services = [
     text-align: center;
   }
   
-  .page-hero h1 {
-    font-size: 48px;
+  .page-hero__tag {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #95cca5;
     margin-bottom: 16px;
+  }
+  
+  .page-hero h1 {
+    font-size: 42px;
+    margin-bottom: 16px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.2;
   }
   
   @media (max-width: 767px) {
     .page-hero h1 {
-      font-size: 32px;
+      font-size: 28px;
     }
   }
   
@@ -132,11 +144,11 @@ const services = [
   }
   
   .page-hero__subtitle {
-    font-size: 20px;
-    max-width: 700px;
-    margin: 0 auto;
-    opacity: 0.9;
-    line-height: 1.6;
+    font-size: 18px;
+    max-width: 750px;
+    margin: 0 auto 32px;
+    opacity: 0.95;
+    line-height: 1.7;
   }
   
   @media (max-width: 767px) {
@@ -145,27 +157,52 @@ const services = [
     }
   }
   
-  .services-section {
-    padding: 80px 0;
+  .btn--hero {
+    background: #95cca5;
+    color: #1a3865;
+    font-weight: 600;
   }
   
-  .services-section h2 {
-    margin-bottom: 16px;
+  .btn--hero:hover {
+    background: #7dbb8f;
+    color: #1a3865;
+  }
+  
+  .services-section {
+    padding: 80px 0;
+    background: #fff;
+  }
+  
+  .services-intro {
+    text-align: center;
+    font-size: 22px;
+    color: #1a3865;
+    margin-bottom: 40px;
+    line-height: 1.5;
+  }
+  
+  .services-intro strong {
+    color: #2c5282;
+  }
+  
+  @media (max-width: 767px) {
+    .services-intro {
+      font-size: 18px;
+    }
   }
   
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    margin-top: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
   }
   
   .service-card {
     background: #fff;
     border: 1px solid #edf0f7;
-    border-radius: 12px;
-    padding: 32px;
-    text-align: center;
+    border-radius: 16px;
+    padding: 32px 28px;
+    text-align: left;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
@@ -176,7 +213,7 @@ const services = [
   }
   
   .service-card__icon {
-    font-size: 48px;
+    font-size: 40px;
     display: block;
     margin-bottom: 16px;
   }
@@ -184,42 +221,58 @@ const services = [
   .service-card h3 {
     font-size: 20px;
     color: #1a3865;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    font-weight: 600;
   }
   
-  .service-card p {
+  .service-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .service-card__list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
     font-size: 15px;
     color: #555;
     line-height: 1.6;
   }
   
-  .external-section {
+  .service-card__list li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .service-card__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    background: #95cca5;
+    border-radius: 50%;
+  }
+  
+  /* Áreas Terapéuticas Section */
+  .areas-section {
     padding: 80px 0;
   }
   
-  .external-section h2 {
+  .areas-section h2 {
     margin-bottom: 16px;
-  }
-  
-  .external-section p {
     max-width: 700px;
-    margin: 0 auto 32px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .areas-text {
+    max-width: 750px;
+    margin: 0 auto;
     font-size: 18px;
-    line-height: 1.7;
-  }
-  
-  .btn--external {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .btn--external svg {
-    transition: transform 0.3s ease;
-  }
-  
-  .btn--external:hover svg {
-    transform: translate(2px, -2px);
+    line-height: 1.8;
+    color: #444;
   }
   
   .cta-section {
