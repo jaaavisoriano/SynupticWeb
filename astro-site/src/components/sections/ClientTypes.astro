@@ -372,6 +372,14 @@ const clientTypes = [
 <script>
   // Touch support for mobile
   function initFlipCards() {
+    const container = document.querySelector('.flip-boxes');
+    if (!container) return;
+    
+    // Check if already initialized to prevent double event listeners
+    // which effectively negates the toggle (turn-on then turn-off immediately)
+    if (container.hasAttribute('data-fp-initialized')) return;
+    container.setAttribute('data-fp-initialized', 'true');
+    
     const flipBoxes = document.querySelectorAll('.flip-box');
     let activeCard: HTMLElement | null = null;
     
@@ -379,8 +387,10 @@ const clientTypes = [
       const element = box as HTMLElement;
       
       element.addEventListener('click', function(this: HTMLElement, e: Event) {
+        // Run logic if touch device OR small screen
         if (window.matchMedia('(hover: none)').matches || window.innerWidth < 992) {
           e.preventDefault();
+          e.stopPropagation(); // Stop propagation to prevent document click handler from firing immediately
           
           // Close previously open card
           if (activeCard && activeCard !== this) {

@@ -43,11 +43,46 @@ const faqs = [
     <Header />
     
     <main id="main-content">
-      <!-- Hero Section -->
-      <section class="page-hero">
+      <!-- Premium Hero Section -->
+      <section class="premium-hero">
+        <!-- Animated Gradient Background -->
+        <div class="hero-gradient"></div>
+        
+        <!-- Floating Particles -->
+        <div class="floating-particles">
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+        </div>
+        
+        <!-- Decorative Elements -->
+        <div class="hero-decoration">
+          <div class="deco-circle deco-circle--1"></div>
+          <div class="deco-circle deco-circle--2"></div>
+        </div>
+        
         <div class="cesis_container">
-          <h1>Si aún te quedan dudas, aquí damos respuesta a las preguntas más frecuentes de nuestros clientes</h1>
-          <div class="line-divider center"></div>
+          <div class="hero-content">
+            <span class="hero-eyebrow">Dudas Razonables</span>
+            <h1 class="hero-title">
+              <span class="title-line title-line--1">Si aún te quedan dudas</span>
+              <span class="title-line title-line--2">aquí tienes <em>las respuestas</em></span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-subtitle">
+              Preguntas más frecuentes que nos hacen nuestros clientes
+            </p>
+            <p class="hero-lema">¡Todo claro!</p>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator" aria-hidden="true">
+              <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -74,13 +109,22 @@ const faqs = [
 
 
 
-      <!-- CTA Section -->
+      <!-- CTA Section - Premium Design -->
       <section class="section cta-section">
-        <div class="cesis_container text-center">
-          <a href="/#contact" class="btn btn--large">
-            <span class="btn-icon">💬</span>
-            <span>Tengo otras dudas</span>
-          </a>
+        <div class="cta-bg">
+          <div class="cta-pattern"></div>
+        </div>
+        <div class="cesis_container">
+          <div class="cta-content">
+            <h2>¿Tienes otras dudas?</h2>
+            <div class="line-divider center light"></div>
+            <p>Si tu pregunta no aparece aquí, escríbenos y te contestamos encantados.</p>
+            <a href="/#contact" class="btn-premium btn-premium--light">
+              <span class="btn-icon">💬</span>
+              <span>Contactar</span>
+              <div class="btn-glow"></div>
+            </a>
+          </div>
         </div>
       </section>
     </main>
@@ -114,40 +158,245 @@ const faqs = [
 </script>
 
 <style>
-  .page-hero {
-    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
-    color: #fff;
+  /* ===== PREMIUM HERO ===== */
+  .premium-hero {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     padding: 120px 0 80px;
-    text-align: center;
   }
   
-  .page-hero h1 {
-    font-size: 36px;
-    margin-bottom: 16px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.3;
-    font-weight: 600;
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg, 
+      #0a1628 0%, 
+      #1a3865 25%, 
+      #0f2240 50%, 
+      #1a3865 75%, 
+      #0a1628 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease-in-out infinite;
   }
   
-  @media (max-width: 767px) {
-    .page-hero h1 {
-      font-size: 24px;
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  .floating-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(149, 204, 165, 0.4);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+  .particle:nth-child(2) { left: 80%; top: 30%; animation-delay: 1.5s; }
+  .particle:nth-child(3) { left: 30%; top: 70%; animation-delay: 3s; }
+  .particle:nth-child(4) { left: 60%; top: 80%; animation-delay: 4.5s; }
+  .particle:nth-child(5) { left: 90%; top: 60%; animation-delay: 6s; }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(-40px) translateX(-20px) scale(1.5);
+      opacity: 0.8;
     }
   }
   
-  .page-hero .line-divider {
-    background: #95cca5;
+  .hero-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
   }
   
-  .btn--large {
-    padding: 20px 40px;
-    font-size: 18px;
+  .deco-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
   }
+  
+  .deco-circle--1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #95cca5 0%, transparent 70%);
+    top: -200px;
+    right: -150px;
+  }
+  
+  .deco-circle--2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #95cca5 0%, transparent 70%);
+    bottom: -150px;
+    left: -100px;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #95cca5;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.2s;
+  }
+  
+  .hero-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  
+  .title-line {
+    display: block;
+  }
+  
+  .title-line--1 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.3s;
+  }
+  
+  .title-line--2 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.5s;
+  }
+  
+  .title-line--2 em {
+    font-style: normal;
+    color: #95cca5;
+    position: relative;
+  }
+  
+  .hero-divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+    margin: 0 auto 24px;
+    opacity: 0;
+    animation: fadeInScale 0.6s ease forwards 0.7s;
+  }
+  
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    to {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 700px;
+    margin: 0 auto 24px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.8s;
+  }
+  
+  .hero-lema {
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    color: #95cca5;
+    font-style: italic;
+    margin: 0;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1s;
+    text-shadow: 0 0 30px rgba(149, 204, 165, 0.3);
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .scroll-indicator {
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.3s;
+  }
+  
+  .scroll-mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  
+  .scroll-wheel {
+    width: 4px;
+    height: 8px;
+    background: #95cca5;
+    border-radius: 2px;
+    animation: scrollWheel 2s ease-in-out infinite;
+  }
+  
+  @keyframes scrollWheel {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.3; transform: translateY(10px); }
+  }
+
+
   
   .faq-section {
-    padding: 80px 0;
+    padding: 100px 0;
+    background: var(--color-bg-body);
   }
   
   .faq-list {
@@ -158,16 +407,17 @@ const faqs = [
   .faq-item {
     background: var(--color-bg-card);
     border: 1px solid var(--color-border-theme);
-    border-radius: 12px;
-    margin-bottom: 16px;
+    border-radius: 16px;
+    margin-bottom: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .faq-item:hover {
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
     transform: translateY(-2px);
+    border-color: rgba(149, 204, 165, 0.3);
   }
   
   .faq-question {
@@ -175,7 +425,7 @@ const faqs = [
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px;
+    padding: 28px;
     background: none;
     border: none;
     cursor: pointer;
@@ -214,53 +464,128 @@ const faqs = [
   }
   
   .faq-answer p {
-    padding: 0 24px 24px;
+    padding: 0 28px 32px;
     font-size: 16px;
     line-height: 1.7;
     color: var(--color-text-muted);
     margin: 0;
   }
-  
-  .external-section {
-    padding: 80px 0;
+
+  /* ===== CTA SECTION ===== */
+  .cta-section {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
   }
   
-  .external-section h2 {
-    margin-bottom: 16px;
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1a3865 0%, #0f2240 50%, #1a3865 100%);
   }
   
-  .external-section p {
-    max-width: 700px;
-    margin: 0 auto 32px;
-    font-size: 18px;
-    line-height: 1.7;
+  .cta-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(149,204,165,0.1) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 50%, rgba(149,204,165,0.08) 0%, transparent 40%);
   }
   
-  .btn--external {
+  .cta-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }
+  
+  .cta-content h2 {
+    font-size: clamp(32px, 5vw, 48px);
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+  }
+  
+  .line-divider.light {
+    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+  }
+  
+  .cta-content p {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: #ffffff;
+    margin-bottom: 32px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.9;
+  }
+
+  /* ===== PREMIUM BUTTON ===== */
+  .btn-premium {
+    position: relative;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
+    padding: 18px 36px;
+    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px rgba(26, 56, 101, 0.3);
+    text-decoration: none;
   }
   
-  .btn--external svg {
-    transition: transform 0.3s ease;
+  .btn-premium:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(26, 56, 101, 0.4);
   }
   
-  .btn--external:hover svg {
-    transform: translate(2px, -2px);
+  .btn-premium .btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
   }
   
-  .cta-section {
-    padding: 80px 0;
+  .btn-premium:hover .btn-glow {
+    left: 100%;
   }
   
-  .cta-section h2 {
-    margin-bottom: 16px;
+  .btn-premium--light {
+    background: #95cca5;
+    color: #1a3865;
+    box-shadow: 0 10px 30px rgba(149, 204, 165, 0.3);
   }
   
-  .cta-section p {
-    font-size: 18px;
-    margin-bottom: 24px;
-    color: #555;
+  .btn-premium--light:hover {
+    background: #ffffff;
+    box-shadow: 0 20px 40px rgba(149, 204, 165, 0.4);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 767px) {
+    .premium-hero {
+      min-height: 60vh;
+      padding: 100px 0 60px;
+    }
+
+    .scroll-indicator {
+      display: none;
+    }
+    
+    .faq-section,
+    .cta-section {
+      padding: 70px 0;
+    }
   }
 </style>

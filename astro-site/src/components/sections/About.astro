@@ -45,9 +45,24 @@
   function animateCounter() {
     const counters = document.querySelectorAll('.stat-number');
     
+    const isMobile = window.innerWidth < 768;
+    
+    // Force visibility on mobile for cascade effect (connects with Hero animation)
+    if (isMobile) {
+      const content = document.querySelector('.about-section__content');
+      if (content) {
+        // Add visible class slightly after Hero animations start finishing
+        setTimeout(() => {
+          content.classList.add('visible');
+          // Also set transition delay to 0 to ensure it appears immediately
+          (content as HTMLElement).style.transitionDelay = '0s';
+        }, 600);
+      }
+    }
+
     const observerOptions = {
-      threshold: 0.5,
-      rootMargin: '0px'
+      threshold: isMobile ? 0.1 : 0.5,
+      rootMargin: isMobile ? '100px 0px' : '0px'
     };
     
     const observer = new IntersectionObserver((entries) => {
