@@ -1,130 +1,244 @@
 ---
-// Contact Form Section
+// Contact Form Section - Premium two-column layout with trust indicators
 ---
 
 <section id="contact" class="section contact-section">
   <div class="container">
-    <div class="text-center mb-md reveal">
-      <h2>¿Hablamos?</h2>
-      <div class="line-divider center"></div>
+    <div class="contact-grid">
+      <!-- Left Column: Info & Trust -->
+      <div class="contact-info reveal-left">
+
+        
+        <div class="contact-intro">
+          <p class="intro-lead">Y, llegados a este punto, ¿todavía te queda alguna duda?</p>
+          <p>Si tienes claro que podemos ayudarte a alcanzar tus objetivos, contáctanos. Y, si no lo tienes claro, también. Porque explicar todo lo que podemos hacer como medical writers y consultores healthcare no es fácil.</p>
+          <p>Escríbenos y nos pondremos en contacto contigo para ofrecerte la solución que necesites.</p>
+        </div>
+        <div class="line-divider"></div>
+        
+        <!-- Trust Indicators -->
+        <div class="trust-indicators">
+
+          <div class="trust-item">
+            <svg class="trust-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"></path>
+              <path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"></path>
+            </svg>
+            <span>Presupuesto sin compromiso</span>
+          </div>
+          <div class="trust-item">
+            <svg class="trust-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <polyline points="9 12 11 14 15 10"></polyline>
+            </svg>
+            <span>Confidencialidad garantizada</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Column: Form -->
+      <div class="contact-form-wrapper reveal-right">
+        <div class="form-card">
+          <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="form-group">
+              <label for="name" class="visually-hidden">Nombre</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                class="form-control" 
+                placeholder="Tu nombre" 
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="visually-hidden">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="form-control" 
+                placeholder="Tu email" 
+                required
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="phone" class="visually-hidden">Teléfono</label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                class="form-control" 
+                placeholder="Tu teléfono"
+              >
+            </div>
+            
+            <div class="form-group">
+              <label for="message" class="visually-hidden">Mensaje</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                class="form-control" 
+                placeholder="¿En qué podemos ayudarte?" 
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            
+            <div class="form-checkbox">
+              <input type="checkbox" id="legal-1" name="legal-1" required>
+              <label for="legal-1">
+                Acepto la <a href="/politica-privacidad/" target="_blank">política de privacidad</a>
+              </label>
+            </div>
+            
+            <div class="form-checkbox">
+              <input type="checkbox" id="legal-2" name="legal-2" required>
+              <label for="legal-2">
+                He leído y consiento el tratamiento de mis datos personales
+              </label>
+            </div>
+            
+            <p class="form-legal">
+              <strong>Información básica sobre protección de datos:</strong><br>
+              <strong>Responsable:</strong> Sinergias en Salud MCA SL<br>
+              <strong>Finalidad:</strong> Gestión de la solicitud de información<br>
+              <strong>Legitimación:</strong> Consentimiento del interesado<br>
+              <strong>Destinatarios:</strong> No se ceden datos a terceros<br>
+              <strong>Derechos:</strong> Acceso, rectificación, supresión, portabilidad, limitación, oposición, olvido
+            </p>
+            
+            <button type="submit" class="btn form-submit btn-shimmer">
+              <span>Enviar mensaje</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-    
-    <form class="contact-form reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-      <div class="form-group">
-        <label for="name" class="visually-hidden">Nombre</label>
-        <input 
-          type="text" 
-          id="name" 
-          name="name" 
-          class="form-control" 
-          placeholder="Tu nombre" 
-          required
-        >
-      </div>
-      
-      <div class="form-group">
-        <label for="email" class="visually-hidden">Email</label>
-        <input 
-          type="email" 
-          id="email" 
-          name="email" 
-          class="form-control" 
-          placeholder="Tu email" 
-          required
-        >
-      </div>
-      
-      <div class="form-group">
-        <label for="phone" class="visually-hidden">Teléfono</label>
-        <input 
-          type="tel" 
-          id="phone" 
-          name="phone" 
-          class="form-control" 
-          placeholder="Tu teléfono"
-        >
-      </div>
-      
-      <div class="form-group">
-        <label for="message" class="visually-hidden">Mensaje</label>
-        <textarea 
-          id="message" 
-          name="message" 
-          class="form-control" 
-          placeholder="Tu mensaje" 
-          rows="5"
-          required
-        ></textarea>
-      </div>
-      
-      <div class="form-checkbox">
-        <input type="checkbox" id="legal-1" name="legal-1" required>
-        <label for="legal-1">
-          Acepto la <a href="/politica-privacidad/" target="_blank">política de privacidad</a>
-        </label>
-      </div>
-      
-      <div class="form-checkbox">
-        <input type="checkbox" id="legal-2" name="legal-2" required>
-        <label for="legal-2">
-          He leído y consiento el tratamiento de mis datos personales
-        </label>
-      </div>
-      
-      <p class="form-legal">
-        <strong>Información básica sobre protección de datos:</strong><br>
-        <strong>Responsable:</strong> Sinergias en Salud MCA SL<br>
-        <strong>Finalidad:</strong> Gestión de la solicitud de información<br>
-        <strong>Legitimación:</strong> Consentimiento del interesado<br>
-        <strong>Destinatarios:</strong> No se ceden datos a terceros<br>
-        <strong>Derechos:</strong> Acceso, rectificación, supresión, portabilidad, limitación, oposición, olvido
-      </p>
-      
-      <button type="submit" class="btn form-submit">
-        <span>Enviar mensaje</span>
-      </button>
-    </form>
   </div>
 </section>
 
 <style>
   .contact-section {
     position: relative;
-    padding: 80px 0;
+    padding: 100px 0;
+    background: var(--color-bg-body);
   }
   
-
+  /* ===== GRID LAYOUT ===== */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    align-items: start;
+  }
   
-  .contact-section .container {
-    position: relative;
-    z-index: 1;
+  @media (min-width: 992px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+  }
+  
+  /* ===== LEFT COLUMN: INFO ===== */
+  .contact-info h2 {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    margin-bottom: 16px;
+    color: var(--color-heading);
+  }
+  
+  .contact-intro {
+    margin: 32px 0 40px;
+    color: var(--color-text-body);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  
+  .intro-lead {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: var(--color-heading);
+  }
+  
+  .contact-intro p {
+    margin-bottom: 16px;
+  }
+  
+  /* ===== TRUST INDICATORS ===== */
+  .trust-indicators {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    background: var(--color-bg-subtle);
+    border-radius: 12px;
+    border: 1px solid var(--color-border-theme);
+  }
+  
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text-body);
+  }
+  
+  .trust-icon {
+    flex-shrink: 0;
+    color: var(--color-primary);
+  }
+  
+  /* ===== RIGHT COLUMN: FORM ===== */
+  .form-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-theme);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 
+      0 20px 50px rgba(0, 0, 0, 0.08),
+      0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+  
+  @media (max-width: 767px) {
+    .form-card {
+      padding: 24px;
+    }
   }
   
   .contact-form {
-    max-width: 600px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
   
   .form-group {
     margin-bottom: 16px;
+    position: relative;
   }
   
   .form-control {
     width: 100%;
-    padding: 14px 18px;
+    padding: 16px 20px;
     font-family: inherit;
     font-size: 16px;
-    border: 1px solid var(--color-border-theme);
-    border-radius: 6px;
+    border: 2px solid var(--color-border-theme);
+    border-radius: 10px;
     background: var(--color-bg-input);
     color: var(--color-text-body);
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   .form-control:focus {
     outline: none;
     border-color: #95cca5;
-    box-shadow: 0 0 0 3px rgba(149, 204, 165, 0.2);
+    box-shadow: 0 0 0 4px rgba(149, 204, 165, 0.15);
   }
   
   .form-control::placeholder {
@@ -136,10 +250,11 @@
     resize: vertical;
   }
   
+  /* ===== CHECKBOXES ===== */
   .form-checkbox {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 12px;
     font-size: 14px;
     color: var(--color-text-body);
@@ -148,25 +263,77 @@
   .form-checkbox input {
     margin-top: 3px;
     accent-color: #95cca5;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  
+  .form-checkbox label {
+    cursor: pointer;
   }
   
   .form-checkbox a {
     color: #1a3865;
     text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+  
+  .form-checkbox a:hover {
+    color: #95cca5;
   }
   
   .form-legal {
     font-size: 12px;
     color: var(--color-text-muted-light);
-    margin: 24px 0;
-    line-height: 1.6;
+    margin: 0 0 32px;
+    line-height: 1.7;
+    padding: 16px;
+    background: var(--color-bg-subtle);
+    border-radius: 8px;
   }
   
+  /* ===== SUBMIT BUTTON ===== */
   .form-submit {
     width: 100%;
-    margin-top: 16px;
+    margin-top: 8px;
+    gap: 12px;
   }
   
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { left: -100%; }
+    50%, 100% { left: 100%; }
+  }
+  
+  .form-submit svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .form-submit:hover svg {
+    transform: translateX(5px) translateY(-3px);
+  }
+  
+  /* ===== ACCESSIBILITY ===== */
   .visually-hidden {
     position: absolute;
     width: 1px;
@@ -177,5 +344,15 @@
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+  }
+  
+  @media (max-width: 991px) {
+    .contact-section {
+      padding: 60px 0;
+    }
+    
+    .trust-indicators {
+      flex-direction: column;
+    }
   }
 </style>

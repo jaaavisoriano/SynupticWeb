@@ -52,17 +52,30 @@
     --color-nav-link: var(--color-primary);
     --color-border-theme: var(--color-border);
     --color-bg-card: var(--color-white);
-    --color-bg-subtle: var(--color-white);
+    --color-bg-subtle: #f7f9fb;
     --color-bg-input: var(--color-white);
     --color-bg-overlay: rgba(247, 249, 251, 0.92);
     --color-text-muted: #555555;
     --color-text-muted-light: #757575;
+    --color-text-heading: var(--color-primary);
+
+    /* Premium Effects */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-blur: 16px;
+    --glow-accent: 0 0 30px rgba(149, 204, 165, 0.4);
+    --glow-primary: 0 0 30px rgba(26, 56, 101, 0.3);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.16);
+    --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-glow: var(--glow-accent);
 }
 
 [data-theme="dark"] {
     /* Semantic Colors - Dark Mode */
     --color-bg-body: var(--color-primary);
-    /* Corporate Navy Blue */
     --color-text-body: var(--color-white);
     --color-heading: var(--color-white);
     --color-bg-header: var(--color-primary);
@@ -76,6 +89,16 @@
     --color-text-muted: rgba(255, 255, 255, 0.7);
     --color-text-muted-light: rgba(255, 255, 255, 0.6);
     --color-gray-light: #0f223d;
+    --color-text-heading: var(--color-white);
+
+    /* Dark Mode Premium Effects */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.35);
+    --shadow-glow: 0 0 30px rgba(149, 204, 165, 0.2);
 }
 
 /* --------------------------------------------------------------------------

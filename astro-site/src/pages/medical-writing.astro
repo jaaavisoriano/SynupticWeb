@@ -11,7 +11,8 @@ const services = [
       'Redacción de textos científico-médicos adaptados a diferentes canales y audiencias: materiales promocionales, slidekits, pódcast, webs, guiones de vídeos, infografías científicas, etc.',
       'Búsqueda de información científica y elaboración de dossieres bibliográficos para aprobaciones internas.',
       'Soporte científico a los equipos creativos para crear campañas de comunicación.'
-    ]
+    ],
+    color: '#95cca5'
   },
   {
     title: 'Formaciones en el sector salud',
@@ -20,7 +21,8 @@ const services = [
       'Contenido formativo para actualizar a profesionales sanitarios (FMC, acreditada, específica de producto).',
       'Materiales informativos para pacientes.',
       'Materiales divulgativos para población general.'
-    ]
+    ],
+    color: '#4a8fc2'
   },
   {
     title: 'Eventos, congresos y reuniones',
@@ -29,7 +31,8 @@ const services = [
       'Coberturas de congresos médicos nacionales e internacionales.',
       'Redacción de actas e informes de reuniones científicas y advisory boards.',
       'Análisis de resultados de informes y encuestas pre y posteriores a la reunión.'
-    ]
+    ],
+    color: '#e8b84a'
   }
 ];
 ---
@@ -42,34 +45,60 @@ const services = [
     <Header />
     
     <main id="main-content">
-      <!-- Hero Section -->
+      <!-- Hero Section Premium -->
       <section class="page-hero">
-        <div class="cesis_container">
-          <span class="page-hero__tag">MEDICAL WRITING</span>
-          <h1>Integramos la ciencia en tus proyectos healthcare</h1>
-          <div class="line-divider center"></div>
-          <p class="page-hero__subtitle">
+        <!-- Animated Gradient Background -->
+        <div class="hero-gradient"></div>
+        
+        <!-- Floating Particles -->
+        <div class="hero-particles">
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+        </div>
+        
+        <div class="cesis_container hero-content">
+          <span class="page-hero__tag reveal-tag">MEDICAL WRITING</span>
+          <h1 class="reveal-headline">Integramos la ciencia en tus proyectos healthcare</h1>
+          <div class="line-divider center reveal-divider"></div>
+          <p class="page-hero__subtitle reveal-subtitle">
             Desarrollamos contenido científico, buscando el equilibrio entre la rigurosidad que requiere el departamento médico, la creatividad que demanda marketing, ¡y sin perder de vista a los "puntillosos" de regulatory!
           </p>
-          <a href="/#contact" class="btn btn--hero">
+          <a href="/#contact" class="btn btn--hero reveal-cta">
             <span>Necesito un medical writer</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </a>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+          <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+          </div>
+          <span class="scroll-text">Scroll</span>
         </div>
       </section>
 
-      <!-- Services Section -->
+      <!-- Services Section Premium -->
       <section class="section services-section">
         <div class="cesis_container">
-          <p class="services-intro">Como medical writers... <strong>creamos contenidos de calidad adaptados a cada canal y target</strong></p>
+          <p class="services-intro reveal">Como medical writers... <strong>creamos contenidos de calidad adaptados a cada canal y target</strong></p>
           
           <div class="services-grid">
-            {services.map((service) => (
-              <div class="service-card">
-                <img src={service.image} alt={service.title} class="service-card__icon" />
+            {services.map((service, index) => (
+              <div class="service-card glass-card reveal" style={`--card-index: ${index}; --card-accent: ${service.color}`}>
+                <div class="card-shine"></div>
+                <div class="service-card__icon-wrapper">
+                  <img src={service.image} alt={service.title} class="service-card__icon" />
+                </div>
                 <h3>{service.title}</h3>
                 <ul class="service-card__list">
-                  {service.items.map((item) => (
-                    <li>{item}</li>
+                  {service.items.map((item, itemIndex) => (
+                    <li style={`--item-index: ${itemIndex}`}>{item}</li>
                   ))}
                 </ul>
               </div>
@@ -78,25 +107,37 @@ const services = [
         </div>
       </section>
 
-      <!-- Áreas Terapéuticas Section -->
-      <section class="section section--gray areas-section">
+      <!-- Áreas Terapéuticas Section Premium -->
+      <section class="section areas-section">
+        <div class="areas-decoration">
+          <div class="deco-circle"></div>
+          <div class="deco-circle"></div>
+        </div>
         <div class="cesis_container text-center">
-          <h2>Trabajamos con cualquier área terapéutica que necesites</h2>
-          <div class="line-divider center"></div>
-          <p class="areas-text">
+          <div class="reveal">
+            <h2>Trabajamos con cualquier área terapéutica que necesites</h2>
+            <div class="line-divider center"></div>
+          </div>
+          <p class="areas-text reveal">
             Para hacer contenidos healthcare de calidad es fundamental contar con conocimientos científicos y de salud. En nuestro equipo, siempre encontrarás a un experto en el campo que necesites, desde la biología molecular a la salud pública.
           </p>
         </div>
       </section>
 
-      <!-- CTA Section -->
+      <!-- CTA Section Premium -->
       <section class="section cta-section">
+        <div class="cta-bg-pattern"></div>
         <div class="cesis_container text-center">
-          <h2>¿Listo para empezar?</h2>
-          <div class="line-divider center"></div>
-          <p>Cuéntanos tu proyecto y te ayudamos a hacerlo realidad.</p>
-          <a href="/#contact" class="btn">
+          <div class="reveal">
+            <h2>¿Listo para empezar?</h2>
+            <div class="line-divider center"></div>
+          </div>
+          <p class="reveal">Cuéntanos tu proyecto y te ayudamos a hacerlo realidad.</p>
+          <a href="/#contact" class="btn btn--cta reveal">
             <span>Necesito un medical writer</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </a>
         </div>
       </section>
@@ -106,125 +147,423 @@ const services = [
   </div>
 </Layout>
 
-<style>
-  .page-hero {
-    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
-    color: #fff;
-    padding: 120px 0 80px;
-    text-align: center;
+<script>
+  function initRevealAnimations() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('.reveal, .glass-card').forEach(el => {
+      observer.observe(el);
+    });
+    
+    // Hero animations on load
+    setTimeout(() => {
+      document.querySelectorAll('.reveal-tag, .reveal-headline, .reveal-divider, .reveal-subtitle, .reveal-cta').forEach((el, index) => {
+        setTimeout(() => {
+          el.classList.add('visible');
+        }, index * 150);
+      });
+    }, 300);
   }
   
+  initRevealAnimations();
+  document.addEventListener('astro:page-load', initRevealAnimations);
+</script>
+
+<style>
+  /* ===== HERO SECTION PREMIUM ===== */
+  .page-hero {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+    padding: 120px 0 80px;
+  }
+  
+  @media (max-width: 768px) {
+    .page-hero {
+      min-height: 70vh;
+      padding: 100px 0 60px;
+    }
+  }
+  
+  /* Animated Gradient Background */
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg, 
+      #0a1628 0%, 
+      #1a3865 25%, 
+      #0f2240 50%, 
+      #1a3865 75%, 
+      #0a1628 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease-in-out infinite;
+    z-index: 0;
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  /* Floating Particles */
+  .hero-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(149, 204, 165, 0.4);
+    border-radius: 50%;
+    animation: floatParticle 8s ease-in-out infinite;
+  }
+  
+  .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 9s; }
+  .particle:nth-child(2) { left: 80%; top: 30%; animation-delay: 1s; animation-duration: 7s; }
+  .particle:nth-child(3) { left: 30%; top: 70%; animation-delay: 2s; animation-duration: 10s; }
+  .particle:nth-child(4) { left: 70%; top: 80%; animation-delay: 3s; animation-duration: 8s; }
+  .particle:nth-child(5) { left: 50%; top: 50%; animation-delay: 4s; animation-duration: 11s; }
+  
+  @keyframes floatParticle {
+    0%, 100% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.3;
+    }
+    25% {
+      transform: translateY(-40px) translateX(15px) scale(1.3);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(-60px) translateX(-20px) scale(1);
+      opacity: 0.8;
+    }
+    75% {
+      transform: translateY(-30px) translateX(10px) scale(0.8);
+      opacity: 0.5;
+    }
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 5;
+  }
+  
+  /* Tag Animation */
   .page-hero__tag {
     display: inline-block;
     font-size: 14px;
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: #95cca5;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
+  .page-hero__tag.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Headline Animation */
   .page-hero h1 {
-    font-size: 42px;
-    margin-bottom: 16px;
-    max-width: 800px;
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 20px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
-    line-height: 1.2;
+    line-height: 1.15;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
-  @media (max-width: 767px) {
-    .page-hero h1 {
-      font-size: 28px;
-    }
+  .page-hero h1.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
   
+  /* Divider Animation */
   .page-hero .line-divider {
-    background: #95cca5;
+    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+    height: 3px;
+    width: 80px;
+    opacity: 0;
+    transform: scaleX(0);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
+  .page-hero .line-divider.visible {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  
+  /* Subtitle Animation */
   .page-hero__subtitle {
-    font-size: 18px;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     max-width: 750px;
-    margin: 0 auto 32px;
-    opacity: 0.95;
+    margin: 24px auto 40px;
+    opacity: 0;
     line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
-  @media (max-width: 767px) {
-    .page-hero__subtitle {
-      font-size: 16px;
-    }
+  .page-hero__subtitle.visible {
+    opacity: 0.95;
+    transform: translateY(0);
   }
   
+  /* CTA Button Premium */
   .btn--hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     background: #95cca5;
     color: #1a3865;
-    font-weight: 600;
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
+    padding: 18px 32px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    box-shadow: 0 8px 30px rgba(149, 204, 165, 0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .btn--hero.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
   
   .btn--hero:hover {
-    background: #7dbb8f;
+    background: #ffffff;
     color: #1a3865;
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 40px rgba(149, 204, 165, 0.4);
   }
   
+  .btn--hero svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .btn--hero:hover svg {
+    transform: translateX(5px);
+  }
+  
+  /* Scroll Indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 2s;
+    z-index: 5;
+  }
+  
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  
+  .scroll-mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  
+  .scroll-wheel {
+    width: 4px;
+    height: 8px;
+    background: #95cca5;
+    border-radius: 2px;
+    animation: scrollWheel 2s ease-in-out infinite;
+  }
+  
+  @keyframes scrollWheel {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.3; transform: translateY(10px); }
+  }
+  
+  .scroll-text {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  @media (max-width: 768px) {
+    .scroll-indicator {
+      bottom: 24px;
+    }
+  }
+  
+  /* ===== SERVICES SECTION PREMIUM ===== */
   .services-section {
-    padding: 80px 0;
+    padding: 100px 0;
     background: var(--color-bg-body);
+    position: relative;
   }
   
   .services-intro {
     text-align: center;
-    font-size: 22px;
-    color: #1a3865;
-    margin-bottom: 40px;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--color-heading);
+    margin-bottom: 60px;
     line-height: 1.5;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .services-intro.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
   
   .services-intro strong {
     color: #2c5282;
-  }
-  
-  @media (max-width: 767px) {
-    .services-intro {
-      font-size: 18px;
-    }
+    background: linear-gradient(180deg, transparent 60%, rgba(149, 204, 165, 0.3) 60%);
   }
   
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 32px;
+  }
+  
+  @media (max-width: 767px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+  
+  /* Glass Card Style */
+  .glass-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-theme);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--card-index) * 0.15s);
+  }
+  
+  .glass-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Shine Effect */
+  .card-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+  
+  .glass-card:hover .card-shine {
+    left: 100%;
   }
   
   .service-card {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border-theme);
-    border-radius: 16px;
-    padding: 32px 28px;
+    padding: 36px 32px;
     text-align: left;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 
+      0 4px 24px rgba(0, 0, 0, 0.06),
+      0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   .service-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    transform: translateY(-8px);
+    box-shadow: 
+      0 20px 50px rgba(0, 0, 0, 0.12),
+      0 0 0 1px var(--card-accent);
+    border-color: var(--card-accent);
+  }
+  
+  .service-card__icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, rgba(var(--card-accent-rgb, 149, 204, 165), 0.1), transparent);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .service-card:hover .service-card__icon-wrapper {
+    transform: scale(1.1) rotate(3deg);
   }
   
   .service-card__icon {
-    width: 64px;
+    width: 56px;
     height: auto;
-    display: block;
-    margin-bottom: 24px;
     object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
   }
   
   .service-card h3 {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: var(--color-heading);
-    margin-bottom: 16px;
-    font-weight: 600;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
   }
   
   .service-card__list {
@@ -235,11 +574,11 @@ const services = [
   
   .service-card__list li {
     position: relative;
-    padding-left: 20px;
-    margin-bottom: 12px;
+    padding-left: 24px;
+    margin-bottom: 14px;
     font-size: 15px;
     color: var(--color-text-muted);
-    line-height: 1.6;
+    line-height: 1.65;
   }
   
   .service-card__list li:last-child {
@@ -250,16 +589,53 @@ const services = [
     content: '';
     position: absolute;
     left: 0;
-    top: 8px;
+    top: 9px;
     width: 8px;
     height: 8px;
-    background: #95cca5;
+    background: var(--card-accent);
     border-radius: 50%;
+    box-shadow: 0 0 8px var(--card-accent);
   }
   
-  /* Áreas Terapéuticas Section */
+  /* ===== ÁREAS TERAPÉUTICAS SECTION ===== */
   .areas-section {
-    padding: 80px 0;
+    padding: 100px 0;
+    background: var(--color-gray-light);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .areas-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  
+  .areas-decoration .deco-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(149, 204, 165, 0.15);
+  }
+  
+  .areas-decoration .deco-circle:nth-child(1) {
+    width: 400px;
+    height: 400px;
+    top: -200px;
+    right: -100px;
+    animation: rotateCircle 30s linear infinite;
+  }
+  
+  .areas-decoration .deco-circle:nth-child(2) {
+    width: 300px;
+    height: 300px;
+    bottom: -150px;
+    left: -100px;
+    animation: rotateCircle 25s linear infinite reverse;
+  }
+  
+  @keyframes rotateCircle {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
   
   .areas-section h2 {
@@ -267,28 +643,100 @@ const services = [
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    color: var(--color-heading);
   }
   
   .areas-text {
     max-width: 750px;
     margin: 0 auto;
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 1.8;
-    color: #444;
+    color: var(--color-text-muted);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
   }
   
+  .areas-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Reveal Animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* ===== CTA SECTION PREMIUM ===== */
   .cta-section {
-    background: var(--color-bg-body);
-    padding: 80px 0;
+    background: linear-gradient(180deg, var(--color-bg-body) 0%, var(--color-gray-light) 100%);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cta-bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(149, 204, 165, 0.08) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
   }
   
   .cta-section h2 {
     margin-bottom: 16px;
+    color: var(--color-heading);
   }
   
   .cta-section p {
-    font-size: 18px;
-    margin-bottom: 24px;
+    font-size: 1.125rem;
+    margin-bottom: 32px;
     color: var(--color-text-muted);
+  }
+  
+  .btn--cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    color: #ffffff;
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
+    padding: 18px 36px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    box-shadow: 0 8px 30px rgba(26, 56, 101, 0.3);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .btn--cta:hover {
+    background: linear-gradient(135deg, #2c5282 0%, #1a3865 100%);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 40px rgba(26, 56, 101, 0.4);
+  }
+  
+  .btn--cta svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .btn--cta:hover svg {
+    transform: translateX(5px);
+  }
+  
+  @media (max-width: 767px) {
+    .services-section,
+    .areas-section,
+    .cta-section {
+      padding: 60px 0;
+    }
   }
 </style>

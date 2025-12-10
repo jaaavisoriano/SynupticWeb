@@ -1,99 +1,740 @@
 ---
-// Hero section with video background
+// Hero section with fullscreen Vimeo video, premium overlay and lightbox modal
 ---
 
-<section class="video-intro section">
-  <div class="video-intro__overlay"></div>
-  <div class="video-intro__content">
-    <a 
-      href="https://vimeo.com/902229971" 
-      class="play-button"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Ver video completo"
-    >
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M8 5v14l11-7z"/>
-      </svg>
-    </a>
+<section class="video-intro section" id="hero-section">
+  <!-- Placeholder that shows while video loads -->
+  <div class="video-placeholder" id="video-placeholder">
+    <!-- Gradient background with subtle animation -->
+    <div class="placeholder-gradient"></div>
+    
+    <!-- Animated loading indicator -->
+    <div class="loading-indicator">
+      <div class="loading-ring">
+        <div class="ring-segment"></div>
+        <div class="ring-segment"></div>
+        <div class="ring-segment"></div>
+      </div>
+      <div class="loading-pulse"></div>
+    </div>
+    
+    <!-- Subtle floating particles for premium feel -->
+    <div class="floating-particles">
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+    </div>
+  </div>
+  
+  <!-- Vimeo background video container (muted, looping) -->
+  <div class="video-container" id="video-container">
+    <iframe 
+      id="vimeo-player"
+      src="https://player.vimeo.com/video/902229971?autoplay=1&loop=1&muted=1&background=1&quality=720p"
+      frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen
+      title="Synuptic Video"
+    ></iframe>
+  </div>
+  
+  <!-- Premium Overlay with Content -->
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <h1 class="hero-headline">
+        <span class="headline-line headline-line-1">Medical Writing</span>
+        <span class="headline-ampersand">&</span>
+        <span class="headline-line headline-line-2">Healthcare Strategy</span>
+      </h1>
+      <p class="hero-subline">Como si fuéramos parte de tu departamento científico</p>
+      <div class="hero-cta-group">
+        <button 
+          class="hero-play-btn"
+          id="open-lightbox"
+          aria-label="Ver video a pantalla completa"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <span>Ver video</span>
+        </button>
+        <a href="#about" class="hero-cta-link">
+          <span>Descubre más</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span class="scroll-text">Scroll</span>
+    </div>
   </div>
 </section>
+
+<!-- Fullscreen Video Lightbox Modal -->
+<div class="video-lightbox" id="video-lightbox" aria-hidden="true">
+  <div class="lightbox-overlay" id="lightbox-overlay"></div>
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="close-lightbox" aria-label="Cerrar video">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="lightbox-video-wrapper">
+      <iframe 
+        id="lightbox-video"
+        src=""
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        title="Synuptic Video Fullscreen"
+      ></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initVideoLoader() {
+    const placeholder = document.getElementById('video-placeholder');
+    const videoContainer = document.getElementById('video-container');
+    const iframe = document.getElementById('vimeo-player');
+    
+    if (!iframe || !placeholder || !videoContainer) return;
+    
+    // Set a minimum display time for the placeholder (to avoid flashing)
+    const minDisplayTime = 1500; // 1.5 seconds minimum
+    const startTime = Date.now();
+    
+    // Function to hide placeholder with smooth transition
+    const hidePlaceholder = () => {
+      const elapsed = Date.now() - startTime;
+      const remainingTime = Math.max(0, minDisplayTime - elapsed);
+      
+      setTimeout(() => {
+        // Add loaded class to trigger smooth transition
+        videoContainer.classList.add('video-loaded');
+        
+        // Fade out placeholder
+        placeholder.classList.add('placeholder-hidden');
+        
+        // Remove placeholder from DOM after animation completes
+        setTimeout(() => {
+          placeholder.style.display = 'none';
+        }, 1000);
+      }, remainingTime);
+    };
+    
+    // Listen for iframe load event
+    iframe.addEventListener('load', hidePlaceholder);
+    
+    // Fallback: Hide placeholder after maximum wait time
+    setTimeout(() => {
+      if (!videoContainer.classList.contains('video-loaded')) {
+        hidePlaceholder();
+      }
+    }, 5000); // 5 second maximum wait
+  }
+  
+  function initLightbox() {
+    const openBtn = document.getElementById('open-lightbox');
+    const closeBtn = document.getElementById('close-lightbox');
+    const lightbox = document.getElementById('video-lightbox');
+    const overlay = document.getElementById('lightbox-overlay');
+    const lightboxVideo = document.getElementById('lightbox-video') as HTMLIFrameElement;
+    
+    if (!openBtn || !closeBtn || !lightbox || !overlay || !lightboxVideo) return;
+    
+    const vimeoFullUrl = 'https://player.vimeo.com/video/902229971?autoplay=1&loop=0&muted=0&quality=1080p';
+    
+    const openLightbox = () => {
+      // Set video source with autoplay and sound
+      lightboxVideo.src = vimeoFullUrl;
+      
+      // Show lightbox
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      
+      // Lock body scroll
+      document.body.style.overflow = 'hidden';
+    };
+    
+    const closeLightbox = () => {
+      // Hide lightbox
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      
+      // Stop video by clearing src
+      lightboxVideo.src = '';
+      
+      // Unlock body scroll
+      document.body.style.overflow = '';
+    };
+    
+    // Event listeners
+    openBtn.addEventListener('click', openLightbox);
+    closeBtn.addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', closeLightbox);
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+        closeLightbox();
+      }
+    });
+  }
+  
+  // Initialize on page load
+  initVideoLoader();
+  initLightbox();
+  
+  // Re-initialize after Astro View Transitions
+  document.addEventListener('astro:page-load', () => {
+    initVideoLoader();
+    initLightbox();
+  });
+</script>
 
 <style>
   .video-intro {
     position: relative;
-    min-height: 65vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #1a3865 0%, #2a4a7a 100%);
+    background: #0a1628;
     overflow: hidden;
   }
 
   @media (max-width: 768px) {
     .video-intro {
-      min-height: 40vh;
+      min-height: 70vh;
     }
   }
   
-  .video-intro__overlay {
+  /* ===== PLACEHOLDER STYLES ===== */
+  .video-placeholder {
     position: absolute;
     inset: 0;
-    background: url('/images/acuarela_alta.jpg') center/cover no-repeat;
-    opacity: 0.3;
-  }
-  
-  .video-intro__content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-  }
-  
-  .play-button {
+    z-index: 3; /* Below hero-overlay (z-index: 10) so content shows in front */
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), 
+                filter 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .video-placeholder.placeholder-hidden {
+    opacity: 0;
+    filter: blur(10px);
+    pointer-events: none;
+  }
+  
+  /* Animated gradient background */
+  .placeholder-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg, 
+      #0a1628 0%, 
+      #1a3865 25%, 
+      #0f2240 50%, 
+      #1a3865 75%, 
+      #0a1628 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease-in-out infinite;
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  /* Loading indicator container */
+  .loading-indicator {
+    position: relative;
     width: 100px;
     height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  
+  /* Animated ring loader */
+  .loading-ring {
+    position: absolute;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    background: #95cca5;
-    color: #1a3865;
-    cursor: pointer;
-    transition: all 0.5s var(--timing-premium);
-    box-shadow: 
-      0 0 20px rgba(149, 204, 165, 0.4),
-      0 0 40px rgba(149, 204, 165, 0.2);
-    text-decoration: none;
-    animation: playPulse 2.5s ease-in-out infinite;
+    animation: ringRotate 3s linear infinite;
   }
   
-  .play-button:hover {
-    background: #afccb5;
-    transform: scale(1.15);
-    box-shadow: 
-      0 0 30px rgba(149, 204, 165, 0.6),
-      0 0 60px rgba(149, 204, 165, 0.3);
+  .ring-segment {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent;
+    border-radius: 50%;
   }
   
-  @keyframes playPulse {
+  .ring-segment:nth-child(1) {
+    border-top-color: rgba(149, 204, 165, 0.8);
+    animation: ringPulse 1.5s ease-in-out infinite;
+  }
+  
+  .ring-segment:nth-child(2) {
+    border-right-color: rgba(149, 204, 165, 0.5);
+    animation: ringPulse 1.5s ease-in-out 0.2s infinite;
+  }
+  
+  .ring-segment:nth-child(3) {
+    border-bottom-color: rgba(149, 204, 165, 0.3);
+    animation: ringPulse 1.5s ease-in-out 0.4s infinite;
+  }
+  
+  @keyframes ringRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes ringPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.6; }
+  }
+  
+  /* Center pulse effect */
+  .loading-pulse {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(149, 204, 165, 0.6) 0%, transparent 70%);
+    animation: centerPulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes centerPulse {
+    0%, 100% { 
+      transform: scale(0.8); 
+      opacity: 0.5;
+    }
+    50% { 
+      transform: scale(1.2); 
+      opacity: 1;
+    }
+  }
+  
+  /* Floating particles for premium feel */
+  .floating-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(149, 204, 165, 0.4);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .particle:nth-child(1) {
+    left: 20%;
+    top: 30%;
+    animation-delay: 0s;
+    animation-duration: 7s;
+  }
+  
+  .particle:nth-child(2) {
+    left: 70%;
+    top: 60%;
+    animation-delay: 2s;
+    animation-duration: 8s;
+  }
+  
+  .particle:nth-child(3) {
+    left: 50%;
+    top: 80%;
+    animation-delay: 4s;
+    animation-duration: 6s;
+  }
+  
+  @keyframes float {
     0%, 100% {
-      box-shadow: 
-        0 0 20px rgba(149, 204, 165, 0.4),
-        0 0 40px rgba(149, 204, 165, 0.2);
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.3;
+    }
+    25% {
+      transform: translateY(-30px) translateX(10px) scale(1.2);
+      opacity: 0.6;
     }
     50% {
-      box-shadow: 
-        0 0 35px rgba(149, 204, 165, 0.6),
-        0 0 60px rgba(149, 204, 165, 0.3);
+      transform: translateY(-50px) translateX(-15px) scale(1);
+      opacity: 0.8;
+    }
+    75% {
+      transform: translateY(-20px) translateX(5px) scale(0.8);
+      opacity: 0.5;
     }
   }
   
-  .play-button svg {
-    margin-left: 4px;
-    transition: transform 0.3s var(--timing-elastic);
+  /* ===== VIDEO CONTAINER STYLES ===== */
+  .video-container iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 177.777%;
+    min-width: 100%;
+    min-height: 56.25vw;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
   }
   
-  .play-button:hover svg {
-    transform: scale(1.1);
+  /* ===== HERO OVERLAY ===== */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 22, 40, 0.4) 0%,
+      rgba(10, 22, 40, 0.6) 50%,
+      rgba(10, 22, 40, 0.8) 100%
+    );
+  }
+  
+  /* ===== HERO CONTENT ===== */
+  .hero-content {
+    text-align: center;
+    max-width: 900px;
+    padding: 0 24px;
+    /* Content is now visible immediately */
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .hero-headline {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .headline-line {
+    display: block;
+  }
+  
+  .headline-line-1 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealLine 0.8s ease forwards 0.3s;
+  }
+  
+  .headline-ampersand {
+    display: block;
+    font-size: 0.5em;
+    color: #95cca5;
+    margin: 8px 0;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: revealAmpersand 0.6s ease forwards 0.6s;
+  }
+  
+  .headline-line-2 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealLine 0.8s ease forwards 0.9s;
+  }
+  
+  @keyframes revealLine {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes revealAmpersand {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .hero-subline {
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.2s;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ===== CTA GROUP ===== */
+  .hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.5s;
+  }
+  
+  .hero-play-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    background: #95cca5;
+    color: #1a3865;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 30px rgba(149, 204, 165, 0.3);
+  }
+  
+  .hero-play-btn:hover {
+    background: #ffffff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 40px rgba(149, 204, 165, 0.4);
+  }
+  
+  .hero-play-btn svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .hero-play-btn:hover svg {
+    transform: scale(1.15);
+  }
+  
+  .hero-cta-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 28px;
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .hero-cta-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-3px);
+  }
+  
+  .hero-cta-link svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .hero-cta-link:hover svg {
+    transform: translateX(5px);
+  }
+  
+  /* ===== SCROLL INDICATOR ===== */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 2s;
+  }
+  
+  .scroll-mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  
+  .scroll-wheel {
+    width: 4px;
+    height: 8px;
+    background: #95cca5;
+    border-radius: 2px;
+    animation: scrollWheel 2s ease-in-out infinite;
+  }
+  
+  @keyframes scrollWheel {
+    0%, 100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 0.3;
+      transform: translateY(10px);
+    }
+  }
+  
+  .scroll-text {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  @media (max-width: 768px) {
+    .scroll-indicator {
+      bottom: 24px;
+    }
+    
+    .hero-cta-group {
+      flex-direction: column;
+      width: 100%;
+      padding: 0 20px;
+    }
+    
+    .hero-play-btn,
+    .hero-cta-link {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  
+  /* ===== LIGHTBOX MODAL ===== */
+  .video-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .video-lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .lightbox-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    cursor: pointer;
+  }
+  
+  .lightbox-content {
+    position: relative;
+    width: 90vw;
+    max-width: 1400px;
+    z-index: 1;
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .video-lightbox.is-open .lightbox-content {
+    transform: scale(1) translateY(0);
+  }
+  
+  .lightbox-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+  
+  .lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: rotate(90deg);
+  }
+  
+  .lightbox-video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+  }
+  
+  .lightbox-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .lightbox-content {
+      width: 95vw;
+    }
+    
+    .lightbox-close {
+      top: -45px;
+      right: 5px;
+      width: 38px;
+      height: 38px;
+    }
+    
+    .lightbox-close svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 </style>

@@ -1,11 +1,17 @@
 ---
-// About section - "Más que tu medical writer de confianza"
+// About section - "Más que tu medical writer de confianza" - Premium version
 ---
 
-<section class="section about-section">
+<section class="section about-section" id="about">
   <div class="cesis_container">
     <div class="row">
       <div class="col-sm-6 about-section__content reveal-left">
+        <!-- Stats badge -->
+        <div class="about-stats">
+          <span class="stat-number" data-target="9">0</span>
+          <span class="stat-text">años de<br>experiencia</span>
+        </div>
+        
         <h2>Más que tu medical writer de confianza</h2>
         <div class="line-divider"></div>
         <p>
@@ -15,13 +21,14 @@
           más de 10 años trabajando para unir la rigurosidad a la creatividad de las 
           <strong>agencias del sector salud</strong>.
         </p>
-        <a href="#contact" class="btn">
+        <a href="#contact" class="btn btn-pulse">
           <span class="btn-icon">✉</span>
           <span>Quiero conoceros</span>
         </a>
       </div>
       <div class="col-sm-6">
         <div class="about-section__image reveal-scale">
+          <div class="image-glow"></div>
           <img 
             src="/images/Multidisci_800x600-1.jpg" 
             alt="Equipo multidisciplinar de Synuptic"
@@ -35,54 +42,206 @@
   </div>
 </section>
 
+<script>
+  // Animated counter for stats
+  function animateCounter() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target as HTMLElement;
+          const target = parseInt(counter.dataset.target || '0');
+          const duration = 2000;
+          const startTime = performance.now();
+          
+          const updateCounter = (currentTime: number) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function for smooth animation
+            const easeOutExpo = 1 - Math.pow(2, -10 * progress);
+            const currentValue = Math.floor(target * easeOutExpo);
+            
+            counter.textContent = currentValue + '+';
+            
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            }
+          };
+          
+          requestAnimationFrame(updateCounter);
+          observer.unobserve(counter);
+        }
+      });
+    }, observerOptions);
+    
+    counters.forEach(counter => observer.observe(counter));
+  }
+  
+  animateCounter();
+  document.addEventListener('astro:page-load', animateCounter);
+</script>
+
 <style>
   .about-section {
     background: var(--color-bg-body);
+    padding: 100px 0;
   }
   
   .about-section .row {
     align-items: center;
+    gap: 40px;
   }
   
+  /* ===== STATS BADGE ===== */
+  .about-stats {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #1a3865 0%, #2a5a8a 100%);
+    padding: 12px 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 30px rgba(26, 56, 101, 0.2);
+    /* Removed transform for cleaner alignment */
+  }
+  
+  .stat-number {
+    font-family: 'Raleway', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #95cca5;
+    line-height: 1;
+  }
+  
+  .stat-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    line-height: 1.4;
+  }
+  
+  /* ===== CONTENT ===== */
   .about-section__content {
     padding-right: 40px;
   }
   
+  @media (max-width: 767px) {
     .about-section__content {
       padding-right: 0;
-      margin-bottom: 24px;
+      margin-bottom: 40px;
     }
     
-    .about-section__image {
-      max-width: 85%;
-      margin-left: auto;
-      margin-right: auto;
+    .about-stats {
+      transform: none;
     }
   }
   
   .about-section__content h2 {
-    font-size: 32px;
+    font-size: clamp(1.75rem, 4vw, 2rem);
     line-height: 1.2;
     margin-bottom: 16px;
-  }
-  
-  @media (max-width: 767px) {
-    .about-section__content h2 {
-      font-size: 26px;
-    }
+    color: var(--color-heading);
   }
   
   .about-section__content p {
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 17px;
+    line-height: 1.8;
     color: var(--color-text-body);
     margin-bottom: 32px;
   }
   
-  .about-section__image img {
+  .about-section__content p strong {
+    color: var(--color-heading);
+  }
+  
+  /* ===== BUTTON ===== */
+  .btn-pulse {
+    position: relative;
+  }
+  
+  .btn-pulse::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
     border-radius: 8px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    background: linear-gradient(90deg, #95cca5, #1a3865, #95cca5);
+    background-size: 200% 100%;
+    z-index: -1;
+    opacity: 0;
+    animation: btnPulseGlow 3s ease-in-out infinite;
+  }
+  
+  @keyframes btnPulseGlow {
+    0%, 100% {
+      opacity: 0;
+      background-position: 200% 0;
+    }
+    50% {
+      opacity: 0.5;
+      background-position: 0% 0;
+    }
+  }
+  
+  /* ===== IMAGE ===== */
+  .about-section__image {
+    position: relative;
+  }
+  
+  .image-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(149, 204, 165, 0.15) 0%,
+      transparent 70%
+    );
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  .about-section__image:hover .image-glow {
+    opacity: 1;
+  }
+  
+  .about-section__image img {
+    position: relative;
+    z-index: 1;
+    border-radius: 12px;
+    box-shadow: 
+      0 20px 50px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
     width: 100%;
     height: auto;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.6s ease;
+  }
+  
+  .about-section__image:hover img {
+    transform: scale(1.02) translateY(-5px);
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(149, 204, 165, 0.2);
+  }
+  
+  @media (max-width: 767px) {
+    .about-section {
+      padding: 60px 0;
+    }
+    
+    .about-section__image {
+      max-width: 90%;
+      margin: 0 auto;
+    }
   }
 </style>

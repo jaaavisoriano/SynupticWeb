@@ -44,36 +44,105 @@ const services = [
     <Header />
     
     <main id="main-content">
-      <!-- Hero Section -->
+      <!-- Hero Section - Premium Style -->
       <section class="page-hero">
-        <div class="cesis_container">
-          <span class="page-hero__tag">ESTRATEGIA HEALTHCARE</span>
-          <h1>Asesoramos desde el conocimiento científico de la salud</h1>
-          <div class="line-divider center"></div>
+        <!-- Animated gradient background -->
+        <div class="hero-gradient"></div>
+        
+        <!-- Floating particles -->
+        <div class="floating-particles">
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+        </div>
+        
+        <!-- Decorative waves -->
+        <div class="hero-waves">
+          <svg class="wave wave-1" viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="rgba(149, 204, 165, 0.1)" d="M0,160L48,170.7C96,181,192,203,288,197.3C384,192,480,160,576,165.3C672,171,768,213,864,213.3C960,213,1056,171,1152,149.3C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          </svg>
+          <svg class="wave wave-2" viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="rgba(149, 204, 165, 0.05)" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,106.7C672,117,768,171,864,186.7C960,203,1056,181,1152,154.7C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+          </svg>
+        </div>
+        
+        <div class="cesis_container hero-content-wrapper">
+          <span class="page-hero__tag">
+            <span class="tag-icon">🎯</span>
+            ESTRATEGIA HEALTHCARE
+          </span>
+          <h1 class="hero-title">
+            <span class="title-line title-line-1">Asesoramos desde el</span>
+            <span class="title-line title-line-2">conocimiento científico</span>
+            <span class="title-line title-line-3 highlight">de la salud</span>
+          </h1>
+          <div class="hero-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon">✦</span>
+            <span class="divider-line"></span>
+          </div>
           <p class="page-hero__subtitle">
             Buscamos argumentos científicos para cimentar con una estrategia sólida la propuesta a tu cliente. Convertimos la ciencia en la mejor aliada de tus proyectos.
           </p>
-          <a href="/#contact" class="btn btn--hero">
-            <span>Necesito ayuda estratégica</span>
-          </a>
+          <div class="hero-cta-group">
+            <a href="/#contact" class="btn btn--hero-primary">
+              <span>Necesito ayuda estratégica</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+            <a href="#services" class="btn btn--hero-secondary">
+              <span>Ver servicios</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+          <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+          </div>
+          <span class="scroll-text">Scroll</span>
         </div>
       </section>
 
       <!-- Services Section -->
-      <section class="section services-section">
+      <section class="section services-section" id="services">
         <div class="cesis_container">
-          <p class="services-intro">Como consultores healthcare... <strong>diseñamos estrategias y dinámicas innovadoras</strong></p>
+          <div class="section-header">
+            <span class="section-tag">NUESTROS SERVICIOS</span>
+            <p class="services-intro">Como consultores healthcare... <strong>diseñamos estrategias y dinámicas innovadoras</strong></p>
+          </div>
           
           <div class="services-grid">
-            {services.map((service) => (
-              <div class="service-card">
-                <img src={service.icon} alt={service.title} class="service-card__icon" />
+            {services.map((service, index) => (
+              <div class="service-card" style={`--card-delay: ${index * 0.15}s`}>
+                <div class="service-card__glow"></div>
+                <div class="service-card__icon-wrapper">
+                  <img src={service.icon} alt={service.title} class="service-card__icon" />
+                </div>
                 <h3>{service.title}</h3>
                 <ul class="service-card__list">
                   {service.items.map((item) => (
-                    <li>{item}</li>
+                    <li>
+                      <span class="check-icon">✓</span>
+                      <span>{item}</span>
+                    </li>
                   ))}
                 </ul>
+                <div class="service-card__footer">
+                  <a href="/#contact" class="service-card__link">
+                    Más información
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </a>
+                </div>
               </div>
             ))}
           </div>
@@ -81,25 +150,60 @@ const services = [
       </section>
 
       <!-- Innovation Section -->
-      <section class="section section--gray innovation-section">
+      <section class="section innovation-section">
+        <div class="innovation-bg">
+          <div class="innovation-particles">
+            <span class="inno-particle"></span>
+            <span class="inno-particle"></span>
+            <span class="inno-particle"></span>
+          </div>
+        </div>
         <div class="cesis_container text-center">
-          <div class="innovation-icon">💡</div>
-          <h2>Además, innovamos con metodologías de otros sectores que aportan valor y frescura a las reuniones que lideramos</h2>
-          <div class="line-divider center"></div>
+          <div class="innovation-icon-wrapper">
+            <div class="innovation-icon-glow"></div>
+            <div class="innovation-icon">💡</div>
+          </div>
+          <h2 class="innovation-title">Además, innovamos con metodologías de otros sectores que aportan valor y frescura a las reuniones que lideramos</h2>
+          <div class="innovation-divider">
+            <span class="divider-line"></span>
+          </div>
           <p class="innovation-text">
             Buscamos siempre las mejores herramientas para que tus reuniones de trabajo o advisory boards sean memorables y productivos. Nuestro objetivo es que una reunión de 3 horas dure un suspiro y el informe esté repleto de ideas y soluciones.
           </p>
+          <div class="innovation-features">
+            <div class="innovation-feature">
+              <span class="feature-icon">⚡</span>
+              <span class="feature-text">Dinámicas ágiles</span>
+            </div>
+            <div class="innovation-feature">
+              <span class="feature-icon">🎯</span>
+              <span class="feature-text">Resultados medibles</span>
+            </div>
+            <div class="innovation-feature">
+              <span class="feature-icon">🚀</span>
+              <span class="feature-text">Innovación constante</span>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- CTA Section -->
       <section class="section cta-section">
+        <div class="cta-bg-pattern"></div>
         <div class="cesis_container text-center">
-          <h2>¿Necesitas apoyo estratégico?</h2>
-          <div class="line-divider center"></div>
-          <p>Cuéntanos tu reto y diseñamos juntos la solución.</p>
-          <a href="/#contact" class="btn">
+          <span class="cta-tag">¿LISTO PARA EMPEZAR?</span>
+          <h2 class="cta-title">¿Necesitas apoyo estratégico?</h2>
+          <div class="cta-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon">✦</span>
+            <span class="divider-line"></span>
+          </div>
+          <p class="cta-text">Cuéntanos tu reto y diseñamos juntos la solución.</p>
+          <a href="/#contact" class="btn btn--cta">
             <span>Necesito ayuda estratégica</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </a>
         </div>
       </section>
@@ -109,107 +213,461 @@ const services = [
   </div>
 </Layout>
 
+<script>
+  function initScrollAnimations() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, observerOptions);
+    
+    // Observe elements
+    document.querySelectorAll('.service-card, .innovation-icon-wrapper, .innovation-feature, .cta-section').forEach(el => {
+      observer.observe(el);
+    });
+  }
+  
+  initScrollAnimations();
+  document.addEventListener('astro:page-load', initScrollAnimations);
+</script>
+
 <style>
+  /* ===== PAGE HERO - PREMIUM STYLE ===== */
   .page-hero {
-    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #fff;
     padding: 120px 0 80px;
     text-align: center;
+    overflow: hidden;
+  }
+  
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg, 
+      #0a1628 0%, 
+      #1a3865 25%, 
+      #0f2240 50%, 
+      #1a3865 75%, 
+      #0a1628 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease-in-out infinite;
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  /* Floating particles */
+  .floating-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(149, 204, 165, 0.4);
+    border-radius: 50%;
+    animation: floatParticle 8s ease-in-out infinite;
+  }
+  
+  .particle:nth-child(1) { left: 15%; top: 20%; animation-delay: 0s; animation-duration: 7s; }
+  .particle:nth-child(2) { left: 75%; top: 30%; animation-delay: 1s; animation-duration: 9s; }
+  .particle:nth-child(3) { left: 45%; top: 70%; animation-delay: 2s; animation-duration: 6s; }
+  .particle:nth-child(4) { left: 85%; top: 60%; animation-delay: 3s; animation-duration: 8s; }
+  .particle:nth-child(5) { left: 25%; top: 80%; animation-delay: 4s; animation-duration: 10s; }
+  
+  @keyframes floatParticle {
+    0%, 100% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.3;
+    }
+    25% {
+      transform: translateY(-40px) translateX(15px) scale(1.3);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(-60px) translateX(-20px) scale(1);
+      opacity: 0.9;
+    }
+    75% {
+      transform: translateY(-30px) translateX(10px) scale(0.8);
+      opacity: 0.5;
+    }
+  }
+  
+  /* Hero waves */
+  .hero-waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    pointer-events: none;
+  }
+  
+  .wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .wave-1 { animation: waveMove1 12s ease-in-out infinite; }
+  .wave-2 { animation: waveMove2 15s ease-in-out infinite; }
+  
+  @keyframes waveMove1 {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-30px); }
+  }
+  
+  @keyframes waveMove2 {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(30px); }
+  }
+  
+  /* Hero content */
+  .hero-content-wrapper {
+    position: relative;
+    z-index: 10;
   }
   
   .page-hero__tag {
-    display: inline-block;
-    background: rgba(149, 204, 165, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(149, 204, 165, 0.15);
+    backdrop-filter: blur(10px);
     color: #95cca5;
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 24px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+    border: 1px solid rgba(149, 204, 165, 0.3);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.2s;
   }
   
-  .page-hero h1 {
-    font-size: 48px;
-    margin-bottom: 16px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+  .tag-icon {
+    font-size: 16px;
   }
   
-  @media (max-width: 767px) {
-    .page-hero h1 {
-      font-size: 32px;
+  .hero-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 28px;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .title-line {
+    display: block;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  .title-line-1 { animation: revealLine 0.8s ease forwards 0.4s; }
+  .title-line-2 { animation: revealLine 0.8s ease forwards 0.6s; }
+  .title-line-3 { animation: revealLine 0.8s ease forwards 0.8s; }
+  
+  .title-line.highlight {
+    color: #95cca5;
+    text-shadow: 0 0 40px rgba(149, 204, 165, 0.4);
+  }
+  
+  @keyframes revealLine {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
   
-  .page-hero .line-divider {
-    background: #95cca5;
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Hero divider */
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1s;
+  }
+  
+  .hero-divider .divider-line {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+  }
+  
+  .hero-divider .divider-icon {
+    color: #95cca5;
+    font-size: 14px;
   }
   
   .page-hero__subtitle {
-    font-size: 20px;
-    max-width: 750px;
-    margin: 0 auto 32px;
-    opacity: 0.9;
-    line-height: 1.6;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    max-width: 700px;
+    margin: 0 auto 40px;
+    opacity: 0;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    animation: fadeInUp 0.8s ease forwards 1.2s;
   }
   
-  @media (max-width: 767px) {
-    .page-hero__subtitle {
-      font-size: 16px;
-    }
+  /* Hero CTA group */
+  .hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.4s;
   }
-
-  .btn--hero {
+  
+  .btn--hero-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 32px;
     background: #95cca5;
     color: #1a3865;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 30px rgba(149, 204, 165, 0.3);
+  }
+  
+  .btn--hero-primary:hover {
+    background: #ffffff;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 45px rgba(149, 204, 165, 0.4);
+  }
+  
+  .btn--hero-primary svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .btn--hero-primary:hover svg {
+    transform: translateX(4px);
+  }
+  
+  .btn--hero-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 32px;
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
     font-weight: 600;
-    padding: 16px 32px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   
-  .btn--hero:hover {
-    background: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  .btn--hero-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-4px);
   }
   
+  .btn--hero-secondary svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .btn--hero-secondary:hover svg {
+    transform: translateY(3px);
+  }
+  
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 2s;
+    z-index: 10;
+  }
+  
+  .scroll-mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  
+  .scroll-wheel {
+    width: 4px;
+    height: 8px;
+    background: #95cca5;
+    border-radius: 2px;
+    animation: scrollWheel 2s ease-in-out infinite;
+  }
+  
+  @keyframes scrollWheel {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.3; transform: translateY(10px); }
+  }
+  
+  .scroll-text {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  @media (max-width: 768px) {
+    .page-hero {
+      min-height: 80vh;
+      padding: 100px 0 60px;
+    }
+    
+    .scroll-indicator {
+      bottom: 20px;
+    }
+    
+    .hero-cta-group {
+      flex-direction: column;
+      width: 100%;
+      padding: 0 20px;
+    }
+    
+    .btn--hero-primary,
+    .btn--hero-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  
+  /* ===== SERVICES SECTION ===== */
   .services-section {
-    padding: 80px 0;
+    padding: 100px 0;
     background: var(--color-bg-body);
   }
   
-  .services-intro {
+  .section-header {
     text-align: center;
-    font-size: 22px;
+    margin-bottom: 60px;
+  }
+  
+  .section-tag {
+    display: inline-block;
+    background: rgba(26, 56, 101, 0.1);
     color: #1a3865;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
     margin-bottom: 16px;
   }
   
+  .services-intro {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    color: var(--color-heading);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+  
   .services-intro strong {
-    color: #2c5282;
+    color: #1a3865;
+    background: linear-gradient(135deg, #95cca5 0%, #7bb892 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 28px;
-    margin-top: 48px;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 32px;
   }
   
   .service-card {
+    position: relative;
     background: var(--color-bg-card);
     border: 1px solid var(--color-border-theme);
-    border-radius: 16px;
-    padding: 36px;
+    border-radius: 24px;
+    padding: 40px;
     text-align: left;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  
+  .service-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: var(--card-delay);
+  }
+  
+  .service-card__glow {
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(149, 204, 165, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  .service-card:hover .service-card__glow {
+    opacity: 1;
   }
   
   .service-card::before {
@@ -221,134 +679,390 @@ const services = [
     height: 4px;
     background: linear-gradient(90deg, #1a3865, #95cca5);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
   }
   
   .service-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
   }
   
   .service-card:hover::before {
     opacity: 1;
   }
   
+  .service-card__icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, rgba(26, 56, 101, 0.1) 0%, rgba(149, 204, 165, 0.1) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transition: transform 0.4s ease;
+  }
+  
+  .service-card:hover .service-card__icon-wrapper {
+    transform: scale(1.1) rotate(5deg);
+  }
+  
   .service-card__icon {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
-    display: block;
-    margin-bottom: 20px;
   }
 
   @media (max-width: 767px) {
+    .service-card__icon-wrapper {
+      width: 64px;
+      height: 64px;
+    }
+    
     .service-card__icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 16px;
+      width: 36px;
+      height: 36px;
     }
   }
   
   .service-card h3 {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: var(--color-heading);
     margin-bottom: 20px;
     line-height: 1.4;
+    font-weight: 700;
   }
   
   .service-card__list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 0 24px 0;
   }
   
   .service-card__list li {
-    position: relative;
-    padding-left: 24px;
-    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
     font-size: 15px;
     color: var(--color-text-muted);
     line-height: 1.6;
   }
   
-  .service-card__list li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
+  .service-card__list li .check-icon {
     color: #95cca5;
-    font-weight: 600;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
   }
   
   .service-card__list li:last-child {
     margin-bottom: 0;
   }
   
+  .service-card__footer {
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border-theme);
+  }
+  
+  .service-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #1a3865;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .service-card__link:hover {
+    color: #95cca5;
+  }
+  
+  .service-card__link svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .service-card__link:hover svg {
+    transform: translateX(4px);
+  }
+  
+  /* ===== INNOVATION SECTION ===== */
   .innovation-section {
-    padding: 100px 0;
-    background: linear-gradient(180deg, #f8fafc 0%, #edf0f7 100%);
+    position: relative;
+    padding: 120px 0;
+    overflow: hidden;
+  }
+  
+  .innovation-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #f0f5fa 0%, #e8eff7 100%);
+  }
+  
+  .innovation-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  
+  .inno-particle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(149, 204, 165, 0.15) 0%, transparent 70%);
+    animation: innoFloat 10s ease-in-out infinite;
+  }
+  
+  .inno-particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+  .inno-particle:nth-child(2) { right: 15%; top: 50%; animation-delay: 3s; }
+  .inno-particle:nth-child(3) { left: 50%; bottom: 10%; animation-delay: 5s; }
+  
+  @keyframes innoFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.2); }
+  }
+  
+  .innovation-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .innovation-icon-wrapper.is-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .innovation-icon-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, rgba(149, 204, 165, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: iconGlow 3s ease-in-out infinite;
+  }
+  
+  @keyframes iconGlow {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.3); opacity: 1; }
   }
   
   .innovation-icon {
-    font-size: 64px;
-    margin-bottom: 24px;
-    animation: float 3s ease-in-out infinite;
+    position: relative;
+    font-size: 72px;
+    animation: iconFloat 4s ease-in-out infinite;
   }
   
-  @keyframes float {
+  @keyframes iconFloat {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-15px); }
   }
   
-  .innovation-section h2 {
-    font-size: 32px;
+  .innovation-title {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
     color: #1a3865;
-    max-width: 800px;
-    margin: 0 auto 20px;
-    line-height: 1.4;
+    max-width: 850px;
+    margin: 0 auto 24px;
+    line-height: 1.5;
+    font-weight: 700;
   }
   
-  @media (max-width: 767px) {
-    .innovation-section h2 {
-      font-size: 24px;
-    }
+  .innovation-divider {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  
+  .innovation-divider .divider-line {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #1a3865, #95cca5);
+    border-radius: 2px;
   }
   
   .innovation-text {
-    font-size: 18px;
+    position: relative;
+    z-index: 1;
+    font-size: 1.125rem;
     color: var(--color-text-muted);
     max-width: 750px;
-    margin: 24px auto 0;
+    margin: 0 auto 48px;
     line-height: 1.8;
   }
   
-  .cta-section {
-    background: var(--color-bg-body);
-    padding: 80px 0;
+  .innovation-features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
   }
   
-  .cta-section h2 {
-    color: #1a3865;
-    margin-bottom: 16px;
+  .innovation-feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 16px 28px;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
   }
   
-  .cta-section p {
-    font-size: 18px;
-    margin-bottom: 28px;
-    color: var(--color-text-muted);
+  .innovation-feature.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
   
-  .cta-section .btn {
-    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
-    color: #fff;
-    padding: 16px 36px;
-    border-radius: 8px;
+  .innovation-feature:nth-child(1) { transition-delay: 0.1s; }
+  .innovation-feature:nth-child(2) { transition-delay: 0.2s; }
+  .innovation-feature:nth-child(3) { transition-delay: 0.3s; }
+  
+  .feature-icon {
+    font-size: 24px;
+  }
+  
+  .feature-text {
+    font-size: 15px;
     font-weight: 600;
-    transition: all 0.3s ease;
-    display: inline-block;
+    color: #1a3865;
   }
   
-  .cta-section .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(26, 56, 101, 0.3);
+  /* ===== CTA SECTION ===== */
+  .cta-section {
+    position: relative;
+    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    padding: 100px 0;
+    overflow: hidden;
+  }
+  
+  .cta-bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+  }
+  
+  .cta-tag {
+    display: inline-block;
+    background: rgba(149, 204, 165, 0.15);
+    color: #95cca5;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  
+  .cta-title {
+    position: relative;
+    z-index: 1;
+    color: #ffffff;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  
+  .cta-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .cta-divider .divider-line {
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+  }
+  
+  .cta-divider .divider-icon {
+    color: #95cca5;
+    font-size: 14px;
+  }
+  
+  .cta-text {
+    position: relative;
+    z-index: 1;
+    font-size: 1.125rem;
+    margin-bottom: 36px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  
+  .btn--cta {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #95cca5;
+    color: #1a3865;
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 10px 40px rgba(149, 204, 165, 0.3);
+  }
+  
+  .btn--cta:hover {
+    background: #ffffff;
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 20px 60px rgba(149, 204, 165, 0.4);
+  }
+  
+  .btn--cta svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .btn--cta:hover svg {
+    transform: translateX(5px);
+  }
+  
+  /* Dark mode adjustments */
+  :global([data-theme="dark"]) .services-intro strong {
+    color: #95cca5;
+    -webkit-text-fill-color: #95cca5;
+  }
+  
+  :global([data-theme="dark"]) .section-tag {
+    background: rgba(149, 204, 165, 0.15);
+    color: #95cca5;
+  }
+  
+  :global([data-theme="dark"]) .innovation-bg {
+    background: linear-gradient(180deg, #0f1a2e 0%, #0a1628 100%);
+  }
+  
+  :global([data-theme="dark"]) .innovation-feature {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  :global([data-theme="dark"]) .feature-text {
+    color: #ffffff;
+  }
+  
+  :global([data-theme="dark"]) .innovation-title {
+    color: #ffffff;
+  }
+  
+  :global([data-theme="dark"]) .service-card__link {
+    color: #95cca5;
   }
 </style>

@@ -1,25 +1,29 @@
 ---
-// Client Types - Flip Boxes
+// Client Types - Premium Flip Cards with Clean 3D Effects
 const clientTypes = [
   {
     title: 'Agencia potente',
     icon: '/images/Fuerza-300x300.png',
-    description: 'Las agencias de salud potentes cuentan con un buen equipo de trabajadores y tienen clientes farmacéuticos fidelizados. Trabajan con otras agencias de publicidad, comunicación o de servicios gráficos para completar su oferta.'
+    description: 'Las agencias de salud potentes cuentan con un buen equipo de trabajadores y tienen clientes farmacéuticos fidelizados. Trabajan con otras agencias de publicidad, comunicación o de servicios gráficos para completar su oferta.',
+    color: '#95cca5'
   },
   {
     title: 'Agencia global',
     icon: '/images/Mundo-300x300.png',
-    description: 'Las agencias de salud globales trabajan acuerdos internacionales con las casas matrices de las multinacionales farmacéuticas. El idioma de trabajo suele ser el inglés y sus equipos son muy numerosos.'
+    description: 'Las agencias de salud globales trabajan acuerdos internacionales con las casas matrices de las multinacionales farmacéuticas. El idioma de trabajo suele ser el inglés y sus equipos son muy numerosos.',
+    color: '#4a8fc2'
   },
   {
     title: 'Agencia Boutique',
     icon: '/images/Bombilla-300x300.png',
-    description: 'Las agencias boutique están formadas por unos pocos valientes que deciden emprender aventura en solitario. Tienen un conocimiento profundo de las necesidades del marketing farmacéutico y prefieren una red de freelances de confianza.'
+    description: 'Las agencias boutique están formadas por unos pocos valientes que deciden emprender aventura en solitario. Tienen un conocimiento profundo de las necesidades del marketing farmacéutico y prefieren una red de freelances de confianza.',
+    color: '#e8b84a'
   },
   {
     title: 'Agencia Valiente',
     icon: '/images/Bombilla2-300x300.png',
-    description: 'Las agencias valientes son aquellas del mundo del marketing, la publicidad o la comunicación que deciden entrar en el mercado de la salud. Les falta experiencia en el sector, pero tienen muchas ganas de crecer.'
+    description: 'Las agencias valientes son aquellas del mundo del marketing, la publicidad o la comunicación que deciden entrar en el mercado de la salud. Les falta experiencia en el sector, pero tienen muchas ganas de crecer.',
+    color: '#d06b6b'
   },
 ];
 ---
@@ -29,12 +33,15 @@ const clientTypes = [
     <div class="text-center mb-md reveal">
       <h2>¿Qué tipo de agencia eres?</h2>
       <div class="line-divider center"></div>
-      <p class="clients-section__subtitle">Pasa el ratón por encima para descubrirlo</p>
+      <p class="clients-section__subtitle">
+        <span class="desktop-hint">Pasa el ratón por encima para descubrirlo</span>
+        <span class="mobile-hint">Toca para descubrirlo</span>
+      </p>
     </div>
     
-    <div class="flip-boxes animate-stagger">
-      {clientTypes.map((client) => (
-        <div class="flip-box">
+    <div class="flip-boxes">
+      {clientTypes.map((client, index) => (
+        <div class="flip-box" style={`--card-accent: ${client.color}; --card-accent-rgb: ${parseInt(client.color.slice(1, 3), 16)}, ${parseInt(client.color.slice(3, 5), 16)}, ${parseInt(client.color.slice(5, 7), 16)}; --card-index: ${index}`}>
           <div class="flip-box__inner">
             <div class="flip-box__front">
               <img 
@@ -43,12 +50,19 @@ const clientTypes = [
                 class="flip-box__icon"
                 width="200"
                 height="200"
-                loading="lazy"
               >
               <h3 class="flip-box__title">{client.title}</h3>
+              <div class="flip-box__indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
             <div class="flip-box__back">
-              <p class="flip-box__text">{client.description}</p>
+              <div class="flip-box__back-content">
+                <h4 class="flip-box__back-title">{client.title}</h4>
+                <p class="flip-box__text">{client.description}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -59,138 +73,339 @@ const clientTypes = [
 
 <style>
   .clients-section {
-    padding: 80px 0;
+    padding: 100px 0;
+    background: var(--color-gray-light);
+    position: relative;
+    overflow: hidden;
   }
   
   .clients-section__subtitle {
-    font-size: 18px;
-    color: #757575;
-    margin-bottom: 40px;
+    font-size: 17px;
+    color: var(--color-text-muted);
+    margin-bottom: 48px;
   }
   
+  .desktop-hint { display: inline; }
+  .mobile-hint { display: none; }
+  
+  @media (hover: none) {
+    .desktop-hint { display: none; }
+    .mobile-hint { display: inline; }
+  }
+  
+  /* ===== FLIP BOXES GRID ===== */
   .flip-boxes {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 28px;
   }
   
   @media (min-width: 576px) {
     .flip-boxes {
       grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
     }
   }
   
   @media (min-width: 992px) {
     .flip-boxes {
       grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
     }
   }
   
+  /* ===== FLIP BOX CONTAINER ===== */
   .flip-box {
-    perspective: 1500px;
-    height: 320px;
-    transition: transform 0.4s var(--timing-premium);
+    perspective: 1000px;
+    height: 380px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: flipBoxReveal 0.6s ease-out forwards;
+    animation-delay: calc(var(--card-index) * 0.1s + 0.2s);
   }
   
-  .flip-box:hover {
-    transform: translateY(-8px);
+  @keyframes flipBoxReveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
+  /* ===== INNER WRAPPER - This is what rotates ===== */
   .flip-box__inner {
     position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 1s var(--timing-premium);
+    transition: transform 0.7s ease-in-out;
     transform-style: preserve-3d;
   }
   
-  .flip-box:hover .flip-box__inner {
+  /* Flip trigger */
+  .flip-box:hover .flip-box__inner,
+  .flip-box.is-flipped .flip-box__inner {
     transform: rotateY(180deg);
   }
   
-  /* Premium hover effects */
-  .flip-box {
-    transition: z-index 0s 0.8s;
-  }
-  
-  .flip-box:hover {
-    z-index: 10;
-    transition: z-index 0s 0s;
-  }
-  
+  /* ===== CARD FACES ===== */
   .flip-box__front,
   .flip-box__back {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
-    border-radius: 15px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 32px;
     text-align: center;
+    /* Critical for 3D flip */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
   
+  /* ===== FRONT FACE ===== */
   .flip-box__front {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border-theme);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    transition: 
-      box-shadow 0.5s var(--timing-premium),
-      border-color 0.4s ease;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.08),
+      0 1px 3px rgba(0, 0, 0, 0.04);
+    z-index: 2;
   }
   
+  /* Dark mode */
+  :global(body.night-mode) .flip-box__front {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  /* Hover state for front - only visual, no transforms */
   .flip-box:hover .flip-box__front {
     box-shadow: 
-      0 30px 60px -15px rgba(0, 0, 0, 0.2),
-      0 0 0 1px rgba(149, 204, 165, 0.3);
-    border-color: rgba(149, 204, 165, 0.4);
+      0 8px 30px rgba(0, 0, 0, 0.12),
+      0 0 0 2px var(--card-accent);
   }
   
-  .flip-box__back {
-    background: linear-gradient(145deg, #1a3865 0%, #0f2340 100%);
-    color: #fff;
-    transform: rotateY(180deg);
-    box-shadow: inset 0 0 40px rgba(0,0,0,0.2);
+  /* Hide front face after flip completes to prevent any flash */
+  .flip-box:hover .flip-box__front,
+  .flip-box.is-flipped .flip-box__front {
+    transition: visibility 0s 0.35s;
+    visibility: hidden;
   }
   
+  /* ===== ICON ===== */
   .flip-box__icon {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 16px;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
     object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
   }
   
+  /* ===== TITLE ===== */
   .flip-box__title {
     font-family: 'Raleway', sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--color-heading);
     margin: 0;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+  }
+  
+  /* ===== INDICATOR DOTS ===== */
+  .flip-box__indicator {
+    position: absolute;
+    bottom: 24px;
+    display: flex;
+    gap: 8px;
+  }
+  
+  .flip-box__indicator span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--card-accent);
+    opacity: 0.4;
+  }
+  
+  .flip-box__indicator span:nth-child(1) { animation: dotPulse 1.5s ease-in-out infinite 0s; }
+  .flip-box__indicator span:nth-child(2) { animation: dotPulse 1.5s ease-in-out infinite 0.2s; }
+  .flip-box__indicator span:nth-child(3) { animation: dotPulse 1.5s ease-in-out infinite 0.4s; }
+  
+  @keyframes dotPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+  
+  /* ===== BACK FACE ===== */
+  .flip-box__back {
+    background: linear-gradient(160deg, #1e3a5f 0%, #0f2340 100%);
+    color: #fff;
+    transform: rotateY(180deg);
+    z-index: 1;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    padding: 36px;
+  }
+  
+  .flip-box__back::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--card-accent);
+    border-radius: 20px 20px 0 0;
+  }
+  
+  .flip-box__back-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .flip-box__back-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--card-accent);
+    margin-bottom: 16px;
   }
   
   .flip-box__text {
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.75;
     margin: 0;
+    color: rgba(255, 255, 255, 0.9);
   }
   
-  /* Touch device support */
+  /* ===== TOUCH DEVICES ===== */
   @media (hover: none) {
-    .flip-box__back {
+    .flip-box__indicator {
       display: none;
     }
     
     .flip-box__front::after {
       content: 'Toca para ver más';
-      display: block;
-      margin-top: 12px;
+      position: absolute;
+      bottom: 24px;
       font-size: 12px;
-      color: #95cca5;
+      color: var(--card-accent);
+      font-weight: 600;
+    }
+    
+    /* Disable hover on touch - only use .is-flipped class */
+    .flip-box:hover .flip-box__inner {
+      transform: none;
+    }
+    
+    .flip-box:hover .flip-box__front {
+      visibility: visible;
+      box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    
+    .flip-box.is-flipped .flip-box__inner {
+      transform: rotateY(180deg);
+    }
+    
+    .flip-box.is-flipped .flip-box__front {
+      visibility: hidden;
+    }
+  }
+  
+  /* ===== MOBILE ===== */
+  @media (max-width: 767px) {
+    .clients-section {
+      padding: 70px 0;
+    }
+    
+    .flip-box {
+      height: 340px;
+    }
+    
+    .flip-box__icon {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .flip-box__title {
+      font-size: 12px;
+    }
+    
+    .flip-box__text {
+      font-size: 13px;
+      line-height: 1.7;
+    }
+  }
+  
+  /* ===== REDUCED MOTION ===== */
+  @media (prefers-reduced-motion: reduce) {
+    .flip-box {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .flip-box__inner {
+      transition: transform 0.3s ease;
+    }
+    
+    .flip-box__indicator span {
+      animation: none;
+      opacity: 0.6;
     }
   }
 </style>
+
+<script>
+  // Touch support for mobile
+  function initFlipCards() {
+    const flipBoxes = document.querySelectorAll('.flip-box');
+    let activeCard: HTMLElement | null = null;
+    
+    flipBoxes.forEach(box => {
+      const element = box as HTMLElement;
+      
+      element.addEventListener('click', function(this: HTMLElement, e: Event) {
+        if (window.matchMedia('(hover: none)').matches) {
+          e.preventDefault();
+          
+          // Close previously open card
+          if (activeCard && activeCard !== this) {
+            activeCard.classList.remove('is-flipped');
+          }
+          
+          // Toggle current card
+          this.classList.toggle('is-flipped');
+          activeCard = this.classList.contains('is-flipped') ? this : null;
+        }
+      });
+    });
+    
+    // Close on outside click
+    document.addEventListener('click', (e: Event) => {
+      if (window.matchMedia('(hover: none)').matches && activeCard) {
+        const target = e.target as HTMLElement;
+        if (!target.closest('.flip-box')) {
+          activeCard.classList.remove('is-flipped');
+          activeCard = null;
+        }
+      }
+    });
+  }
+  
+  initFlipCards();
+  document.addEventListener('astro:page-load', initFlipCards);
+</script>
+

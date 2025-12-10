@@ -1,6 +1,5 @@
 ---
-// What we are / aren't section
-// What we are / aren't section
+// What we are / aren't section - Premium version with glassmorphism
 const whatWeAre = [
   'Redactores médicos expertos en el sector salud',
   'Personas con experiencia en investigación, asistencia sanitaria, industria farmacéutica y marketing healthcare',
@@ -20,12 +19,17 @@ const whatWeAreNot = [
   <div class="cesis_container">
     <div class="row stagger-premium">
       <div class="col-sm-4 what-col">
-        <div class="what-section__card reveal">
+        <div class="what-section__card glass-card reveal">
+          <div class="card-icon card-icon-yes">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
           <h3>¿Qué somos?</h3>
           <div class="line-divider"></div>
           <ul>
-            {whatWeAre.map((item) => (
-              <li>{item}</li>
+            {whatWeAre.map((item, index) => (
+              <li style={`--item-index: ${index}`}>{item}</li>
             ))}
           </ul>
         </div>
@@ -40,16 +44,26 @@ const whatWeAreNot = [
             height="800"
             loading="lazy"
           >
+          <div class="image-badge">
+            <span class="badge-text">Synuptic</span>
+            <span class="badge-year">Est. 2015</span>
+          </div>
         </div>
       </div>
       
       <div class="col-sm-4 not-what-col">
-        <div class="what-section__card reveal">
+        <div class="what-section__card glass-card reveal">
+          <div class="card-icon card-icon-no">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </div>
           <h3>¿Qué no somos?</h3>
           <div class="line-divider"></div>
           <ul>
-            {whatWeAreNot.map((item) => (
-              <li>{item}</li>
+            {whatWeAreNot.map((item, index) => (
+              <li style={`--item-index: ${index}`}>{item}</li>
             ))}
           </ul>
         </div>
@@ -61,7 +75,19 @@ const whatWeAreNot = [
 <style>
   .what-section {
     background: var(--color-bg-body);
-    padding: 80px 0;
+    padding: 100px 0;
+    position: relative;
+  }
+  
+  .what-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, var(--color-gray-light), transparent);
+    pointer-events: none;
   }
   
   .what-section .row {
@@ -70,23 +96,80 @@ const whatWeAreNot = [
     flex-wrap: wrap;
   }
   
-  .what-section__card {
+  /* ===== GLASS CARDS ===== */
+  .glass-card {
     background: var(--color-bg-card);
     border: 1px solid var(--color-border-theme);
-    border-radius: 8px;
+    border-radius: 16px;
     padding: 32px;
     height: 100%;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .what-section__card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+      0 4px 24px rgba(0, 0, 0, 0.06),
+      0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transition: left 0.6s ease;
+  }
+  
+  .glass-card:hover::before {
+    left: 100%;
+  }
+  
+  .glass-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(149, 204, 165, 0.2);
+    border-color: rgba(149, 204, 165, 0.3);
+  }
+  
+  /* ===== CARD ICON ===== */
+  .card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .card-icon-yes {
+    background: linear-gradient(135deg, #95cca5 0%, #7ab892 100%);
+    color: #1a3865;
+    box-shadow: 0 8px 20px rgba(149, 204, 165, 0.3);
+  }
+  
+  .card-icon-no {
+    background: linear-gradient(135deg, #1a3865 0%, #2a5a8a 100%);
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(26, 56, 101, 0.3);
+  }
+  
+  .glass-card:hover .card-icon {
+    transform: scale(1.1) rotate(5deg);
+  }
+  
+  /* ===== CARD CONTENT ===== */
   .what-section__card h3 {
-    font-size: 24px;
+    font-size: 22px;
     margin-bottom: 16px;
     text-align: center;
     color: var(--color-heading);
@@ -97,8 +180,8 @@ const whatWeAreNot = [
     margin-right: auto;
     margin-bottom: 24px;
     height: 2px;
-    width: 60px;
-    background-color: #95cca5;
+    width: 50px;
+    background: linear-gradient(90deg, transparent, #95cca5, transparent);
   }
   
   .what-section__card ul {
@@ -111,10 +194,24 @@ const whatWeAreNot = [
     position: relative;
     padding-left: 24px;
     margin-bottom: 16px;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.6;
     color: var(--color-text-muted);
     font-weight: 400;
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  
+  .what-section__card.visible ul li {
+    animation: revealListItem 0.5s ease forwards;
+    animation-delay: calc(0.6s + var(--item-index) * 0.1s);
+  }
+  
+  @keyframes revealListItem {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   
   .what-section__card ul li::before {
@@ -125,55 +222,98 @@ const whatWeAreNot = [
     font-weight: bold;
   }
   
+  /* ===== IMAGE ===== */
   .what-section__image {
+    position: relative;
     height: 100%;
-    min-height: 400px;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .what-section__image img {
-    border-radius: 8px;
+    border-radius: 16px;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
-  /* Desktop Order: What Not (Left) - Image (Center) - What We Are (Right) */
-  .not-what-col {
-    order: 1;
+  .what-section__image:hover img {
+    transform: scale(1.02);
   }
-  .image-col {
-    order: 2;
+  
+  .image-badge {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(26, 56, 101, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 12px 24px;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   }
-  .what-col {
-    order: 3;
+  
+  .badge-text {
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
+  
+  .badge-year {
+    font-size: 11px;
+    color: #95cca5;
+    letter-spacing: 1px;
+  }
+  
+  /* ===== COLUMN ORDER ===== */
+  .not-what-col { order: 1; }
+  .image-col { order: 2; }
+  .what-col { order: 3; }
   
   @media (max-width: 767px) {
-    .what-col {
-      order: 1;
+    .what-section {
+      padding: 60px 0;
     }
-    .not-what-col {
-      order: 3;
-    }
-    .image-col {
-      order: 2;
-    }
+    
+    .what-col { order: 1; }
+    .not-what-col { order: 3; }
+    .image-col { order: 2; }
 
     .what-section__image {
-      margin: 24px auto;
+      margin: 32px auto;
       min-height: auto;
-      max-width: 180px;
+      max-width: 200px;
       height: auto;
     }
 
     .what-section__image img {
-        aspect-ratio: 3/4;
+      aspect-ratio: 3/4;
     }
     
     .what-section__card {
       margin-bottom: 24px;
       padding: 24px;
+    }
+    
+    .image-badge {
+      padding: 8px 16px;
+    }
+    
+    .badge-text {
+      font-size: 12px;
     }
   }
 </style>
