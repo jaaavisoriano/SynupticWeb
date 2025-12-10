@@ -1,32 +1,52 @@
 /**
- * Minimal Scroll Animations using IntersectionObserver
- * ~500 bytes minified - Native Zero-Library approach
+ * Premium Scroll Animations using IntersectionObserver
+ * Includes blur reveal effects and dynamic stagger delays
  */
 
 // Initialize scroll animations
 function initScrollAnimations() {
     const observerOptions = {
         root: null,
-        rootMargin: '0px 0px -50px 0px',
-        threshold: 0.1
+        rootMargin: '0px 0px -80px 0px',
+        threshold: 0.15
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Add dynamic delay for children in stagger containers
+                const parent = entry.target.parentElement;
+                if (parent && (parent.classList.contains('animate-stagger') || parent.classList.contains('stagger-premium'))) {
+                    const children = Array.from(parent.children);
+                    const index = children.indexOf(entry.target);
+                    const delay = index * 0.15; // 150ms between each child
+                    entry.target.style.transitionDelay = `${delay}s`;
+                }
+
+                // Trigger the animation
                 entry.target.classList.add('visible');
-                // Optionally unobserve after animation
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe all elements with animation classes
+    // Observe all elements with animation classes (including new reveal classes)
     const animatedElements = document.querySelectorAll(
-        '.animate-on-scroll, .animate-left, .animate-right, .animate-scale'
+        '.animate-on-scroll, .animate-left, .animate-right, .animate-scale, .reveal, .reveal-left, .reveal-right, .reveal-scale'
     );
 
     animatedElements.forEach(el => observer.observe(el));
+
+    // Also observe children of stagger containers
+    const staggerContainers = document.querySelectorAll('.animate-stagger, .stagger-premium');
+    staggerContainers.forEach(container => {
+        Array.from(container.children).forEach(child => {
+            if (!child.classList.contains('visible')) {
+                child.classList.add('reveal');
+                observer.observe(child);
+            }
+        });
+    });
 }
 
 // Header scroll behavior

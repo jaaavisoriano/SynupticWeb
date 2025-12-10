@@ -5,7 +5,7 @@
 <section class="section about-section">
   <div class="cesis_container">
     <div class="row">
-      <div class="col-sm-6 about-section__content animate-on-scroll">
+      <div class="col-sm-6 about-section__content reveal-left">
         <h2>Más que tu medical writer de confianza</h2>
         <div class="line-divider"></div>
         <p>
@@ -21,7 +21,7 @@
         </a>
       </div>
       <div class="col-sm-6">
-        <div class="about-section__image animate-right">
+        <div class="about-section__image reveal-scale">
           <img 
             src="/images/Multidisci_800x600-1.jpg" 
             alt="Equipo multidisciplinar de Synuptic"
@@ -37,7 +37,7 @@
 
 <style>
   .about-section {
-    background: #fff;
+    background: var(--color-bg-body);
   }
   
   .about-section .row {
@@ -48,10 +48,15 @@
     padding-right: 40px;
   }
   
-  @media (max-width: 767px) {
     .about-section__content {
       padding-right: 0;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
+    }
+    
+    .about-section__image {
+      max-width: 85%;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
   
@@ -70,7 +75,7 @@
   .about-section__content p {
     font-size: 16px;
     line-height: 1.7;
-    color: #333;
+    color: var(--color-text-body);
     margin-bottom: 32px;
   }
   

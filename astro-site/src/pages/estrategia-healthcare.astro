@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 const services = [
   {
     title: 'Planes de marketing y posicionamiento de marca',
-    icon: '📊',
+    icon: '/images/Estrategia.png',
     items: [
       'Planes estratégicos.',
       'Estrategias de lanzamiento y premarketing.',
@@ -17,7 +17,7 @@ const services = [
   },
   {
     title: 'Formación de equipos científicos de agencias y laboratorios',
-    icon: '🎓',
+    icon: '/images/Formacion.png',
     items: [
       'Soporte a la búsqueda de perfiles científicos y capacitación de nuevas incorporaciones.',
       'Formación científica a miembros de otros departamentos de la agencia.',
@@ -26,7 +26,7 @@ const services = [
   },
   {
     title: 'Metodologías y dinámicas en reuniones científicas',
-    icon: '🔬',
+    icon: '/images/Microscopio.png',
     items: [
       'Coordinación de grupos de trabajo con expertos.',
       'Diseño de dinámicas de trabajo diferenciales y uso de metodologías innovadoras.',
@@ -67,7 +67,7 @@ const services = [
           <div class="services-grid">
             {services.map((service) => (
               <div class="service-card">
-                <span class="service-card__icon">{service.icon}</span>
+                <img src={service.icon} alt={service.title} class="service-card__icon" />
                 <h3>{service.title}</h3>
                 <ul class="service-card__list">
                   {service.items.map((item) => (
@@ -179,7 +179,7 @@ const services = [
   
   .services-section {
     padding: 80px 0;
-    background: #fff;
+    background: var(--color-bg-body);
   }
   
   .services-intro {
@@ -201,8 +201,8 @@ const services = [
   }
   
   .service-card {
-    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-    border: 1px solid #edf0f7;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-theme);
     border-radius: 16px;
     padding: 36px;
     text-align: left;
@@ -234,14 +234,24 @@ const services = [
   }
   
   .service-card__icon {
-    font-size: 42px;
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
     display: block;
     margin-bottom: 20px;
+  }
+
+  @media (max-width: 767px) {
+    .service-card__icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+    }
   }
   
   .service-card h3 {
     font-size: 20px;
-    color: #1a3865;
+    color: var(--color-heading);
     margin-bottom: 20px;
     line-height: 1.4;
   }
@@ -257,7 +267,7 @@ const services = [
     padding-left: 24px;
     margin-bottom: 12px;
     font-size: 15px;
-    color: #555;
+    color: var(--color-text-muted);
     line-height: 1.6;
   }
   
@@ -305,14 +315,14 @@ const services = [
   
   .innovation-text {
     font-size: 18px;
-    color: #555;
+    color: var(--color-text-muted);
     max-width: 750px;
     margin: 24px auto 0;
     line-height: 1.8;
   }
   
   .cta-section {
-    background: #fff;
+    background: var(--color-bg-body);
     padding: 80px 0;
   }
   
@@ -324,7 +334,7 @@ const services = [
   .cta-section p {
     font-size: 18px;
     margin-bottom: 28px;
-    color: #555;
+    color: var(--color-text-muted);
   }
   
   .cta-section .btn {

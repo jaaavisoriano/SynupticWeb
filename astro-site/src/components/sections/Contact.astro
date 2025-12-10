@@ -2,14 +2,14 @@
 // Contact Form Section
 ---
 
-<section id="contact" class="section contact-section" style="background-image: url('/images/acuarela_alta.jpg');">
+<section id="contact" class="section contact-section">
   <div class="container">
-    <div class="text-center mb-md">
+    <div class="text-center mb-md reveal">
       <h2>¿Hablamos?</h2>
       <div class="line-divider center"></div>
     </div>
     
-    <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form class="contact-form reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <div class="form-group">
         <label for="name" class="visually-hidden">Nombre</label>
         <input 
@@ -90,18 +90,10 @@
 <style>
   .contact-section {
     position: relative;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     padding: 80px 0;
   }
   
-  .contact-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(247, 249, 251, 0.92);
-  }
+
   
   .contact-section .container {
     position: relative;
@@ -122,9 +114,10 @@
     padding: 14px 18px;
     font-family: inherit;
     font-size: 16px;
-    border: 1px solid #edf0f7;
+    border: 1px solid var(--color-border-theme);
     border-radius: 6px;
-    background: #fff;
+    background: var(--color-bg-input);
+    color: var(--color-text-body);
     transition: all 0.2s ease;
   }
   
@@ -135,7 +128,7 @@
   }
   
   .form-control::placeholder {
-    color: #aeb7c1;
+    color: var(--color-text-muted-light);
   }
   
   textarea.form-control {
@@ -149,7 +142,7 @@
     gap: 10px;
     margin-bottom: 12px;
     font-size: 14px;
-    color: #333;
+    color: var(--color-text-body);
   }
   
   .form-checkbox input {
@@ -164,7 +157,7 @@
   
   .form-legal {
     font-size: 12px;
-    color: #757575;
+    color: var(--color-text-muted-light);
     margin: 24px 0;
     line-height: 1.6;
   }

@@ -11,26 +11,9 @@ const currentYear = new Date().getFullYear();
 <footer id="cesis_colophon" class="site-footer">
   <div class="footer_main">
     <div class="cesis_container">
-      <div class="row">
-        <!-- Logo & Legal Links -->
-        <div class="col-sm-4 footer-col">
-          <img 
-            src="/images/logo.svg" 
-            alt="Synuptic" 
-            class="footer-logo"
-            width="200"
-            height="72"
-          >
-          <div class="line-divider"></div>
-          <ul class="footer-links">
-            {legalLinks.map((link) => (
-              <li><a href={link.href}>{link.label}</a></li>
-            ))}
-          </ul>
-        </div>
-        
+      <div class="row align-items-center">
         <!-- Contact Info -->
-        <div class="col-sm-4 footer-col footer-contact">
+        <div class="col-sm-6 footer-col footer-contact">
           <h3 class="text-center">¿Quieres conocernos?</h3>
           <div class="contact-list">
             <div class="contact-item">
@@ -53,11 +36,11 @@ const currentYear = new Date().getFullYear();
         </div>
         
         <!-- Map -->
-        <div class="col-sm-4 footer-col">
+        <div class="col-sm-6 footer-col">
           <div class="footer-map">
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.879143113521!2d-3.6956054240158758!3d40.43367497143694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228f2ab0b0a11%3A0xae9ed7f61e1b69ae!2sCalle%20de%20Zurbano%2C%2048%2C%20Chamber%C3%AD%2C%2028010%20Madrid!5e0!3m2!1ses!2ses!4v1707399433337!5m2!1ses!2ses" 
-              width="600" 
+              width="100%" 
               height="250" 
               style="border:0;" 
               allowfullscreen="" 
@@ -67,6 +50,24 @@ const currentYear = new Date().getFullYear();
             ></iframe>
           </div>
         </div>
+      </div>
+
+      <!-- New Bottom Section: Logo & Legal Links -->
+      <div class="footer-bottom-section">
+        <div class="footer-logo-container">
+          <img 
+            src="/images/logo.svg" 
+            alt="Synuptic" 
+            class="footer-logo-bottom"
+            width="150"
+            height="54"
+          >
+        </div>
+        <ul class="footer-legal-links">
+          {legalLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
       </div>
     </div>
   </div>
@@ -93,6 +94,87 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 </footer>
+
+<style>
+  /* Footer Restructuring Styles */
+  .footer_main {
+    padding-bottom: 2rem;
+  }
+
+  .footer-col {
+    margin-bottom: 30px;
+  }
+
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center contact items */
+    gap: 10px;
+  }
+
+  /* Expand Map to fill column */
+  .footer-map iframe {
+    width: 100%;
+    border-radius: 8px; /* Optional: adds a nice touch */
+  }
+
+  /* Bottom Section Styles */
+  .footer-bottom-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05); /* Subtle separator */
+  }
+
+  .footer-logo-bottom {
+    opacity: 0.8; /* Slightly muted for elegance */
+    transition: opacity 0.3s ease;
+    margin-bottom: 20px;
+  }
+
+  .footer-logo-bottom:hover {
+    opacity: 1;
+  }
+
+  .footer-legal-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .footer-legal-links li a {
+    color: #666; /* Muted text color */
+    font-size: 0.85rem;
+    text-decoration: none;
+    text-transform: uppercase; /* Elegant touch */
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .footer-legal-links li a:hover {
+    color: var(--primary-color, #000); /* Use primary color on hover if available, else black */
+  }
+
+  @media (max-width: 767px) {
+    .footer-legal-links {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+    
+    .footer-bottom-section {
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+  }
+</style>
 
 <!-- Scroll to Top Button -->
 <a id="cesis_to_top" aria-label="Volver arriba">

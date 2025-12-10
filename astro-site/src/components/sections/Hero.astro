@@ -29,6 +29,12 @@
     background: linear-gradient(135deg, #1a3865 0%, #2a4a7a 100%);
     overflow: hidden;
   }
+
+  @media (max-width: 768px) {
+    .video-intro {
+      min-height: 40vh;
+    }
+  }
   
   .video-intro__overlay {
     position: absolute;
@@ -53,17 +59,41 @@
     background: #95cca5;
     color: #1a3865;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(0,0,0,0.25);
+    transition: all 0.5s var(--timing-premium);
+    box-shadow: 
+      0 0 20px rgba(149, 204, 165, 0.4),
+      0 0 40px rgba(149, 204, 165, 0.2);
     text-decoration: none;
+    animation: playPulse 2.5s ease-in-out infinite;
   }
   
   .play-button:hover {
     background: #afccb5;
-    transform: scale(1.1);
+    transform: scale(1.15);
+    box-shadow: 
+      0 0 30px rgba(149, 204, 165, 0.6),
+      0 0 60px rgba(149, 204, 165, 0.3);
+  }
+  
+  @keyframes playPulse {
+    0%, 100% {
+      box-shadow: 
+        0 0 20px rgba(149, 204, 165, 0.4),
+        0 0 40px rgba(149, 204, 165, 0.2);
+    }
+    50% {
+      box-shadow: 
+        0 0 35px rgba(149, 204, 165, 0.6),
+        0 0 60px rgba(149, 204, 165, 0.3);
+    }
   }
   
   .play-button svg {
     margin-left: 4px;
+    transition: transform 0.3s var(--timing-elastic);
+  }
+  
+  .play-button:hover svg {
+    transform: scale(1.1);
   }
 </style>

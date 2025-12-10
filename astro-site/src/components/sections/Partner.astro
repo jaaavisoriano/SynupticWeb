@@ -4,9 +4,14 @@
 
 <section class="section partner-section">
   <div class="cesis_container">
-    <div class="row">
+    <div class="row partner-row">
+      <div class="col-sm-6 partner-section__content reveal-right">
+        <h2>Somos un partner para todas las agencias y consultoras que han confiado en nuestra experiencia desde 2015</h2>
+        <div class="line-divider"></div>
+        <p class="partner-section__subtitle">Y seguimos creciendo cada año con nuevos clientes satisfechos.</p>
+      </div>
       <div class="col-sm-6">
-        <div class="partner-section__image">
+        <div class="partner-section__image reveal-scale">
           <img 
             src="/images/Ilustracion_30-768x542.jpg" 
             alt="Ilustración de colaboración"
@@ -15,11 +20,6 @@
             loading="lazy"
           >
         </div>
-      </div>
-      <div class="col-sm-6 partner-section__content">
-        <h2>Somos un partner para todas las agencias y consultoras que han confiado en nuestra experiencia desde 2015</h2>
-        <div class="line-divider"></div>
-        <p class="partner-section__subtitle">Y seguimos creciendo cada año con nuevos clientes satisfechos.</p>
       </div>
     </div>
   </div>
@@ -33,6 +33,12 @@
   .partner-section .row {
     align-items: center;
   }
+
+  @media (min-width: 768px) {
+    .partner-section .partner-row {
+      flex-direction: row-reverse;
+    }
+  }
   
   .partner-section__image img {
     border-radius: 8px;
@@ -43,7 +49,10 @@
   
   @media (max-width: 767px) {
     .partner-section__image {
-      margin-bottom: 32px;
+      margin-top: 24px;
+      max-width: 85%;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
   

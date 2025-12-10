@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 const services = [
   {
     title: 'Contenidos de marketing farmacéutico',
-    icon: '📝',
+    image: '/images/Lapiz.png',
     items: [
       'Redacción de textos científico-médicos adaptados a diferentes canales y audiencias: materiales promocionales, slidekits, pódcast, webs, guiones de vídeos, infografías científicas, etc.',
       'Búsqueda de información científica y elaboración de dossieres bibliográficos para aprobaciones internas.',
@@ -15,7 +15,7 @@ const services = [
   },
   {
     title: 'Formaciones en el sector salud',
-    icon: '🎓',
+    image: '/images/Formacion.png',
     items: [
       'Contenido formativo para actualizar a profesionales sanitarios (FMC, acreditada, específica de producto).',
       'Materiales informativos para pacientes.',
@@ -24,7 +24,7 @@ const services = [
   },
   {
     title: 'Eventos, congresos y reuniones',
-    icon: '🎤',
+    image: '/images/Comunicacion_ideas.png',
     items: [
       'Coberturas de congresos médicos nacionales e internacionales.',
       'Redacción de actas e informes de reuniones científicas y advisory boards.',
@@ -65,7 +65,7 @@ const services = [
           <div class="services-grid">
             {services.map((service) => (
               <div class="service-card">
-                <span class="service-card__icon">{service.icon}</span>
+                <img src={service.image} alt={service.title} class="service-card__icon" />
                 <h3>{service.title}</h3>
                 <ul class="service-card__list">
                   {service.items.map((item) => (
@@ -170,7 +170,7 @@ const services = [
   
   .services-section {
     padding: 80px 0;
-    background: #fff;
+    background: var(--color-bg-body);
   }
   
   .services-intro {
@@ -198,8 +198,8 @@ const services = [
   }
   
   .service-card {
-    background: #fff;
-    border: 1px solid #edf0f7;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-theme);
     border-radius: 16px;
     padding: 32px 28px;
     text-align: left;
@@ -213,14 +213,16 @@ const services = [
   }
   
   .service-card__icon {
-    font-size: 40px;
+    width: 64px;
+    height: auto;
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
+    object-fit: contain;
   }
   
   .service-card h3 {
     font-size: 20px;
-    color: #1a3865;
+    color: var(--color-heading);
     margin-bottom: 16px;
     font-weight: 600;
   }
@@ -236,7 +238,7 @@ const services = [
     padding-left: 20px;
     margin-bottom: 12px;
     font-size: 15px;
-    color: #555;
+    color: var(--color-text-muted);
     line-height: 1.6;
   }
   
@@ -276,7 +278,7 @@ const services = [
   }
   
   .cta-section {
-    background: #fff;
+    background: var(--color-bg-body);
     padding: 80px 0;
   }
   
@@ -287,6 +289,6 @@ const services = [
   .cta-section p {
     font-size: 18px;
     margin-bottom: 24px;
-    color: #555;
+    color: var(--color-text-muted);
   }
 </style>
