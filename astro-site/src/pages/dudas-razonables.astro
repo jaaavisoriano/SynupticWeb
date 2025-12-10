@@ -120,7 +120,7 @@ const faqs = [
             <div class="line-divider center light"></div>
             <p>Si tu pregunta no aparece aquí, escríbenos y te contestamos encantados.</p>
             <a href="/#contact" class="btn-premium btn-premium--light">
-              <span class="btn-icon">💬</span>
+
               <span>Contactar</span>
               <div class="btn-glow"></div>
             </a>
@@ -135,26 +135,39 @@ const faqs = [
 
 <script>
   // FAQ Accordion functionality
-  document.querySelectorAll('.faq-question').forEach(button => {
-    button.addEventListener('click', () => {
-      const item = button.closest('.faq-item');
-      if (!item) return;
-      
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
-      
-      // Close all other items
-      document.querySelectorAll('.faq-item').forEach(otherItem => {
-        if (otherItem !== item) {
-          otherItem.classList.remove('is-open');
-          otherItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
-        }
+  function initAccordion() {
+    document.querySelectorAll('.faq-question').forEach(button => {
+      // Prevent adding duplicate listeners if function runs multiple times
+      if (button.dataset.hasListener) return;
+      button.dataset.hasListener = "true";
+
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        if (!item) return;
+        
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+        // Close all other items
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('is-open');
+            otherItem.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        // Toggle current item
+        item.classList.toggle('is-open');
+        button.setAttribute('aria-expanded', String(!isExpanded));
       });
-      
-      // Toggle current item
-      item.classList.toggle('is-open');
-      button.setAttribute('aria-expanded', String(!isExpanded));
     });
-  });
+  }
+
+  // Initialize on page load (Astro View Transitions compatible)
+  document.addEventListener('astro:page-load', initAccordion);
+  
+  // Fallback for initial load if not using View Transitions or if script runs before event
+  // (Optional, but safe with the check above)
+  initAccordion();
 </script>
 
 <style>

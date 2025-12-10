@@ -129,17 +129,17 @@ const ventajas = [
           <div class="proof-content">
             <div class="proof-stats">
               <div class="stat-item">
-                <span class="stat-number">2015</span>
-                <span class="stat-label">Desde</span>
+                <span class="stat-label">Desde...</span>
+                <span class="proof-number">2015</span>
               </div>
               <div class="stat-divider"></div>
               <div class="stat-item">
-                <span class="stat-number">+30</span>
+                <span class="proof-number">+30</span>
                 <span class="stat-label">Agencias y consultoras</span>
               </div>
             </div>
             <p class="proof-text">
-              ya han confiado en nuestra experiencia
+              Ya han confiado en nuestra experiencia
             </p>
             <p class="proof-question">¿Quieres ser la siguiente?</p>
             <a href="/#contact" class="btn-premium">
@@ -603,9 +603,10 @@ const ventajas = [
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 8px;
   }
   
-  .stat-number {
+  .proof-number {
     font-size: clamp(48px, 8vw, 72px);
     font-weight: 800;
     color: #1a3865;
@@ -621,7 +622,6 @@ const ventajas = [
     text-transform: uppercase;
     letter-spacing: 2px;
     color: var(--color-text-muted);
-    margin-top: 8px;
   }
   
   .stat-divider {
