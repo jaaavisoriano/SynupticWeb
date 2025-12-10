@@ -88,7 +88,7 @@ const clientTypes = [
   .desktop-hint { display: inline; }
   .mobile-hint { display: none; }
   
-  @media (hover: none) {
+  @media (hover: none), (max-width: 991px) {
     .desktop-hint { display: none; }
     .mobile-hint { display: inline; }
   }
@@ -289,7 +289,8 @@ const clientTypes = [
   }
   
   /* ===== TOUCH DEVICES ===== */
-  @media (hover: none) {
+  /* ===== TOUCH DEVICES & MOBILE/TABLET ===== */
+  @media (hover: none), (max-width: 991px) {
     .flip-box__indicator {
       display: none;
     }
@@ -378,7 +379,7 @@ const clientTypes = [
       const element = box as HTMLElement;
       
       element.addEventListener('click', function(this: HTMLElement, e: Event) {
-        if (window.matchMedia('(hover: none)').matches) {
+        if (window.matchMedia('(hover: none)').matches || window.innerWidth < 992) {
           e.preventDefault();
           
           // Close previously open card
@@ -395,7 +396,7 @@ const clientTypes = [
     
     // Close on outside click
     document.addEventListener('click', (e: Event) => {
-      if (window.matchMedia('(hover: none)').matches && activeCard) {
+      if ((window.matchMedia('(hover: none)').matches || window.innerWidth < 992) && activeCard) {
         const target = e.target as HTMLElement;
         if (!target.closest('.flip-box')) {
           activeCard.classList.remove('is-flipped');
