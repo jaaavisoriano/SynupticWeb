@@ -204,7 +204,7 @@
 
   @media (max-width: 768px) {
     .video-intro {
-      min-height: 70vh;
+      min-height: 60vh;
     }
   }
   
@@ -390,6 +390,14 @@
     pointer-events: none;
   }
   
+  /* En móvil, hacer el video más ancho para cubrir sin bordes */
+  @media (max-width: 768px) {
+    .video-container iframe {
+      width: 220%;
+      min-height: 100%;
+    }
+  }
+  
   /* ===== HERO OVERLAY ===== */
   .hero-overlay {
     position: absolute;
@@ -565,8 +573,10 @@
   .scroll-indicator {
     position: absolute;
     bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;

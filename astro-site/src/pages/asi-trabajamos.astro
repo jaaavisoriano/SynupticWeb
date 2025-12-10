@@ -54,60 +54,121 @@ const ventajas = [
     <Header />
     
     <main id="main-content">
-      <!-- Hero Section -->
-      <section class="page-hero">
+      <!-- Premium Hero Section -->
+      <section class="premium-hero">
+        <!-- Animated Gradient Background -->
+        <div class="hero-gradient"></div>
+        
+        <!-- Floating Particles -->
+        <div class="floating-particles">
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+        </div>
+        
+        <!-- Decorative Elements -->
+        <div class="hero-decoration">
+          <div class="deco-circle deco-circle--1"></div>
+          <div class="deco-circle deco-circle--2"></div>
+        </div>
+        
         <div class="cesis_container">
-          <h1>Trabajamos para ofrecer soluciones rápidas y precisas</h1>
-          <div class="line-divider center"></div>
-          <p class="page-hero__subtitle">
-            Conocemos el ritmo frenético de las agencias. Por eso, procuramos que contratarnos no te suponga un esfuerzo extra.
-          </p>
-          <p class="page-hero__lema">¡Siente la sinapsis!</p>
+          <div class="hero-content">
+            <span class="hero-eyebrow">Nuestro método</span>
+            <h1 class="hero-title">
+              <span class="title-line title-line--1">Trabajamos para ofrecer</span>
+              <span class="title-line title-line--2">soluciones <em>rápidas</em> y <em>precisas</em></span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-subtitle">
+              Conocemos el ritmo frenético de las agencias. Por eso, procuramos que contratarnos no te suponga un esfuerzo extra.
+            </p>
+            <p class="hero-lema">¡Siente la sinapsis!</p>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator" aria-hidden="true">
+              <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Modelos de Contratación -->
+      <!-- Modelos de Contratación - Premium Cards -->
       <section class="section modelos-section">
         <div class="cesis_container">
-          <h2 class="text-center">Cómo activar la sinapsis</h2>
-          <div class="line-divider center"></div>
+          <div class="section-header">
+            <span class="section-eyebrow">Flexibilidad total</span>
+            <h2>Cómo activar la sinapsis</h2>
+            <div class="line-divider center"></div>
+          </div>
           
           <div class="modelos-grid">
-            {modelos.map((modelo) => (
-              <div class="modelo-card">
-                <img src={modelo.icon} alt={modelo.title} class="modelo-icon" />
+            {modelos.map((modelo, index) => (
+              <div class="modelo-card" style={`--delay: ${index * 0.1}s`}>
+                <div class="card-glow"></div>
+                <div class="card-icon-wrapper">
+                  <img src={modelo.icon} alt={modelo.title} class="modelo-icon" />
+                </div>
                 <h3>{modelo.title}</h3>
                 <p>{modelo.description}</p>
+                <div class="card-accent"></div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <!-- Social Proof Section -->
-      <section class="section section--gray social-proof-section">
-        <div class="cesis_container text-center">
-          <p class="social-proof__highlight">
-            Desde 2015... <span class="highlight-number">más de 30 agencias y consultoras</span> ya han confiado en nuestra experiencia
-          </p>
-          <p class="social-proof__question">¿Quieres ser la siguiente?</p>
-          <a href="/#contact" class="btn">
-            <span class="btn-icon">✉</span>
-            <span>Contactar</span>
-          </a>
+      <!-- Social Proof Section - Premium Design -->
+      <section class="section social-proof-section">
+        <div class="proof-bg"></div>
+        <div class="cesis_container">
+          <div class="proof-content">
+            <div class="proof-stats">
+              <div class="stat-item">
+                <span class="stat-number">2015</span>
+                <span class="stat-label">Desde</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <span class="stat-number">+30</span>
+                <span class="stat-label">Agencias y consultoras</span>
+              </div>
+            </div>
+            <p class="proof-text">
+              ya han confiado en nuestra experiencia
+            </p>
+            <p class="proof-question">¿Quieres ser la siguiente?</p>
+            <a href="/#contact" class="btn-premium">
+              <span class="btn-icon">✉</span>
+              <span>Contactar</span>
+              <div class="btn-glow"></div>
+            </a>
+          </div>
         </div>
       </section>
 
-      <!-- Ventajas Section -->
+      <!-- Ventajas Section - Premium Icons -->
       <section class="section ventajas-section">
         <div class="cesis_container">
-          <h2 class="text-center">Contar con nosotros son todo ventajas, la ciencia dejará de darte dolor de cabeza</h2>
-          <div class="line-divider center"></div>
+          <div class="section-header">
+            <span class="section-eyebrow">Por qué elegirnos</span>
+            <h2>Contar con nosotros son todo ventajas</h2>
+            <p class="section-subtitle">La ciencia dejará de darte dolor de cabeza</p>
+            <div class="line-divider center"></div>
+          </div>
           
           <div class="ventajas-grid">
-            {ventajas.map((ventaja) => (
-              <div class="ventaja-item">
-                <img src={ventaja.icon} alt={ventaja.title} class="ventaja-icon" />
+            {ventajas.map((ventaja, index) => (
+              <div class="ventaja-item" style={`--delay: ${index * 0.15}s`}>
+                <div class="ventaja-icon-wrapper">
+                  <div class="icon-bg"></div>
+                  <img src={ventaja.icon} alt={ventaja.title} class="ventaja-icon" />
+                  <div class="icon-ring"></div>
+                </div>
                 <span class="ventaja-title">{ventaja.title}</span>
               </div>
             ))}
@@ -115,16 +176,22 @@ const ventajas = [
         </div>
       </section>
 
-      <!-- CTA Section -->
-      <section class="section section--gray cta-section">
-        <div class="cesis_container text-center">
-          <h2>¿Empezamos?</h2>
-          <div class="line-divider center"></div>
-          <p>Cuéntanos tu proyecto y comenzamos con el primer paso.</p>
-          <a href="/#contact" class="btn">
-            <span class="btn-icon">✉</span>
-            <span>Contactar</span>
-          </a>
+      <!-- CTA Section - Premium Design -->
+      <section class="section cta-section">
+        <div class="cta-bg">
+          <div class="cta-pattern"></div>
+        </div>
+        <div class="cesis_container">
+          <div class="cta-content">
+            <h2>¿Empezamos?</h2>
+            <div class="line-divider center light"></div>
+            <p>Cuéntanos tu proyecto y comenzamos con el primer paso.</p>
+            <a href="/#contact" class="btn-premium btn-premium--light">
+              <span class="btn-icon">✉</span>
+              <span>Contactar</span>
+              <div class="btn-glow"></div>
+            </a>
+          </div>
         </div>
       </section>
     </main>
@@ -134,74 +201,273 @@ const ventajas = [
 </Layout>
 
 <style>
-  .page-hero {
-    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
-    color: #fff;
+  /* ===== PREMIUM HERO ===== */
+  .premium-hero {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     padding: 120px 0 80px;
+  }
+  
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg, 
+      #0a1628 0%, 
+      #1a3865 25%, 
+      #0f2240 50%, 
+      #1a3865 75%, 
+      #0a1628 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease-in-out infinite;
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  .floating-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(149, 204, 165, 0.4);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+  .particle:nth-child(2) { left: 80%; top: 30%; animation-delay: 1.5s; }
+  .particle:nth-child(3) { left: 30%; top: 70%; animation-delay: 3s; }
+  .particle:nth-child(4) { left: 60%; top: 80%; animation-delay: 4.5s; }
+  .particle:nth-child(5) { left: 90%; top: 60%; animation-delay: 6s; }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(-40px) translateX(-20px) scale(1.5);
+      opacity: 0.8;
+    }
+  }
+  
+  .hero-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  
+  .deco-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+  }
+  
+  .deco-circle--1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #95cca5 0%, transparent 70%);
+    top: -200px;
+    right: -150px;
+  }
+  
+  .deco-circle--2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #95cca5 0%, transparent 70%);
+    bottom: -150px;
+    left: -100px;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 10;
     text-align: center;
-  }
-  
-  .page-hero h1 {
-    font-size: 42px;
-    margin-bottom: 16px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.2;
-  }
-  
-  @media (max-width: 767px) {
-    .page-hero h1 {
-      font-size: 28px;
-    }
-  }
-  
-  .page-hero .line-divider {
-    background: #95cca5;
-  }
-  
-  .page-hero__subtitle {
-    font-size: 20px;
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
-    opacity: 0.9;
-    line-height: 1.6;
+    padding: 0 24px;
   }
   
-  @media (max-width: 767px) {
-    .page-hero__subtitle {
-      font-size: 16px;
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #95cca5;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.2s;
+  }
+  
+  .hero-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  
+  .title-line {
+    display: block;
+  }
+  
+  .title-line--1 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.3s;
+  }
+  
+  .title-line--2 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.5s;
+  }
+  
+  .title-line--2 em {
+    font-style: normal;
+    color: #95cca5;
+    position: relative;
+  }
+  
+  .hero-divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+    margin: 0 auto 24px;
+    opacity: 0;
+    animation: fadeInScale 0.6s ease forwards 0.7s;
+  }
+  
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    to {
+      opacity: 1;
+      transform: scaleX(1);
     }
   }
   
-  .page-hero__lema {
-    font-size: 28px;
+  .hero-subtitle {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 700px;
+    margin: 0 auto 24px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.8s;
+  }
+  
+  .hero-lema {
+    font-size: clamp(22px, 3vw, 32px);
     font-weight: 700;
     color: #95cca5;
-    margin-top: 24px;
     font-style: italic;
+    margin: 0;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1s;
+    text-shadow: 0 0 30px rgba(149, 204, 165, 0.3);
   }
   
-  @media (max-width: 767px) {
-    .page-hero__lema {
-      font-size: 22px;
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
   
-  /* Modelos de Contratación */
-  .modelos-section {
-    padding: 80px 0;
+  .scroll-indicator {
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.3s;
   }
   
-  .modelos-section h2 {
+  .scroll-mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  
+  .scroll-wheel {
+    width: 4px;
+    height: 8px;
+    background: #95cca5;
+    border-radius: 2px;
+    animation: scrollWheel 2s ease-in-out infinite;
+  }
+  
+  @keyframes scrollWheel {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.3; transform: translateY(10px); }
+  }
+  
+  /* ===== SECTIONS ===== */
+  .section-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  
+  .section-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #95cca5;
+    margin-bottom: 12px;
+  }
+  
+  .section-subtitle {
+    font-size: 18px;
+    color: var(--color-text-muted);
+    margin-top: 8px;
     margin-bottom: 16px;
+  }
+  
+  /* ===== MODELOS SECTION ===== */
+  .modelos-section {
+    padding: 100px 0;
+    background: var(--color-bg-body);
   }
   
   .modelos-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    margin-top: 40px;
+    gap: 28px;
   }
   
   @media (max-width: 767px) {
@@ -211,106 +477,252 @@ const ventajas = [
   }
   
   .modelo-card {
-    background: var(--color-bg, #fff);
-    border: 1px solid var(--color-border, #edf0f7);
-    border-radius: 16px;
-    padding: 32px;
+    position: relative;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-theme);
+    border-radius: 20px;
+    padding: 40px 32px;
     text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardReveal 0.8s ease forwards;
+    animation-delay: var(--delay);
+  }
+  
+  @keyframes cardReveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   .modelo-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    border-color: rgba(149, 204, 165, 0.3);
+  }
+  
+  .card-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(149, 204, 165, 0.1) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+  
+  .modelo-card:hover .card-glow {
+    opacity: 1;
+  }
+  
+  .card-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
   }
   
   .modelo-icon {
     width: 80px;
     height: 80px;
     object-fit: contain;
-    display: block;
-    margin: 0 auto 16px;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .modelo-card:hover .modelo-icon {
+    transform: scale(1.1) translateY(-5px);
   }
   
   .modelo-card h3 {
     font-size: 20px;
-    color: var(--color-primary, #1a3865);
+    color: var(--color-heading);
     margin-bottom: 12px;
+    transition: color 0.3s ease;
+  }
+  
+  .modelo-card:hover h3 {
+    color: #1a3865;
   }
   
   .modelo-card p {
     font-size: 15px;
-    color: var(--color-text-secondary, #555);
-    line-height: 1.6;
+    color: var(--color-text-muted);
+    line-height: 1.7;
     margin: 0;
   }
   
-  /* Social Proof */
+  .card-accent {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1a3865, #95cca5);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 3px 3px 0 0;
+  }
+  
+  .modelo-card:hover .card-accent {
+    width: 80%;
+  }
+  
+  /* ===== SOCIAL PROOF SECTION ===== */
   .social-proof-section {
-    padding: 80px 0;
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
   }
   
-  .social-proof__highlight {
-    font-size: 28px;
-    line-height: 1.5;
-    color: var(--color-text, #333);
-    max-width: 800px;
-    margin: 0 auto 24px;
+  .proof-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #f8faf9 0%, #eef5f0 50%, #f8faf9 100%);
   }
   
-  @media (max-width: 767px) {
-    .social-proof__highlight {
-      font-size: 22px;
+  .proof-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }
+  
+  .proof-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .stat-number {
+    font-size: clamp(48px, 8vw, 72px);
+    font-weight: 800;
+    color: #1a3865;
+    line-height: 1;
+    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .stat-label {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-text-muted);
+    margin-top: 8px;
+  }
+  
+  .stat-divider {
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(180deg, transparent, #95cca5, transparent);
+  }
+  
+  @media (max-width: 575px) {
+    .stat-divider {
+      display: none;
     }
   }
   
-  .highlight-number {
-    color: var(--color-accent, #95cca5);
-    font-weight: 700;
+  .proof-text {
+    font-size: clamp(18px, 3vw, 24px);
+    color: var(--color-text-muted);
+    margin-bottom: 20px;
   }
   
-  .social-proof__question {
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--color-primary, #1a3865);
+  .proof-question {
+    font-size: clamp(24px, 4vw, 32px);
+    font-weight: 700;
+    color: #1a3865;
     margin-bottom: 32px;
   }
   
-  @media (max-width: 767px) {
-    .social-proof__question {
-      font-size: 20px;
-    }
+  /* ===== PREMIUM BUTTON ===== */
+  .btn-premium {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 36px;
+    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px rgba(26, 56, 101, 0.3);
+    text-decoration: none;
   }
   
-  /* Ventajas */
+  .btn-premium:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(26, 56, 101, 0.4);
+  }
+  
+  .btn-premium .btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .btn-premium:hover .btn-glow {
+    left: 100%;
+  }
+  
+  .btn-premium .btn-icon {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+  }
+  
+  .btn-premium:hover .btn-icon {
+    transform: scale(1.2);
+  }
+  
+  /* ===== VENTAJAS SECTION ===== */
   .ventajas-section {
-    padding: 80px 0;
-  }
-  
-  .ventajas-section h2 {
-    margin-bottom: 16px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 100px 0;
+    background: var(--color-bg-body);
   }
   
   .ventajas-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-    margin-top: 48px;
+    gap: 40px;
   }
   
   @media (max-width: 991px) {
     .ventajas-grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
     }
   }
   
   @media (max-width: 575px) {
     .ventajas-grid {
       grid-template-columns: 1fr;
+      gap: 28px;
     }
   }
   
@@ -319,18 +731,55 @@ const ventajas = [
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 16px;
+    gap: 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardReveal 0.8s ease forwards;
+    animation-delay: var(--delay);
+  }
+  
+  .ventaja-icon-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(149,204,165,0.15) 0%, rgba(26,56,101,0.1) 100%);
+    border-radius: 50%;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .icon-ring {
+    position: absolute;
+    inset: -5px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .ventaja-item:hover .icon-bg {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, rgba(149,204,165,0.25) 0%, rgba(26,56,101,0.15) 100%);
+  }
+  
+  .ventaja-item:hover .icon-ring {
+    border-color: rgba(149, 204, 165, 0.3);
+    transform: scale(1.15);
   }
   
   .ventaja-icon {
-    width: 100px;
-    height: 100px;
+    position: relative;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
-    display: block;
-    padding: 15px;
-    background: linear-gradient(135deg, rgba(149,204,165,0.15) 0%, rgba(26,56,101,0.1) 100%);
-    border-radius: 50%;
-    transition: transform 0.3s ease;
+    z-index: 2;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
   
   .ventaja-item:hover .ventaja-icon {
@@ -340,22 +789,87 @@ const ventajas = [
   .ventaja-title {
     font-size: 17px;
     font-weight: 600;
-    color: var(--color-text, #333);
+    color: var(--color-text-body);
     line-height: 1.4;
+    transition: color 0.3s ease;
   }
   
-  /* CTA */
+  .ventaja-item:hover .ventaja-title {
+    color: #1a3865;
+  }
+  
+  /* ===== CTA SECTION ===== */
   .cta-section {
-    padding: 80px 0;
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
   }
   
-  .cta-section h2 {
-    margin-bottom: 16px;
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1a3865 0%, #0f2240 50%, #1a3865 100%);
   }
   
-  .cta-section p {
-    font-size: 18px;
-    margin-bottom: 24px;
-    color: var(--color-text-secondary, #555);
+  .cta-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(149,204,165,0.1) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 50%, rgba(149,204,165,0.08) 0%, transparent 40%);
+  }
+  
+  .cta-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }
+  
+  .cta-content h2 {
+    font-size: clamp(32px, 5vw, 48px);
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  
+  .line-divider.light {
+    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+  }
+  
+  .cta-content p {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: #ffffff;
+    margin-bottom: 32px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .btn-premium--light {
+    background: #95cca5;
+    color: #1a3865;
+    box-shadow: 0 10px 30px rgba(149, 204, 165, 0.3);
+  }
+  
+  .btn-premium--light:hover {
+    background: #ffffff;
+    box-shadow: 0 20px 40px rgba(149, 204, 165, 0.4);
+  }
+  
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 767px) {
+    .premium-hero {
+      min-height: 70vh;
+      padding: 100px 0 60px;
+    }
+    
+    .proof-stats {
+      gap: 24px;
+    }
+    
+    .modelos-section,
+    .social-proof-section,
+    .ventajas-section,
+    .cta-section {
+      padding: 70px 0;
+    }
   }
 </style>
