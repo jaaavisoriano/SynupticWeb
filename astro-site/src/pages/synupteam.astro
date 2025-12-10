@@ -79,16 +79,49 @@ const leader = {
     <Header />
     
     <main id="main-content">
-      <!-- Hero Section -->
+      <!-- Hero Section Premium -->
       <section class="page-hero">
-        <div class="cesis_container">
-          <span class="hero-label">SYNUPTEAM</span>
-          <h1>En Synuptic valoramos, ante todo, a las personas</h1>
-          <div class="line-divider center"></div>
-          <p class="hero-subtitle">
-            El SynupTeam es gente maravillosa, de formación científica, pero con un puntito de creatividad 
-            que hará que tus proyectos healthcare brillen con luz propia.
-          </p>
+        <!-- Animated gradient background -->
+        <div class="hero-gradient"></div>
+        
+        <!-- Floating particles for premium feel -->
+        <div class="floating-particles">
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+        </div>
+        
+        <!-- Hero overlay -->
+        <div class="hero-overlay">
+          <div class="hero-content">
+            <span class="hero-label">SYNUPTEAM</span>
+            <h1 class="hero-headline">
+              <span class="headline-line headline-line-1">En Synuptic valoramos,</span>
+              <span class="headline-accent">ante todo,</span>
+              <span class="headline-line headline-line-2">a las personas</span>
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-subtitle">
+              El SynupTeam es gente maravillosa, de formación científica, pero con un puntito de creatividad 
+              que hará que tus proyectos healthcare brillen con luz propia.
+            </p>
+            <a href="#team-section" class="hero-cta-link">
+              <span>Conoce al equipo</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+          
+          <!-- Scroll Indicator -->
+          <div class="scroll-indicator" aria-hidden="true">
+            <div class="scroll-mouse">
+              <div class="scroll-wheel"></div>
+            </div>
+            <span class="scroll-text">Scroll</span>
+          </div>
         </div>
       </section>
 
@@ -101,7 +134,7 @@ const leader = {
       </section>
 
       <!-- Team Grid Section -->
-      <section class="section team-section">
+      <section class="section team-section" id="team-section">
         <div class="cesis_container">
           <h2 class="text-center">Nuestro fantástico SynupTeam</h2>
           <div class="line-divider center"></div>
@@ -203,55 +236,334 @@ const leader = {
 </Layout>
 
 <style>
-  /* Hero Section */
+  /* ===== PREMIUM HERO SECTION ===== */
   .page-hero {
-    background: linear-gradient(135deg, var(--color-primary, #1a3865) 0%, #2c5282 100%);
-    color: #fff;
-    padding: 120px 0 80px;
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #0a1628;
+  }
+
+  @media (max-width: 768px) {
+    .page-hero {
+      min-height: 70vh;
+    }
+  }
+  
+  /* Animated gradient background */
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg, 
+      #0a1628 0%, 
+      #1a3865 25%, 
+      #0f2240 50%, 
+      #1a3865 75%, 
+      #0a1628 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease-in-out infinite;
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  /* Floating particles for premium feel */
+  .floating-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(149, 204, 165, 0.4);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .particle:nth-child(1) {
+    left: 15%;
+    top: 25%;
+    animation-delay: 0s;
+    animation-duration: 7s;
+  }
+  
+  .particle:nth-child(2) {
+    left: 75%;
+    top: 50%;
+    animation-delay: 1s;
+    animation-duration: 8s;
+  }
+  
+  .particle:nth-child(3) {
+    left: 40%;
+    top: 75%;
+    animation-delay: 2s;
+    animation-duration: 6s;
+  }
+  
+  .particle:nth-child(4) {
+    left: 85%;
+    top: 20%;
+    animation-delay: 3s;
+    animation-duration: 9s;
+  }
+  
+  .particle:nth-child(5) {
+    left: 25%;
+    top: 60%;
+    animation-delay: 4s;
+    animation-duration: 7s;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.3;
+    }
+    25% {
+      transform: translateY(-30px) translateX(10px) scale(1.2);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateY(-50px) translateX(-15px) scale(1);
+      opacity: 0.8;
+    }
+    75% {
+      transform: translateY(-20px) translateX(5px) scale(0.8);
+      opacity: 0.5;
+    }
+  }
+  
+  /* Hero overlay */
+  .hero-overlay {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 85vh;
+    width: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 22, 40, 0.3) 0%,
+      rgba(10, 22, 40, 0.5) 50%,
+      rgba(10, 22, 40, 0.7) 100%
+    );
+  }
+
+  @media (max-width: 768px) {
+    .hero-overlay {
+      min-height: 70vh;
+    }
+  }
+  
+  /* Hero content */
+  .hero-content {
     text-align: center;
+    max-width: 900px;
+    padding: 0 24px;
   }
   
   .hero-label {
     display: inline-block;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    opacity: 0.8;
-    margin-bottom: 16px;
+    color: #95cca5;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.2s;
   }
   
-  .page-hero h1 {
-    font-size: 42px;
-    margin-bottom: 16px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+  .hero-headline {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 700;
+    color: #ffffff;
     line-height: 1.2;
-    color: #fff;
+    margin-bottom: 24px;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   }
   
-  @media (max-width: 767px) {
-    .page-hero h1 {
-      font-size: 28px;
+  .headline-line {
+    display: block;
+  }
+  
+  .headline-line-1 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealLine 0.8s ease forwards 0.4s;
+  }
+  
+  .headline-accent {
+    display: block;
+    font-size: 0.6em;
+    color: #95cca5;
+    margin: 8px 0;
+    font-style: italic;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: revealAmpersand 0.6s ease forwards 0.7s;
+  }
+  
+  .headline-line-2 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealLine 0.8s ease forwards 1s;
+  }
+  
+  @keyframes revealLine {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
   
-  .page-hero .line-divider {
-    background: var(--color-accent, #95cca5);
+  @keyframes revealAmpersand {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Hero divider */
+  .hero-divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+    margin: 0 auto 24px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.2s;
   }
   
   .hero-subtitle {
-    font-size: 20px;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.85);
     max-width: 700px;
-    margin: 0 auto;
-    opacity: 0.9;
-    line-height: 1.6;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.4s;
   }
   
-  @media (max-width: 767px) {
-    .hero-subtitle {
-      font-size: 16px;
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Hero CTA Link */
+  .hero-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: #95cca5;
+    color: #1a3865;
+    border-radius: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 30px rgba(149, 204, 165, 0.3);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.6s;
+  }
+  
+  .hero-cta-link:hover {
+    background: #ffffff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 40px rgba(149, 204, 165, 0.4);
+    color: #1a3865;
+  }
+  
+  .hero-cta-link svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .hero-cta-link:hover svg {
+    transform: translateX(5px);
+  }
+  
+  /* Scroll Indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 2s;
+  }
+  
+  .scroll-mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  
+  .scroll-wheel {
+    width: 4px;
+    height: 8px;
+    background: #95cca5;
+    border-radius: 2px;
+    animation: scrollWheel 2s ease-in-out infinite;
+  }
+  
+  @keyframes scrollWheel {
+    0%, 100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 0.3;
+      transform: translateY(10px);
+    }
+  }
+  
+  .scroll-text {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  @media (max-width: 768px) {
+    .scroll-indicator {
+      bottom: 24px;
+    }
+    
+    .hero-cta-link {
+      padding: 14px 24px;
+      font-size: 13px;
     }
   }
   
