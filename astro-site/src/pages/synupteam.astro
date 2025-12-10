@@ -715,6 +715,28 @@ const leader = {
     opacity: 0.95;
     margin: 0;
   }
+
+  /* ===== TOUCH DEVICES & MOBILE/TABLET ===== */
+  @media (hover: none), (max-width: 991px) {
+    .team-flip-box__front::after {
+      content: 'Toca para descubrir';
+      position: absolute;
+      bottom: 12px; /* Adjusted for better spacing */
+      font-size: 11px;
+      color: var(--color-accent, #95cca5);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Disable hover on touch - only use .is-flipped class */
+    .team-flip-box:hover .team-flip-box__inner {
+      transform: none;
+    }
+    
+    .team-flip-box.is-flipped .team-flip-box__inner {
+      transform: rotateY(180deg);
+    }
+  }
   
   /* Leader Section */
   .leader-section {
@@ -892,41 +914,64 @@ const leader = {
   .team-flip-box__link:hover {
     background-color: rgba(255, 255, 255, 0.4);
   }
-  
-  /* Mobile touch support */
-  @media (hover: none) and (pointer: coarse) {
-    .team-flip-box.is-flipped .team-flip-box__inner {
-      transform: rotateY(180deg);
-    }
-  }
 </style>
+  
+
 
 <script>
-  // Touch support for flip boxes on mobile
-  function initTeamFlipBoxes() {
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  // Touch support for mobile team cards
+  function initTeamFlipCards() {
+    const container = document.querySelector('.team-grid');
+    if (!container) return;
     
-    if (isTouchDevice) {
-      const flipBoxes = document.querySelectorAll('.team-flip-box');
+    // Check if already initialized to prevent double event listeners
+    if (container.hasAttribute('data-fp-initialized')) return;
+    container.setAttribute('data-fp-initialized', 'true');
+    
+    const flipBoxes = document.querySelectorAll('.team-flip-box');
+    let activeCard: HTMLElement | null = null;
+    
+    flipBoxes.forEach(box => {
+      const element = box as HTMLElement;
       
-      flipBoxes.forEach(box => {
-        box.addEventListener('click', (e) => {
-          // Close all other boxes
-          flipBoxes.forEach(otherBox => {
-            if (otherBox !== box) {
-              otherBox.classList.remove('is-flipped');
-            }
-          });
-          // Toggle current box
-          box.classList.toggle('is-flipped');
-        });
+      element.addEventListener('click', function(this: HTMLElement, e: Event) {
+        // Run logic if touch device OR small screen
+        if (window.matchMedia('(hover: none)').matches || window.innerWidth < 992) {
+          // Only prevent default if we're not clicking a link/button inside
+          const target = e.target as HTMLElement;
+          if (target.tagName.toLowerCase() === 'a' || target.closest('a')) {
+            return;
+          }
+
+          e.preventDefault();
+          e.stopPropagation(); // Stop propagation
+          
+          // Close previously open card
+          if (activeCard && activeCard !== this) {
+            activeCard.classList.remove('is-flipped');
+          }
+          
+          // Toggle current card
+          this.classList.toggle('is-flipped');
+          activeCard = this.classList.contains('is-flipped') ? this : null;
+        }
       });
-    }
+    });
+    
+    // Close on outside click
+    document.addEventListener('click', (e: Event) => {
+      if ((window.matchMedia('(hover: none)').matches || window.innerWidth < 992) && activeCard) {
+        const target = e.target as HTMLElement;
+        if (!target.closest('.team-flip-box')) {
+          activeCard.classList.remove('is-flipped');
+          activeCard = null;
+        }
+      }
+    });
   }
   
-  // Run on initial load
-  initTeamFlipBoxes();
-  
-  // Run after Astro page transitions
-  document.addEventListener('astro:page-load', initTeamFlipBoxes);
+  initTeamFlipCards();
+  document.addEventListener('astro:page-load', initTeamFlipCards);
 </script>
+
+
