@@ -4,8 +4,8 @@
 
 <section class="section about-section" id="about">
   <div class="cesis_container">
-    <div class="row">
-      <div class="col-sm-6 about-section__content reveal-left">
+    <div class="about-grid">
+      <div class="about-section__content reveal-left">
         <!-- Stats badge -->
         <div class="about-stats">
           <span class="stat-number" data-target="9">0</span>
@@ -26,17 +26,15 @@
           <span>Quiero conoceros</span>
         </a>
       </div>
-      <div class="col-sm-6">
-        <div class="about-section__image reveal-scale">
-          <div class="image-glow"></div>
-          <img 
-            src="/images/Multidisci_800x600-1.jpg" 
-            alt="Equipo multidisciplinar de Synuptic"
-            width="800"
-            height="600"
-            loading="lazy"
-          >
-        </div>
+      <div class="about-section__image reveal-scale">
+        <div class="image-glow"></div>
+        <img 
+          src="/images/Multidisci_800x600-1.jpg" 
+          alt="Equipo multidisciplinar de Synuptic"
+          width="800"
+          height="600"
+          loading="lazy"
+        >
       </div>
     </div>
   </div>
@@ -94,9 +92,19 @@
     padding: 100px 0;
   }
   
-  .about-section .row {
-    align-items: center;
+  /* ===== GRID LAYOUT ===== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 40px;
+    align-items: center;
+  }
+  
+  @media (min-width: 992px) {
+    .about-grid {
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+    }
   }
   
   /* ===== STATS BADGE ===== */
@@ -109,7 +117,6 @@
     border-radius: 12px;
     margin-bottom: 24px;
     box-shadow: 0 10px 30px rgba(26, 56, 101, 0.2);
-    /* Removed transform for cleaner alignment */
   }
   
   .stat-number {
@@ -131,17 +138,12 @@
   
   /* ===== CONTENT ===== */
   .about-section__content {
-    padding-right: 40px;
+    padding-right: 0;
   }
   
-  @media (max-width: 767px) {
+  @media (min-width: 992px) {
     .about-section__content {
-      padding-right: 0;
-      margin-bottom: 40px;
-    }
-    
-    .about-stats {
-      transform: none;
+      padding-right: 20px;
     }
   }
   
@@ -191,7 +193,34 @@
     }
   }
   
-  /* ===== IMAGE ===== */
+  /* ===== IMAGES CONTAINER ===== */
+  .about-section__images {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  @media (min-width: 992px) {
+    .about-section__images {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr;
+      grid-template-rows: auto auto;
+      gap: 20px;
+    }
+    
+    .about-image-main {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+    
+    .about-image-secondary {
+      grid-column: 2 / 3;
+      grid-row: 1 / 3;
+      align-self: center;
+    }
+  }
+  
+  /* ===== IMAGE STYLES ===== */
   .about-section__image {
     position: relative;
   }
@@ -234,14 +263,35 @@
       0 0 0 1px rgba(149, 204, 165, 0.2);
   }
   
-  @media (max-width: 767px) {
+  /* ===== SECONDARY IMAGE SPECIFIC STYLES ===== */
+  .about-image-secondary img {
+    border-radius: 16px;
+  }
+  
+  @media (min-width: 992px) {
+    .about-image-secondary {
+      transform: translateY(30px);
+    }
+    
+    .about-image-secondary img {
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+    }
+  }
+  
+  @media (max-width: 991px) {
     .about-section {
       padding: 60px 0;
     }
     
-    .about-section__image {
+    .about-section__images {
       max-width: 90%;
       margin: 0 auto;
+    }
+    
+    .about-image-secondary {
+      display: none; /* Ocultar en móvil para no sobrecargar */
     }
   }
 </style>

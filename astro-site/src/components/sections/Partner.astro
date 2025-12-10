@@ -19,8 +19,17 @@
   </div>
   
   <div class="cesis_container">
-    <div class="row partner-row">
-      <div class="col-sm-6 partner-section__content reveal-right">
+    <div class="partner-grid">
+      <div class="partner-section__image reveal-scale">
+        <img 
+          src="/images/Ilustracion_30-768x542.jpg" 
+          alt="Ilustración de colaboración"
+          width="768"
+          height="542"
+          loading="lazy"
+        >
+      </div>
+      <div class="partner-content reveal-right">
         <div class="partner-badge">
           <span class="badge-number">30+</span>
           <span class="badge-label">Clientes satisfechos</span>
@@ -28,17 +37,9 @@
         <h2>Somos un partner para todas las agencias y consultoras que han confiado en nuestra experiencia desde 2015</h2>
         <div class="line-divider"></div>
         <p class="partner-section__subtitle">Y seguimos creciendo cada año con nuevos clientes satisfechos.</p>
-      </div>
-      <div class="col-sm-6">
-        <div class="partner-section__image reveal-scale">
-          <img 
-            src="/images/Ilustracion_30-768x542.jpg" 
-            alt="Ilustración de colaboración"
-            width="768"
-            height="542"
-            loading="lazy"
-          >
-        </div>
+        <a href="#contact" class="btn btn-secondary">
+          <span>Únete al equipo</span>
+        </a>
       </div>
     </div>
   </div>
@@ -104,14 +105,10 @@
   }
   
   /* ===== CONTENT ===== */
-  .partner-section .row {
-    align-items: center;
-  }
-
-  @media (min-width: 768px) {
-    .partner-section .partner-row {
-      flex-direction: row-reverse;
-    }
+  .partner-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
   }
   
   /* ===== BADGE ===== */
@@ -141,51 +138,50 @@
     letter-spacing: 0.5px;
   }
   
-  /* ===== IMAGE ===== */
-  .partner-section__image img {
-    border-radius: 16px;
-    box-shadow: 
-      0 25px 50px rgba(0, 0, 0, 0.12),
-      0 0 0 1px rgba(0, 0, 0, 0.05);
-    width: 100%;
-    height: auto;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  
-  .partner-section__image:hover img {
-    transform: scale(1.02) translateY(-5px);
-  }
-  
-  @media (max-width: 767px) {
-    .partner-section__image {
-      margin-top: 32px;
-      max-width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-  
-  .partner-section__content {
-    padding-left: 40px;
-  }
-  
-  @media (max-width: 767px) {
-    .partner-section__content {
-      padding-left: 0;
-    }
-  }
-  
-  .partner-section__content h2 {
-    font-size: clamp(1.5rem, 3.5vw, 1.75rem);
+  .partner-content h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
     line-height: 1.35;
     margin-bottom: 16px;
     color: var(--color-heading);
   }
   
+  .partner-content .line-divider {
+    margin: 0 auto 24px;
+  }
+  
   .partner-section__subtitle {
     font-size: 18px;
     color: var(--color-text-muted);
-    margin: 0;
+    margin: 0 0 32px 0;
+  }
+  
+  .partner-content .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: transparent;
+    border: 2px solid #1a3865;
+    color: #1a3865;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .partner-content .btn-secondary:hover {
+    background: #1a3865;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  
+  [data-theme="dark"] .partner-content .btn-secondary {
+    border-color: #95cca5;
+    color: #95cca5;
+  }
+  
+  [data-theme="dark"] .partner-content .btn-secondary:hover {
+    background: #95cca5;
+    color: #1a3865;
   }
   
   @media (max-width: 767px) {
@@ -193,7 +189,7 @@
       padding: 80px 0;
     }
     
-    .partner-section__content h2 {
+    .partner-content h2 {
       font-size: 1.35rem;
     }
     
