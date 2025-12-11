@@ -386,62 +386,58 @@ const currentYear = new Date().getFullYear();
     justify-content: center;
     gap: 10px;
     padding: 12px 20px;
-    border-radius: 10px;
+    border-radius: 4px; /* Matching .btn border-radius */
     text-decoration: none;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    border: 1px solid #eee;
+    font-weight: 700; /* Matching .btn font-weight */
+    transition: all 0.3s ease;
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
 
   .map-option svg {
     width: 20px;
     height: 20px;
+    fill: currentColor;
   }
 
-  .map-option.google {
-    background-color: #fff;
-    color: #333;
-    border-color: #e0e0e0;
+  .map-option:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-white);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
   }
 
-  .map-option.google:hover {
-    background-color: #f8f9fa;
-    border-color: #ccc;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  /* Specific tweaks if needed, but keeping them uniform as per request */
+  .map-option.google, .map-option.apple {
+    /* Ensuring overrides if any previous specific classes remain */
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
   }
 
-  .map-option.apple {
-    background-color: #000;
-    color: #fff;
-    border-color: #000;
+  .map-option.google:hover, .map-option.apple:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-white);
   }
 
-  .map-option.apple:hover {
-    background-color: #333;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  }
-
-  /* Dark Mode for Modal */
+  /* Dark Mode for Modal - Buttons stay consistent as they are corporate colors */
   :global([data-theme="dark"]) .maps-modal-container {
     background: var(--color-bg-card, #1a1a1a);
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   :global([data-theme="dark"]) .maps-modal-title {
     color: #fff;
   }
 
-  :global([data-theme="dark"]) .map-option.google {
-    background-color: #2a2a2a;
-    color: #fff;
-    border-color: #444;
-  }
-
-  :global([data-theme="dark"]) .map-option.google:hover {
-    background-color: #333;
-  }
 </style>
 
 <!-- Scroll to Top Button -->
