@@ -25,7 +25,7 @@ const currentYear = new Date().getFullYear();
               <a href="mailto:hola@synuptic.es" id="email-copy" class="contact-item__text" title="Clic para copiar email">hola@synuptic.es</a>
               <span id="email-tooltip" class="copy-tooltip">¡Copiado!</span>
             </div>
-            <div class="contact-item">
+            <div class="contact-item location-trigger" id="location-trigger" role="button" tabindex="0" title="Ver en mapa">
               <span class="contact-item__icon">📍</span>
               <span class="contact-item__text">c/ Zurbano, 48 - 28010 Madrid</span>
             </div>
@@ -91,6 +91,28 @@ const currentYear = new Date().getFullYear();
             </svg>
           </a>
         </span>
+      </div>
+    </div>
+  </div>
+  <!-- Maps Selection Modal -->
+  <div id="maps-modal" class="maps-modal">
+    <div class="maps-modal-overlay"></div>
+    <div class="maps-modal-container">
+      <button class="maps-modal-close" aria-label="Cerrar">&times;</button>
+      <h3 class="maps-modal-title">Abrir ubicación en</h3>
+      <div class="maps-modal-options">
+        <a href="https://www.google.com/maps/search/?api=1&query=Calle+de+Zurbano+48,+28010+Madrid" target="_blank" rel="noopener noreferrer" class="map-option google">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="map-icon">
+             <path d="M12 0C7.31 0 3.5 3.81 3.5 8.5c0 5.59 7.42 14.54 7.74 14.92.19.23.48.37.76.37.28 0 .57-.14.76-.37.31-.38 7.74-9.33 7.74-14.92C20.5 3.81 16.69 0 12 0zm0 12.8c-2.37 0-4.3-1.93-4.3-4.3 0-2.37 1.93-4.3 4.3-4.3 2.37 0 4.3 1.93 4.3 4.3 0 2.37-1.93 4.3-4.3 4.3z"/>
+          </svg>
+          Google Maps
+        </a>
+        <a href="https://maps.apple.com/?q=Calle+de+Zurbano+48,+28010+Madrid" target="_blank" rel="noopener noreferrer" class="map-option apple">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="map-icon">
+             <path d="M16.92 12.04c.03-2.67 2.19-3.96 2.29-4.02-1.25-1.83-3.19-2.08-3.87-2.11-1.63-.17-3.18.96-4.01.96-.83 0-2.11-.94-3.48-.91-1.78.03-3.43 1.04-4.35 2.65-1.86 3.22-.48 7.97 1.33 10.58.89 1.28 1.94 2.71 3.32 2.66 1.33-.05 1.83-.86 3.44-.86 1.6 0 2.06.86 3.46.83 1.44-.03 2.35-1.3 3.23-2.58 1.01-1.48 1.43-2.91 1.45-2.99-.03-.02-2.78-1.07-2.81-4.21M12.78 4.25c.73-.88 1.22-2.1 1.08-3.32-1.05.04-2.31.7-3.06 1.58-.67.78-1.26 2.05-1.1 3.23 1.17.09 2.36-.6 3.08-1.49"/>
+          </svg>
+          Apple Maps
+        </a>
       </div>
     </div>
   </div>
@@ -265,6 +287,161 @@ const currentYear = new Date().getFullYear();
   :global([data-theme="dark"]) .copy-tooltip::after {
     border-top-color: #f0f0f0;
   }
+
+  /* Location Contact Item Interactive */
+  .location-trigger {
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  
+  .location-trigger:hover {
+    transform: translateY(-2px);
+    opacity: 0.8;
+  }
+
+  /* Maps Modal Styles */
+  .maps-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .maps-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .maps-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  .maps-modal-container {
+    position: relative;
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    transform: translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2;
+    text-align: center;
+  }
+
+  .maps-modal.active .maps-modal-container {
+    transform: translateY(0);
+  }
+
+  .maps-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s;
+  }
+
+  .maps-modal-close:hover {
+    color: #333;
+  }
+
+  .maps-modal-title {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .maps-modal-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .map-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: 1px solid #eee;
+  }
+
+  .map-option svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .map-option.google {
+    background-color: #fff;
+    color: #333;
+    border-color: #e0e0e0;
+  }
+
+  .map-option.google:hover {
+    background-color: #f8f9fa;
+    border-color: #ccc;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+
+  .map-option.apple {
+    background-color: #000;
+    color: #fff;
+    border-color: #000;
+  }
+
+  .map-option.apple:hover {
+    background-color: #333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  }
+
+  /* Dark Mode for Modal */
+  :global([data-theme="dark"]) .maps-modal-container {
+    background: var(--color-bg-card, #1a1a1a);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+
+  :global([data-theme="dark"]) .maps-modal-title {
+    color: #fff;
+  }
+
+  :global([data-theme="dark"]) .map-option.google {
+    background-color: #2a2a2a;
+    color: #fff;
+    border-color: #444;
+  }
+
+  :global([data-theme="dark"]) .map-option.google:hover {
+    background-color: #333;
+  }
 </style>
 
 <!-- Scroll to Top Button -->
@@ -312,6 +489,35 @@ const currentYear = new Date().getFullYear();
         }, 2000);
       } catch (err) {
         console.error('Failed to copy text: ', err);
+      }
+    });
+  }
+
+  /* Maps Modal Logic */
+  const locationTrigger = document.getElementById('location-trigger');
+  const mapsModal = document.getElementById('maps-modal');
+  const mapsModalClose = document.querySelector('.maps-modal-close');
+  const mapsModalOverlay = document.querySelector('.maps-modal-overlay');
+
+  if (locationTrigger && mapsModal) {
+    const openModal = () => mapsModal.classList.add('active');
+    const closeModal = () => mapsModal.classList.remove('active');
+
+    locationTrigger.addEventListener('click', openModal);
+    locationTrigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal();
+      }
+    });
+
+    if (mapsModalClose) mapsModalClose.addEventListener('click', closeModal);
+    if (mapsModalOverlay) mapsModalOverlay.addEventListener('click', closeModal);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mapsModal.classList.contains('active')) {
+        closeModal();
       }
     });
   }
