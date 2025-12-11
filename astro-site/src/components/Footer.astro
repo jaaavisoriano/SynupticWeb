@@ -448,73 +448,99 @@ const currentYear = new Date().getFullYear();
 </a>
 
 <script>
-  // Scroll to top functionality
-  const scrollTopBtn = document.getElementById('cesis_to_top');
-  
-  if (scrollTopBtn) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        scrollTopBtn.classList.add('visible');
-      } else {
-        scrollTopBtn.classList.remove('visible');
-      }
-    });
+  // Variables to hold cleanup functions for global listeners
+  let cleanupScroll;
+  let cleanupEsc;
+
+  const initFooter = () => {
+    // --- 1. Scroll to top functionality ---
+    const scrollTopBtn = document.getElementById('cesis_to_top');
     
-    scrollTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
+    if (scrollTopBtn) {
+      // Click listener (element-bound, safe to re-add on new elements)
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
 
-  // Email click to copy functionality
-  const emailLink = document.getElementById('email-copy');
-  const tooltip = document.getElementById('email-tooltip');
+      // Cleanup previous scroll listener if it exists
+      if (cleanupScroll) cleanupScroll();
 
-  if (emailLink && tooltip) {
-    emailLink.addEventListener('click', async (e) => {
-      e.preventDefault();
+      // Window Scroll listener (Global)
+      const handleScroll = () => {
+        if (window.scrollY > 300) {
+          scrollTopBtn.classList.add('visible');
+        } else {
+          scrollTopBtn.classList.remove('visible');
+        }
+      };
       
-      try {
-        await navigator.clipboard.writeText('hola@synuptic.es');
-        
-        // Show tooltip
-        tooltip.classList.add('visible');
-        
-        // Hide after 2 seconds
-        setTimeout(() => {
-          tooltip.classList.remove('visible');
-        }, 2000);
-      } catch (err) {
-        console.error('Failed to copy text: ', err);
-      }
-    });
-  }
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      cleanupScroll = () => window.removeEventListener('scroll', handleScroll);
+      
+      // Initial check
+      handleScroll();
+    }
 
-  /* Maps Modal Logic */
-  const locationTrigger = document.getElementById('location-trigger');
-  const mapsModal = document.getElementById('maps-modal');
-  const mapsModalClose = document.querySelector('.maps-modal-close');
-  const mapsModalOverlay = document.querySelector('.maps-modal-overlay');
+    // --- 2. Email click to copy functionality ---
+    const emailLink = document.getElementById('email-copy');
+    const tooltip = document.getElementById('email-tooltip');
 
-  if (locationTrigger && mapsModal) {
-    const openModal = () => mapsModal.classList.add('active');
-    const closeModal = () => mapsModal.classList.remove('active');
-
-    locationTrigger.addEventListener('click', openModal);
-    locationTrigger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+    if (emailLink && tooltip) {
+      emailLink.addEventListener('click', async (e) => {
         e.preventDefault();
-        openModal();
-      }
-    });
+        
+        try {
+          await navigator.clipboard.writeText('hola@synuptic.es');
+          
+          // Show tooltip
+          tooltip.classList.add('visible');
+          
+          // Hide after 2 seconds
+          setTimeout(() => {
+            tooltip.classList.remove('visible');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy text: ', err);
+        }
+      });
+    }
 
-    if (mapsModalClose) mapsModalClose.addEventListener('click', closeModal);
-    if (mapsModalOverlay) mapsModalOverlay.addEventListener('click', closeModal);
+    // --- 3. Maps Modal Logic ---
+    const locationTrigger = document.getElementById('location-trigger');
+    const mapsModal = document.getElementById('maps-modal');
+    const mapsModalClose = document.querySelector('.maps-modal-close');
+    const mapsModalOverlay = document.querySelector('.maps-modal-overlay');
 
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mapsModal.classList.contains('active')) {
-        closeModal();
-      }
-    });
-  }
+    if (locationTrigger && mapsModal) {
+      const openModal = () => mapsModal.classList.add('active');
+      const closeModal = () => mapsModal.classList.remove('active');
+
+      locationTrigger.addEventListener('click', openModal);
+      locationTrigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal();
+        }
+      });
+
+      if (mapsModalClose) mapsModalClose.addEventListener('click', closeModal);
+      if (mapsModalOverlay) mapsModalOverlay.addEventListener('click', closeModal);
+
+      // Cleanup previous Esc listener
+      if (cleanupEsc) cleanupEsc();
+
+      // Document Keydown listener (Global)
+      const handleEsc = (e) => {
+        if (e.key === 'Escape' && mapsModal.classList.contains('active')) {
+          closeModal();
+        }
+      };
+
+      document.addEventListener('keydown', handleEsc);
+      cleanupEsc = () => document.removeEventListener('keydown', handleEsc);
+    }
+  };
+
+  // Run on initial load and every subsequent navigation
+  document.addEventListener('astro:page-load', initFooter);
 </script>
