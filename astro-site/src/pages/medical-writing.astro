@@ -66,12 +66,12 @@ const services = [
           <p class="page-hero__subtitle reveal-subtitle">
             Desarrollamos contenido científico, buscando el equilibrio entre la rigurosidad que requiere el departamento médico, la creatividad que demanda marketing, ¡y sin perder de vista a los "puntillosos" de regulatory!
           </p>
-          <a href="/#contact" class="btn btn--hero reveal-cta">
+          <button type="button" onclick="window.openContactModal()" class="btn btn--hero reveal-cta" aria-label="Abrir formulario de contacto">
             <span>Necesito un medical writer</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
-          </a>
+          </button>
         </div>
         
         <!-- Scroll Indicator -->
@@ -133,12 +133,12 @@ const services = [
             <div class="line-divider center"></div>
           </div>
           <p class="reveal">Cuéntanos tu proyecto y te ayudamos a hacerlo realidad.</p>
-          <a href="/#contact" class="btn btn--cta reveal">
+          <button type="button" onclick="window.openContactModal()" class="btn btn--cta reveal" aria-label="Abrir formulario de contacto">
             <span>Necesito un medical writer</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
-          </a>
+          </button>
         </div>
       </section>
     </main>
@@ -466,6 +466,10 @@ const services = [
   .services-intro strong {
     color: #2c5282;
     background: linear-gradient(180deg, transparent 60%, rgba(149, 204, 165, 0.3) 60%);
+  }
+  
+  :global([data-theme="dark"]) .services-intro strong {
+    color: #ffffff;
   }
   
   .services-grid {

@@ -178,6 +178,11 @@ const clientTypes = [
   }
   
   /* Dark mode */
+  :global([data-theme="dark"]) .flip-box {
+    --card-accent: #95cca5 !important;
+    --card-accent-rgb: 149, 204, 165 !important;
+  }
+
   :global([data-theme="dark"]) .flip-box__front {
     background: linear-gradient(145deg, rgba(var(--card-accent-rgb), 0.15) 0%, rgba(var(--card-accent-rgb), 0.05) 100%);
     border: 1px solid rgba(var(--card-accent-rgb), 0.3);

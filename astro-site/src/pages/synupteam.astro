@@ -126,10 +126,21 @@ const leader = {
       </section>
 
       <!-- Quote Banner -->
-      <section class="section--primary quote-banner">
+      <!-- Quote Banner Premium -->
+      <section class="premium-quote-section">
+        <div class="quote-bg-pattern"></div>
         <div class="cesis_container">
-          <h3>"El talento gana partidos, pero el trabajo en equipo y la inteligencia ganan campeonatos"</h3>
-          <p>— Michael Jordan</p>
+          <div class="quote-content-wrapper">
+             <div class="quote-mark quote-mark-left">“</div>
+             <blockquote class="premium-quote-text">
+               El talento gana partidos, pero el trabajo en equipo y la inteligencia ganan campeonatos
+             </blockquote>
+             <div class="quote-author">
+               <span class="author-dash"></span>
+               <span class="author-name">Michael Jordan</span>
+             </div>
+             <div class="quote-mark quote-mark-right">”</div>
+          </div>
         </div>
       </section>
 
@@ -609,7 +620,7 @@ const leader = {
   .team-flip-box {
     perspective: 1200px;
     min-height: 380px;
-    transition: z-index 0s 0.8s;
+    transition: z-index 0s 1.2s;
   }
   
   .team-flip-box:hover {
@@ -622,7 +633,7 @@ const leader = {
     width: 100%;
     height: 100%;
     min-height: 380px;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     transform-style: preserve-3d;
     cursor: pointer;
   }
@@ -721,11 +732,18 @@ const leader = {
     .team-flip-box__front::after {
       content: 'Toca para descubrir';
       position: absolute;
-      bottom: 12px; /* Adjusted for better spacing */
+      bottom: 12px;
+      left: 0;
+      width: 100%;
+      text-align: center;
       font-size: 11px;
       color: var(--color-accent, #95cca5);
       font-weight: 600;
       letter-spacing: 0.5px;
+    }
+
+    .team-flip-box__info {
+      padding-bottom: 40px;
     }
     
     /* Disable hover on touch - only use .is-flipped class */
@@ -913,6 +931,103 @@ const leader = {
   
   .team-flip-box__link:hover {
     background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* ===== PREMIUM QUOTE SECTION ===== */
+  .premium-quote-section {
+    position: relative;
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8faf9 0%, #eef5f0 100%);
+    color: #1a3865;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .quote-bg-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.1;
+    background-image: 
+      radial-gradient(circle at 20% 50%, #95cca5 1px, transparent 1px),
+      radial-gradient(circle at 80% 30%, #95cca5 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  .quote-content-wrapper {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
+    z-index: 10;
+  }
+  
+  .quote-mark {
+    font-family: 'Georgia', serif;
+    font-size: 120px;
+    line-height: 0.5;
+    color: #95cca5;
+    opacity: 0.2;
+    position: absolute;
+    pointer-events: none;
+  }
+  
+  .quote-mark-left {
+    top: -40px;
+    left: 0;
+  }
+  
+  .quote-mark-right {
+    bottom: -60px;
+    right: 0;
+    transform: rotate(180deg);
+  }
+  
+  .premium-quote-text {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 700;
+    line-height: 1.4;
+    color: #1a3865;
+    margin: 0 0 32px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .quote-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .author-dash {
+    width: 40px;
+    height: 3px;
+    background: #95cca5;
+  }
+  
+  .author-name {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1a3865;
+  }
+
+  @media (max-width: 768px) {
+    .premium-quote-section {
+      padding: 70px 0;
+    }
+    
+    .quote-mark-left {
+      left: 20px;
+      top: -20px;
+    }
+    
+    .quote-mark-right {
+      right: 20px;
+      bottom: -40px;
+    }
   }
 </style>
   

@@ -101,6 +101,41 @@ const currentPath = Astro.url.pathname;
     <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
     
     <div class="header_mobile" id="mobile-nav">
+      <!-- Logo Section -->
+      <div class="mobile-menu-logo">
+        <a href="/" aria-label="Go to Homepage">
+          <img src="/images/logo.webp" alt="Synuptic" width="160" height="57" />
+        </a>
+      </div>
+
+      <!-- Top Text/Controls: Theme Toggle -->
+      <div class="tt-mobile-top-controls">
+        <span class="cesis_social_icons cesis_simple">
+          <button 
+            id="theme-toggle-mobile" 
+            class="social-icon-link theme-toggle" 
+            aria-label="Toggle Dark Mode"
+          >
+            <!-- Moon (Show in Light Mode) -->
+            <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <!-- Sun (Show in Dark Mode) -->
+            <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+        </span>
+      </div>
+
       <nav id="mobile-navigation" class="tt-mobile-navigation">
         <div class="menu-mobile-ct">
           <ul id="mobile-menu" class="mobile-menu">
@@ -124,30 +159,6 @@ const currentPath = Astro.url.pathname;
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
             </svg>
           </a>
-        </span>
-        <span class="cesis_social_icons cesis_simple" style="margin-left: 10px;">
-          <button 
-            id="theme-toggle-mobile" 
-            class="social-icon-link theme-toggle" 
-            aria-label="Toggle Dark Mode"
-          >
-            <!-- Moon (Show in Light Mode) -->
-            <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-            <!-- Sun (Show in Dark Mode) -->
-            <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="5"></circle>
-              <line x1="12" y1="1" x2="12" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="23"></line>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-              <line x1="1" y1="12" x2="3" y2="12"></line>
-              <line x1="21" y1="12" x2="23" y2="12"></line>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-          </button>
         </span>
       </div>
     </div>
@@ -394,4 +405,32 @@ const currentPath = Astro.url.pathname;
   /* Ensure mobile nav is above overlay */
   .header_mobile {
     z-index: 99999;
+  }
+
+  /* Mobile Logo Styling */
+  .mobile-menu-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 15px; /* Reduced top padding */
+    margin-bottom: -5px;
+  }
+
+  .mobile-menu-logo a {
+    display: block;
+  }
+
+  .mobile-menu-logo img {
+    height: 40px;
+    width: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-menu-logo a:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Dark mode for mobile logo */
+  :global([data-theme="dark"]) .mobile-menu-logo img {
+    filter: brightness(0) invert(1);
   }

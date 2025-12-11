@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import ContactModal from '../components/ContactModal.astro';
 
 interface Props {
   title?: string;
@@ -35,6 +36,7 @@ const {
 </head>
 <body>
   <slot />
+  <ContactModal />
   <script src="/scripts/animations.js" is:inline></script>
   <script src="/scripts/smooth-scroll.js" is:inline></script>
 </body>

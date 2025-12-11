@@ -142,11 +142,11 @@ const ventajas = [
               Ya han confiado en nuestra experiencia
             </p>
             <p class="proof-question">¿Quieres ser la siguiente?</p>
-            <a href="/#contact" class="btn-premium">
+            <button type="button" onclick="window.openContactModal()" class="btn-premium" aria-label="Abrir formulario de contacto">
               <span class="btn-icon">✉</span>
               <span>Contactar</span>
               <div class="btn-glow"></div>
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -186,11 +186,11 @@ const ventajas = [
             <h2>¿Empezamos?</h2>
             <div class="line-divider center light"></div>
             <p>Cuéntanos tu proyecto y comenzamos con el primer paso.</p>
-            <a href="/#contact" class="btn-premium btn-premium--light">
+            <button type="button" onclick="window.openContactModal()" class="btn-premium btn-premium--light" aria-label="Abrir formulario de contacto">
               <span class="btn-icon">✉</span>
               <span>Contactar</span>
               <div class="btn-glow"></div>
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -584,6 +584,10 @@ const ventajas = [
     background: linear-gradient(135deg, #f8faf9 0%, #eef5f0 50%, #f8faf9 100%);
   }
   
+  :global([data-theme="dark"]) .proof-bg {
+    background: linear-gradient(135deg, #0a1628 0%, #1a3865 100%);
+  }
+  
   .proof-content {
     position: relative;
     z-index: 10;
@@ -612,6 +616,14 @@ const ventajas = [
     color: #1a3865;
     line-height: 1;
     background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  :global([data-theme="dark"]) .proof-number {
+    color: #ffffff;
+    background: linear-gradient(135deg, #ffffff 0%, #95cca5 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -647,6 +659,10 @@ const ventajas = [
     font-weight: 700;
     color: #1a3865;
     margin-bottom: 32px;
+  }
+
+  :global([data-theme="dark"]) .proof-question {
+    color: #ffffff;
   }
   
   /* ===== PREMIUM BUTTON ===== */

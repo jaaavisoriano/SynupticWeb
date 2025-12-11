@@ -76,6 +76,14 @@ const faqs = [
             </p>
             <p class="hero-lema">¡Todo claro!</p>
             
+            <div class="hero-cta">
+              <button type="button" onclick="window.openContactModal()" class="btn-premium" aria-label="Resolver otras dudas">
+                <span class="btn-icon">✉</span>
+                <span>Resolver otras dudas</span>
+                <div class="btn-glow"></div>
+              </button>
+            </div>
+            
             <!-- Scroll Indicator -->
             <div class="scroll-indicator" aria-hidden="true">
               <div class="scroll-mouse">
@@ -119,11 +127,10 @@ const faqs = [
             <h2>¿Tienes otras dudas?</h2>
             <div class="line-divider center light"></div>
             <p>Si tu pregunta no aparece aquí, escríbenos y te contestamos encantados.</p>
-            <a href="/#contact" class="btn-premium btn-premium--light">
-
+            <button type="button" onclick="window.openContactModal()" class="btn-premium btn-premium--light" aria-label="Abrir formulario de contacto">
               <span>Contactar</span>
               <div class="btn-glow"></div>
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -356,6 +363,12 @@ const faqs = [
     text-shadow: 0 0 30px rgba(149, 204, 165, 0.3);
   }
   
+  .hero-cta {
+    margin-top: 32px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.2s;
+  }
+  
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -379,7 +392,7 @@ const faqs = [
     align-items: center;
     gap: 8px;
     opacity: 0;
-    animation: fadeInUp 0.8s ease forwards 1.3s;
+    animation: fadeInUp 0.8s ease forwards 1.5s;
   }
   
   .scroll-mouse {
