@@ -47,7 +47,7 @@ const ventajas = [
 ---
 
 <Layout 
-  title="Así Trabajamos - Synuptic"
+  title="Así Trabajamos"
   description="Conoce cómo trabajamos: soluciones rápidas y precisas para agencias. Modelos flexibles de contratación adaptados a tus necesidades."
 >
   <div id="wrap_all">
@@ -85,7 +85,7 @@ const ventajas = [
             <p class="hero-subtitle">
               Conocemos el ritmo frenético de las agencias. Por eso, procuramos que contratarnos no te suponga un esfuerzo extra.
             </p>
-            <p class="hero-lema">¡Siente la sinapsis!</p>
+            <button type="button" onclick="window.openContactModal()" class="hero-lema">¡Siente la sinapsis!</button>
             
             <!-- Scroll Indicator -->
             <div class="scroll-indicator" aria-hidden="true">
@@ -111,7 +111,7 @@ const ventajas = [
               <div class="modelo-card" style={`--delay: ${index * 0.1}s`}>
                 <div class="card-glow"></div>
                 <div class="card-icon-wrapper">
-                  <img src={modelo.icon} alt={modelo.title} class="modelo-icon" />
+                  <img src={modelo.icon} alt={modelo.title} class="modelo-icon" width="80" height="80" />
                 </div>
                 <h3>{modelo.title}</h3>
                 <p>{modelo.description}</p>
@@ -166,7 +166,7 @@ const ventajas = [
               <div class="ventaja-item" style={`--delay: ${index * 0.15}s`}>
                 <div class="ventaja-icon-wrapper">
                   <div class="icon-bg"></div>
-                  <img src={ventaja.icon} alt={ventaja.title} class="ventaja-icon" />
+                  <img src={ventaja.icon} alt={ventaja.title} class="ventaja-icon" width="70" height="70" />
                   <div class="icon-ring"></div>
                 </div>
                 <span class="ventaja-title">{ventaja.title}</span>
@@ -384,6 +384,19 @@ const ventajas = [
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards 1s;
     text-shadow: 0 0 30px rgba(149, 204, 165, 0.3);
+    
+    /* Button styles reset */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .hero-lema:hover {
+    transform: scale(1.05) translateY(0) !important; /* Ensure override of animation final state if needed */
+    color: #ffffff;
+    text-shadow: 0 0 40px rgba(149, 204, 165, 0.6);
   }
   
   @keyframes fadeInUp {

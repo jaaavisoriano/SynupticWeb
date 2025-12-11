@@ -1,15 +1,22 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import ContactModal from '../components/ContactModal.astro';
+import SEO from '../components/SEO.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  jsonld?: any;
 }
 
 const { 
-  title = "Synuptic - Medical Writing & Healthcare Strategy",
-  description = "Creamos textos médicos y diseñamos estrategias healthcare como si fuéramos parte de tu departamento científico."
+  title = "Medical Writing & Healthcare Strategy",
+  description = "Creamos textos médicos y diseñamos estrategias healthcare como si fuéramos parte de tu departamento científico.",
+  image,
+  type,
+  jsonld
 } = Astro.props;
 ---
 
@@ -20,8 +27,14 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="/images/favicon.png">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <title>{title}</title>
-  <meta name="description" content={description}>
+  
+  <SEO 
+    title={title} 
+    description={description}
+    image={image}
+    type={type}
+    jsonld={jsonld}
+  />
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

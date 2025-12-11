@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://synuptic.com/sitemap-index.xml

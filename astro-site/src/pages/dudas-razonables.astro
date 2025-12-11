@@ -33,11 +33,25 @@ const faqs = [
     answer: 'Trabajamos con muchas agencias y para muchos laboratorios, por lo que es imprescindible comunicar cualquier conflicto de intereses desde el primer momento. Siempre sabréis si nos ha contactado otra agencia antes para el mismo proyecto y respetaremos vuestra prioridad.'
   }
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
 ---
 
 <Layout 
-  title="Dudas Razonables - Synuptic"
-  description="Preguntas frecuentes sobre nuestros servicios de medical writing y estrategia healthcare."
+  title="Dudas Razonables"
+  description="Resuelve tus dudas sobre agencia de medical writing, confidencialidad, tarifas y colaboración externa."
+  jsonld={faqSchema}
 >
   <div id="wrap_all">
     <Header />

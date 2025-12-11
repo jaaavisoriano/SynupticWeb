@@ -34,11 +34,35 @@ const services = [
     ]
   }
 ];
+
+const strategySchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Consultoría Estratégica Healthcare",
+  "provider": {
+    "@type": "Organization",
+    "name": "Sinergias en Salud S.L."
+  },
+  "description": "Asesoramos desde el conocimiento científico de la salud. Convertimos la ciencia en la mejor aliada de tus proyectos healthcare.",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios de Estrategia",
+    "itemListElement": services.map((service, index) => ({
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": service.title,
+        "description": service.items.join(' ')
+      }
+    }))
+  }
+};
 ---
 
 <Layout 
-  title="Estrategia Healthcare - Synuptic"
+  title="Estrategia Healthcare"
   description="Asesoramos desde el conocimiento científico de la salud. Convertimos la ciencia en la mejor aliada de tus proyectos healthcare."
+  jsonld={strategySchema}
 >
   <div id="wrap_all">
     <Header />
@@ -123,7 +147,7 @@ const services = [
               <div class="service-card" style={`--card-delay: ${index * 0.15}s`}>
                 <div class="service-card__glow"></div>
                 <div class="service-card__icon-wrapper">
-                  <img src={service.icon} alt={service.title} class="service-card__icon" />
+                  <img src={service.icon} alt={service.title} class="service-card__icon" width="48" height="48" />
                 </div>
                 <h3>{service.title}</h3>
                 <ul class="service-card__list">

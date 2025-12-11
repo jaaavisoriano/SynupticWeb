@@ -65,7 +65,7 @@
         <div class="form-checkbox">
           <input type="checkbox" id="modal-legal-1" name="legal-1" required>
           <label for="modal-legal-1">
-            Acepto la <a href="/politica-privacidad/" target="_blank">política de privacidad</a>
+            Acepto la <a href="/politica-privacidad/" target="_blank" rel="noopener noreferrer">política de privacidad</a>
           </label>
         </div>
         
@@ -366,26 +366,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 14px;
-    background-color: var(--color-primary); /* Assuming this variable exists, otherwise hardcode #1a3865 */
+    padding: 16px;
+    background: linear-gradient(90deg, #1a3865, #95cca5);
+    background-size: 200% 100%;
     color: white;
     border: none;
     border-radius: 10px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     gap: 12px;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(26, 56, 101, 0.2);
   }
 
   .form-submit:hover {
-    background-color: var(--color-primary-dark); /* Fallback might be needed */
+    background-position: 100% 0;
     transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(149, 204, 165, 0.3);
   }
   
-  /* Ensure button is visible if var missing */
-  .form-submit {
-    background-color: #1a3865;
-  }
+  /* Ensure button is visible if var missing - fallback included in background property above */
   
   .btn-shimmer {
     position: relative;
@@ -402,7 +402,7 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.4),
       transparent
     );
     animation: shimmer 3s ease-in-out infinite;
@@ -410,7 +410,8 @@
   
   @keyframes shimmer {
     0% { left: -100%; }
-    50%, 100% { left: 100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
   }
   
   /* Mobile Adjustments */
