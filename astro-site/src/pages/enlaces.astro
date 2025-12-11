@@ -1,0 +1,282 @@
+---
+import SEO from '../components/SEO.astro';
+
+const links = [
+  {
+    text: "Visita nuestra Web Oficial",
+    url: "/",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`
+  },
+  {
+    text: "Servicios de Medical Writing",
+    url: "/medical-writing",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.4l-6.9-6.9c-.781-.781-.781-2.047 0-2.828L14.318 2.05c.875-.875 2.29-.875 3.165 0l4.242 4.243c.875.875.875 2.29 0 3.165l-6.2 6.2"></path><path d="M14 14l2 2"></path><path d="M8.5 8.5l2 2"></path><path d="M7 17l-4 4"></path></svg>`
+  },
+  {
+    text: "Estrategia Healthcare",
+    url: "/estrategia-healthcare",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path></svg>`
+  },
+  {
+    text: "Conoce al SynupTeam",
+    url: "/synupteam",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`
+  },
+  {
+    text: "Escríbenos un Email",
+    url: "mailto:hola@synuptic.es",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>`
+  },
+  {
+    text: "Llámanos",
+    url: "tel:+34690009731",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>`
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <SEO 
+        title="Enlaces" 
+        description="Conecta con Synuptic: Medical Writing y Estrategia Healthcare."
+    />
+    <link rel="stylesheet" href="/styles/global.css">
+    
+    <style>
+        body {
+            /* Premium Gradient Background */
+            background: linear-gradient(135deg, #f4f6f9 0%, #eefbf3 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-family: var(--font-main, 'Lato', sans-serif);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Abstract blurred orbs for that "difuminado" premium feel */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(149, 204, 165, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            filter: blur(60px);
+            z-index: -1;
+        }
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(26, 56, 101, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            filter: blur(60px);
+            z-index: -1;
+        }
+
+        .container-links {
+            width: 100%;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            text-align: center;
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-header {
+            margin-bottom: 3rem;
+        }
+        
+        .profile-img {
+            /* Full Logo - "Entero" */
+            width: 280px; /* Wider to accommodate full text logo */
+            max-width: 80%; /* Responsive safety */
+            height: auto;
+            border-radius: 0;
+            margin: 0 auto 1rem;
+            display: block;
+            /* Ensure no cropping artifacts */
+            object-fit: contain; 
+            background: transparent;
+            box-shadow: none;
+            padding: 0;
+            border: none;
+        }
+
+        .profile-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--color-primary, #1a3865);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            display: none; /* Ocultamos el @Synuptic ya que el logo es grande y lo dice */
+        }
+        
+        .profile-bio {
+            font-size: 1.05rem;
+            color: var(--color-text-muted, #555);
+            line-height: 1.6;
+            max-width: 90%;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 1.25rem 2rem;
+            
+            /* Gradient Button Background */
+            background: linear-gradient(90deg, #1a3865 0%, #244b85 100%);
+            
+            color: white;
+            border-radius: 16px; /* slightly less rounded than pill for a modern look, or keep pill? Let's use 16px for premium card feel or 50px for pill. User asked for rounded borders before. Let's stick to pill but maybe slightly softer */
+            border-radius: 100px; 
+            
+            text-decoration: none;
+            font-weight: 600;
+            font-family: var(--font-main, 'Lato', sans-serif);
+            font-size: 1.1rem;
+            letter-spacing: 0.3px;
+            
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 20px rgba(26, 56, 101, 0.15);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Shine effect on hover */
+        .link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .link-btn:hover::before {
+            left: 100%;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 15px 30px rgba(26, 56, 101, 0.25);
+            /* Gradient shift on hover */
+            background: linear-gradient(90deg, #1a3865 0%, #173054 100%); 
+            border-color: rgba(149, 204, 165, 0.5); /* Mint hint border on hover */
+        }
+
+        .btn-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+        }
+
+        .footer-simple {
+            margin-top: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .social-icon {
+            color: var(--color-primary, #1a3865);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0.7;
+            padding: 10px;
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .social-icon:hover {
+            opacity: 1;
+            color: white;
+            background-color: var(--color-primary, #1a3865);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 56, 101, 0.2);
+        }
+        
+        .copyright {
+            font-size: 0.8rem;
+            color: var(--color-text-muted-light, #757575);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-links">
+    <header class="profile-header">
+        <!-- Logo "tal cual" - Full version -->
+        <img src="/images/logo.webp" alt="Synuptic - Medical Writing y Estrategia" class="profile-img">
+        <p class="profile-bio">Medical Writing y Estrategia Healthcare.<br>Conectamos neuronas.</p>
+    </header>
+
+    <main class="links-list">
+        {links.map(link => (
+            <a href={link.url} class="link-btn">
+                <span set:html={link.icon} class="btn-icon-wrapper"></span>
+                <span>{link.text}</span>
+            </a>
+        ))}
+    </main>
+
+    <footer class="footer-simple">
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/company/synuptic" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/synuptic" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+        </div>
+        <div class="copyright">
+            © Synuptic
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Metadata for the 404 page
+const title = "Error 404: Sinapsis fallida | Synuptic";
+const description = "Ups, parece que la conexión neuronal se ha interrumpido. La página que buscas no existe.";
+---
+
+<Layout title={title} description={description}>
+  <div id="wrap_all">
+    <Header />
+    
+    <main id="main-content" class="error-page">
+      <div class="container">
+        <div class="error-content">
+          <div class="illustration">
+            <!-- Disconnected Neuron / Synapse Illustration -->
+            <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="neuron-svg">
+              <!-- Central Soma -->
+              <circle cx="100" cy="100" r="30" fill="var(--color-primary)" fill-opacity="0.1" stroke="var(--color-primary)" stroke-width="2"/>
+              <circle cx="100" cy="100" r="15" fill="var(--color-primary)"/>
+              
+              <!-- Dendrites (Connected) -->
+              <path d="M100 70 L100 30" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="100" cy="30" r="4" fill="var(--color-primary)"/>
+              
+              <path d="M74 85 L40 65" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="40" cy="65" r="4" fill="var(--color-primary)"/>
+              
+              <path d="M126 85 L160 65" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="160" cy="65" r="4" fill="var(--color-primary)"/>
+              
+              <!-- Axon (Broken/Disconnected) -->
+              <path d="M100 130 L100 150" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4"/>
+              <path d="M100 160 L100 180" stroke="var(--color-gray)" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 2"/>
+              
+              <!-- Broken Signal Symbol -->
+              <path d="M90 155 L110 155 M90 155 L110 165 M90 165 L110 155" stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="broken-signal"/>
+            </svg>
+          </div>
+          
+          <h1>Error 404: Sinapsis fallida</h1>
+          <p>Ups, parece que la conexión neuronal se ha interrumpido. La página que buscas no existe o ha sido movida a otro lóbulo cerebral.</p>
+          
+          <div class="actions">
+            <a href="/" class="btn">
+              <span>Volver al Inicio</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right btn-icon" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  #wrap_all {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* Ensure header spacing is correct */
+  #main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 120px; /* Header height + spacing */
+    padding-bottom: 80px;
+    background-color: var(--color-bg-subtle);
+  }
+
+  .error-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    background: var(--color-bg-card);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border-theme);
+  }
+
+  .illustration {
+    margin-bottom: 30px;
+  }
+
+  .neuron-svg {
+    max-width: 100%;
+    height: auto;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .broken-signal {
+    animation: pulse 2s infinite;
+  }
+
+  h1 {
+    font-family: var(--font-alt);
+    font-size: 3rem;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Animations */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    #main-content {
+      padding-top: 100px;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+    
+    .error-content {
+      padding: 30px 20px;
+      margin: 0 20px;
+    }
+  }
+
+  /* Dark Mode Adjustments */
+  :global([data-theme="dark"]) #main-content {
+    background-color: var(--color-bg-body);
+  }
+  
+  :global([data-theme="dark"]) h1 {
+    color: var(--color-white);
+  }
+  
+  :global([data-theme="dark"]) p {
+    color: var(--color-gray);
+  }
+  
+  :global([data-theme="dark"]) .neuron-svg circle[fill="var(--color-primary)"] {
+    fill: var(--color-accent);
+  }
+  
+  :global([data-theme="dark"]) .neuron-svg path[stroke="var(--color-primary)"] {
+    stroke: var(--color-accent);
+  }
+  
+  :global([data-theme="dark"]) .neuron-svg circle[stroke="var(--color-primary)"] {
+    stroke: var(--color-accent);
+  }
+</style>

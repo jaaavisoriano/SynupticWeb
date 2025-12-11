@@ -20,9 +20,10 @@ const currentYear = new Date().getFullYear();
               <span class="contact-item__icon">📞</span>
               <a href="tel:+34690009731" class="contact-item__text">+34 690009731</a>
             </div>
-            <div class="contact-item">
+            <div class="contact-item email-container">
               <span class="contact-item__icon">✉️</span>
-              <a href="mailto:hola@synuptic.es" class="contact-item__text">hola@synuptic.es</a>
+              <a href="mailto:hola@synuptic.es" id="email-copy" class="contact-item__text" title="Clic para copiar email">hola@synuptic.es</a>
+              <span id="email-tooltip" class="copy-tooltip">¡Copiado!</span>
             </div>
             <div class="contact-item">
               <span class="contact-item__icon">📍</span>
@@ -209,6 +210,61 @@ const currentYear = new Date().getFullYear();
   :global([data-theme="dark"]) .footer_sub__text span {
     color: rgba(255, 255, 255, 0.6);
   }
+
+  /* Email Copy Tooltip */
+  .email-container {
+    position: relative;
+    display: inline-flex; /* Maintain alignment in flex container */
+    align-items: center;
+  }
+  
+  #email-copy {
+    cursor: pointer;
+  }
+
+  .copy-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+    margin-bottom: 8px; /* Space above the text */
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+  .copy-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+  }
+
+  .copy-tooltip.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+  }
+
+  /* Tooltip Dark Mode Support */
+  :global([data-theme="dark"]) .copy-tooltip {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  :global([data-theme="dark"]) .copy-tooltip::after {
+    border-top-color: #f0f0f0;
+  }
 </style>
 
 <!-- Scroll to Top Button -->
@@ -233,6 +289,30 @@ const currentYear = new Date().getFullYear();
     
     scrollTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Email click to copy functionality
+  const emailLink = document.getElementById('email-copy');
+  const tooltip = document.getElementById('email-tooltip');
+
+  if (emailLink && tooltip) {
+    emailLink.addEventListener('click', async (e) => {
+      e.preventDefault();
+      
+      try {
+        await navigator.clipboard.writeText('hola@synuptic.es');
+        
+        // Show tooltip
+        tooltip.classList.add('visible');
+        
+        // Hide after 2 seconds
+        setTimeout(() => {
+          tooltip.classList.remove('visible');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy text: ', err);
+      }
     });
   }
 </script>

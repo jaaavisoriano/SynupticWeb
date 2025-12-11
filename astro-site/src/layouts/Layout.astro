@@ -2,6 +2,7 @@
 import { ClientRouter } from 'astro:transitions';
 import ContactModal from '../components/ContactModal.astro';
 import SEO from '../components/SEO.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
 
 interface Props {
   title?: string;
@@ -48,6 +49,7 @@ const {
   <ClientRouter />
 </head>
 <body>
+  <ReadingProgress />
   <slot />
   <ContactModal />
   <script src="/scripts/animations.js" is:inline></script>

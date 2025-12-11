@@ -1,0 +1,59 @@
+---
+---
+<div id="reading-progress-bar" class="reading-progress-bar"></div>
+
+<style>
+  .reading-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background-color: var(--color-primary);
+    z-index: 1000;
+    transition: width 0.1s ease-out;
+    pointer-events: none; /* Ensure it doesn't block clicks */
+  }
+</style>
+
+<script>
+  function initReadingProgress() {
+    const progressBar = document.getElementById('reading-progress-bar');
+    if (!progressBar) return;
+
+    let requestAnimationFrameId;
+
+    const updateProgress = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      
+      if (scrollHeight <= 0) {
+        progressBar.style.width = '0%';
+        return;
+      }
+
+      const scrollPercent = (scrollTop / scrollHeight) * 100;
+      progressBar.style.width = `${Math.min(100, Math.max(0, scrollPercent))}%`;
+    };
+
+    const handleScroll = () => {
+      if (requestAnimationFrameId) {
+        cancelAnimationFrame(requestAnimationFrameId);
+      }
+      requestAnimationFrameId = requestAnimationFrame(updateProgress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    
+    // Initial calculation
+    updateProgress();
+  }
+
+  // Run on load and after view transitions
+  document.addEventListener('astro:page-load', initReadingProgress);
+  
+  // Also run on DOMContentLoaded in case astro:page-load isn't fired on first load (though it usually is with ClientRouter)
+  // or if the script is treated as a module that runs immediately.
+  initReadingProgress();
+</script>
