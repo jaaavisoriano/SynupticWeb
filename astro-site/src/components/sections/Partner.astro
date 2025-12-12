@@ -1,61 +1,80 @@
 ---
-// Partner section - Enhanced with wave divider
+// Partner section - Styled like "Así Trabajamos" social proof but with image
 ---
 
-<section class="section partner-section">
+<section class="section partner-section" id="partner">
+  <!-- Animated Gradient Background (Matches Asi Trabajamos) -->
+  <div class="hero-gradient"></div>
+  
+  <!-- Floating Particles -->
+  <div class="floating-particles">
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+  </div>
+
   <!-- Top Wave Divider -->
-  <div class="wave-divider wave-top" aria-hidden="true">
-    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="waveGradientTop" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#1a3865" />
-          <stop offset="100%" stop-color="#2a5a8a" />
-        </linearGradient>
-      </defs>
-      <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".15" fill="url(#waveGradientTop)"></path>
-      <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".3" fill="url(#waveGradientTop)"></path>
-      <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="url(#waveGradientTop)"></path>
+  <div class="shape-divider-top">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
     </svg>
   </div>
-  
-  <div class="cesis_container">
-    <div class="partner-grid">
-      <div class="partner-section__image reveal-scale">
-        <img 
-          src="/images/Ilustracion_30-768x542.jpg" 
-          alt="Ilustración de colaboración"
-          width="768"
-          height="542"
-          loading="lazy"
-        >
-      </div>
-      <div class="partner-content reveal-right">
-        <div class="partner-badge">
-          <span class="badge-number">30+</span>
-          <span class="badge-label">Clientes satisfechos</span>
+
+  <div class="cesis_container z-relative">
+    <div class="proof-card glass-effect">
+      <div class="proof-content">
+        
+        <!-- Image Column -->
+        <div class="image-wrapper animate-fade-in">
+          <img 
+            src="/images/Ilustracion_30-768x542.jpg" 
+            alt="Ilustración confianza clientes"
+            width="768"
+            height="542"
+            loading="lazy"
+            class="feature-image"
+          >
+          <div class="image-glow"></div>
         </div>
-        <h2>Somos un partner para todas las agencias y consultoras que han confiado en nuestra experiencia desde 2015</h2>
-        <div class="line-divider"></div>
-        <p class="partner-section__subtitle">Y seguimos creciendo cada año con nuevos clientes satisfechos.</p>
-        <a href="#contact" class="btn btn-secondary">
-          <span>Únete al equipo</span>
-        </a>
+
+        <!-- Text Column -->
+        <div class="text-content animate-fade-in delay-200">
+          <div class="badge-pill">Trayectoria</div>
+          
+          <h2 class="premium-heading">
+            Somos un partner para todas las agencias y consultoras que han confiado en nuestra experiencia desde 2015
+          </h2>
+          
+          <div class="feature-divider"></div>
+          
+          <p class="premium-text">
+            Y seguimos creciendo cada año con nuevos clientes satisfechos.
+          </p>
+
+          <div class="action-buttons">
+            <button type="button" onclick="window.openContactModal()" class="btn-premium btn-wide">
+              <span class="btn-icon">✉</span>
+              <span>Contactar ahora</span>
+              <div class="btn-glow"></div>
+            </button>
+            
+            <a href="/asi-trabajamos" class="btn-premium btn-wide btn-secondary-style">
+              <span class="btn-icon">→</span>
+              <span>Así trabajamos</span>
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
-  
+
   <!-- Bottom Wave Divider -->
-  <div class="wave-divider wave-bottom" aria-hidden="true">
-    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="waveGradientBottom" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#1a3865" />
-          <stop offset="100%" stop-color="#2a5a8a" />
-        </linearGradient>
-      </defs>
-      <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".15" fill="url(#waveGradientBottom)"></path>
-      <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".3" fill="url(#waveGradientBottom)"></path>
-      <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="url(#waveGradientBottom)"></path>
+  <div class="shape-divider-bottom">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
     </svg>
   </div>
 </section>
@@ -63,188 +82,354 @@
 <style>
   .partner-section {
     position: relative;
-    background: #f7f9fb;
-    padding: 100px 0;
-    overflow: visible;
+    padding: 160px 0;
+    background: #0a1628;
+    color: #fff;
+    overflow: hidden;
   }
   
-  :global([data-theme="dark"]) .partner-section {
-    background: var(--color-bg-subtle);
+  /* ANIMATIONS */
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
   }
   
-  /* ===== WAVE DIVIDERS ===== */
-  .wave-divider {
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .z-relative {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* BACKGROUND EFFECTS (Shared with Asi Trabajamos) */
+  .hero-gradient {
     position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg, 
+      #0a1628 0%, 
+      #1a3865 25%, 
+      #0f2240 50%, 
+      #1a3865 75%, 
+      #0a1628 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease-in-out infinite;
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .floating-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(149, 204, 165, 0.4);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+  .particle:nth-child(2) { left: 80%; top: 30%; animation-delay: 1.5s; }
+  .particle:nth-child(3) { left: 30%; top: 70%; animation-delay: 3s; }
+  .particle:nth-child(4) { left: 60%; top: 80%; animation-delay: 4.5s; }
+  .particle:nth-child(5) { left: 90%; top: 60%; animation-delay: 6s; }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.3; }
+    50% { transform: translateY(-40px) translateX(-20px) scale(1.5); opacity: 0.8; }
+  }
+
+  /* SHAPE DIVIDERS */
+  .shape-divider-top {
+    position: absolute;
+    top: 0;
     left: 0;
     width: 100%;
     overflow: hidden;
     line-height: 0;
-    color: var(--color-bg-body);
   }
   
-  .wave-top {
-    top: -1px;
-    transform: rotate(180deg);
-  }
-  
-  .wave-bottom {
-    bottom: -1px;
-  }
-  
-  .wave-divider svg {
+  .shape-divider-top svg {
     position: relative;
     display: block;
     width: calc(100% + 1.3px);
-    height: 60px;
+    height: 80px;
+    transform: rotateY(180deg);
   }
   
-  @media (min-width: 768px) {
-    .wave-divider svg {
-      height: 80px;
-    }
+  .shape-divider-top .shape-fill {
+    fill: var(--color-bg-body, #ffffff);
   }
   
-  /* ===== GRID LAYOUT ===== */
-  .partner-grid {
+  :global([data-theme="dark"]) .shape-divider-top .shape-fill {
+    fill: var(--color-bg-body, #1a1a1a);
+  }
+
+  .shape-divider-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+  }
+  
+  .shape-divider-bottom svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 80px;
+    transform: rotateY(180deg);
+  }
+  
+  .shape-divider-bottom .shape-fill {
+    fill: var(--color-bg-body, #ffffff);
+  }
+
+  :global([data-theme="dark"]) .shape-divider-bottom .shape-fill {
+    fill: var(--color-bg-body, #1a1a1a);
+  }
+
+  /* GLASS CARD */
+  .proof-card {
+    position: relative;
+    border-radius: 30px;
+    padding: 60px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .proof-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  }
+  
+  .proof-content {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
     align-items: center;
   }
-  
-  @media (min-width: 992px) {
-    .partner-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-    }
+
+  /* IMAGE STYLES */
+  .image-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    transform: perspective(1000px) rotateY(2deg);
+    transition: transform 0.5s ease;
   }
   
-  /* ===== IMAGE ===== */
-  .partner-section__image img {
-    border-radius: 16px;
-    box-shadow: 
-      0 25px 50px rgba(0, 0, 0, 0.12),
-      0 0 0 1px rgba(0, 0, 0, 0.05);
+  .feature-image {
     width: 100%;
     height: auto;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 20px;
+    display: block;
+    transition: transform 0.5s ease;
   }
   
-  .partner-section__image:hover img {
-    transform: scale(1.02) translateY(-5px);
+  .proof-card:hover .image-wrapper {
+    transform: perspective(1000px) rotateY(0deg) translateY(-5px);
   }
   
-  /* ===== CONTENT ===== */
-  .partner-content {
+  .proof-card:hover .feature-image {
+    transform: scale(1.03);
+  }
+  
+  .image-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(149, 204, 165, 0.2), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+  
+  .image-wrapper:hover .image-glow {
+    opacity: 1;
+  }
+
+  /* TEXT CONTENT */
+  .text-content {
     text-align: left;
   }
-  
-  @media (max-width: 991px) {
-    .partner-content {
-      text-align: center;
-    }
-    
-    .partner-section__image {
-      max-width: 90%;
-      margin: 0 auto;
-      order: 2;
-    }
-    
-    .partner-content {
-      order: 1;
-    }
-  }
-  
-  /* ===== BADGE ===== */
-  .partner-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: linear-gradient(135deg, #95cca5 0%, #7ab892 100%);
-    padding: 12px 20px;
+
+  .badge-pill {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(149, 204, 165, 0.15);
+    border: 1px solid rgba(149, 204, 165, 0.3);
+    color: #95cca5;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     border-radius: 50px;
     margin-bottom: 24px;
-    box-shadow: 0 8px 24px rgba(149, 204, 165, 0.3);
   }
-  
-  .badge-number {
+
+  .premium-heading {
     font-family: 'Raleway', sans-serif;
-    font-size: 24px;
+    font-size: clamp(24px, 4vw, 36px);
     font-weight: 700;
-    color: #1a3865;
+    color: #ffffff;
+    line-height: 1.3;
+    margin-bottom: 30px;
   }
-  
-  .badge-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #1a3865;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+
+  .feature-divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #95cca5, transparent);
+    margin-bottom: 30px;
   }
-  
-  .partner-content h2 {
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
-    line-height: 1.35;
-    margin-bottom: 16px;
-    color: var(--color-heading);
-  }
-  
-  .partner-content .line-divider {
-    margin: 0 0 24px 0;
-  }
-  
-  @media (max-width: 991px) {
-    .partner-content .line-divider {
-      margin: 0 auto 24px;
-    }
-  }
-  
-  .partner-section__subtitle {
+
+  .premium-text {
     font-size: 18px;
-    color: var(--color-text-muted);
-    margin: 0 0 32px 0;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 40px;
+    font-weight: 300;
   }
-  
-  .partner-content .btn-secondary {
+
+  /* BUTTON */
+  .btn-premium {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 14px 28px;
-    background: transparent;
-    border: 2px solid #1a3865;
-    color: #1a3865;
-    font-weight: 600;
-    border-radius: 8px;
+    justify-content: center;
+    gap: 12px;
+    /* Default base styles, colors handled by modifiers below */
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.5;
   }
-  
-  .partner-content .btn-secondary:hover {
-    background: #1a3865;
-    color: #fff;
+
+  .btn-wide {
+    min-width: 200px;
+  }
+
+  .btn-premium:hover {
     transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(149, 204, 165, 0.3);
+    color: #ffffff; /* Added for hover effect */
+  }
+
+  .btn-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 60%);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: transform 0.5s, opacity 0.5s;
+  }
+
+  .btn-premium:hover .btn-glow {
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 0.5s, opacity 0.5s;
   }
   
-  :global([data-theme="dark"]) .partner-content .btn-secondary {
-    border-color: #95cca5;
+  .action-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  /* Primary Button (Green BG, Dark Text) */
+  .btn-premium {
+    background: linear-gradient(135deg, #95cca5 0%, #7ab892 100%);
+    color: #1a3865;
+    border: 2px solid transparent;
+  }
+  
+  /* Secondary Button (Inverse: Transparent/Dark BG, Green Text, Green Border) */
+  .btn-secondary-style {
+    background: rgba(255, 255, 255, 0.05); /* Slight glass tint */
+    border: 2px solid #95cca5;
     color: #95cca5;
   }
   
-  :global([data-theme="dark"]) .partner-content .btn-secondary:hover {
+  .btn-secondary-style:hover {
     background: #95cca5;
     color: #1a3865;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(149, 204, 165, 0.2);
   }
   
-  @media (max-width: 767px) {
-    .partner-section {
-      padding: 80px 0;
+
+
+  /* RESPONSIVE */
+  @media (max-width: 991px) {
+    .proof-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 40px;
     }
     
-    .partner-content h2 {
-      font-size: 1.35rem;
+    .text-content {
+      text-align: center;
+      order: 1; /* Text first on mobile? Or image? Let's keep standard stack order */
+      order: 2;
     }
     
-    .partner-section__subtitle {
-      font-size: 16px;
+    .image-wrapper {
+      order: 1;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .feature-divider {
+      margin: 0 auto 30px;
+    }
+    
+    .proof-card {
+      padding: 40px 24px;
     }
   }
 </style>
