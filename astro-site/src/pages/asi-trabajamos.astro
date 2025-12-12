@@ -122,31 +122,27 @@ const ventajas = [
         </div>
       </section>
 
-      <!-- Social Proof Section - Premium Design -->
-      <section class="section social-proof-section">
-        <div class="proof-bg"></div>
+      <!-- Social Proof Section - Redesigned -->
+      <section class="section social-proof-section-new">
         <div class="cesis_container">
-          <div class="proof-content">
-            <div class="proof-stats">
-              <div class="stat-item">
-                <span class="stat-label">Desde...</span>
-                <span class="proof-number">2015</span>
-              </div>
-              <div class="stat-divider"></div>
-              <div class="stat-item">
-                <span class="proof-number">+30</span>
-                <span class="stat-label">Agencias y consultoras</span>
+          <div class="proof-layout">
+            <!-- Image Side -->
+            <div class="proof-image-wrapper">
+              <div class="proof-image-card">
+                <img src="/images/Ilustracion_30.jpg" alt="Ilustración 30+ clientes" class="proof-img" />
               </div>
             </div>
-            <p class="proof-text">
-              Ya han confiado en nuestra experiencia
-            </p>
-            <p class="proof-question">¿Quieres ser la siguiente?</p>
-            <button type="button" onclick="window.openContactModal()" class="btn-premium" aria-label="Abrir formulario de contacto">
-              <span class="btn-icon">✉</span>
-              <span>Contactar</span>
-              <div class="btn-glow"></div>
-            </button>
+            
+            <!-- Content Side -->
+            <div class="proof-content-col">
+              <span class="proof-badge">30+ CLIENTES SATISFECHOS</span>
+              <h2 class="proof-heading">Somos un partner para todas las agencias y consultoras que han confiado en nuestra experiencia desde 2015</h2>
+              <div class="proof-divider"></div>
+              <p class="proof-subtext">Y seguimos creciendo cada año con nuevos clientes satisfechos.</p>
+              <button type="button" onclick="window.openContactModal()" class="btn-clean">
+                ÚNETE AL EQUIPO
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -584,98 +580,140 @@ const ventajas = [
     width: 80%;
   }
   
-  /* ===== SOCIAL PROOF SECTION ===== */
-  .social-proof-section {
-    position: relative;
+  /* ===== SOCIAL PROOF SECTION NEW ===== */
+  .social-proof-section-new {
     padding: 100px 0;
-    overflow: hidden;
-  }
-  
-  .proof-bg {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #f8faf9 0%, #eef5f0 50%, #f8faf9 100%);
-  }
-  
-  :global([data-theme="dark"]) .proof-bg {
-    background: linear-gradient(135deg, #0a1628 0%, #1a3865 100%);
-  }
-  
-  .proof-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-  }
-  
-  .proof-stats {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-  }
-  
-  .stat-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .proof-number {
-    font-size: clamp(48px, 8vw, 72px);
-    font-weight: 800;
-    color: #1a3865;
-    line-height: 1;
-    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background: linear-gradient(to bottom, transparent, rgba(149, 204, 165, 0.05), transparent);
   }
 
-  :global([data-theme="dark"]) .proof-number {
-    color: #ffffff;
-    background: linear-gradient(135deg, #ffffff 0%, #95cca5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .proof-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
   }
-  
-  .stat-label {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--color-text-muted);
-  }
-  
-  .stat-divider {
-    width: 2px;
-    height: 60px;
-    background: linear-gradient(180deg, transparent, #95cca5, transparent);
-  }
-  
-  @media (max-width: 575px) {
-    .stat-divider {
-      display: none;
+
+  @media (max-width: 991px) {
+    .proof-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      text-align: center;
+    }
+    
+    .proof-content-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .proof-divider {
+      margin-left: auto;
+      margin-right: auto;
     }
   }
   
-  .proof-text {
-    font-size: clamp(18px, 3vw, 24px);
-    color: var(--color-text-muted);
-    margin-bottom: 20px;
+  .proof-image-wrapper {
+    display: flex;
+    justify-content: center;
+    perspective: 1000px;
   }
   
-  .proof-question {
-    font-size: clamp(24px, 4vw, 32px);
-    font-weight: 700;
+  .proof-image-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    transform: rotateY(5deg) rotateX(2deg);
+    transition: transform 0.5s ease;
+  }
+  
+  .proof-image-card:hover {
+    transform: rotateY(0) rotateX(0) scale(1.02);
+  }
+  
+  .proof-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+  }
+  
+  .proof-content-col {
+    padding: 20px 0;
+  }
+  
+  .proof-badge {
+    display: inline-block;
+    background-color: #9bd0ac; /* Muted Green */
     color: #1a3865;
-    margin-bottom: 32px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 10px rgba(155, 208, 172, 0.3);
   }
 
-  :global([data-theme="dark"]) .proof-question {
+  .proof-heading {
+    font-size: clamp(28px, 4vw, 36px);
+    line-height: 1.3;
+    font-weight: 700;
+    color: #1a3865;
+    margin-bottom: 24px;
+    font-family: 'Raleway', sans-serif;
+  }
+  
+  :global([data-theme="dark"]) .proof-heading {
     color: #ffffff;
+  }
+  
+  .proof-divider {
+    width: 80px;
+    height: 3px;
+    background: #95cca5;
+    margin-bottom: 24px;
+    border-radius: 2px;
+  }
+  
+  .proof-subtext {
+    font-size: 18px;
+    color: var(--color-text-muted);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  
+  .btn-clean {
+    display: inline-block;
+    background: transparent;
+    color: #1a3865;
+    border: 2px solid #1a3865;
+    padding: 14px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+  
+  :global([data-theme="dark"]) .btn-clean {
+    color: #fff;
+    border-color: #fff;
+  }
+  
+  .btn-clean:hover {
+    background: #1a3865;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(26, 56, 101, 0.2);
+  }
+  
+  :global([data-theme="dark"]) .btn-clean:hover {
+    background: #fff;
+    color: #1a3865;
   }
   
   /* ===== PREMIUM BUTTON ===== */
