@@ -1,0 +1,388 @@
+---
+// MiddleGround section - Between freelance and agency
+---
+
+<section class="section middle-ground-section" id="middle-ground">
+  <!-- Animated Gradient Background -->
+  <div class="mg-gradient"></div>
+  
+  <!-- Floating Particles -->
+  <div class="mg-particles">
+    <span class="mg-particle"></span>
+    <span class="mg-particle"></span>
+    <span class="mg-particle"></span>
+    <span class="mg-particle"></span>
+    <span class="mg-particle"></span>
+    <span class="mg-particle"></span>
+  </div>
+
+  <!-- Decorative Lines -->
+  <div class="decorative-lines">
+    <div class="line line-left"></div>
+    <div class="line line-right"></div>
+  </div>
+
+  <div class="cesis_container z-relative">
+    <div class="mg-content animate-fade-in">
+      
+      <!-- Pre-title -->
+      <div class="mg-pretitle">
+        <span class="pretitle-line"></span>
+        <span class="pretitle-text">Nuestra filosofía</span>
+        <span class="pretitle-line"></span>
+      </div>
+      
+      <!-- Main Heading -->
+      <h2 class="mg-heading">
+        <span class="heading-line-1">Entre la soledad del freelance</span>
+        <span class="heading-connector">y la complejidad de la agencia...</span>
+      </h2>
+      
+      <!-- Big Statement -->
+      <div class="mg-statement">
+        <p class="statement-text">¡Decidimos quedarnos justo en medio!</p>
+      </div>
+
+      <!-- Visual Accent -->
+      <div class="mg-accent">
+        <div class="accent-dot"></div>
+        <div class="accent-line"></div>
+        <div class="accent-dot"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .middle-ground-section {
+    position: relative;
+    padding: 120px 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    overflow: hidden;
+  }
+  
+  :global([data-theme="dark"]) .middle-ground-section {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  }
+
+  /* ANIMATIONS */
+  .animate-fade-in {
+    opacity: 0;
+    animation: mgFadeIn 1s ease-out forwards;
+  }
+  
+  @keyframes mgFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .z-relative {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* BACKGROUND GRADIENT */
+  .mg-gradient {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(26, 56, 101, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 20% 100%, rgba(149, 204, 165, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(26, 56, 101, 0.08) 0%, transparent 50%);
+    animation: mgGradientPulse 8s ease-in-out infinite;
+  }
+  
+  :global([data-theme="dark"]) .mg-gradient {
+    background: 
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(149, 204, 165, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 20% 100%, rgba(26, 56, 101, 0.2) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(149, 204, 165, 0.1) 0%, transparent 50%);
+  }
+  
+  @keyframes mgGradientPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  /* PARTICLES */
+  .mg-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .mg-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(135deg, #1a3865, #95cca5);
+    border-radius: 50%;
+    animation: mgFloat 10s ease-in-out infinite;
+    opacity: 0.4;
+  }
+  
+  :global([data-theme="dark"]) .mg-particle {
+    background: linear-gradient(135deg, #95cca5, #60a5fa);
+    opacity: 0.6;
+  }
+  
+  .mg-particle:nth-child(1) { left: 5%; top: 20%; animation-delay: 0s; width: 6px; height: 6px; }
+  .mg-particle:nth-child(2) { left: 85%; top: 25%; animation-delay: 1.5s; width: 10px; height: 10px; }
+  .mg-particle:nth-child(3) { left: 15%; top: 70%; animation-delay: 3s; }
+  .mg-particle:nth-child(4) { left: 75%; top: 75%; animation-delay: 4.5s; width: 5px; height: 5px; }
+  .mg-particle:nth-child(5) { left: 45%; top: 10%; animation-delay: 2s; width: 12px; height: 12px; }
+  .mg-particle:nth-child(6) { left: 55%; top: 85%; animation-delay: 5s; }
+  
+  @keyframes mgFloat {
+    0%, 100% { 
+      transform: translateY(0) translateX(0) rotate(0deg); 
+      opacity: 0.3; 
+    }
+    25% { 
+      transform: translateY(-20px) translateX(10px) rotate(90deg); 
+      opacity: 0.6; 
+    }
+    50% { 
+      transform: translateY(-30px) translateX(-15px) rotate(180deg); 
+      opacity: 0.4; 
+    }
+    75% { 
+      transform: translateY(-10px) translateX(5px) rotate(270deg); 
+      opacity: 0.5; 
+    }
+  }
+
+  /* DECORATIVE LINES */
+  .decorative-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  
+  .line {
+    position: absolute;
+    top: 50%;
+    width: 15%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(26, 56, 101, 0.15), transparent);
+  }
+  
+  :global([data-theme="dark"]) .line {
+    background: linear-gradient(90deg, transparent, rgba(149, 204, 165, 0.2), transparent);
+  }
+  
+  .line-left {
+    left: 0;
+    transform: translateY(-50%);
+  }
+  
+  .line-right {
+    right: 0;
+    transform: translateY(-50%);
+  }
+
+  /* CONTENT */
+  .mg-content {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* PRETITLE */
+  .mg-pretitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .pretitle-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #1a3865);
+  }
+  
+  .pretitle-line:last-child {
+    background: linear-gradient(90deg, #1a3865, transparent);
+  }
+  
+  :global([data-theme="dark"]) .pretitle-line {
+    background: linear-gradient(90deg, transparent, #95cca5);
+  }
+  
+  :global([data-theme="dark"]) .pretitle-line:last-child {
+    background: linear-gradient(90deg, #95cca5, transparent);
+  }
+  
+  .pretitle-text {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #1a3865;
+    opacity: 0.7;
+  }
+  
+  :global([data-theme="dark"]) .pretitle-text {
+    color: #95cca5;
+    opacity: 0.9;
+  }
+
+  /* MAIN HEADING */
+  .mg-heading {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(24px, 4vw, 38px);
+    font-weight: 400;
+    color: #334155;
+    line-height: 1.5;
+    margin-bottom: 35px;
+  }
+  
+  :global([data-theme="dark"]) .mg-heading {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  
+  .heading-line-1 {
+    display: block;
+    font-style: italic;
+  }
+  
+  .heading-connector {
+    display: block;
+    opacity: 0.8;
+  }
+
+  /* STATEMENT */
+  .mg-statement {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 50px;
+    animation: mgStatementPop 0.6s ease-out 0.5s both;
+  }
+  
+  @keyframes mgStatementPop {
+    0% {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.02);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .statement-icon {
+    font-size: 32px;
+    animation: mgPulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes mgPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  
+  .statement-text {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    background: linear-gradient(135deg, #1a3865 0%, #2563eb 50%, #1a3865 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: mgGradientText 3s ease-in-out infinite;
+    margin: 0;
+  }
+  
+  :global([data-theme="dark"]) .statement-text {
+    background: linear-gradient(135deg, #95cca5 0%, #60a5fa 50%, #95cca5 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  @keyframes mgGradientText {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
+  }
+
+  /* ACCENT DECORATION */
+  .mg-accent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    opacity: 0.6;
+  }
+  
+  .accent-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1a3865;
+  }
+  
+  :global([data-theme="dark"]) .accent-dot {
+    background: #95cca5;
+  }
+  
+  .accent-line {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, #1a3865, #95cca5, #1a3865);
+    border-radius: 1px;
+  }
+  
+  :global([data-theme="dark"]) .accent-line {
+    background: linear-gradient(90deg, #95cca5, #60a5fa, #95cca5);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .middle-ground-section {
+      padding: 80px 0;
+    }
+    
+    .mg-pretitle {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .pretitle-line {
+      width: 40px;
+    }
+    
+    .mg-statement {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .decorative-lines {
+      display: none;
+    }
+    
+    .mg-accent {
+      gap: 8px;
+    }
+    
+    .accent-line {
+      width: 60px;
+    }
+  }
+</style>

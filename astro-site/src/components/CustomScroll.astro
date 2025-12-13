@@ -1,0 +1,236 @@
+---
+---
+
+<div id="custom-scrollbar-track" class="scrollbar-track">
+  <div id="custom-scrollbar-thumb" class="scrollbar-thumb"></div>
+</div>
+
+<script>
+  function initCustomScroll() {
+    const track = document.getElementById('custom-scrollbar-track');
+    const thumb = document.getElementById('custom-scrollbar-thumb');
+    
+    if (!track || !thumb) return;
+
+    let isScrolling = false;
+    let scrollTimeout;
+    
+    // Configuración
+    const MIN_THUMB_HEIGHT = 40; // Altura mínima en px
+    
+    function updateScrollbar() {
+      const docHeight = document.documentElement.scrollHeight;
+      const winHeight = window.innerHeight;
+      
+      // Si el contenido cabe en la pantalla, ocultar scrollbar
+      if (docHeight <= winHeight) {
+        track.style.opacity = '0';
+        track.style.pointerEvents = 'none';
+        return;
+      }
+      
+      track.style.opacity = '1';
+      track.style.pointerEvents = 'auto';
+
+      const scrollTop = window.scrollY;
+      
+      // Cálculo de altura del thumb
+      const scrollRatio = winHeight / docHeight;
+      let thumbHeight = Math.max(scrollRatio * winHeight, MIN_THUMB_HEIGHT);
+      
+      // Cálculo de la posición (porcentaje de desplazamiento disponible)
+      const maxScrollTop = docHeight - winHeight;
+      const maxThumbTop = winHeight - thumbHeight;
+      
+      // Evitar división por cero
+      const scrollPercent = maxScrollTop > 0 ? scrollTop / maxScrollTop : 0;
+      const thumbTop = scrollPercent * maxThumbTop;
+      
+      // Aplicar estilos
+      // Efecto elástico: Si se está haciendo scroll, aumentar altura
+      const stretchFactor = isScrolling ? 1.3 : 1;
+      thumb.style.height = `${thumbHeight * stretchFactor}px`;
+      
+      // Ajustar posición para mantener el centro relativo si se alarga (opcional, pero mejor visualmente)
+      // Si crece, crece hacia abajo por defecto porque top es fijo.
+      // Para que crezca desde el centro, tendríamos que ajustar el top.
+      const heightDiff = (thumbHeight * stretchFactor) - thumbHeight;
+      const adjustedTop = thumbTop - (isScrolling ? heightDiff / 2 : 0);
+      
+      // Usar transform para mejor rendimiento
+      thumb.style.transform = `translate3d(0, ${adjustedTop}px, 0)`;
+      
+      // Detección de color (Inversión inteligente)
+      checkBackgroundColor();
+    }
+    
+    // Función para detectar el color de fondo y cambiar el del scrollbar
+    function checkBackgroundColor() {
+      // Muestrear un punto a la derecha de la pantalla, cerca de la posición del scrollbar
+      // Usamos el centro vertical del thumb para mayor precisión
+      const thumbRect = thumb.getBoundingClientRect();
+      const centerY = thumbRect.top + (thumbRect.height / 2);
+      
+      // Obtenemos el elemento debajo del centro del scrollbar (ajustado 20px a la izquierda para no pillar el propio track)
+      const x = window.innerWidth - 20;
+      const y = Math.min(Math.max(centerY, 10), window.innerHeight - 10); // Clamp dentro de la ventana
+      
+      const elementsUnder = document.elementsFromPoint(x, y);
+      
+      // Buscar el primer elemento que tenga un color de fondo definido
+      let isDark = false;
+      
+      // Lógica simplificada: Buscar si estamos dentro de una sección con clase oscura o data-theme
+      // Esto es más robusto que getComputedStyle en cada frame
+      for (let el of elementsUnder) {
+        // Detectar secciones oscuras por clases comunes en este proyecto
+        if (el.classList.contains('section--primary') || 
+            el.closest('[data-theme="dark"]') ||
+            el.closest('.bg-dark') || 
+            window.getComputedStyle(el).backgroundColor === 'rgb(26, 56, 101)') /* #1a3865 */ {
+          isDark = true;
+          break;
+        }
+        // Si encontramos un fondo blanco explícito, paramos
+        if (window.getComputedStyle(el).backgroundColor === 'rgb(255, 255, 255)') {
+          isDark = false;
+          break;
+        }
+      }
+      
+      if (isDark) {
+        thumb.classList.add('is-inverted');
+      } else {
+        thumb.classList.remove('is-inverted');
+      }
+    }
+    
+    // Efecto de alargamiento (Elastic Effect)
+    function onScroll() {
+      if (!isScrolling) {
+        thumb.classList.add('is-scrolling');
+        isScrolling = true;
+      }
+      
+      updateScrollbar();
+      
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        thumb.classList.remove('is-scrolling');
+        isScrolling = false;
+      }, 150); // Tiempo para volver a estado normal
+    }
+    
+    // Arrastrar el scrollbar (Drag & Drop)
+    let isDragging = false;
+    let startY = 0;
+    let startScrollTop = 0;
+    
+    thumb.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      isDragging = true;
+      startY = e.clientY;
+      startScrollTop = window.scrollY;
+      track.classList.add('is-dragging');
+      document.body.style.userSelect = 'none'; // Evitar selección de texto
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      
+      const deltaY = e.clientY - startY;
+      const docHeight = document.documentElement.scrollHeight;
+      const winHeight = window.innerHeight;
+      
+      // Relación de movimiento del mouse vs scroll
+      // Cuánto scroll corresponde a 1px de movimiento del thumb
+      const maxThumbTop = winHeight - thumb.offsetHeight;
+      const maxScrollTop = docHeight - winHeight;
+      const scrollRatio = maxScrollTop / maxThumbTop;
+      
+      window.scrollTo(0, startScrollTop + (deltaY * scrollRatio));
+    });
+    
+    document.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        track.classList.remove('is-dragging');
+        document.body.style.userSelect = '';
+      }
+    });
+
+    // Listeners
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', updateScrollbar);
+    
+    // Iniciar
+    updateScrollbar();
+  }
+
+  // Inicializar con soporte para View Transitions de Astro
+  document.addEventListener('astro:page-load', initCustomScroll);
+  document.addEventListener('DOMContentLoaded', initCustomScroll);
+</script>
+
+<style>
+  .scrollbar-track {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 14px;
+    z-index: 9999;
+    pointer-events: none; /* Permitir clicar a través excepto en el thumb */
+  }
+  
+  /* Thumb Base */
+  .scrollbar-thumb {
+    position: absolute;
+    top: 0;
+    right: 4px; /* Un poco de margen derecho */
+    width: 4px; /* Fino y elegante */
+    border-radius: 4px;
+    background-color: var(--color-primary, #1a3865);
+    opacity: 0.6;
+    cursor: grab;
+    pointer-events: auto;
+    
+    /* Transiciones */
+    transition: 
+      width 0.3s ease,
+      background-color 0.3s ease,
+      opacity 0.3s ease,
+      height 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth elastic height */
+      
+    /* Hardware acceleration */
+    will-change: transform, height;
+  }
+  
+  /* Hover State */
+  .scrollbar-track:hover .scrollbar-thumb {
+    opacity: 1;
+    width: 6px;
+  }
+  
+  /* Active/Dragging State */
+  .scrollbar-track.is-dragging .scrollbar-thumb {
+    width: 8px;
+    opacity: 1;
+    cursor: grabbing;
+    background-color: var(--color-accent, #95cca5); /* Verde al arrastrar */
+  }
+  
+  /* Inverted State (Para fondos oscuros) */
+  .scrollbar-thumb.is-inverted {
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3); /* Sombra para resaltar sobre el fondo */
+  }
+  
+  /* Inverted + Dragging */
+  .scrollbar-track.is-dragging .scrollbar-thumb.is-inverted {
+    background-color: var(--color-accent, #95cca5);
+  }
+
+  /* Efecto "Alargado" ahora manejado por JS para suavidad perfecta */
+</style>

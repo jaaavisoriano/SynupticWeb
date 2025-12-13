@@ -3,6 +3,7 @@ import { ClientRouter } from 'astro:transitions';
 import ContactModal from '../components/ContactModal.astro';
 import SEO from '../components/SEO.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
+import CustomScroll from '../components/CustomScroll.astro';
 
 interface Props {
   title?: string;
@@ -53,6 +54,7 @@ const {
   <ReadingProgress />
   <slot />
   <ContactModal />
+  <CustomScroll />
   <script src="/scripts/animations.js" is:inline></script>
   <script src="/scripts/smooth-scroll.js" is:inline></script>
 </body>

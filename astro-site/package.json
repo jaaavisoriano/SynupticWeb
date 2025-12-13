@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
+    "@vimeo/player": "^2.30.1",
     "astro": "^5.16.4"
   },
   "devDependencies": {
