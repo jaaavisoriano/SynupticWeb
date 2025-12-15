@@ -8,9 +8,9 @@ const services = [
     title: 'Contenidos de marketing farmacéutico',
     image: '/images/Lapiz.png',
     items: [
-      'Redacción de textos científico-médicos adaptados a diferentes canales y audiencias: materiales promocionales, slidekits, pódcast, webs, guiones de vídeos, infografías científicas, etc.',
-      'Búsqueda de información científica y elaboración de dossieres bibliográficos para aprobaciones internas.',
-      'Soporte científico a los equipos creativos para crear campañas de comunicación.'
+      '<strong>Redacción de textos científico-médicos</strong> adaptados a diferentes canales y audiencias: materiales promocionales, slidekits, pódcast, webs, guiones de vídeos, infografías científicas, etc.',
+      '<strong>Búsqueda de información científica</strong> y elaboración de dossieres bibliográficos para aprobaciones internas.',
+      '<strong>Soporte científico a los equipos creativos</strong> para crear campañas de comunicación.'
     ],
     color: '#95cca5'
   },
@@ -18,9 +18,9 @@ const services = [
     title: 'Formaciones en el sector salud',
     image: '/images/Formacion.png',
     items: [
-      'Contenido formativo para actualizar a profesionales sanitarios (FMC, acreditada, específica de producto).',
-      'Materiales informativos para pacientes.',
-      'Materiales divulgativos para población general.'
+      'Contenido formativo para actualizar a <strong>profesionales sanitarios</strong> (FMC, acreditada, específica de producto).',
+      '<strong>Materiales</strong> informativos para <strong>pacientes</strong>.',
+      '<strong>Materiales</strong> divulgativos para <strong>población general</strong>.'
     ],
     color: '#4a8fc2'
   },
@@ -28,9 +28,9 @@ const services = [
     title: 'Eventos, congresos y reuniones',
     image: '/images/Comunicacion_ideas.png',
     items: [
-      'Coberturas de congresos médicos nacionales e internacionales.',
-      'Redacción de actas e informes de reuniones científicas y advisory boards.',
-      'Análisis de resultados de informes y encuestas pre y posteriores a la reunión.'
+      '<strong>Coberturas</strong> de congresos médicos nacionales e internacionales.',
+      '<strong>Redacción de actas</strong> e informes de reuniones científicas y advisory boards.',
+      '<strong>Análisis de resultados</strong> de informes y encuestas pre y posteriores a la reunión.'
     ],
     color: '#95cca5'
   }
@@ -53,7 +53,7 @@ const serviceSchema = {
       "itemOffered": {
         "@type": "Service",
         "name": service.title,
-        "description": service.items.join(' ')
+        "description": service.items.map(item => item.replace(/<\/?[^>]+(>|$)/g, "")).join(' ')
       }
     }))
   }
@@ -88,7 +88,7 @@ const serviceSchema = {
           <h1 class="reveal-headline">Integramos la ciencia en tus proyectos healthcare</h1>
           <div class="line-divider center reveal-divider"></div>
           <p class="page-hero__subtitle reveal-subtitle">
-            Desarrollamos contenido científico, buscando el equilibrio entre la rigurosidad que requiere el departamento médico, la creatividad que demanda marketing, ¡y sin perder de vista a los "puntillosos" de regulatory!
+            Desarrollamos contenido científico, buscando el equilibrio entre la <strong>rigurosidad</strong> que requiere el departamento médico, la <strong>creatividad</strong> que demanda <strong>marketing</strong>, ¡y sin perder de vista a los "puntillosos" de <strong>regulatory</strong>!
           </p>
           <button type="button" onclick="window.openContactModal()" class="btn btn--hero reveal-cta" aria-label="Abrir formulario de contacto">
             <span>Necesito un medical writer</span>
@@ -122,7 +122,7 @@ const serviceSchema = {
                 <h3>{service.title}</h3>
                 <ul class="service-card__list">
                   {service.items.map((item, itemIndex) => (
-                    <li style={`--item-index: ${itemIndex}`}>{item}</li>
+                    <li style={`--item-index: ${itemIndex}`} set:html={item} />
                   ))}
                 </ul>
               </div>

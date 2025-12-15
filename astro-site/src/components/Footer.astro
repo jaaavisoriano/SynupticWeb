@@ -17,20 +17,28 @@ const currentYear = new Date().getFullYear();
           <h3 class="text-center">¿Quieres conocernos?</h3>
           <div class="contact-list">
             <div class="contact-item">
-              <span class="contact-item__icon">📞</span>
+              <span class="contact-item__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </span>
               <a href="tel:+34690009731" class="contact-item__text">+34 690009731</a>
             </div>
             <div class="contact-item email-container">
-              <span class="contact-item__icon">✉️</span>
+              <span class="contact-item__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </span>
               <a href="mailto:hola@synuptic.es" id="email-copy" class="contact-item__text" title="Clic para copiar email">hola@synuptic.es</a>
               <span id="email-tooltip" class="copy-tooltip">¡Copiado!</span>
             </div>
             <div class="contact-item location-trigger" id="location-trigger" role="button" tabindex="0" title="Ver en mapa">
-              <span class="contact-item__icon">📍</span>
+              <span class="contact-item__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </span>
               <span class="contact-item__text">c/ Zurbano, 48 <span>- 28010 Madrid</span></span>
             </div>
             <div class="contact-item">
-              <span class="contact-item__icon">🚇</span>
+              <span class="contact-item__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-4.42 0-8 3.58-8 8v7c0 1.1.9 2 2 2h2v3h2v-3h8v3h2v-3h2c1.1 0 2-.9 2-2v-7c0-4.42-3.58-8-8-8zM6 10c0-3.31 2.69-6 6-6s6 2.69 6 6v3H6v-3zm12 5H6v-2h12v2zm-4.5 1.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm-7 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+              </span>
               <span class="contact-item__text">Metro Rubén Darío // Gregorio Marañón // Iglesia</span>
             </div>
           </div>
@@ -135,6 +143,20 @@ const currentYear = new Date().getFullYear();
     gap: 10px;
   }
 
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .contact-item__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+  }
+
   /* Expand Map to fill column */
   .footer-map iframe {
     width: 100%;
@@ -144,7 +166,8 @@ const currentYear = new Date().getFullYear();
   /* Bottom Section Styles */
   .footer-bottom-section {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     margin-top: 40px;
     padding-top: 30px;
@@ -154,7 +177,7 @@ const currentYear = new Date().getFullYear();
   .footer-logo-bottom {
     opacity: 0.8; /* Slightly muted for elegance */
     transition: opacity 0.3s ease;
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
 
   .footer-logo-bottom:hover {
@@ -193,6 +216,8 @@ const currentYear = new Date().getFullYear();
     }
     
     .footer-bottom-section {
+        flex-direction: column;
+        gap: 20px;
         margin-top: 20px;
         padding-top: 20px;
     }
@@ -205,6 +230,10 @@ const currentYear = new Date().getFullYear();
   }
 
   :global([data-theme="dark"]) .contact-item__text {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  :global([data-theme="dark"]) .contact-item__icon {
     color: rgba(255, 255, 255, 0.9);
   }
 

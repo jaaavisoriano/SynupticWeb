@@ -355,4 +355,52 @@
       flex-direction: column;
     }
   }
+
+  /* ===== DARK MODE FIXES ===== */
+  :global([data-theme="dark"]) .contact-section {
+    background-color: #1a3865 !important;
+  }
+
+  :global([data-theme="dark"]) .contact-info h2,
+  :global([data-theme="dark"]) .intro-lead {
+    color: #ffffff !important;
+  }
+
+  :global([data-theme="dark"]) .contact-intro {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  :global([data-theme="dark"]) .trust-indicators {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  :global([data-theme="dark"]) .trust-item {
+    color: #ffffff !important;
+  }
+
+  :global([data-theme="dark"]) .form-card {
+    background-color: #112645 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  :global([data-theme="dark"]) .form-checkbox {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  :global([data-theme="dark"]) .form-legal {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  :global([data-theme="dark"]) .form-control {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+  }
+
+  :global([data-theme="dark"]) .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+  }
 </style>
