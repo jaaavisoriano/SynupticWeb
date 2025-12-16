@@ -83,12 +83,12 @@
     --color-nav-link: var(--color-white);
     --color-border-theme: rgba(255, 255, 255, 0.1);
     --color-bg-card: rgba(255, 255, 255, 0.05);
-    --color-bg-subtle: #152d50;
+    --color-bg-subtle: var(--color-primary);
     --color-bg-input: rgba(255, 255, 255, 0.1);
     --color-bg-overlay: rgba(26, 56, 101, 0.95);
     --color-text-muted: rgba(255, 255, 255, 0.7);
     --color-text-muted-light: rgba(255, 255, 255, 0.6);
-    --color-gray-light: #0f223d;
+    --color-gray-light: var(--color-primary);
     --color-text-heading: var(--color-white);
 
     /* Dark Mode Premium Effects */
@@ -735,7 +735,7 @@ h3 {
 
 [data-theme="dark"] #contact .form-card,
 [data-theme="dark"] .contact-section .form-card {
-    background: #0f2340 !important;
+    background: var(--color-bg-card) !important;
     border-color: rgba(255, 255, 255, 0.1) !important;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }

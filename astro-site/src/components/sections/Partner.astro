@@ -83,6 +83,7 @@
   .partner-section {
     position: relative;
     padding: 160px 0;
+    z-index: 2; /* Ensure wave stays on top of MiddleGround */
     background: #0a1628;
     color: #fff;
     overflow: hidden;
@@ -207,11 +208,11 @@
   }
   
   .shape-divider-bottom .shape-fill {
-    fill: var(--color-bg-body, #ffffff);
+    fill: #ffffff; /* Forced white to match MiddleGround */
   }
 
   :global([data-theme="dark"]) .shape-divider-bottom .shape-fill {
-    fill: var(--color-bg-body, #1a1a1a);
+    fill: var(--color-primary);
   }
 
   /* GLASS CARD */

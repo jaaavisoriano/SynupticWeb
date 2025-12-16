@@ -3,25 +3,6 @@
 ---
 
 <section class="section middle-ground-section" id="middle-ground">
-  <!-- Animated Gradient Background -->
-  <div class="mg-gradient"></div>
-  
-  <!-- Floating Particles -->
-  <div class="mg-particles">
-    <span class="mg-particle"></span>
-    <span class="mg-particle"></span>
-    <span class="mg-particle"></span>
-    <span class="mg-particle"></span>
-    <span class="mg-particle"></span>
-    <span class="mg-particle"></span>
-  </div>
-
-  <!-- Decorative Lines -->
-  <div class="decorative-lines">
-    <div class="line line-left"></div>
-    <div class="line line-right"></div>
-  </div>
-
   <div class="cesis_container z-relative">
     <div class="mg-content animate-fade-in">
       
@@ -52,18 +33,26 @@
 
     </div>
   </div>
+
+  <!-- Bottom Wave Divider -->
+  <div class="shape-divider-bottom">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+    </svg>
+  </div>
 </section>
 
 <style>
   .middle-ground-section {
     position: relative;
-    padding: 120px 0;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 120px 0 160px; /* Added bottom padding for wave */
+    background: #ffffff; /* Forced white to remove any mint/gray tone */
     overflow: hidden;
+    margin-top: -2px;
   }
   
   :global([data-theme="dark"]) .middle-ground-section {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: var(--color-primary);
   }
 
   /* ANIMATIONS */
@@ -88,105 +77,31 @@
     z-index: 10;
   }
 
-  /* BACKGROUND GRADIENT */
-  .mg-gradient {
+  /* SHAPE DIVIDER BOTTOM */
+  .shape-divider-bottom {
     position: absolute;
-    inset: 0;
-    background: 
-      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(26, 56, 101, 0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 20% 100%, rgba(149, 204, 165, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(26, 56, 101, 0.08) 0%, transparent 50%);
-    animation: mgGradientPulse 8s ease-in-out infinite;
-  }
-  
-  :global([data-theme="dark"]) .mg-gradient {
-    background: 
-      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(149, 204, 165, 0.15) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 20% 100%, rgba(26, 56, 101, 0.2) 0%, transparent 50%),
-      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(149, 204, 165, 0.1) 0%, transparent 50%);
-  }
-  
-  @keyframes mgGradientPulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-  }
-
-  /* PARTICLES */
-  .mg-particles {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  
-  .mg-particle {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: linear-gradient(135deg, #1a3865, #95cca5);
-    border-radius: 50%;
-    animation: mgFloat 10s ease-in-out infinite;
-    opacity: 0.4;
-  }
-  
-  :global([data-theme="dark"]) .mg-particle {
-    background: linear-gradient(135deg, #95cca5, #60a5fa);
-    opacity: 0.6;
-  }
-  
-  .mg-particle:nth-child(1) { left: 5%; top: 20%; animation-delay: 0s; width: 6px; height: 6px; }
-  .mg-particle:nth-child(2) { left: 85%; top: 25%; animation-delay: 1.5s; width: 10px; height: 10px; }
-  .mg-particle:nth-child(3) { left: 15%; top: 70%; animation-delay: 3s; }
-  .mg-particle:nth-child(4) { left: 75%; top: 75%; animation-delay: 4.5s; width: 5px; height: 5px; }
-  .mg-particle:nth-child(5) { left: 45%; top: 10%; animation-delay: 2s; width: 12px; height: 12px; }
-  .mg-particle:nth-child(6) { left: 55%; top: 85%; animation-delay: 5s; }
-  
-  @keyframes mgFloat {
-    0%, 100% { 
-      transform: translateY(0) translateX(0) rotate(0deg); 
-      opacity: 0.3; 
-    }
-    25% { 
-      transform: translateY(-20px) translateX(10px) rotate(90deg); 
-      opacity: 0.6; 
-    }
-    50% { 
-      transform: translateY(-30px) translateX(-15px) rotate(180deg); 
-      opacity: 0.4; 
-    }
-    75% { 
-      transform: translateY(-10px) translateX(5px) rotate(270deg); 
-      opacity: 0.5; 
-    }
-  }
-
-  /* DECORATIVE LINES */
-  .decorative-lines {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-  
-  .line {
-    position: absolute;
-    top: 50%;
-    width: 15%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(26, 56, 101, 0.15), transparent);
-  }
-  
-  :global([data-theme="dark"]) .line {
-    background: linear-gradient(90deg, transparent, rgba(149, 204, 165, 0.2), transparent);
-  }
-  
-  .line-left {
+    bottom: 0;
     left: 0;
-    transform: translateY(-50%);
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
   }
   
-  .line-right {
-    right: 0;
-    transform: translateY(-50%);
+  .shape-divider-bottom svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 80px;
+    transform: rotateY(180deg);
+  }
+  
+  .shape-divider-bottom .shape-fill {
+    fill: var(--color-bg-body, #ffffff);
+  }
+
+  :global([data-theme="dark"]) .shape-divider-bottom .shape-fill {
+    fill: var(--color-primary);
   }
 
   /* CONTENT */
@@ -248,7 +163,7 @@
   }
   
   :global([data-theme="dark"]) .mg-heading {
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.95);
   }
   
   .heading-line-1 {
@@ -275,6 +190,7 @@
     0% {
       transform: scale(0.9);
       opacity: 0;
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     }
     50% {
       transform: scale(1.02);
@@ -309,7 +225,7 @@
   }
   
   :global([data-theme="dark"]) .statement-text {
-    background: linear-gradient(135deg, #95cca5 0%, #60a5fa 50%, #95cca5 100%);
+    background: linear-gradient(135deg, #95cca5 0%, #ffffff 50%, #95cca5 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -350,7 +266,7 @@
   }
   
   :global([data-theme="dark"]) .accent-line {
-    background: linear-gradient(90deg, #95cca5, #60a5fa, #95cca5);
+    background: linear-gradient(90deg, #95cca5, #ffffff, #95cca5);
   }
 
   /* RESPONSIVE */
