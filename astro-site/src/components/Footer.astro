@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logoSvg from '../assets/logo.svg';
+
 const legalLinks = [
   { href: '/aviso-legal/', label: 'Aviso legal' },
   { href: '/politica-privacidad/', label: 'Política de privacidad' },
@@ -51,7 +54,7 @@ const currentYear = new Date().getFullYear();
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.879143113521!2d-3.6956054240158758!3d40.43367497143694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228f2ab0b0a11%3A0xae9ed7f61e1b69ae!2sCalle%20de%20Zurbano%2C%2048%2C%20Chamber%C3%AD%2C%2028010%20Madrid!5e0!3m2!1ses!2ses!4v1707399433337!5m2!1ses!2ses" 
               width="100%" 
               height="250" 
-              style="border:0;" 
+              class="map-iframe"
               allowfullscreen="" 
               loading="lazy" 
               referrerpolicy="no-referrer-when-downgrade"
@@ -64,13 +67,12 @@ const currentYear = new Date().getFullYear();
       <!-- New Bottom Section: Logo & Legal Links -->
       <div class="footer-bottom-section">
         <div class="footer-logo-container">
-          <img 
-            src="/images/logo.svg" 
+          <Image 
+            src={logoSvg} 
             alt="Synuptic" 
             class="footer-logo-bottom"
-            width="150"
-            height="54"
-          >
+            width={150}
+          />
         </div>
         <ul class="footer-legal-links">
           {legalLinks.map((link) => (
@@ -126,6 +128,93 @@ const currentYear = new Date().getFullYear();
   </div>
 </footer>
 
+<script>
+  // Variables to hold cleanup functions for global listeners
+  let cleanupScroll;
+  let cleanupEsc;
+
+  const initFooter = () => {
+    // --- 1. Scroll to top functionality ---
+    const scrollTopBtn = document.getElementById('cesis_to_top');
+    
+    if (scrollTopBtn) {
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      if (cleanupScroll) cleanupScroll();
+
+      const handleScroll = () => {
+        if (window.scrollY > 300) {
+          scrollTopBtn.classList.add('visible');
+        } else {
+          scrollTopBtn.classList.remove('visible');
+        }
+      };
+      
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      cleanupScroll = () => window.removeEventListener('scroll', handleScroll);
+      
+      handleScroll();
+    }
+
+    // --- 2. Email click to copy functionality ---
+    const emailLink = document.getElementById('email-copy');
+    const tooltip = document.getElementById('email-tooltip');
+
+    if (emailLink && tooltip) {
+      emailLink.addEventListener('click', async (e) => {
+        e.preventDefault();
+        
+        try {
+          await navigator.clipboard.writeText('hola@synuptic.es');
+          tooltip.classList.add('visible');
+          setTimeout(() => {
+            tooltip.classList.remove('visible');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy text: ', err);
+        }
+      });
+    }
+
+    // --- 3. Maps Modal Logic ---
+    const locationTrigger = document.getElementById('location-trigger');
+    const mapsModal = document.getElementById('maps-modal');
+    const mapsModalClose = document.querySelector('.maps-modal-close');
+    const mapsModalOverlay = document.querySelector('.maps-modal-overlay');
+
+    if (locationTrigger && mapsModal) {
+      const openModal = () => mapsModal.classList.add('active');
+      const closeModal = () => mapsModal.classList.remove('active');
+
+      locationTrigger.addEventListener('click', openModal);
+      locationTrigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal();
+        }
+      });
+
+      if (mapsModalClose) mapsModalClose.addEventListener('click', closeModal);
+      if (mapsModalOverlay) mapsModalOverlay.addEventListener('click', closeModal);
+
+      if (cleanupEsc) cleanupEsc();
+
+      const handleEsc = (e) => {
+        if (e.key === 'Escape' && mapsModal.classList.contains('active')) {
+          closeModal();
+        }
+      };
+
+      document.addEventListener('keydown', handleEsc);
+      cleanupEsc = () => document.removeEventListener('keydown', handleEsc);
+    }
+  };
+
+  document.addEventListener('astro:page-load', initFooter);
+</script>
+
 <style>
   /* Footer Restructuring Styles */
   .footer_main {
@@ -139,7 +228,7 @@ const currentYear = new Date().getFullYear();
   .contact-list {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center contact items */
+    align-items: center; 
     gap: 10px;
   }
 
@@ -160,7 +249,11 @@ const currentYear = new Date().getFullYear();
   /* Expand Map to fill column */
   .footer-map iframe {
     width: 100%;
-    border-radius: 8px; /* Optional: adds a nice touch */
+    border-radius: 8px; 
+  }
+  
+  .map-iframe {
+    border: 0;
   }
 
   /* Bottom Section Styles */
@@ -171,13 +264,15 @@ const currentYear = new Date().getFullYear();
     align-items: center;
     margin-top: 40px;
     padding-top: 30px;
-    border-top: 1px solid rgba(0, 0, 0, 0.05); /* Subtle separator */
+    border-top: 1px solid rgba(0, 0, 0, 0.05); 
   }
 
   .footer-logo-bottom {
-    opacity: 0.8; /* Slightly muted for elegance */
+    opacity: 0.8; 
     transition: opacity 0.3s ease;
     margin-bottom: 0;
+    width: 150px;
+    height: auto;
   }
 
   .footer-logo-bottom:hover {
@@ -195,17 +290,17 @@ const currentYear = new Date().getFullYear();
   }
 
   .footer-legal-links li a {
-    color: #666; /* Muted text color */
+    color: #666; 
     font-size: 0.85rem;
     text-decoration: none;
-    text-transform: uppercase; /* Elegant touch */
+    text-transform: uppercase; 
     letter-spacing: 0.05em;
     font-weight: 500;
     transition: color 0.3s ease;
   }
 
   .footer-legal-links li a:hover {
-    color: var(--primary-color, #000); /* Use primary color on hover if available, else black */
+    color: var(--primary-color, #000); 
   }
 
   @media (max-width: 767px) {
@@ -265,7 +360,7 @@ const currentYear = new Date().getFullYear();
   /* Email Copy Tooltip */
   .email-container {
     position: relative;
-    display: inline-flex; /* Maintain alignment in flex container */
+    display: inline-flex; 
     align-items: center;
   }
   
@@ -287,7 +382,7 @@ const currentYear = new Date().getFullYear();
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
     white-space: nowrap;
-    margin-bottom: 8px; /* Space above the text */
+    margin-bottom: 8px; 
     z-index: 10;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   }
@@ -415,9 +510,9 @@ const currentYear = new Date().getFullYear();
     justify-content: center;
     gap: 10px;
     padding: 12px 20px;
-    border-radius: 4px; /* Matching .btn border-radius */
+    border-radius: 4px; 
     text-decoration: none;
-    font-weight: 700; /* Matching .btn font-weight */
+    font-weight: 700; 
     transition: all 0.3s ease;
     border: 1px solid var(--color-primary);
     background-color: var(--color-primary);
@@ -442,9 +537,7 @@ const currentYear = new Date().getFullYear();
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
   }
 
-  /* Specific tweaks if needed, but keeping them uniform as per request */
   .map-option.google, .map-option.apple {
-    /* Ensuring overrides if any previous specific classes remain */
     background-color: var(--color-primary);
     color: var(--color-white);
     border-color: var(--color-primary);
@@ -456,7 +549,6 @@ const currentYear = new Date().getFullYear();
     color: var(--color-white);
   }
 
-  /* Dark Mode for Modal - Buttons stay consistent as they are corporate colors */
   :global([data-theme="dark"]) .maps-modal-container {
     background: var(--color-bg-card, #1a1a1a);
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
@@ -475,101 +567,3 @@ const currentYear = new Date().getFullYear();
     <path d="M12 4l-8 8h5v8h6v-8h5z"/>
   </svg>
 </a>
-
-<script>
-  // Variables to hold cleanup functions for global listeners
-  let cleanupScroll;
-  let cleanupEsc;
-
-  const initFooter = () => {
-    // --- 1. Scroll to top functionality ---
-    const scrollTopBtn = document.getElementById('cesis_to_top');
-    
-    if (scrollTopBtn) {
-      // Click listener (element-bound, safe to re-add on new elements)
-      scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-
-      // Cleanup previous scroll listener if it exists
-      if (cleanupScroll) cleanupScroll();
-
-      // Window Scroll listener (Global)
-      const handleScroll = () => {
-        if (window.scrollY > 300) {
-          scrollTopBtn.classList.add('visible');
-        } else {
-          scrollTopBtn.classList.remove('visible');
-        }
-      };
-      
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      cleanupScroll = () => window.removeEventListener('scroll', handleScroll);
-      
-      // Initial check
-      handleScroll();
-    }
-
-    // --- 2. Email click to copy functionality ---
-    const emailLink = document.getElementById('email-copy');
-    const tooltip = document.getElementById('email-tooltip');
-
-    if (emailLink && tooltip) {
-      emailLink.addEventListener('click', async (e) => {
-        e.preventDefault();
-        
-        try {
-          await navigator.clipboard.writeText('hola@synuptic.es');
-          
-          // Show tooltip
-          tooltip.classList.add('visible');
-          
-          // Hide after 2 seconds
-          setTimeout(() => {
-            tooltip.classList.remove('visible');
-          }, 2000);
-        } catch (err) {
-          console.error('Failed to copy text: ', err);
-        }
-      });
-    }
-
-    // --- 3. Maps Modal Logic ---
-    const locationTrigger = document.getElementById('location-trigger');
-    const mapsModal = document.getElementById('maps-modal');
-    const mapsModalClose = document.querySelector('.maps-modal-close');
-    const mapsModalOverlay = document.querySelector('.maps-modal-overlay');
-
-    if (locationTrigger && mapsModal) {
-      const openModal = () => mapsModal.classList.add('active');
-      const closeModal = () => mapsModal.classList.remove('active');
-
-      locationTrigger.addEventListener('click', openModal);
-      locationTrigger.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openModal();
-        }
-      });
-
-      if (mapsModalClose) mapsModalClose.addEventListener('click', closeModal);
-      if (mapsModalOverlay) mapsModalOverlay.addEventListener('click', closeModal);
-
-      // Cleanup previous Esc listener
-      if (cleanupEsc) cleanupEsc();
-
-      // Document Keydown listener (Global)
-      const handleEsc = (e) => {
-        if (e.key === 'Escape' && mapsModal.classList.contains('active')) {
-          closeModal();
-        }
-      };
-
-      document.addEventListener('keydown', handleEsc);
-      cleanupEsc = () => document.removeEventListener('keydown', handleEsc);
-    }
-  };
-
-  // Run on initial load and every subsequent navigation
-  document.addEventListener('astro:page-load', initFooter);
-</script>

@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import logoImage from '../assets/logo.webp';
+
 const navItems = [
   { href: '/medical-writing/', label: 'Medical Writing' },
   { href: '/estrategia-healthcare/', label: 'Estrategia Healthcare' },
@@ -17,14 +20,13 @@ const currentPath = Astro.url.pathname;
         <div class="header_logo logo_left">
           <div id="logo_img">
             <a href="/">
-              <img 
+              <Image 
                 class="desktop_logo" 
-                src="/images/logo.webp" 
-                alt="Synuptic" 
-                title="Synuptic" 
-                width="200" 
-                height="72"
-              >
+                src={logoImage} 
+                alt="Synuptic - Medical Writing & Healthcare Strategy" 
+                width={200}
+                loading="eager" 
+              />
             </a>
           </div>
         </div>
@@ -57,22 +59,22 @@ const currentPath = Astro.url.pathname;
                 </a>
               </li>
               <li class="menu-item-icon">
-                <a 
-                  href="#" 
-                  onclick="event.preventDefault(); window.openContactModal?.()"
+                <button 
+                  type="button"
+                  onclick="window.openContactModal?.()"
                   aria-label="Abrir formulario de contacto"
-                  class="social-icon-link"
+                  class="social-icon-link contact-trigger-btn"
                 >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                   </svg>
-                </a>
+                </button>
               </li>
               <li class="menu-item-icon">
                 <button 
                   id="theme-toggle-desktop" 
                   class="social-icon-link theme-toggle" 
-                  aria-label="Toggle Dark Mode"
+                  aria-label="Alternar modo oscuro"
                 >
                   <!-- Moon (Show in Light Mode) -->
                   <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -104,8 +106,8 @@ const currentPath = Astro.url.pathname;
     <div class="header_mobile" id="mobile-nav">
       <!-- Logo Section -->
       <div class="mobile-menu-logo">
-        <a href="/" aria-label="Go to Homepage">
-          <img src="/images/logo.webp" alt="Synuptic" width="160" height="57" />
+        <a href="/" aria-label="Ir a Inicio">
+          <Image src={logoImage} alt="Synuptic" width={160} />
         </a>
       </div>
 
@@ -115,7 +117,7 @@ const currentPath = Astro.url.pathname;
           <button 
             id="theme-toggle-mobile" 
             class="social-icon-link theme-toggle" 
-            aria-label="Toggle Dark Mode"
+            aria-label="Alternar modo oscuro"
           >
             <!-- Moon (Show in Light Mode) -->
             <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -185,13 +187,12 @@ const currentPath = Astro.url.pathname;
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
     
-    // Remove old listeners by cloning the element
+    // Remove old listeners by cloning
     const newMenuToggle = menuToggle.cloneNode(true) as HTMLElement;
     if (menuToggle.parentNode) {
       menuToggle.parentNode.replaceChild(newMenuToggle, menuToggle);
     }
     
-    // Add fresh event listener
     // Add fresh event listener
     const toggleMenu = () => {
       const isOpen = newMenuToggle.classList.toggle('open');
@@ -221,7 +222,6 @@ const currentPath = Astro.url.pathname;
     // Close menu when clicking on overlay
     const overlay = document.getElementById('mobile-menu-overlay');
     if (overlay) {
-      // Remove old listener if any (by cloning)
       const newOverlay = overlay.cloneNode(true) as HTMLElement;
       if (overlay.parentNode) {
         overlay.parentNode.replaceChild(newOverlay, overlay);
@@ -234,7 +234,7 @@ const currentPath = Astro.url.pathname;
       });
     }
     
-    // Close menu when clicking on a link (for smooth navigation)
+    // Close menu when clicking on a link
     const mobileLinks = mobileNav.querySelectorAll('a');
     mobileLinks.forEach(link => {
       link.addEventListener('click', () => {
@@ -253,7 +253,6 @@ const currentPath = Astro.url.pathname;
     const header = document.getElementById('cesis_header');
     if (!header) return;
     
-    // Use passive listener for better scroll performance
     window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
         header.classList.add('scrolled');
@@ -263,11 +262,10 @@ const currentPath = Astro.url.pathname;
     }, { passive: true });
   }
   
-  // Initialize on first load
+  // Initialize
   initMobileMenu();
   initHeaderScroll();
   
-  // Re-initialize after View Transitions navigation
   document.addEventListener('astro:page-load', () => {
     initMobileMenu();
     initHeaderScroll();
@@ -279,17 +277,14 @@ const currentPath = Astro.url.pathname;
     const desktopToggle = document.getElementById('theme-toggle-desktop');
     const mobileToggle = document.getElementById('theme-toggle-mobile');
     
-    // Check local storage
     const storedTheme = localStorage.getItem('theme');
     
-    // Apply initial theme
     if (storedTheme === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.documentElement.removeAttribute('data-theme');
     }
 
-    // Toggle Handler
     const handleToggle = () => {
       const currentTheme = document.documentElement.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -302,16 +297,9 @@ const currentPath = Astro.url.pathname;
       
       localStorage.setItem('theme', newTheme);
     };
-
-    // Attach listeners (cloning to prevent duplicates on re-renders if needed, though ViewTransitions handle full swap usually)
-    // Actually, simple addEventListener is fine if we are careful, but let's use the clone pattern if we want to be safe, 
-    // OR just removeEventListener first. For simplicity in this context:
     
     [desktopToggle, mobileToggle].forEach(btn => {
       if (btn) {
-        // Remove old listener if any (not easily possible with anonymous functions without strict tracking)
-        // So we'll use the .onclick property for a quick "clean" attachment or clone.
-        // Let's use the clone method which is robust for Astro transitions re-runs.
         const newBtn = btn.cloneNode(true) as HTMLElement;
         if (btn.parentNode) {
             btn.parentNode.replaceChild(newBtn, btn);
@@ -321,9 +309,6 @@ const currentPath = Astro.url.pathname;
     });
   }
 
-  // Run immediately to avoid FOUC (Flash of Unstyled Content) if possible
-  // Ideally this script runs blocking in head, but here it's deferred. 
-  // We'll rely on the re-run to catch it quickly.
   initTheme();
 </script>
 
@@ -336,25 +321,33 @@ const currentPath = Astro.url.pathname;
     margin-left: 8px;
   }
 
+  /* Shared base for links and buttons in nav */
   .social-icon-link {
     display: flex !important;
     align-items: center;
     justify-content: center;
     width: 36px;
     height: 36px;
-    padding: 0 !important; /* Override default text padding */
+    padding: 0 !important;
     border-radius: 50%;
     background: var(--color-primary);
     color: var(--color-white) !important;
     transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Specific resets for button element */
+  button.social-icon-link {
+    font-size: 100%;
+    line-height: inherit;
   }
 
   .social-icon-link span::after {
-    display: none !important; /* Remove underline effect */
+    display: none !important;
   }
 
-  /* Override the default menu hover effect for these specific items if needed */
-  .main-menu .menu-item-icon a:hover {
+  .main-menu .menu-item-icon .social-icon-link:hover {
     background: var(--color-accent);
     color: var(--color-white) !important;
     transform: scale(1.1);
@@ -379,7 +372,6 @@ const currentPath = Astro.url.pathname;
   .theme-toggle .sun-icon { display: none; }
   .theme-toggle .moon-icon { display: block; }
 
-  /* Global selector for theme state to toggle icons */
   :global([data-theme="dark"]) .theme-toggle .sun-icon { display: block; }
   :global([data-theme="dark"]) .theme-toggle .moon-icon { display: none; }
 
@@ -390,12 +382,12 @@ const currentPath = Astro.url.pathname;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    z-index: 99998; /* Below mobile menu (99999) but above everything else */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99998;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    backdrop-filter: blur(2px); /* Optional: blur background slightly */
+    backdrop-filter: blur(2px);
   }
 
   .mobile-menu-overlay.is-visible {
@@ -403,7 +395,6 @@ const currentPath = Astro.url.pathname;
     visibility: visible;
   }
   
-  /* Ensure mobile nav is above overlay */
   .header_mobile {
     z-index: 99999;
   }
@@ -413,17 +404,19 @@ const currentPath = Astro.url.pathname;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 0 15px; /* Reduced top padding */
+    padding: 0 0 15px;
     margin-bottom: -5px;
   }
 
   .mobile-menu-logo a {
     display: block;
   }
-
+  
+  /* Image component applies height:auto by default */
   .mobile-menu-logo img {
     height: 40px;
     width: auto;
+    object-fit: contain;
     transition: transform 0.3s ease;
   }
 
@@ -431,7 +424,7 @@ const currentPath = Astro.url.pathname;
     transform: scale(1.05);
   }
 
-  /* Dark mode for mobile logo */
   :global([data-theme="dark"]) .mobile-menu-logo img {
     filter: brightness(0) invert(1);
   }
+</style>

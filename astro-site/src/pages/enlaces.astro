@@ -1,5 +1,7 @@
 ---
 import SEO from '../components/SEO.astro';
+import { Image } from 'astro:assets';
+import logoWebp from '../assets/logo.webp';
 
 const links = [
   {
@@ -111,7 +113,6 @@ const links = [
             border-radius: 0;
             margin: 0 auto 1rem;
             display: block;
-            /* Ensure no cropping artifacts */
             object-fit: contain; 
             background: transparent;
             box-shadow: none;
@@ -123,16 +124,16 @@ const links = [
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 0.75rem;
-            color: var(--color-primary, #1a3865);
+            color: var(--color-primary);
             letter-spacing: 0.5px;
             text-transform: uppercase;
             opacity: 0.9;
-            display: none; /* Ocultamos el @Synuptic ya que el logo es grande y lo dice */
+            display: none; 
         }
         
         .profile-bio {
             font-size: 1.05rem;
-            color: var(--color-text-muted, #555);
+            color: var(--color-text-muted);
             line-height: 1.6;
             max-width: 90%;
             margin: 0 auto;
@@ -154,10 +155,9 @@ const links = [
             padding: 1.25rem 2rem;
             
             /* Gradient Button Background */
-            background: linear-gradient(90deg, #1a3865 0%, #244b85 100%);
+            background: linear-gradient(90deg, var(--color-primary) 0%, #244b85 100%);
             
             color: white;
-            border-radius: 16px; /* slightly less rounded than pill for a modern look, or keep pill? Let's use 16px for premium card feel or 50px for pill. User asked for rounded borders before. Let's stick to pill but maybe slightly softer */
             border-radius: 100px; 
             
             text-decoration: none;
@@ -193,7 +193,7 @@ const links = [
             transform: translateY(-3px) scale(1.01);
             box-shadow: 0 15px 30px rgba(26, 56, 101, 0.25);
             /* Gradient shift on hover */
-            background: linear-gradient(90deg, #1a3865 0%, #173054 100%); 
+            background: linear-gradient(90deg, var(--color-primary) 0%, #173054 100%); 
             border-color: rgba(149, 204, 165, 0.5); /* Mint hint border on hover */
         }
 
@@ -218,7 +218,7 @@ const links = [
         }
         
         .social-icon {
-            color: var(--color-primary, #1a3865);
+            color: var(--color-primary);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             opacity: 0.7;
             padding: 10px;
@@ -230,7 +230,7 @@ const links = [
         .social-icon:hover {
             opacity: 1;
             color: white;
-            background-color: var(--color-primary, #1a3865);
+            background-color: var(--color-primary);
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(26, 56, 101, 0.2);
         }
@@ -250,7 +250,7 @@ const links = [
 <div class="container-links">
     <header class="profile-header">
         <!-- Logo "tal cual" - Full version -->
-        <img src="/images/logo.webp" alt="Synuptic - Medical Writing y Estrategia" class="profile-img">
+        <Image src={logoWebp} alt="Synuptic - Medical Writing y Estrategia" class="profile-img" />
         <p class="profile-bio">Medical Writing y Estrategia Healthcare.<br>Conectamos neuronas.</p>
     </header>
 

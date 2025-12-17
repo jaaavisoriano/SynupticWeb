@@ -2,62 +2,74 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+
+// Import local assets for optimization
+import imgAlmu from '../assets/Almu_600x600.jpg';
+import imgAna from '../assets/Ana_600x600.jpg';
+import imgCris from '../assets/Cris_600x600.jpg';
+import imgFer from '../assets/Fer_600x600.jpg';
+import imgIsa from '../assets/Isa_600x600.jpg';
+import imgLucia from '../assets/Lucia_600x600.jpg';
+import imgRober from '../assets/Rober_600x600.jpg';
+import imgRosa from '../assets/Rosa_600x600.jpg';
+import imgCarol from '../assets/Carol_600x600.jpg';
 
 const teamMembers = [
   {
     name: 'Almudena Vindel',
     role: 'Coordinación del talento y psicología de clientes',
     bio: 'Licenciada en Periodismo. Nuestra experta en coordinación del talento y psicología de clientes. Le encanta usar la danza oriental para alinear sus chakras y quitarse el estrés.',
-    image: '/images/Almu_600x600.jpg',
+    image: imgAlmu,
     link: '#'
   },
   {
     name: 'Ana Bernal',
     role: 'Contenidos y tendencias de actualidad',
     bio: 'Graduada por partida doble en Farmacia y Biotecnología. Nuestra experta más internacional... Le fascina perderse (y reencontrarse) en la naturaleza...',
-    image: '/images/Ana_600x600.jpg',
+    image: imgAna,
     link: '#'
   },
   {
     name: 'Cristina Palacios',
     role: 'Contenidos y divulgación científica',
     bio: 'Graduada en Biotecnología... Le apasiona subirse a un escenario y deleitarnos con su voz de RockStar.',
-    image: '/images/Cris_600x600.jpg',
+    image: imgCris,
     link: '#'
   },
   {
     name: 'Fernando Blanco',
     role: 'Desarrollo de nuevos fármacos y atención farmacéutica',
     bio: 'Doctor en Química Orgánica... Con una mano en las teclas y otra en la guitarra, si no lo encuentras en la botica andará perdido en la montaña.',
-    image: '/images/Fer_600x600.jpg',
+    image: imgFer,
     link: '#'
   },
   {
     name: 'Isabel Martín',
     role: 'Liderazgo científico y soporte estratégico',
     bio: 'Doctora en Biología... Con la vocación dividida entre la curiosidad y la creatividad.',
-    image: '/images/Isa_600x600.jpg',
+    image: imgIsa,
     link: '#'
   },
   {
     name: 'Lucía Gregorio',
     role: 'Contenidos y soporte digital',
     bio: 'Doctora en Biología Molecular... Le encanta enredarse en la esterilla de yoga y defiende en cuerpo y alma el #madeinspain.',
-    image: '/images/Lucia_600x600.jpg',
+    image: imgLucia,
     link: '#'
   },
   {
     name: 'Roberto Moreno',
     role: 'Contenidos y nuevos fármacos',
     bio: 'Doctor en Biociencias Moleculares... Le encanta descubrir nuevos lugares y disfrutar en modo gourmet.',
-    image: '/images/Rober_600x600.jpg',
+    image: imgRober,
     link: '#'
   },
   {
     name: 'Rosa Acebal',
     role: 'Contenidos y visión clínica',
     bio: 'Médica especialista en Medicina Interna... Disfruta trabajando desde la paz que le aportan su taza de té y su lista de éxitos de Spotify.',
-    image: '/images/Rosa_600x600.jpg',
+    image: imgRosa,
     link: '#'
   }
 ];
@@ -65,7 +77,7 @@ const teamMembers = [
 const leader = {
   name: 'Carolina Egea',
   role: 'Impulsora del proyecto',
-  image: '/images/Carol_600x600.jpg',
+  image: imgCarol,
   quote: '«Hace ya más de 15 años que colgué la bata y me reinventé, primero como redactora científica y luego como consultora estratégica. En todo este tiempo, puedo presumir de haberme rodeado siempre de gente maravillosa que me ha ayudado a crecer y a conocerme a mí misma para elegir mi camino. Ahora, me toca a mí liderar un equipo con luz propia que me acompaña en esta aventura, creciendo juntos en la misma dirección. No puedo estar más orgullosa de lo que tenemos en Synuptic y espero que sigamos haciendo, por mucho tiempo, esto que tanto nos gusta, que es traducir la ciencia en beneficios reales para los pacientes.»',
   link: '#'
 };
@@ -125,7 +137,6 @@ const leader = {
         </div>
       </section>
 
-      <!-- Quote Banner -->
       <!-- Quote Banner Premium -->
       <section class="premium-quote-section">
         <div class="quote-bg-pattern"></div>
@@ -156,12 +167,11 @@ const leader = {
                 <div class="team-flip-box__inner">
                   <div class="team-flip-box__front">
                     <div class="team-flip-box__image">
-                      <img 
+                      <Image 
                         src={member.image} 
                         alt={member.name}
-                        width="300"
-                        height="300"
-                        loading="lazy"
+                        width={300}
+                        class="team-img"
                       />
                     </div>
                     <div class="team-flip-box__info">
@@ -173,7 +183,7 @@ const leader = {
                     <h3 class="team-flip-box__name">{member.name}</h3>
                     <span class="team-flip-box__role">{member.role}</span>
                     <p class="team-flip-box__bio">{member.bio}</p>
-                    <a href={member.link} class="team-flip-box__link" target="_blank" rel="noopener noreferrer">Contactar</a>
+                    <button type="button" class="team-flip-box__link" onclick="window.openContactModal && window.openContactModal()">Contactar</button>
                   </div>
                 </div>
               </div>
@@ -191,18 +201,23 @@ const leader = {
           <div class="leader-wrapper">
             <div class="leader-card">
               <div class="leader-image-container">
-                <img 
+                <Image 
                   src={leader.image} 
                   alt={leader.name}
-                  width="400"
-                  height="400"
-                  loading="lazy"
+                  width={400}
+                  class="leader-img"
                 />
               </div>
               <div class="leader-name-badge">
                 <span class="leader-name">{leader.name}</span>
               </div>
-              <a href={leader.link} class="team-flip-box__link" style="margin-top: 24px; color: var(--color-primary, #1a3865); border-color: var(--color-primary, #1a3865); background: transparent;" target="_blank" rel="noopener noreferrer">Contactar</a>
+              <button 
+                type="button" 
+                class="team-flip-box__link leader-contact-btn" 
+                onclick="window.openContactModal && window.openContactModal()"
+              >
+                Contactar
+              </button>
             </div>
             <div class="leader-content">
               <blockquote class="leader-quote">
@@ -245,6 +260,57 @@ const leader = {
   </div>
 </Layout>
 
+<script>
+  // Touch support for mobile team cards
+  function initTeamFlipCards() {
+    const container = document.querySelector('.team-grid');
+    if (!container) return;
+    
+    if (container.hasAttribute('data-fp-initialized')) return;
+    container.setAttribute('data-fp-initialized', 'true');
+    
+    const flipBoxes = document.querySelectorAll('.team-flip-box');
+    let activeCard: HTMLElement | null = null;
+    
+    flipBoxes.forEach(box => {
+      const element = box as HTMLElement;
+      
+      element.addEventListener('click', function(this: HTMLElement, e: Event) {
+        if (window.matchMedia('(hover: none)').matches || window.innerWidth < 992) {
+          const target = e.target as HTMLElement;
+          // Updated: also ignore button clicks
+          if (target.tagName.toLowerCase() === 'a' || target.closest('a') || target.tagName.toLowerCase() === 'button') {
+            return;
+          }
+
+          e.preventDefault();
+          e.stopPropagation(); 
+          
+          if (activeCard && activeCard !== this) {
+            activeCard.classList.remove('is-flipped');
+          }
+          
+          this.classList.toggle('is-flipped');
+          activeCard = this.classList.contains('is-flipped') ? this : null;
+        }
+      });
+    });
+    
+    document.addEventListener('click', (e: Event) => {
+      if ((window.matchMedia('(hover: none)').matches || window.innerWidth < 992) && activeCard) {
+        const target = e.target as HTMLElement;
+        if (!target.closest('.team-flip-box')) {
+          activeCard.classList.remove('is-flipped');
+          activeCard = null;
+        }
+      }
+    });
+  }
+  
+  initTeamFlipCards();
+  document.addEventListener('astro:page-load', initTeamFlipCards);
+</script>
+
 <style>
   /* ===== PREMIUM HERO SECTION ===== */
   .page-hero {
@@ -254,7 +320,7 @@ const leader = {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: #0a1628;
+    background: var(--color-black, #0a1628);
   }
 
   @media (max-width: 768px) {
@@ -270,9 +336,9 @@ const leader = {
     background: linear-gradient(
       135deg, 
       #0a1628 0%, 
-      #1a3865 25%, 
+      var(--color-primary) 25%, 
       #0f2240 50%, 
-      #1a3865 75%, 
+      var(--color-primary) 75%, 
       #0a1628 100%
     );
     background-size: 400% 400%;
@@ -343,7 +409,6 @@ const leader = {
     }
     25% {
       transform: translateY(-30px) translateX(10px) scale(1.2);
-      opacity: 0.6;
     }
     50% {
       transform: translateY(-50px) translateX(-15px) scale(1);
@@ -351,7 +416,6 @@ const leader = {
     }
     75% {
       transform: translateY(-20px) translateX(5px) scale(0.8);
-      opacity: 0.5;
     }
   }
   
@@ -392,7 +456,7 @@ const leader = {
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: #95cca5;
+    color: var(--color-accent);
     margin-bottom: 24px;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards 0.2s;
@@ -402,7 +466,7 @@ const leader = {
     font-family: 'Raleway', sans-serif;
     font-size: clamp(2rem, 6vw, 3.5rem);
     font-weight: 700;
-    color: #ffffff;
+    color: var(--color-white);
     line-height: 1.2;
     margin-bottom: 24px;
     text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
@@ -421,7 +485,7 @@ const leader = {
   .headline-accent {
     display: block;
     font-size: 0.6em;
-    color: #95cca5;
+    color: var(--color-accent);
     margin: 8px 0;
     font-style: italic;
     opacity: 0;
@@ -453,7 +517,7 @@ const leader = {
   .hero-divider {
     width: 80px;
     height: 3px;
-    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
     margin: 0 auto 24px;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards 1.2s;
@@ -486,8 +550,8 @@ const leader = {
     align-items: center;
     gap: 10px;
     padding: 16px 32px;
-    background: #95cca5;
-    color: #1a3865;
+    background: var(--color-accent);
+    color: var(--color-primary);
     border-radius: 50px;
     font-family: 'Raleway', sans-serif;
     font-size: 14px;
@@ -502,10 +566,10 @@ const leader = {
   }
   
   .hero-cta-link:hover {
-    background: #ffffff;
+    background: var(--color-white);
     transform: translateY(-3px) scale(1.03);
     box-shadow: 0 12px 40px rgba(149, 204, 165, 0.4);
-    color: #1a3865;
+    color: var(--color-primary);
   }
   
   .hero-cta-link svg {
@@ -545,7 +609,7 @@ const leader = {
   .scroll-wheel {
     width: 4px;
     height: 8px;
-    background: #95cca5;
+    background: var(--color-accent);
     border-radius: 2px;
     animation: scrollWheel 2s ease-in-out infinite;
   }
@@ -671,7 +735,7 @@ const leader = {
     overflow: hidden;
   }
   
-  .team-flip-box__image img {
+  .team-flip-box__image .team-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -692,15 +756,15 @@ const leader = {
   
   .team-flip-box__role {
     font-size: 13px;
-    color: var(--color-accent, #95cca5);
+    color: var(--color-accent);
     font-weight: 600;
     display: block;
     line-height: 1.4;
   }
   
   .team-flip-box__back {
-    background: linear-gradient(135deg, var(--color-primary, #1a3865) 0%, #2c5282 100%);
-    color: #fff;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #2c5282 100%);
+    color: var(--color-white);
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
@@ -711,7 +775,7 @@ const leader = {
   }
   
   .team-flip-box__back .team-flip-box__name {
-    color: #fff;
+    color: var(--color-white);
     font-size: 20px;
     margin-bottom: 8px;
   }
@@ -724,9 +788,9 @@ const leader = {
     font-size: 14px;
     line-height: 1.6;
     opacity: 0.95;
-    margin: 0;
+    margin: 0 0 16px;
   }
-
+  
   /* ===== TOUCH DEVICES & MOBILE/TABLET ===== */
   @media (hover: none), (max-width: 991px) {
     .team-flip-box__front::after {
@@ -737,7 +801,7 @@ const leader = {
       width: 100%;
       text-align: center;
       font-size: 11px;
-      color: var(--color-accent, #95cca5);
+      color: var(--color-accent);
       font-weight: 600;
       letter-spacing: 0.5px;
     }
@@ -746,7 +810,6 @@ const leader = {
       padding-bottom: 40px;
     }
     
-    /* Disable hover on touch - only use .is-flipped class */
     .team-flip-box:hover .team-flip-box__inner {
       transform: none;
     }
@@ -794,7 +857,7 @@ const leader = {
     box-shadow: 0 10px 40px rgba(0,0,0,0.15);
   }
   
-  .leader-image-container img {
+  .leader-image-container .leader-img {
     width: 100%;
     height: auto;
     display: block;
@@ -804,8 +867,8 @@ const leader = {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(135deg, #95cca5 0%, #afccb5 100%);
-    color: var(--color-primary, #1a3865);
+    background: linear-gradient(135deg, var(--color-accent) 0%, #afccb5 100%);
+    color: var(--color-primary);
     font-size: 18px;
     font-weight: 700;
     padding: 12px 24px;
@@ -816,7 +879,17 @@ const leader = {
     box-shadow: 0 4px 15px rgba(149, 204, 165, 0.4);
   }
   
-
+  .leader-contact-btn {
+    margin-top: 24px !important;
+    background: transparent !important;
+    color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+  }
+  
+  :global([data-theme="dark"]) .leader-contact-btn {
+    color: var(--color-white) !important;
+    border-color: var(--color-white) !important;
+  }
   
   .leader-content {
     text-align: left;
@@ -831,7 +904,7 @@ const leader = {
   .leader-quote {
     font-size: 18px;
     line-height: 1.8;
-    color: var(--color-text, #333);
+    color: var(--color-text-body);
     margin: 0;
     padding: 0;
     font-style: italic;
@@ -845,7 +918,7 @@ const leader = {
     top: 0;
     bottom: 0;
     width: 4px;
-    background: var(--color-accent, #95cca5);
+    background: var(--color-accent);
     border-radius: 2px;
   }
   
@@ -872,8 +945,8 @@ const leader = {
     background: #0077B5;
     border-color: #0077B5;
     margin-top: 16px;
-    color: #fff !important; /* Force white text */
-    text-decoration: none !important; /* No underline */
+    color: #fff !important; 
+    text-decoration: none !important; 
     padding: 10px 20px;
     border-radius: 5px;
     transition: background-color 0.3s ease;
@@ -904,7 +977,7 @@ const leader = {
   }
   
   .recruitment-content a {
-    color: var(--color-primary, #1a3865);
+    color: var(--color-primary);
     font-weight: 600;
     text-decoration: underline;
   }
@@ -927,6 +1000,7 @@ const leader = {
     border-radius: 4px;
     font-size: 14px;
     transition: background-color 0.3s ease;
+    cursor: pointer;
   }
   
   .team-flip-box__link:hover {
@@ -938,7 +1012,7 @@ const leader = {
     position: relative;
     padding: 100px 0;
     background: linear-gradient(135deg, #f8faf9 0%, #eef5f0 100%);
-    color: #1a3865;
+    color: var(--color-primary);
     overflow: hidden;
     text-align: center;
   }
@@ -948,8 +1022,8 @@ const leader = {
     inset: 0;
     opacity: 0.1;
     background-image: 
-      radial-gradient(circle at 20% 50%, #95cca5 1px, transparent 1px),
-      radial-gradient(circle at 80% 30%, #95cca5 1px, transparent 1px);
+      radial-gradient(circle at 20% 50%, var(--color-accent) 1px, transparent 1px),
+      radial-gradient(circle at 80% 30%, var(--color-accent) 1px, transparent 1px);
     background-size: 50px 50px;
   }
   
@@ -965,7 +1039,7 @@ const leader = {
     font-family: 'Georgia', serif;
     font-size: 120px;
     line-height: 0.5;
-    color: #95cca5;
+    color: var(--color-accent);
     opacity: 0.2;
     position: absolute;
     pointer-events: none;
@@ -987,7 +1061,7 @@ const leader = {
     font-size: clamp(24px, 4vw, 36px);
     font-weight: 700;
     line-height: 1.4;
-    color: #1a3865;
+    color: var(--color-primary);
     margin: 0 0 32px;
     position: relative;
     z-index: 2;
@@ -1003,7 +1077,7 @@ const leader = {
   .author-dash {
     width: 40px;
     height: 3px;
-    background: #95cca5;
+    background: var(--color-accent);
   }
   
   .author-name {
@@ -1011,7 +1085,7 @@ const leader = {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #1a3865;
+    color: var(--color-primary);
   }
 
   @media (max-width: 768px) {
@@ -1030,63 +1104,3 @@ const leader = {
     }
   }
 </style>
-  
-
-
-<script>
-  // Touch support for mobile team cards
-  function initTeamFlipCards() {
-    const container = document.querySelector('.team-grid');
-    if (!container) return;
-    
-    // Check if already initialized to prevent double event listeners
-    if (container.hasAttribute('data-fp-initialized')) return;
-    container.setAttribute('data-fp-initialized', 'true');
-    
-    const flipBoxes = document.querySelectorAll('.team-flip-box');
-    let activeCard: HTMLElement | null = null;
-    
-    flipBoxes.forEach(box => {
-      const element = box as HTMLElement;
-      
-      element.addEventListener('click', function(this: HTMLElement, e: Event) {
-        // Run logic if touch device OR small screen
-        if (window.matchMedia('(hover: none)').matches || window.innerWidth < 992) {
-          // Only prevent default if we're not clicking a link/button inside
-          const target = e.target as HTMLElement;
-          if (target.tagName.toLowerCase() === 'a' || target.closest('a')) {
-            return;
-          }
-
-          e.preventDefault();
-          e.stopPropagation(); // Stop propagation
-          
-          // Close previously open card
-          if (activeCard && activeCard !== this) {
-            activeCard.classList.remove('is-flipped');
-          }
-          
-          // Toggle current card
-          this.classList.toggle('is-flipped');
-          activeCard = this.classList.contains('is-flipped') ? this : null;
-        }
-      });
-    });
-    
-    // Close on outside click
-    document.addEventListener('click', (e: Event) => {
-      if ((window.matchMedia('(hover: none)').matches || window.innerWidth < 992) && activeCard) {
-        const target = e.target as HTMLElement;
-        if (!target.closest('.team-flip-box')) {
-          activeCard.classList.remove('is-flipped');
-          activeCard = null;
-        }
-      }
-    });
-  }
-  
-  initTeamFlipCards();
-  document.addEventListener('astro:page-load', initTeamFlipCards);
-</script>
-
-

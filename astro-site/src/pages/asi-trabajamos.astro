@@ -2,25 +2,36 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+
+// Import local assets
+import imgPresupuesto from '../assets/icon_presupuesto.png';
+import imgBolsa from '../assets/icon_bolsa_horas.png';
+import imgImplant from '../assets/icon_implant.png';
+import imgMentoring from '../assets/icon_mentoring.png';
+import imgVision from '../assets/icon_vision_global.png';
+import imgRespuesta from '../assets/icon_respuesta_rapida.png';
+import imgCobertura from '../assets/icon_cobertura.png';
+import imgInteligencia from '../assets/icon_inteligencia.png';
 
 const modelos = [
   {
-    icon: '/images/icon_presupuesto.png',
+    icon: imgPresupuesto,
     title: 'Presupuesto por proyecto',
     description: 'El clásico en el sector. Tu cliente te pide y tú nos cuentas qué necesitas.'
   },
   {
-    icon: '/images/icon_bolsa_horas.png',
+    icon: imgBolsa,
     title: 'Bolsa de horas científicas',
     description: 'Si tienes varios frentes abiertos donde necesites soporte del departamento médico, puedes elegir un pack a tu medida.'
   },
   {
-    icon: '/images/icon_implant.png',
+    icon: imgImplant,
     title: 'Implant científico temporal',
     description: 'Si tienes una baja en el equipo médico o buscas cubrir un puesto de redacción científica de manera temporal.'
   },
   {
-    icon: '/images/icon_mentoring.png',
+    icon: imgMentoring,
     title: 'Fee mensual de mentoring científico',
     description: 'Si tu equipo científico es junior y necesita la sombra de un buen maestro para florecer con energía.'
   }
@@ -28,19 +39,19 @@ const modelos = [
 
 const ventajas = [
   {
-    icon: '/images/icon_vision_global.png',
+    icon: imgVision,
     title: 'Visión global del proyecto'
   },
   {
-    icon: '/images/icon_respuesta_rapida.png',
+    icon: imgRespuesta,
     title: 'Respuesta rápida ante imprevistos'
   },
   {
-    icon: '/images/icon_cobertura.png',
+    icon: imgCobertura,
     title: 'Cobertura 100% de necesidades'
   },
   {
-    icon: '/images/icon_inteligencia.png',
+    icon: imgInteligencia,
     title: 'Inteligencia colaborativa'
   }
 ];
@@ -111,7 +122,7 @@ const ventajas = [
               <div class="modelo-card" style={`--delay: ${index * 0.1}s`}>
                 <div class="card-glow"></div>
                 <div class="card-icon-wrapper">
-                  <img src={modelo.icon} alt={modelo.title} class="modelo-icon" width="80" height="80" />
+                  <Image src={modelo.icon} alt={modelo.title} class="modelo-icon" width={80} />
                 </div>
                 <h3>{modelo.title}</h3>
                 <p>{modelo.description}</p>
@@ -206,7 +217,7 @@ const ventajas = [
               <div class="ventaja-item" style={`--delay: ${index * 0.15}s`}>
                 <div class="ventaja-icon-wrapper">
                   <div class="icon-bg"></div>
-                  <img src={ventaja.icon} alt={ventaja.title} class="ventaja-icon" width="70" height="70" />
+                  <Image src={ventaja.icon} alt={ventaja.title} class="ventaja-icon" width={70} />
                   <div class="icon-ring"></div>
                 </div>
                 <span class="ventaja-title">{ventaja.title}</span>
@@ -258,9 +269,9 @@ const ventajas = [
     background: linear-gradient(
       135deg, 
       #0a1628 0%, 
-      #1a3865 25%, 
+      var(--color-primary) 25%, 
       #0f2240 50%, 
-      #1a3865 75%, 
+      var(--color-primary) 75%, 
       #0a1628 100%
     );
     background-size: 400% 400%;
@@ -320,7 +331,7 @@ const ventajas = [
   .deco-circle--1 {
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, #95cca5 0%, transparent 70%);
+    background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
     top: -200px;
     right: -150px;
   }
@@ -328,7 +339,7 @@ const ventajas = [
   .deco-circle--2 {
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, #95cca5 0%, transparent 70%);
+    background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
     bottom: -150px;
     left: -100px;
   }
@@ -348,7 +359,7 @@ const ventajas = [
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 3px;
-    color: #95cca5;
+    color: var(--color-accent);
     margin-bottom: 20px;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards 0.2s;
@@ -358,7 +369,7 @@ const ventajas = [
     font-family: 'Raleway', sans-serif;
     font-size: clamp(28px, 5vw, 48px);
     font-weight: 700;
-    color: #ffffff;
+    color: var(--color-white);
     line-height: 1.2;
     margin-bottom: 24px;
   }
@@ -381,14 +392,14 @@ const ventajas = [
   
   .title-line--2 em {
     font-style: normal;
-    color: #95cca5;
+    color: var(--color-accent);
     position: relative;
   }
   
   .hero-divider {
     width: 80px;
     height: 3px;
-    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
     margin: 0 auto 24px;
     opacity: 0;
     animation: fadeInScale 0.6s ease forwards 0.7s;
@@ -418,7 +429,7 @@ const ventajas = [
   .hero-lema {
     font-size: clamp(22px, 3vw, 32px);
     font-weight: 700;
-    color: #95cca5;
+    color: var(--color-accent);
     font-style: italic;
     margin: 0;
     opacity: 0;
@@ -434,7 +445,7 @@ const ventajas = [
   }
 
   .hero-lema:hover {
-    transform: scale(1.05) translateY(0) !important; /* Ensure override of animation final state if needed */
+    transform: scale(1.05) translateY(0) !important; 
     color: #ffffff;
     text-shadow: 0 0 40px rgba(149, 204, 165, 0.6);
   }
@@ -478,7 +489,7 @@ const ventajas = [
   .scroll-wheel {
     width: 4px;
     height: 8px;
-    background: #95cca5;
+    background: var(--color-accent);
     border-radius: 2px;
     animation: scrollWheel 2s ease-in-out infinite;
   }
@@ -500,7 +511,7 @@ const ventajas = [
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #95cca5;
+    color: var(--color-accent);
     margin-bottom: 12px;
   }
   
@@ -598,7 +609,7 @@ const ventajas = [
   }
   
   .modelo-card:hover h3 {
-    color: #1a3865;
+    color: var(--color-primary);
   }
   
   .modelo-card p {
@@ -615,7 +626,7 @@ const ventajas = [
     transform: translateX(-50%);
     width: 0;
     height: 3px;
-    background: linear-gradient(90deg, #1a3865, #95cca5);
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
     transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     border-radius: 3px 3px 0 0;
   }
@@ -627,10 +638,10 @@ const ventajas = [
   /* ===== SOCIAL PROOF SECTION ===== */
   .social-proof-section {
     position: relative;
-    padding: 180px 0; /* Increased padding to accommodate dividers */
+    padding: 180px 0; 
     overflow: hidden;
-    background: #0a1628; /* Fallback */
-    color: #fff;
+    background: #0a1628; 
+    color: var(--color-white);
   }
   
   .z-relative {
@@ -681,9 +692,6 @@ const ventajas = [
   .shape-divider-bottom .shape-fill {
     fill: var(--color-bg-body, #ffffff);
   }
-  
-  /* Reuse hero particles and gradient to connect themes */
-  /* If hero classes aren't global, we ensure they work here */
   
   .proof-card {
     position: relative;
@@ -739,7 +747,7 @@ const ventajas = [
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 3px;
-    color: #95cca5;
+    color: var(--color-accent);
     font-weight: 700;
   }
   
@@ -758,7 +766,7 @@ const ventajas = [
   .proof-number.big {
     font-size: clamp(48px, 6vw, 80px);
     font-weight: 800;
-    background: linear-gradient(135deg, #ffffff 0%, #95cca5 100%);
+    background: linear-gradient(135deg, #ffffff 0%, var(--color-accent) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -774,7 +782,7 @@ const ventajas = [
   .proof-separator {
     width: 2px;
     height: 120px;
-    background: linear-gradient(to bottom, transparent, #95cca5, transparent);
+    background: linear-gradient(to bottom, transparent, var(--color-accent), transparent);
     opacity: 0.3;
   }
   
@@ -817,7 +825,7 @@ const ventajas = [
     .proof-separator {
       width: 100%;
       height: 2px;
-      background: linear-gradient(to right, transparent, #95cca5, transparent);
+      background: linear-gradient(to right, transparent, var(--color-accent), transparent);
     }
     
     .proof-stats {
@@ -859,7 +867,7 @@ const ventajas = [
     align-items: center;
     gap: 12px;
     padding: 18px 36px;
-    background: linear-gradient(135deg, #1a3865 0%, #2c5282 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #2c5282 100%);
     color: #ffffff;
     border: none;
     border-radius: 50px;
@@ -998,7 +1006,7 @@ const ventajas = [
   }
   
   .ventaja-item:hover .ventaja-title {
-    color: #1a3865;
+    color: var(--color-primary);
   }
   
   /* ===== CTA SECTION ===== */
@@ -1011,7 +1019,7 @@ const ventajas = [
   .cta-bg {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #1a3865 0%, #0f2240 50%, #1a3865 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #0f2240 50%, var(--color-primary) 100%);
   }
   
   .cta-pattern {
@@ -1034,7 +1042,7 @@ const ventajas = [
   }
   
   .line-divider.light {
-    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
   }
   
   .cta-content p {
@@ -1047,8 +1055,8 @@ const ventajas = [
   }
   
   .btn-premium--light {
-    background: #95cca5;
-    color: #1a3865;
+    background: var(--color-accent);
+    color: var(--color-primary);
     box-shadow: 0 10px 30px rgba(149, 204, 165, 0.3);
   }
   
