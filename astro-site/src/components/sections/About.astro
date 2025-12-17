@@ -81,7 +81,7 @@
             const easeOutExpo = 1 - Math.pow(2, -10 * progress);
             const currentValue = Math.floor(target * easeOutExpo);
             
-            counter.textContent = currentValue + '+';
+            counter.textContent = '+' + currentValue;
             
             if (progress < 1) {
               requestAnimationFrame(updateCounter);
