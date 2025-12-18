@@ -1,0 +1,315 @@
+---
+// Main Services Section - Two distinct entry points
+---
+
+<section class="main-services-section" id="main-services">
+  <div class="services-container">
+    
+    <!-- Medical Writing Card -->
+    <a href="/medical-writing" class="service-split-card service-medical">
+      <div class="card-bg-gradient"></div>
+      <div class="card-particles">
+        <span class="p-dot"></span><span class="p-dot"></span><span class="p-dot"></span>
+      </div>
+      
+      <div class="card-content">
+        <div class="card-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+        </div>
+        <h2 class="card-title">Medical Writing</h2>
+        <div class="card-divider"></div>
+        <p class="card-desc">Integramos la ciencia en tus proyectos healthcare. Contenidos rigurosos y creativos.</p>
+        <div class="card-cta">
+          <span>Explorar servicios</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </div>
+      
+      <div class="hover-overlay"></div>
+    </a>
+    
+    <!-- Healthcare Strategy Card -->
+    <a href="/estrategia-healthcare" class="service-split-card service-strategy">
+      <div class="card-bg-gradient"></div>
+      <div class="card-particles">
+        <span class="p-dot"></span><span class="p-dot"></span><span class="p-dot"></span>
+      </div>
+      
+      <div class="card-content">
+        <div class="card-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M16 12l-4-4-4 4"></path>
+            <path d="M12 16V8"></path>
+          </svg>
+        </div>
+        <h2 class="card-title">Estrategia Healthcare</h2>
+        <div class="card-divider"></div>
+        <p class="card-desc">Asesoramos desde el conocimiento científico. Estrategias sólidas y diferenciadoras.</p>
+        <div class="card-cta">
+          <span>Explorar servicios</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </div>
+      
+      <div class="hover-overlay"></div>
+    </a>
+    
+  </div>
+</section>
+
+<script>
+  function initCardAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    document.querySelectorAll('.service-split-card').forEach((card, index) => {
+      card.style.setProperty('--delay', `${index * 0.2}s`);
+      observer.observe(card);
+    });
+  }
+  
+  initCardAnimations();
+  document.addEventListener('astro:page-load', initCardAnimations);
+</script>
+
+<style>
+  .main-services-section {
+    position: relative;
+    z-index: 10;
+    margin-top: -20px; /* Slight overlap or pull up if needed, or adjust spacing */
+    background: var(--color-bg-body, #fff);
+  }
+
+  .services-container {
+    display: flex;
+    width: 100%;
+    min-height: 400px; /* Substantial height */
+  }
+
+  @media (max-width: 900px) {
+    .services-container {
+      flex-direction: column;
+    }
+  }
+
+  /* ===== CARD STYLES ===== */
+  .service-split-card {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  
+  /* Background gradients */
+  .service-medical {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2f6 100%);
+    border-right: 1px solid rgba(0,0,0,0.05);
+  }
+  
+  .service-strategy {
+    background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+  }
+  
+  /* Dark mode overrides */
+  :global([data-theme="dark"]) .service-medical {
+    background: linear-gradient(135deg, #0f2240 0%, #0a1628 100%);
+    border-right: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  
+  :global([data-theme="dark"]) .service-strategy {
+    background: linear-gradient(135deg, #1a3865 0%, #0f2240 100%);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  
+  /* Hover Overlay */
+  .hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(149, 204, 165, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+  
+  .service-split-card:hover .hover-overlay {
+    opacity: 1;
+  }
+  
+  /* Content Elements */
+  .card-content {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .service-split-card.visible .card-content {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: var(--delay);
+  }
+  
+  .card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(149, 204, 165, 0.15);
+    color: #1a3865;
+    margin-bottom: 24px;
+    transition: all 0.4s ease;
+  }
+  
+  :global([data-theme="dark"]) .card-icon {
+    color: #95cca5;
+    background: rgba(149, 204, 165, 0.1);
+  }
+  
+  .service-split-card:hover .card-icon {
+    transform: scale(1.1) rotate(5deg);
+    background: rgba(149, 204, 165, 0.3);
+  }
+
+  .card-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: #1a3865;
+    margin-bottom: 16px;
+    transition: color 0.3s ease;
+  }
+  
+  :global([data-theme="dark"]) .card-title {
+    color: #fff;
+  }
+  
+  .card-divider {
+    width: 60px;
+    height: 3px;
+    background: #95cca5;
+    margin: 0 auto 20px;
+    transform: scaleX(0.5);
+    transition: transform 0.4s ease;
+  }
+  
+  .service-split-card:hover .card-divider {
+    transform: scaleX(1.2);
+  }
+  
+  .card-desc {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #4a5568;
+    margin-bottom: 32px;
+    padding: 0 10%;
+  }
+  
+  :global([data-theme="dark"]) .card-desc {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: 2px solid #1a3865;
+    color: #1a3865;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+  
+  :global([data-theme="dark"]) .card-cta {
+    border-color: #95cca5;
+    color: #95cca5;
+  }
+  
+  .service-split-card:hover .card-cta {
+    background: #1a3865;
+    color: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  
+  :global([data-theme="dark"]) .service-split-card:hover .card-cta {
+    background: #95cca5;
+    color: #1a3865;
+  }
+
+  /* Particles */
+  .card-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .p-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #95cca5;
+    border-radius: 50%;
+    opacity: 0;
+  }
+  
+  .service-split-card:hover .p-dot {
+    opacity: 0.4;
+    animation: floatUp 3s infinite ease-in-out;
+  }
+  
+  .p-dot:nth-child(1) { left: 20%; bottom: -10px; animation-delay: 0s; }
+  .p-dot:nth-child(2) { left: 50%; bottom: -10px; animation-delay: 1.5s; width: 4px; height: 4px; }
+  .p-dot:nth-child(3) { left: 80%; bottom: -10px; animation-delay: 0.8s; }
+  
+  @keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { transform: translateY(-100px); opacity: 0; }
+  }
+  
+  @media (max-width: 900px) {
+    .service-medical {
+      border-right: none;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .card-title {
+      font-size: 2rem;
+    }
+    
+    .service-split-card {
+      padding: 60px 24px;
+    }
+  }
+</style>

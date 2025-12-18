@@ -725,70 +725,7 @@ h3 {
     color: var(--color-white);
 }
 
-/* Contact Section - Dark Mode Fix (using ID for max specificity) */
-[data-theme="dark"] #contact,
-[data-theme="dark"] #contact.contact-section,
-[data-theme="dark"] .contact-section {
-    background: #1a3865 !important;
-    background-color: #1a3865 !important;
-}
 
-[data-theme="dark"] #contact .form-card,
-[data-theme="dark"] .contact-section .form-card {
-    background: var(--color-bg-card) !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="dark"] #contact .form-control,
-[data-theme="dark"] .contact-section .form-control {
-    background: rgba(0, 0, 0, 0.2) !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-    color: #ffffff !important;
-}
-
-[data-theme="dark"] #contact .form-control::placeholder,
-[data-theme="dark"] .contact-section .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.4) !important;
-}
-
-[data-theme="dark"] #contact .trust-indicators,
-[data-theme="dark"] .contact-section .trust-indicators {
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-}
-
-[data-theme="dark"] #contact .form-legal,
-[data-theme="dark"] .contact-section .form-legal {
-    background: transparent !important;
-    padding: 0 !important;
-}
-
-[data-theme="dark"] #contact .contact-intro,
-[data-theme="dark"] .contact-section .contact-intro {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-[data-theme="dark"] #contact .trust-item,
-[data-theme="dark"] .contact-section .trust-item {
-    color: rgba(255, 255, 255, 0.9);
-}
-
-[data-theme="dark"] #contact .form-checkbox,
-[data-theme="dark"] .contact-section .form-checkbox {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-[data-theme="dark"] #contact .form-checkbox a,
-[data-theme="dark"] .contact-section .form-checkbox a {
-    color: #95cca5;
-}
-
-[data-theme="dark"] #contact .form-legal,
-[data-theme="dark"] .contact-section .form-legal {
-    color: rgba(255, 255, 255, 0.5);
-}
 
 /* About Section */
 .about-section .row {
@@ -1848,4 +1785,37 @@ html {
     display: none;
     width: 0;
     height: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Force Dark Mode Overrides (High Specificity)
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] #contact {
+    background-color: #1a3865 !important;
+    background: #1a3865 !important;
+}
+
+[data-theme="dark"] #contact .form-card {
+    background-color: transparent !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: none !important;
+}
+
+[data-theme="dark"] #contact .contact-info h2,
+[data-theme="dark"] #contact .intro-lead {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] #contact .contact-intro {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+[data-theme="dark"] #contact .form-control {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] #contact .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
 }

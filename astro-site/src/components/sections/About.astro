@@ -61,8 +61,8 @@
     }
 
     const observerOptions = {
-      threshold: isMobile ? 0.1 : 0.5,
-      rootMargin: isMobile ? '100px 0px' : '0px'
+      threshold: isMobile ? 0.3 : 0.5,
+      rootMargin: '0px'
     };
     
     const observer = new IntersectionObserver((entries) => {
@@ -70,23 +70,34 @@
         if (entry.isIntersecting) {
           const counter = entry.target as HTMLElement;
           const target = parseInt(counter.dataset.target || '0');
-          const duration = 2000;
+          const duration = 1000;
           const startTime = performance.now();
           
           const updateCounter = (currentTime: number) => {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
             
-            // Easing function for smooth animation
-            const easeOutExpo = 1 - Math.pow(2, -10 * progress);
-            const currentValue = Math.floor(target * easeOutExpo);
+            // Use easeOutQuart for a natural but quicker finish feel
+            const ease = 1 - Math.pow(1 - progress, 4);
+            
+            // Use round so we snap to the target number (10) as soon as we are close enough
+            // This prevents the counter from "getting stuck" on 9
+            let currentValue = Math.round(target * ease);
+            
+            if (currentValue > target) currentValue = target;
             
             counter.textContent = '+' + currentValue;
+            
+            // Trigger flash exactly when we hit the target
+            if (currentValue === target && !counter.classList.contains('flash-effect')) {
+              counter.classList.add('flash-effect');
+            }
             
             if (progress < 1) {
               requestAnimationFrame(updateCounter);
             }
           };
+
           
           requestAnimationFrame(updateCounter);
           observer.unobserve(counter);
@@ -149,6 +160,26 @@
     text-transform: uppercase;
     letter-spacing: 1.5px;
     line-height: 1.4;
+  }
+  
+  .flash-effect {
+    animation: numberFlash 0.5s ease-out forwards;
+  }
+  
+  @keyframes numberFlash {
+    0% {
+      text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+      transform: scale(1);
+    }
+    50% {
+      text-shadow: 0 0 20px #fff, 0 0 40px #95cca5;
+      color: #fff;
+      transform: scale(1.15);
+    }
+    100% {
+      text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+      transform: scale(1);
+    }
   }
   
   /* ===== CONTENT ===== */
