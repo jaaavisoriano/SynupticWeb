@@ -132,15 +132,30 @@
   }
   
   /* Dark mode overrides */
-  :global([data-theme="dark"]) .service-medical {
-    background: linear-gradient(135deg, #0f2240 0%, #0a1628 100%);
-    border-right: 1px solid rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+  /* Dark mode overrides */
+  :global([data-theme="dark"]) .service-medical,
+  :global([data-theme="dark"]) .service-strategy {
+    background: var(--color-bg-body); /* Matches the rest of the site */
+    border-color: rgba(255,255,255,0.05);
   }
   
-  :global([data-theme="dark"]) .service-strategy {
-    background: linear-gradient(135deg, #1a3865 0%, #0f2240 100%);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+  :global([data-theme="dark"]) .service-medical {
+    border-right: 1px solid rgba(255,255,255,0.05); /* Keep separator */
+  }
+  
+  /* Robust Dark Mode Hover Effect - Shift towards Mint Green */
+  :global([data-theme="dark"]) .service-split-card:hover {
+    /* Subtle gradient from Corporate Blue to a darker shade of Mint Green */
+    background: linear-gradient(135deg, var(--color-primary) 0%, #3e6b63 100%);
+    z-index: 1;
+  }
+
+  /* Specific border adjustments for mobile in dark mode */
+  @media (max-width: 900px) {
+    :global([data-theme="dark"]) .service-medical {
+      border-right: none;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
   }
   
   /* Hover Overlay */
