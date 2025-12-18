@@ -20,7 +20,7 @@
   <div class="video-container" id="video-container">
     <iframe 
       id="vimeo-player"
-      src="https://player.vimeo.com/video/902229971?autoplay=1&loop=1&muted=1&background=1&quality=720p"
+      src="https://player.vimeo.com/video/902229971?autoplay=1&loop=1&muted=1&background=1&quality=720p&playsinline=1&api=1"
       frameborder="0"
       allow="autoplay; fullscreen; picture-in-picture"
       allowfullscreen
@@ -94,42 +94,46 @@
   function initVideoLoader() {
     const placeholder = document.getElementById('video-placeholder');
     const videoContainer = document.getElementById('video-container');
-    const iframe = document.getElementById('vimeo-player');
+    const iframe = document.getElementById('vimeo-player') as HTMLIFrameElement;
     
     if (!iframe || !placeholder || !videoContainer) return;
     
-    // Set a minimum display time for the placeholder (to avoid flashing)
-    const minDisplayTime = 1500; // 1.5 seconds minimum
+    let isLoaded = false;
     const startTime = Date.now();
-    
-    // Function to hide placeholder with smooth transition
+
     const hidePlaceholder = () => {
+      if (isLoaded) return;
+      isLoaded = true;
+
       const elapsed = Date.now() - startTime;
+      const minDisplayTime = 800; // Reduced for faster feel
       const remainingTime = Math.max(0, minDisplayTime - elapsed);
       
       setTimeout(() => {
         // Add loaded class to trigger smooth transition
         videoContainer.classList.add('video-loaded');
-        
-        // Fade out placeholder
         placeholder.classList.add('placeholder-hidden');
         
-        // Remove placeholder from DOM after animation completes
+        // Remove placeholder after animation
         setTimeout(() => {
           placeholder.style.display = 'none';
         }, 1000);
       }, remainingTime);
     };
-    
-    // Listen for iframe load event
-    iframe.addEventListener('load', hidePlaceholder);
-    
-    // Fallback: Hide placeholder after maximum wait time
-    setTimeout(() => {
-      if (!videoContainer.classList.contains('video-loaded')) {
+
+    // 1. Listen for Vimeo Message API
+    window.addEventListener('message', (event) => {
+      if (event.origin.includes('vimeo.com')) {
+        // Any message from Vimeo means the player is active
         hidePlaceholder();
       }
-    }, 5000); // 5 second maximum wait
+    });
+
+    // 2. Standard load event as fallback
+    iframe.addEventListener('load', hidePlaceholder);
+
+    // 3. Safety net (shorter)
+    setTimeout(hidePlaceholder, 3000);
   }
   
   function initLightbox() {
@@ -180,11 +184,7 @@
     });
   }
   
-  // Initialize on page load
-  initVideoLoader();
-  initLightbox();
-  
-  // Re-initialize after Astro View Transitions
+  // Initialize on page load (handles initial load and view transitions)
   document.addEventListener('astro:page-load', () => {
     initVideoLoader();
     initLightbox();
@@ -378,6 +378,19 @@
   }
   
   /* ===== VIDEO CONTAINER STYLES ===== */
+  .video-container {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: #000;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+
+  .video-container.video-loaded {
+    opacity: 1;
+  }
+
   .video-container iframe {
     position: absolute;
     top: 50%;

@@ -158,18 +158,27 @@
     }
   }
   
-  /* Hover Overlay */
+  /* Hover Overlay - Light Mode Enhanced */
   .hover-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(149, 204, 165, 0.1), transparent);
+    /* Stronger mint gradient for light mode */
+    background: linear-gradient(135deg, rgba(149, 204, 165, 0.25), rgba(149, 204, 165, 0.05));
     opacity: 0;
     transition: opacity 0.5s ease;
     pointer-events: none;
+    z-index: 1; /* Ensure overlay sits on top of bg but below content */
   }
   
+  /* Make light mode hover significantly more visible */
   .service-split-card:hover .hover-overlay {
     opacity: 1;
+  }
+
+  /* Add a subtle mint border glow on hover for light mode */
+  .service-split-card:hover {
+    box-shadow: inset 0 0 0 1px rgba(149, 204, 165, 0.4);
+    z-index: 2; /* Bring active card to front */
   }
   
   /* Content Elements */
