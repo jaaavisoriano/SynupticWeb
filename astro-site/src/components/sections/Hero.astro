@@ -6,15 +6,16 @@
   <!-- Native HTML5 Video with Poster (No JS loader needed) -->
   <div class="video-container" id="video-container">
     <video 
+      id="main-hero-video"
       class="video-bg"
       autoplay 
       muted 
       loop 
       playsinline 
+      webkit-playsinline
       preload="auto"
-      poster="/images/intro-poster.jpg"
     >
-      <source src="/videos/VIDEO%20LARGO%20SYNUPTIC.mov">
+      <source src="/videos/synuptic-video.mp4" type="video/mp4">
       <!-- Fallback message -->
       Tu navegador no soporta video HTML5.
     </video>
@@ -83,64 +84,143 @@
 </div>
 
 <script>
-  function initLightbox() {
-    const openBtn = document.getElementById('open-lightbox');
-    const closeBtn = document.getElementById('close-lightbox');
-    const lightbox = document.getElementById('video-lightbox');
-    const overlay = document.getElementById('lightbox-overlay');
-    const lightboxVideo = document.getElementById('lightbox-video') as HTMLIFrameElement;
-    
-    if (!openBtn || !closeBtn || !lightbox || !overlay || !lightboxVideo) return;
-    
-    const vimeoFullUrl = 'https://player.vimeo.com/video/902229971?autoplay=1&loop=0&muted=0&quality=1080p';
-    
-    const openLightbox = () => {
-      // Set video source with autoplay and sound
-      lightboxVideo.src = vimeoFullUrl;
-      
-      // Show lightbox
-      lightbox.classList.add('is-open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      
-      // Lock body scroll
-      document.body.style.overflow = 'hidden';
-    };
-    
-    const closeLightbox = () => {
-      // Hide lightbox
-      lightbox.classList.remove('is-open');
-      lightbox.setAttribute('aria-hidden', 'true');
-      
-      // Stop video by clearing src
-      lightboxVideo.src = '';
-      
-      // Unlock body scroll
-      document.body.style.overflow = '';
-    };
-    
-    // Event listeners
-    openBtn.addEventListener('click', openLightbox);
-    closeBtn.addEventListener('click', closeLightbox);
-    overlay.addEventListener('click', closeLightbox);
-    
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
-        closeLightbox();
+  /**
+   * Controlador Video Hero - Versión Agresiva (Safe Autoplay)
+   * Prioridad absoluta: que arranque al cargar.
+   */
+  class HeroVideoController {
+    private video: HTMLVideoElement | null;
+    private attempts: number = 0;
+    private maxAttempts: number = 20; // Intentar durante ~3 segundos aprox
+
+    constructor(videoId: string) {
+      this.video = document.getElementById(videoId) as HTMLVideoElement;
+      if (this.video) {
+        this.init();
       }
+    }
+
+    private init() {
+      if (!this.video) return;
+
+      // 1. Configuración Hardware-Level (Propiedades directas)
+      this.video.muted = true;
+      this.video.defaultMuted = true;
+      this.video.playsInline = true;
+      
+      // 2. Configuración DOM-Level (Atributos)
+      // Importante: setAttribute fuerza al navegador a reconocer el estado
+      this.video.setAttribute('muted', '');
+      this.video.setAttribute('playsinline', '');
+      this.video.setAttribute('autoplay', '');
+
+      // 3. Estrategia de Arranque Inmediato (Loop Polling)
+      // No confiamos solo en eventos. Insistimos un poco al principio.
+      this.startForceLoop();
+
+      // 4. Listeners de respaldo
+      // Si por alguna razón el loop falla, el cambio de pestaña o click nos salva
+      document.addEventListener('visibilitychange', () => {
+         if (document.visibilityState === 'visible') this.forcePlay();
+      });
+      document.addEventListener('click', () => this.forcePlay(), { once: true, passive: true });
+      document.addEventListener('scroll', () => this.forcePlay(), { once: true, passive: true });
+    }
+
+    private startForceLoop() {
+      // Intentamos reproducir inmediatamente
+      this.forcePlay();
+
+      // Y programamos reintentos rápidos
+      const interval = setInterval(() => {
+        if (this.video && !this.video.paused) {
+          console.log('[HeroCtrl] Video arrancado correctamente. Deteniendo loop.');
+          clearInterval(interval);
+          this.video.classList.add('is-playing');
+          return;
+        }
+
+        if (this.attempts >= this.maxAttempts) {
+          console.warn('[HeroCtrl] Autoplay timeout. Esperando interacción.');
+          clearInterval(interval);
+          return;
+        }
+
+        this.forcePlay();
+        this.attempts++;
+      }, 150);
+    }
+
+    private async forcePlay() {
+      if (!this.video || !this.video.paused) return;
+      
+      // Re-asegurar mute en cada intento (vital para Chrome/Safari)
+      this.video.muted = true; 
+      
+      try {
+        // Reset genérico por si el video está "terminado" o atascado
+        if (this.video.readyState >= 1) {
+             const playPromise = this.video.play();
+             if (playPromise !== undefined) {
+                 await playPromise;
+             }
+        } else {
+             this.video.load(); // Kickstart si está en readyState 0
+        }
+      } catch (err) {
+        // Silenciamos errores de consola para no ensuciar, 
+        // ya sabemos que estamos forzando.
+      }
+    }
+  }
+
+  // --- Lightbox Logic ---
+  function initLightbox() {
+    const elements = {
+      openBtn: document.getElementById('open-lightbox'),
+      closeBtn: document.getElementById('close-lightbox'),
+      lightbox: document.getElementById('video-lightbox'),
+      overlay: document.getElementById('lightbox-overlay'),
+      video: document.getElementById('lightbox-video') as HTMLIFrameElement
+    };
+    
+    if (!elements.openBtn) return;
+    
+    const { openBtn, closeBtn, lightbox, overlay, video } = elements;
+    const vimeoUrl = 'https://player.vimeo.com/video/902229971?autoplay=1&loop=0&muted=0&quality=1080p';
+    
+    const toggle = (open: boolean) => {
+      if (open) {
+        video.src = vimeoUrl;
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      } else {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        video.src = '';
+        document.body.style.overflow = '';
+      }
+    };
+    
+    openBtn.addEventListener('click', () => toggle(true));
+    closeBtn.addEventListener('click', () => toggle(false));
+    overlay.addEventListener('click', () => toggle(false));
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) toggle(false);
     });
   }
-  
-  // Initialize on page load (handles initial load and view transitions)
-  document.addEventListener('astro:page-load', () => {
+
+  // --- Inicialización ---
+  const launch = () => {
     initLightbox();
-    
-    // Force video playback to ensure it works even if autoplay failed initially
-    const video = document.querySelector('.video-bg') as HTMLVideoElement;
-    if (video) {
-      video.play().catch(e => console.log('Video play failed:', e));
-    }
-  });
+    // @ts-ignore
+    window.heroCtrl = new HeroVideoController('main-hero-video');
+  };
+
+  document.addEventListener('astro:page-load', launch);
+  document.addEventListener('DOMContentLoaded', launch);
 </script>
 
 <style>
@@ -165,22 +245,26 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: #000;
+    background: #0a1628;
   }
 
-  .video-bg {
+  #main-hero-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;
+    pointer-events: none; /* Crucial para evitar pausas por clic */
+    
+    /* Aseguramos que el video ocupe espacio incluso si no ha cargado */
+    display: block; 
+    background: #0a1628;
   }
   
   /* Responsive adjustments if needed */
   @media (max-width: 768px) {
-    .video-bg {
-      /* Example: focus specific part of video or just cover */
+    #main-hero-video {
       object-fit: cover;
     }
   }
@@ -531,6 +615,6 @@
     .lightbox-close svg {
       width: 24px;
       height: 24px;
-    }
+      }
   }
 </style>

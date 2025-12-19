@@ -3,6 +3,7 @@ import { ClientRouter } from 'astro:transitions';
 import ContactModal from '../components/ContactModal.astro';
 import SEO from '../components/SEO.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
+import Preloader from '../components/Preloader.astro';
 
 
 interface Props {
@@ -51,6 +52,7 @@ const {
   <ClientRouter />
 </head>
 <body>
+  <Preloader />
   <ReadingProgress />
   <slot />
   <ContactModal />
