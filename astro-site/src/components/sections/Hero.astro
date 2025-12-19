@@ -3,29 +3,21 @@
 ---
 
 <section class="video-intro section" id="hero-section">
-  <!-- Placeholder that shows while video loads -->
-  <div class="video-placeholder" id="video-placeholder">
-    <!-- Gradient background with subtle animation -->
-    <div class="placeholder-gradient"></div>
-    
-    <!-- Subtle floating particles for premium feel -->
-    <div class="floating-particles">
-      <span class="particle"></span>
-      <span class="particle"></span>
-      <span class="particle"></span>
-    </div>
-  </div>
-  
-  <!-- Vimeo background video container (muted, looping) -->
+  <!-- Native HTML5 Video with Poster (No JS loader needed) -->
   <div class="video-container" id="video-container">
-    <iframe 
-      id="vimeo-player"
-      src="https://player.vimeo.com/video/902229971?autoplay=1&loop=1&muted=1&background=1&quality=720p&playsinline=1&api=1"
-      frameborder="0"
-      allow="autoplay; fullscreen; picture-in-picture"
-      allowfullscreen
-      title="Synuptic Video"
-    ></iframe>
+    <video 
+      class="video-bg"
+      autoplay 
+      muted 
+      loop 
+      playsinline 
+      preload="auto"
+      poster="/images/intro-poster.jpg"
+    >
+      <source src="/videos/VIDEO%20LARGO%20SYNUPTIC.mov">
+      <!-- Fallback message -->
+      Tu navegador no soporta video HTML5.
+    </video>
   </div>
   
   <!-- Premium Overlay with Content -->
@@ -91,51 +83,6 @@
 </div>
 
 <script>
-  function initVideoLoader() {
-    const placeholder = document.getElementById('video-placeholder');
-    const videoContainer = document.getElementById('video-container');
-    const iframe = document.getElementById('vimeo-player') as HTMLIFrameElement;
-    
-    if (!iframe || !placeholder || !videoContainer) return;
-    
-    let isLoaded = false;
-    const startTime = Date.now();
-
-    const hidePlaceholder = () => {
-      if (isLoaded) return;
-      isLoaded = true;
-
-      const elapsed = Date.now() - startTime;
-      const minDisplayTime = 800; // Reduced for faster feel
-      const remainingTime = Math.max(0, minDisplayTime - elapsed);
-      
-      setTimeout(() => {
-        // Add loaded class to trigger smooth transition
-        videoContainer.classList.add('video-loaded');
-        placeholder.classList.add('placeholder-hidden');
-        
-        // Remove placeholder after animation
-        setTimeout(() => {
-          placeholder.style.display = 'none';
-        }, 1000);
-      }, remainingTime);
-    };
-
-    // 1. Listen for Vimeo Message API
-    window.addEventListener('message', (event) => {
-      if (event.origin.includes('vimeo.com')) {
-        // Any message from Vimeo means the player is active
-        hidePlaceholder();
-      }
-    });
-
-    // 2. Standard load event as fallback
-    iframe.addEventListener('load', hidePlaceholder);
-
-    // 3. Safety net (shorter)
-    setTimeout(hidePlaceholder, 3000);
-  }
-  
   function initLightbox() {
     const openBtn = document.getElementById('open-lightbox');
     const closeBtn = document.getElementById('close-lightbox');
@@ -186,8 +133,13 @@
   
   // Initialize on page load (handles initial load and view transitions)
   document.addEventListener('astro:page-load', () => {
-    initVideoLoader();
     initLightbox();
+    
+    // Force video playback to ensure it works even if autoplay failed initially
+    const video = document.querySelector('.video-bg') as HTMLVideoElement;
+    if (video) {
+      video.play().catch(e => console.log('Video play failed:', e));
+    }
   });
 </script>
 
@@ -208,206 +160,28 @@
     }
   }
   
-  /* ===== PLACEHOLDER STYLES ===== */
-  .video-placeholder {
-    position: absolute;
-    inset: 0;
-    z-index: 3; /* Below hero-overlay (z-index: 10) so content shows in front */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), 
-                filter 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .video-placeholder.placeholder-hidden {
-    opacity: 0;
-    filter: blur(10px);
-    pointer-events: none;
-  }
-  
-  /* Animated gradient background */
-  .placeholder-gradient {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      135deg, 
-      #0a1628 0%, 
-      #1a3865 25%, 
-      #0f2240 50%, 
-      #1a3865 75%, 
-      #0a1628 100%
-    );
-    background-size: 400% 400%;
-    animation: gradientShift 8s ease-in-out infinite;
-  }
-  
-  @keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-  
-  /* Loading indicator container */
-  .loading-indicator {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-  }
-  
-  /* Animated ring loader */
-  .loading-ring {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    animation: ringRotate 3s linear infinite;
-  }
-  
-  .ring-segment {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 3px solid transparent;
-    border-radius: 50%;
-  }
-  
-  .ring-segment:nth-child(1) {
-    border-top-color: rgba(149, 204, 165, 0.8);
-    animation: ringPulse 1.5s ease-in-out infinite;
-  }
-  
-  .ring-segment:nth-child(2) {
-    border-right-color: rgba(149, 204, 165, 0.5);
-    animation: ringPulse 1.5s ease-in-out 0.2s infinite;
-  }
-  
-  .ring-segment:nth-child(3) {
-    border-bottom-color: rgba(149, 204, 165, 0.3);
-    animation: ringPulse 1.5s ease-in-out 0.4s infinite;
-  }
-  
-  @keyframes ringRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  
-  @keyframes ringPulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.6; }
-  }
-  
-  /* Center pulse effect */
-  .loading-pulse {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(149, 204, 165, 0.6) 0%, transparent 70%);
-    animation: centerPulse 2s ease-in-out infinite;
-  }
-  
-  @keyframes centerPulse {
-    0%, 100% { 
-      transform: scale(0.8); 
-      opacity: 0.5;
-    }
-    50% { 
-      transform: scale(1.2); 
-      opacity: 1;
-    }
-  }
-  
-  /* Floating particles for premium feel */
-  .floating-particles {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  
-  .particle {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: rgba(149, 204, 165, 0.4);
-    border-radius: 50%;
-    animation: float 6s ease-in-out infinite;
-  }
-  
-  .particle:nth-child(1) {
-    left: 20%;
-    top: 30%;
-    animation-delay: 0s;
-    animation-duration: 7s;
-  }
-  
-  .particle:nth-child(2) {
-    left: 70%;
-    top: 60%;
-    animation-delay: 2s;
-    animation-duration: 8s;
-  }
-  
-  .particle:nth-child(3) {
-    left: 50%;
-    top: 80%;
-    animation-delay: 4s;
-    animation-duration: 6s;
-  }
-  
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0) translateX(0) scale(1);
-      opacity: 0.3;
-    }
-    25% {
-      transform: translateY(-30px) translateX(10px) scale(1.2);
-      opacity: 0.6;
-    }
-    50% {
-      transform: translateY(-50px) translateX(-15px) scale(1);
-      opacity: 0.8;
-    }
-    75% {
-      transform: translateY(-20px) translateX(5px) scale(0.8);
-      opacity: 0.5;
-    }
-  }
-  
   /* ===== VIDEO CONTAINER STYLES ===== */
   .video-container {
     position: absolute;
     inset: 0;
     z-index: 1;
     background: #000;
-    opacity: 0;
-    transition: opacity 1.2s ease;
   }
 
-  .video-container.video-loaded {
-    opacity: 1;
-  }
-
-  .video-container iframe {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+  .video-bg {
+    width: 100%;
     height: 100%;
-    width: 177.777%;
-    min-width: 100%;
-    min-height: 56.25vw;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   
-  /* En móvil, hacer el video más ancho para cubrir sin bordes */
+  /* Responsive adjustments if needed */
   @media (max-width: 768px) {
-    .video-container iframe {
-      width: 220%;
-      min-height: 100%;
+    .video-bg {
+      /* Example: focus specific part of video or just cover */
+      object-fit: cover;
     }
   }
   
