@@ -60,10 +60,18 @@
   
   if (preloader) {
     const minTime = 2000; // 2 seconds
+    const fadeOutDuration = 800; // CSS transition duration (0.8s)
     const startTime = Date.now();
 
     const finishAnimation = () => {
       preloader.classList.add('fade-out');
+      
+      // Emitir evento casi inmediatamente al iniciar el fade-out
+      // Esto permite que el video arranque MIENTRAS el preloader se desvanece
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('preloaderComplete'));
+        console.log('[Preloader] Signal to start video sent.');
+      }, 100);
     };
 
     const handleLoad = () => {

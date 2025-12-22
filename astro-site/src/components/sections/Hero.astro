@@ -85,13 +85,14 @@
 
 <script>
   /**
-   * Controlador Video Hero - Versión Agresiva (Safe Autoplay)
-   * Prioridad absoluta: que arranque al cargar.
+   * Controlador Video Hero - Sincronizado con Preloader
+   * El vídeo espera a que el preloader desaparezca antes de reproducirse.
    */
   class HeroVideoController {
     private video: HTMLVideoElement | null;
     private attempts: number = 0;
-    private maxAttempts: number = 20; // Intentar durante ~3 segundos aprox
+    private maxAttempts: number = 20;
+    private preloaderFinished: boolean = false;
 
     constructor(videoId: string) {
       this.video = document.getElementById(videoId) as HTMLVideoElement;
@@ -109,25 +110,48 @@
       this.video.playsInline = true;
       
       // 2. Configuración DOM-Level (Atributos)
-      // Importante: setAttribute fuerza al navegador a reconocer el estado
       this.video.setAttribute('muted', '');
       this.video.setAttribute('playsinline', '');
-      this.video.setAttribute('autoplay', '');
+      // IMPORTANTE: No ponemos autoplay aún, esperamos al preloader
+      this.video.removeAttribute('autoplay');
+      
+      // 3. Pausar el video para asegurarnos de que no se reproduzca
+      this.video.pause();
+      
+      // 4. Comprobar si el preloader existe (puede no estar en navegaciones internas)
+      const preloader = document.getElementById('premium-preloader');
+      const preloaderVisible = preloader && !preloader.classList.contains('fade-out');
+      
+      if (preloaderVisible) {
+        // Esperar al evento del preloader
+        console.log('[HeroCtrl] Esperando a que el preloader termine...');
+        window.addEventListener('preloaderComplete', () => {
+          console.log('[HeroCtrl] Preloader terminado. Iniciando reproducción del video.');
+          this.preloaderFinished = true;
+          this.startForceLoop();
+        }, { once: true });
+      } else {
+        // El preloader ya no está visible (navegación interna o ya terminó)
+        console.log('[HeroCtrl] No hay preloader activo. Iniciando video inmediatamente.');
+        this.preloaderFinished = true;
+        this.startForceLoop();
+      }
 
-      // 3. Estrategia de Arranque Inmediato (Loop Polling)
-      // No confiamos solo en eventos. Insistimos un poco al principio.
-      this.startForceLoop();
-
-      // 4. Listeners de respaldo
-      // Si por alguna razón el loop falla, el cambio de pestaña o click nos salva
+      // 5. Listeners de respaldo
       document.addEventListener('visibilitychange', () => {
-         if (document.visibilityState === 'visible') this.forcePlay();
+         if (document.visibilityState === 'visible' && this.preloaderFinished) this.forcePlay();
       });
-      document.addEventListener('click', () => this.forcePlay(), { once: true, passive: true });
-      document.addEventListener('scroll', () => this.forcePlay(), { once: true, passive: true });
+      document.addEventListener('click', () => {
+        if (this.preloaderFinished) this.forcePlay();
+      }, { once: true, passive: true });
+      document.addEventListener('scroll', () => {
+        if (this.preloaderFinished) this.forcePlay();
+      }, { once: true, passive: true });
     }
 
     private startForceLoop() {
+      if (!this.preloaderFinished) return;
+      
       // Intentamos reproducir inmediatamente
       this.forcePlay();
 
@@ -152,24 +176,22 @@
     }
 
     private async forcePlay() {
-      if (!this.video || !this.video.paused) return;
+      if (!this.video || !this.video.paused || !this.preloaderFinished) return;
       
       // Re-asegurar mute en cada intento (vital para Chrome/Safari)
       this.video.muted = true; 
       
       try {
-        // Reset genérico por si el video está "terminado" o atascado
         if (this.video.readyState >= 1) {
              const playPromise = this.video.play();
              if (playPromise !== undefined) {
                  await playPromise;
              }
         } else {
-             this.video.load(); // Kickstart si está en readyState 0
+             this.video.load();
         }
       } catch (err) {
-        // Silenciamos errores de consola para no ensuciar, 
-        // ya sabemos que estamos forzando.
+        // Silenciamos errores de consola
       }
     }
   }
