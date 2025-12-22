@@ -1,0 +1,502 @@
+---
+// BlogCTA section - Premium section following About/Trayectoria style
+---
+
+<section class="section blog-cta-section" id="blog-cta">
+  <div class="cesis_container">
+    <div class="blog-cta-grid">
+      <div class="blog-cta__image reveal-scale">
+        <div class="image-glow"></div>
+        <div class="blog-visual">
+          <div class="blog-visual__icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M7 11H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M7 15H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="blog-visual__articles">
+            <div class="blog-article-preview">
+              <div class="blog-article-preview__thumb"></div>
+              <div class="blog-article-preview__lines">
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div class="blog-article-preview">
+              <div class="blog-article-preview__thumb"></div>
+              <div class="blog-article-preview__lines">
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div class="blog-article-preview">
+              <div class="blog-article-preview__thumb"></div>
+              <div class="blog-article-preview__lines">
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="blog-cta__content reveal-right">
+        <!-- Stats badge -->
+        <div class="blog-stats">
+          <svg class="stat-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="stat-text">Blog<br>Synuptic</span>
+        </div>
+        
+        <h2>Insights exclusivos del sector healthcare</h2>
+        <div class="line-divider"></div>
+        <p>
+          Análisis profundos, tendencias emergentes y las mejores prácticas en 
+          <strong>medical writing</strong> y <strong>comunicación científica</strong>. 
+          Contenido estratégico creado por expertos del sector para profesionales 
+          que buscan <strong>liderar la conversación</strong> en salud.
+        </p>
+        
+        <div class="blog-cta__actions">
+          <a href="/blog" class="btn btn-primary btn-pulse">
+            <span>Acceder al Blog</span>
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <span class="cta-badge">Acceso gratuito</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Reveal animations observer
+  function initBlogReveal() {
+    const elements = document.querySelectorAll('.blog-cta-section .reveal-scale, .blog-cta-section .reveal-right');
+    
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    elements.forEach(el => observer.observe(el));
+  }
+  
+  initBlogReveal();
+  document.addEventListener('astro:page-load', initBlogReveal);
+</script>
+
+<style>
+  .blog-cta-section {
+    background: var(--color-bg-body);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Subtle background pattern */
+  .blog-cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(149, 204, 165, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(26, 56, 101, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  /* ===== GRID LAYOUT ===== */
+  .blog-cta-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  
+  @media (min-width: 992px) {
+    .blog-cta-grid {
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+    }
+  }
+  
+  /* ===== STATS BADGE ===== */
+  .blog-stats {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #1a3865 0%, #2a5a8a 100%);
+    padding: 12px 24px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 30px rgba(26, 56, 101, 0.2);
+  }
+  
+  .stat-icon-svg {
+    width: 32px;
+    height: 32px;
+    color: #95cca5;
+    flex-shrink: 0;
+  }
+  
+  .stat-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    line-height: 1.4;
+  }
+  
+  /* ===== CONTENT ===== */
+  .blog-cta__content {
+    padding-left: 0;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
+  .blog-cta__content.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  @media (min-width: 992px) {
+    .blog-cta__content {
+      padding-left: 20px;
+    }
+  }
+  
+  .blog-cta__content h2 {
+    font-size: clamp(1.75rem, 4vw, 2rem);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: var(--color-heading);
+  }
+  
+  .blog-cta__content p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--color-text-body);
+    margin-bottom: 28px;
+  }
+  
+  .blog-cta__content p strong {
+    color: var(--color-heading);
+  }
+  
+  /* ===== CTA ACTIONS ===== */
+  .blog-cta__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #1a3865 0%, #2a5a8a 100%);
+    color: #fff;
+    padding: 16px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(26, 56, 101, 0.3);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(26, 56, 101, 0.4);
+  }
+  
+  .btn-arrow {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+  }
+  
+  .btn-primary:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+  
+  .cta-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: rgba(149, 204, 165, 0.15);
+    color: #5a9b6a;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  
+  :global([data-theme="dark"]) .cta-badge {
+    background: rgba(149, 204, 165, 0.2);
+    color: #95cca5;
+  }
+  
+  /* ===== BUTTON ===== */
+  .btn-pulse {
+    position: relative;
+  }
+  
+  .btn-pulse::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #95cca5, #1a3865, #95cca5);
+    background-size: 200% 100%;
+    z-index: -1;
+    opacity: 0;
+    animation: btnPulseGlow 3s ease-in-out infinite;
+  }
+  
+  @keyframes btnPulseGlow {
+    0%, 100% {
+      opacity: 0;
+      background-position: 200% 0;
+    }
+    50% {
+      opacity: 0.5;
+      background-position: 0% 0;
+    }
+  }
+  
+  /* ===== IMAGE SECTION ===== */
+  .blog-cta__image {
+    position: relative;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
+  .blog-cta__image.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .image-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(149, 204, 165, 0.15) 0%,
+      transparent 70%
+    );
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  .blog-cta__image:hover .image-glow {
+    opacity: 1;
+  }
+  
+  /* ===== BLOG VISUAL (replaces image) ===== */
+  .blog-visual {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(145deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 
+      0 20px 50px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.6s ease;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  :global([data-theme="dark"]) .blog-visual {
+    background: linear-gradient(145deg, rgba(26, 56, 101, 0.15) 0%, rgba(26, 56, 101, 0.05) 100%);
+    border: 1px solid rgba(149, 204, 165, 0.2);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  }
+  
+  .blog-cta__image:hover .blog-visual {
+    transform: scale(1.02) translateY(-5px);
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(149, 204, 165, 0.2);
+  }
+  
+  .blog-visual__icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #1a3865 0%, #2a5a8a 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(26, 56, 101, 0.3);
+  }
+  
+  .blog-visual__icon svg {
+    width: 40px;
+    height: 40px;
+    color: #95cca5;
+  }
+  
+  /* Article previews */
+  .blog-visual__articles {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .blog-article-preview {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(26, 56, 101, 0.05);
+    border-radius: 10px;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  
+  :global([data-theme="dark"]) .blog-article-preview {
+    background: rgba(149, 204, 165, 0.08);
+  }
+  
+  .blog-article-preview:hover {
+    background: rgba(26, 56, 101, 0.1);
+    transform: translateX(4px);
+  }
+  
+  :global([data-theme="dark"]) .blog-article-preview:hover {
+    background: rgba(149, 204, 165, 0.15);
+  }
+  
+  .blog-article-preview__thumb {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #95cca5 0%, #7ab58a 100%);
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  
+  .blog-article-preview__lines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+  
+  .blog-article-preview__lines span {
+    height: 8px;
+    background: rgba(26, 56, 101, 0.15);
+    border-radius: 4px;
+  }
+  
+  :global([data-theme="dark"]) .blog-article-preview__lines span {
+    background: rgba(149, 204, 165, 0.2);
+  }
+  
+  .blog-article-preview__lines span:first-child {
+    width: 100%;
+  }
+  
+  .blog-article-preview__lines span:last-child {
+    width: 70%;
+  }
+  
+  /* Stagger animation for articles */
+  .blog-article-preview:nth-child(1) { animation: articleSlide 0.6s ease-out 0.3s both; }
+  .blog-article-preview:nth-child(2) { animation: articleSlide 0.6s ease-out 0.45s both; }
+  .blog-article-preview:nth-child(3) { animation: articleSlide 0.6s ease-out 0.6s both; }
+  
+  @keyframes articleSlide {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* ===== MOBILE ===== */
+  @media (max-width: 991px) {
+    .blog-cta-section {
+      padding: 60px 0;
+    }
+    
+    .blog-cta-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    /* Reorder: content first on mobile */
+    .blog-cta__content {
+      order: 1;
+    }
+    
+    .blog-cta__image {
+      order: 2;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    
+    .blog-visual {
+      min-height: 280px;
+      padding: 30px;
+    }
+    
+    .blog-visual__icon {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .blog-visual__icon svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  
+  /* ===== REDUCED MOTION ===== */
+  @media (prefers-reduced-motion: reduce) {
+    .blog-cta__content,
+    .blog-cta__image {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    
+    .blog-article-preview {
+      animation: none;
+      opacity: 1;
+    }
+  }
+</style>

@@ -1,0 +1,1003 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Blog Schema for SEO
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Blog de Synuptic",
+  "description": "Artículos sobre medical writing, estrategia healthcare y comunicación científica. Insights del sector farmacéutico y biotecnológico.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sinergias en Salud S.L.",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/synuptic-logo.png"
+    }
+  }
+};
+
+// Categories for the blog filter (ready for future use)
+const categories = [
+  { id: 'all', name: 'Todos' },
+  { id: 'medical-writing', name: 'Medical Writing' },
+  { id: 'healthcare-strategy', name: 'Healthcare Strategy' },
+  { id: 'comunicacion-cientifica', name: 'Comunicación Científica' },
+  { id: 'tendencias', name: 'Tendencias' }
+];
+---
+
+<Layout 
+  title="Blog | Synuptic - Medical Writing & Healthcare Strategy"
+  description="Artículos sobre medical writing, estrategia healthcare y comunicación científica. Insights y tendencias del sector farmacéutico."
+  jsonld={blogSchema}
+>
+  <div id="wrap_all">
+    <Header />
+    
+    <main id="main-content">
+      <!-- Hero Section - Premium Blog Header -->
+      <section class="blog-hero">
+        <!-- Animated Gradient Background -->
+        <div class="hero-gradient"></div>
+        
+        <!-- Floating Particles -->
+        <div class="floating-particles">
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+        </div>
+        
+        <!-- Decorative Elements -->
+        <div class="hero-decoration">
+          <div class="deco-circle deco-circle--1"></div>
+          <div class="deco-circle deco-circle--2"></div>
+        </div>
+        
+        <div class="cesis_container hero-content-wrapper">
+          <span class="blog-hero__tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+              <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+              <path d="M2 2l7.586 7.586"></path>
+              <circle cx="11" cy="11" r="2"></circle>
+            </svg>
+            BLOG SYNUPTIC
+          </span>
+          <h1 class="hero-title">
+            <span class="title-line title-line-1">Insights sobre</span>
+            <span class="title-line title-line-2">Medical Writing &</span>
+            <span class="title-line title-line-3 highlight">Healthcare Strategy</span>
+          </h1>
+          <div class="hero-divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon">✦</span>
+            <span class="divider-line"></span>
+          </div>
+          <p class="blog-hero__subtitle">
+            Exploramos las últimas <strong>tendencias</strong>, compartimos <strong>conocimiento</strong> y ofrecemos nuestra perspectiva sobre el mundo de la comunicación científica y la estrategia en salud.
+          </p>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+          <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+          </div>
+          <span class="scroll-text">Explorar</span>
+        </div>
+      </section>
+
+      <!-- Filter Categories Section -->
+      <section class="categories-section">
+        <div class="cesis_container">
+          <div class="categories-wrapper">
+            <nav class="categories-nav" aria-label="Categorías del blog">
+              {categories.map((cat, index) => (
+                <button 
+                  class={`category-btn ${cat.id === 'all' ? 'active' : ''}`}
+                  data-category={cat.id}
+                  style={`--cat-delay: ${index * 0.05}s`}
+                >
+                  <span>{cat.name}</span>
+                </button>
+              ))}
+            </nav>
+            <div class="search-wrapper">
+              <div class="search-box">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="M21 21l-4.35-4.35"></path>
+                </svg>
+                <input type="text" placeholder="Buscar artículos..." class="search-input" aria-label="Buscar artículos" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Blog Posts Grid Section (Ready for Articles) -->
+      <section class="blog-posts-section" id="articles">
+        <div class="cesis_container">
+          <!-- Empty State - Show when no articles -->
+          <div class="empty-state">
+            <div class="empty-state__icon">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+                <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+                <path d="M2 2l7.586 7.586"></path>
+                <circle cx="11" cy="11" r="2"></circle>
+              </svg>
+            </div>
+            <h2 class="empty-state__title">Próximamente</h2>
+            <p class="empty-state__text">
+              Estamos preparando artículos increíbles sobre medical writing, estrategia healthcare y comunicación científica. ¡Vuelve pronto!
+            </p>
+            <div class="empty-state__decoration">
+              <span class="deco-line"></span>
+              <span class="deco-dot"></span>
+              <span class="deco-line"></span>
+            </div>
+          </div>
+
+          <!-- Blog Grid (Hidden until articles are added) -->
+          <div class="blog-grid" style="display: none;">
+            <!-- Articles will be dynamically inserted here -->
+          </div>
+
+          <!-- Pagination (Hidden until articles are added) -->
+          <nav class="pagination" aria-label="Paginación del blog" style="display: none;">
+            <button class="pagination-btn prev" disabled>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <div class="pagination-numbers">
+              <span class="pagination-page active">1</span>
+            </div>
+            <button class="pagination-btn next" disabled>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </nav>
+        </div>
+      </section>
+
+      <!-- Newsletter CTA Section -->
+      <section class="newsletter-section">
+        <div class="newsletter-bg">
+          <div class="newsletter-pattern"></div>
+          <div class="newsletter-particles">
+            <span class="news-particle"></span>
+            <span class="news-particle"></span>
+            <span class="news-particle"></span>
+          </div>
+        </div>
+        <div class="cesis_container text-center">
+          <span class="newsletter-tag">MANTENTE INFORMADO</span>
+          <h2 class="newsletter-title">¿Quieres recibir nuestros artículos?</h2>
+          <p class="newsletter-text">
+            Suscríbete y recibe las últimas novedades sobre medical writing y estrategia healthcare directamente en tu bandeja de entrada.
+          </p>
+          <div class="newsletter-form">
+            <div class="newsletter-input-wrapper">
+              <svg class="newsletter-input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <input type="email" placeholder="tu@email.com" class="newsletter-input" aria-label="Email para newsletter" />
+            </div>
+            <button type="submit" class="btn btn--newsletter">
+              <span>Suscribirme</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+          <p class="newsletter-disclaimer">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Sin spam. Cancela cuando quieras.
+          </p>
+        </div>
+      </section>
+
+    </main>
+    
+    <Footer />
+  </div>
+</Layout>
+
+<script>
+  function initBlogPage() {
+    // Category filter functionality
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        // Future: Filter articles by category
+      });
+    });
+
+    // Search functionality (ready for future implementation)
+    const searchInput = document.querySelector('.search-input') as HTMLInputElement;
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = (e.target as HTMLInputElement).value;
+        // Future: Filter articles by search query
+        console.log('Searching for:', query);
+      });
+    }
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, observerOptions);
+    
+    // Observe elements for animation
+    document.querySelectorAll('.blog-card, .empty-state, .newsletter-section').forEach(el => {
+      observer.observe(el);
+    });
+  }
+  
+  initBlogPage();
+  document.addEventListener('astro:page-load', initBlogPage);
+</script>
+
+<style>
+  /* ===== BLOG HERO SECTION ===== */
+  .blog-hero {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 120px 0 80px;
+  }
+  
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg, 
+      #0a1628 0%, 
+      #1a3865 25%, 
+      #0f2240 50%, 
+      #1a3865 75%, 
+      #0a1628 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease-in-out infinite;
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  .floating-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(149, 204, 165, 0.4);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+  .particle:nth-child(2) { left: 80%; top: 30%; animation-delay: 1.5s; }
+  .particle:nth-child(3) { left: 30%; top: 70%; animation-delay: 3s; }
+  .particle:nth-child(4) { left: 60%; top: 80%; animation-delay: 4.5s; }
+  .particle:nth-child(5) { left: 90%; top: 60%; animation-delay: 6s; }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateY(-40px) translateX(-20px) scale(1.5);
+      opacity: 0.8;
+    }
+  }
+  
+  .hero-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  
+  .deco-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+  }
+  
+  .deco-circle--1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #95cca5 0%, transparent 70%);
+    top: -200px;
+    right: -150px;
+  }
+  
+  .deco-circle--2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #95cca5 0%, transparent 70%);
+    bottom: -150px;
+    left: -100px;
+  }
+  
+  /* Hero content */
+  .hero-content-wrapper {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  .blog-hero__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #95cca5;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.2s;
+  }
+  
+  .blog-hero__tag svg {
+    opacity: 0.8;
+  }
+  
+  .hero-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  
+  .title-line {
+    display: block;
+  }
+  
+  .title-line-1 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.3s;
+  }
+  
+  .title-line-2 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.5s;
+  }
+  
+  .title-line-3 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.7s;
+  }
+  
+  .title-line.highlight {
+    color: #95cca5;
+    text-shadow: 0 0 30px rgba(149, 204, 165, 0.3);
+  }
+  
+  /* Hero divider */
+  .hero-divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+    margin: 0 auto 24px;
+    opacity: 0;
+    animation: fadeInScale 0.6s ease forwards 0.8s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .hero-divider .divider-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #95cca5, transparent);
+  }
+  
+  .hero-divider .divider-icon {
+    color: #95cca5;
+    font-size: 14px;
+  }
+  
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    to {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+  
+  .blog-hero__subtitle {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.9s;
+  }
+  
+  .blog-hero__subtitle strong {
+    color: #95cca5;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 1.2s;
+    z-index: 10;
+  }
+  
+  .scroll-mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  
+  .scroll-wheel {
+    width: 4px;
+    height: 8px;
+    background: #95cca5;
+    border-radius: 2px;
+    animation: scrollWheel 2s ease-in-out infinite;
+  }
+  
+  @keyframes scrollWheel {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.3; transform: translateY(10px); }
+  }
+  
+  .scroll-text {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  /* ===== CATEGORIES SECTION ===== */
+  .categories-section {
+    padding: 40px 0 30px;
+    background: var(--color-bg-body);
+    border-bottom: 1px solid var(--color-border-theme);
+    position: sticky;
+    top: 80px;
+    z-index: 50;
+    backdrop-filter: blur(10px);
+  }
+  
+  .categories-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .categories-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .category-btn {
+    background: transparent;
+    border: 1px solid var(--color-border-theme);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.5s ease forwards calc(var(--cat-delay) + 0.3s);
+  }
+  
+  .category-btn:hover {
+    border-color: #95cca5;
+    color: #1a3865;
+    transform: translateY(-2px);
+  }
+  
+  .category-btn.active {
+    background: linear-gradient(135deg, #1a3865 0%, #2a4a7a 100%);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(26, 56, 101, 0.3);
+  }
+  
+  .search-wrapper {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease forwards 0.6s;
+  }
+  
+  .search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    color: var(--color-gray);
+    pointer-events: none;
+  }
+  
+  .search-input {
+    width: 280px;
+    padding: 12px 16px 12px 48px;
+    border: 1px solid var(--color-border-theme);
+    border-radius: 50px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    background: var(--color-bg-input);
+    color: var(--color-text-body);
+    transition: all 0.3s ease;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #95cca5;
+    box-shadow: 0 0 0 3px rgba(149, 204, 165, 0.15);
+  }
+  
+  .search-input::placeholder {
+    color: var(--color-gray);
+  }
+  
+  /* ===== BLOG POSTS SECTION ===== */
+  .blog-posts-section {
+    padding: 80px 0;
+    background: var(--color-bg-body);
+    min-height: 50vh;
+  }
+  
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+  
+  .empty-state.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .empty-state__icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 32px;
+    background: linear-gradient(135deg, rgba(26, 56, 101, 0.1) 0%, rgba(149, 204, 165, 0.1) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  .empty-state__icon svg {
+    color: #95cca5;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(149, 204, 165, 0.2); }
+    50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(149, 204, 165, 0); }
+  }
+  
+  .empty-state__title {
+    font-family: 'Raleway', sans-serif;
+    font-size: 2rem;
+    color: var(--color-heading);
+    margin-bottom: 16px;
+  }
+  
+  .empty-state__text {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    max-width: 500px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+  
+  .empty-state__decoration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .deco-line {
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #95cca5);
+  }
+  
+  .deco-line:last-child {
+    background: linear-gradient(90deg, #95cca5, transparent);
+  }
+  
+  .deco-dot {
+    width: 8px;
+    height: 8px;
+    background: #95cca5;
+    border-radius: 50%;
+    animation: dotPulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes dotPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+  }
+  
+  /* Blog Grid (for future articles) */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 32px;
+  }
+  
+  /* Pagination */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 60px;
+  }
+  
+  .pagination-btn {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--color-border-theme);
+    border-radius: 50%;
+    background: var(--color-bg-card);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .pagination-btn:hover:not(:disabled) {
+    border-color: #95cca5;
+    color: #1a3865;
+    transform: translateY(-2px);
+  }
+  
+  .pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  
+  .pagination-numbers {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .pagination-page {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .pagination-page.active {
+    background: linear-gradient(135deg, #1a3865 0%, #2a4a7a 100%);
+    color: #fff;
+  }
+  
+  /* ===== NEWSLETTER SECTION ===== */
+  .newsletter-section {
+    position: relative;
+    padding: 100px 0;
+    overflow: hidden;
+  }
+  
+  .newsletter-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1a3865 0%, #0f2240 50%, #1a3865 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 10s ease-in-out infinite;
+  }
+  
+  .newsletter-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(149, 204, 165, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+  
+  .newsletter-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  
+  .news-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(149, 204, 165, 0.5);
+    border-radius: 50%;
+    animation: floatParticle 6s ease-in-out infinite;
+  }
+  
+  .news-particle:nth-child(1) { left: 20%; top: 30%; animation-delay: 0s; }
+  .news-particle:nth-child(2) { left: 70%; top: 40%; animation-delay: 1s; }
+  .news-particle:nth-child(3) { left: 50%; top: 70%; animation-delay: 2s; }
+  
+  .newsletter-section .cesis_container {
+    position: relative;
+    z-index: 10;
+  }
+  
+  .newsletter-tag {
+    display: inline-block;
+    background: rgba(149, 204, 165, 0.15);
+    color: #95cca5;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  
+  .newsletter-title {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  
+  .newsletter-text {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 550px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+  
+  .newsletter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    max-width: 550px;
+    margin: 0 auto 24px;
+  }
+  
+  .newsletter-input-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .newsletter-input-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .newsletter-input {
+    width: 100%;
+    padding: 18px 20px 18px 56px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+  
+  .newsletter-input:focus {
+    outline: none;
+    border-color: #95cca5;
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  .newsletter-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .btn--newsletter {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 32px;
+    background: #95cca5;
+    color: #1a3865;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 30px rgba(149, 204, 165, 0.3);
+  }
+  
+  .btn--newsletter:hover {
+    background: #fff;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 45px rgba(149, 204, 165, 0.4);
+  }
+  
+  .btn--newsletter svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .btn--newsletter:hover svg {
+    transform: translateX(4px);
+  }
+  
+  .newsletter-disclaimer {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+  }
+  
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .blog-hero {
+      min-height: 70vh;
+      padding: 100px 0 60px;
+    }
+    
+    .scroll-indicator {
+      display: none;
+    }
+    
+    .categories-section {
+      padding: 24px 0;
+      position: relative;
+      top: 0;
+    }
+    
+    .categories-wrapper {
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .categories-nav {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .search-wrapper {
+      width: 100%;
+    }
+    
+    .search-input {
+      width: 100%;
+    }
+    
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .newsletter-form {
+      flex-direction: column;
+    }
+    
+    .newsletter-input-wrapper {
+      width: 100%;
+    }
+    
+    .btn--newsletter {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  
+  /* ===== TEXT CENTER UTILITY ===== */
+  .text-center {
+    text-align: center;
+  }
+  
+  /* ===== PAGE WRAPPER ===== */
+  #wrap_all {
+    overflow-x: hidden;
+    padding-top: 80px;
+  }
+  
+  #main-content {
+    min-height: 100vh;
+  }
+</style>
