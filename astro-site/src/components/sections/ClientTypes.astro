@@ -339,25 +339,93 @@ const clientTypes = [
   /* ===== MOBILE ===== */
   @media (max-width: 767px) {
     .clients-section {
-      padding: 70px 0;
+      padding: 50px 0;
+    }
+    
+    .clients-section__subtitle {
+      font-size: 15px;
+      margin-bottom: 32px;
+    }
+    
+    .flip-boxes {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
     
     .flip-box {
-      height: 340px;
+      height: 200px;
+    }
+    
+    .flip-box__front,
+    .flip-box__back {
+      padding: 16px 12px;
+      border-radius: 14px;
     }
     
     .flip-box__icon {
-      width: 100px;
-      height: 100px;
+      width: 60px;
+      height: 60px;
+      margin-bottom: 12px;
     }
     
     .flip-box__title {
-      font-size: 12px;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+    
+    .flip-box__front::after {
+      font-size: 9px;
+      bottom: 12px;
+    }
+    
+    .flip-box__back {
+      padding: 16px 10px;
+    }
+    
+    .flip-box__back-title {
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
     }
     
     .flip-box__text {
-      font-size: 13px;
-      line-height: 1.7;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+    
+    .flip-box__indicator {
+      bottom: 12px;
+    }
+    
+    .flip-box__indicator span {
+      width: 4px;
+      height: 4px;
+    }
+  }
+  
+  /* ===== SMALL MOBILE (below 400px) ===== */
+  @media (max-width: 400px) {
+    .flip-boxes {
+      gap: 8px;
+    }
+    
+    .flip-box {
+      height: 180px;
+    }
+    
+    .flip-box__icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 8px;
+    }
+    
+    .flip-box__title {
+      font-size: 9px;
+    }
+    
+    .flip-box__text {
+      font-size: 10px;
+      line-height: 1.4;
     }
   }
   

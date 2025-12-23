@@ -153,8 +153,8 @@
   /* Specific border adjustments for mobile in dark mode */
   @media (max-width: 900px) {
     :global([data-theme="dark"]) .service-medical {
-      border-right: none;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      border-bottom: none;
     }
   }
   
@@ -323,17 +323,97 @@
   }
   
   @media (max-width: 900px) {
-    .service-medical {
-      border-right: none;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-    }
-    
-    .card-title {
-      font-size: 2rem;
+    .services-container {
+      flex-direction: row; /* Keep side by side on mobile */
+      min-height: auto;
     }
     
     .service-split-card {
-      padding: 60px 24px;
+      padding: 30px 16px;
+      min-height: 280px;
+    }
+    
+    .service-medical {
+      border-right: 1px solid rgba(0,0,0,0.05);
+      border-bottom: none;
+    }
+    
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 16px;
+    }
+    
+    .card-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .card-title {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    
+    .card-divider {
+      width: 40px;
+      height: 2px;
+      margin-bottom: 12px;
+    }
+    
+    .card-desc {
+      font-size: 0.8rem;
+      line-height: 1.4;
+      margin-bottom: 16px;
+      padding: 0 5%;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .card-cta {
+      padding: 8px 14px;
+      font-size: 0.65rem;
+      gap: 6px;
+    }
+    
+    .card-cta svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+  
+  /* Very small screens - slightly more compact */
+  @media (max-width: 480px) {
+    .service-split-card {
+      padding: 24px 12px;
+      min-height: 250px;
+    }
+    
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 12px;
+    }
+    
+    .card-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .card-title {
+      font-size: 0.95rem;
+    }
+    
+    .card-desc {
+      font-size: 0.75rem;
+      -webkit-line-clamp: 2;
+      padding: 0;
+    }
+    
+    .card-cta {
+      padding: 6px 12px;
+      font-size: 0.6rem;
     }
   }
 </style>
