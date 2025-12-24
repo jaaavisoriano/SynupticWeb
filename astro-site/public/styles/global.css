@@ -519,6 +519,11 @@ h3 {
     transition: width var(--transition-fast);
 }
 
+/* Current page indicator - Light Mode */
+.main-menu li.current-menu-item a {
+    color: var(--color-accent);
+}
+
 [data-theme="dark"] .main-menu li a:hover {
     color: var(--color-accent);
 }
@@ -589,6 +594,11 @@ h3 {
 .mobile-menu li a:hover {
     color: var(--color-accent);
     padding-left: 10px;
+}
+
+/* Current page indicator - Mobile Menu */
+.mobile-menu li.current-menu-item>a {
+    color: var(--color-accent);
 }
 
 /* LinkedIn icon in mobile menu */

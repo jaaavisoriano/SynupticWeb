@@ -438,12 +438,28 @@ const ventajas = [
         </div>
       </section>
 
-      <!-- CTA Section - Final Premium Design -->
+      <!-- CTA Section - Final Premium Design (Matching Social Proof Style) -->
       <section class="section cta-section">
-        <div class="cta-bg">
-          <div class="cta-pattern"></div>
+        <!-- Animated Gradient Background (Matches Social Proof) -->
+        <div class="hero-gradient"></div>
+        
+        <!-- Floating Particles (Matches Social Proof) -->
+        <div class="floating-particles">
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
+          <span class="particle"></span>
         </div>
-        <div class="cesis_container">
+        
+        <!-- Top Wave Divider -->
+        <div class="shape-divider-top">
+          <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+          </svg>
+        </div>
+        
+        <div class="cesis_container z-relative">
           <div class="cta-content">
             <span class="cta-eyebrow">¿Listo para empezar?</span>
             <h2>Activa la sinapsis hoy</h2>
@@ -654,7 +670,7 @@ const ventajas = [
   
   /* Timeline Container */
   .timeline-container { position: relative; max-width: 1000px; margin: 0 auto; }
-  .timeline-line { position: absolute; left: 50%; top: 40px; bottom: 40px; width: 4px; background: rgba(149,204,165,0.2); transform: translateX(-50%); border-radius: 4px; z-index: 0; }
+  .timeline-line { position: absolute; left: 50%; top: 40px; bottom: 80px; width: 4px; background: rgba(149,204,165,0.2); transform: translateX(-50%); border-radius: 4px; z-index: 0; }
   .timeline-line-progress { position: absolute; top: 0; left: 0; width: 100%; height: 0; background: linear-gradient(to bottom, var(--color-accent), var(--color-primary)); border-radius: 4px; transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1); z-index: inherit; }
   
   /* Timeline Steps - centered with cards */
@@ -846,9 +862,7 @@ const ventajas = [
   .btn-premium--outline:hover { border-color: var(--color-accent); background: rgba(149,204,165,0.1); }
   
   /* ===== CTA SECTION ===== */
-  .cta-section { position: relative; padding: 120px 0; overflow: hidden; }
-  .cta-bg { position: absolute; inset: 0; background: linear-gradient(135deg, var(--color-primary), #0f2240, var(--color-primary)); }
-  .cta-pattern { position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 50%, rgba(149,204,165,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(149,204,165,0.08) 0%, transparent 40%); }
+  .cta-section { position: relative; padding: 120px 0; overflow: hidden; background: #0a1628; color: #fff; }
   .cta-content { position: relative; z-index: 10; text-align: center; }
   .cta-eyebrow { display: block; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; color: var(--color-accent); margin-bottom: 16px; }
   .cta-content h2 { font-size: clamp(32px, 5vw, 52px); color: #fff; margin-bottom: 20px; }
