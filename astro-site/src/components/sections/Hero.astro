@@ -85,14 +85,18 @@
 
 <script>
   /**
-   * Controlador Video Hero - Sincronizado con Preloader
-   * El vídeo espera a que el preloader desaparezca antes de reproducirse.
+   * Controlador Video Hero - Versión Robusta
+   * Maneja: precarga, reintentos inteligentes, errores de red, y navegación Astro.
    */
   class HeroVideoController {
     private video: HTMLVideoElement | null;
     private attempts: number = 0;
-    private maxAttempts: number = 20;
+    private maxAttempts: number = 30;
     private preloaderFinished: boolean = false;
+    private loadRetries: number = 0;
+    private maxLoadRetries: number = 3;
+    private playInterval: ReturnType<typeof setInterval> | null = null;
+    private isDestroyed: boolean = false;
 
     constructor(videoId: string) {
       this.video = document.getElementById(videoId) as HTMLVideoElement;
@@ -112,87 +116,248 @@
       // 2. Configuración DOM-Level (Atributos)
       this.video.setAttribute('muted', '');
       this.video.setAttribute('playsinline', '');
-      // IMPORTANTE: No ponemos autoplay aún, esperamos al preloader
       this.video.removeAttribute('autoplay');
       
       // 3. Pausar el video para asegurarnos de que no se reproduzca
       this.video.pause();
+
+      // 4. Registrar listeners de eventos del video para diagnóstico y recuperación
+      this.setupVideoEventListeners();
       
-      // 4. Comprobar si el preloader existe (puede no estar en navegaciones internas)
+      // 5. Comprobar si el preloader existe
       const preloader = document.getElementById('premium-preloader');
       const preloaderVisible = preloader && !preloader.classList.contains('fade-out');
       
       if (preloaderVisible) {
-        // Esperar al evento del preloader
         console.log('[HeroCtrl] Esperando a que el preloader termine...');
         window.addEventListener('preloaderComplete', () => {
+          if (this.isDestroyed) return;
           console.log('[HeroCtrl] Preloader terminado. Iniciando reproducción del video.');
           this.preloaderFinished = true;
-          this.startForceLoop();
+          this.ensureVideoLoaded();
         }, { once: true });
       } else {
-        // El preloader ya no está visible (navegación interna o ya terminó)
         console.log('[HeroCtrl] No hay preloader activo. Iniciando video inmediatamente.');
         this.preloaderFinished = true;
-        this.startForceLoop();
+        this.ensureVideoLoaded();
       }
 
-      // 5. Listeners de respaldo
-      document.addEventListener('visibilitychange', () => {
-         if (document.visibilityState === 'visible' && this.preloaderFinished) this.forcePlay();
+      // 6. Listeners de respaldo
+      this.setupFallbackListeners();
+    }
+
+    private setupVideoEventListeners() {
+      if (!this.video) return;
+
+      // Evento cuando el video tiene suficientes datos para reproducirse
+      this.video.addEventListener('canplaythrough', () => {
+        if (this.isDestroyed) return;
+        console.log('[HeroCtrl] Video listo para reproducirse (canplaythrough).');
+        if (this.preloaderFinished) {
+          this.startForceLoop();
+        }
       });
-      document.addEventListener('click', () => {
+
+      // Evento cuando el video comienza a reproducirse
+      this.video.addEventListener('playing', () => {
+        if (this.isDestroyed) return;
+        console.log('[HeroCtrl] Video en reproducción.');
+        this.video?.classList.add('is-playing');
+        this.clearPlayInterval();
+      });
+
+      // Evento de error en la carga del video
+      this.video.addEventListener('error', (e) => {
+        if (this.isDestroyed) return;
+        console.warn('[HeroCtrl] Error en el video:', this.video?.error?.message || 'Unknown error');
+        this.handleVideoError();
+      });
+
+      // Evento cuando el video se ha pausado inesperadamente
+      this.video.addEventListener('pause', () => {
+        if (this.isDestroyed) return;
+        // Solo reintentar si el video debería estar reproduciéndose
+        if (this.preloaderFinished && document.visibilityState === 'visible') {
+          setTimeout(() => {
+            if (!this.isDestroyed && this.video?.paused) {
+              console.log('[HeroCtrl] Video pausado inesperadamente. Reintentando...');
+              this.forcePlay();
+            }
+          }, 100);
+        }
+      });
+
+      // Evento de espera (buffering)
+      this.video.addEventListener('waiting', () => {
+        if (this.isDestroyed) return;
+        console.log('[HeroCtrl] Video en espera (buffering)...');
+      });
+
+      // Evento stalled - la carga se ha detenido
+      this.video.addEventListener('stalled', () => {
+        if (this.isDestroyed) return;
+        console.warn('[HeroCtrl] La carga del video se ha estancado.');
+        this.handleVideoError();
+      });
+    }
+
+    private setupFallbackListeners() {
+      const visibilityHandler = () => {
+        if (this.isDestroyed) return;
+        if (document.visibilityState === 'visible' && this.preloaderFinished) {
+          this.forcePlay();
+        }
+      };
+
+      const interactionHandler = () => {
+        if (this.isDestroyed) return;
         if (this.preloaderFinished) this.forcePlay();
-      }, { once: true, passive: true });
-      document.addEventListener('scroll', () => {
-        if (this.preloaderFinished) this.forcePlay();
-      }, { once: true, passive: true });
+      };
+
+      document.addEventListener('visibilitychange', visibilityHandler);
+      document.addEventListener('click', interactionHandler, { once: true, passive: true });
+      document.addEventListener('scroll', interactionHandler, { once: true, passive: true });
+      document.addEventListener('touchstart', interactionHandler, { once: true, passive: true });
+    }
+
+    private ensureVideoLoaded() {
+      if (!this.video || this.isDestroyed) return;
+
+      // Si el video ya tiene datos, intentar reproducir
+      if (this.video.readyState >= 3) { // HAVE_FUTURE_DATA o superior
+        console.log('[HeroCtrl] Video ya tiene datos (readyState:', this.video.readyState, ')');
+        this.startForceLoop();
+        return;
+      }
+
+      // Si no, forzar la carga
+      console.log('[HeroCtrl] Forzando carga del video (readyState:', this.video.readyState, ')');
+      
+      // Asegurar que la fuente está correcta
+      const source = this.video.querySelector('source');
+      if (source && !this.video.src) {
+        this.video.src = source.getAttribute('src') || '';
+      }
+      
+      this.video.load();
+      
+      // Timeout de seguridad si la carga tarda demasiado
+      setTimeout(() => {
+        if (this.isDestroyed) return;
+        if (this.video && this.video.readyState < 1) {
+          console.warn('[HeroCtrl] Timeout de carga inicial. Reintentando...');
+          this.handleVideoError();
+        } else if (this.video && this.video.paused && this.preloaderFinished) {
+          this.startForceLoop();
+        }
+      }, 3000);
+    }
+
+    private handleVideoError() {
+      if (this.isDestroyed) return;
+      
+      this.loadRetries++;
+      
+      if (this.loadRetries <= this.maxLoadRetries) {
+        console.log(`[HeroCtrl] Reintentando carga del video (${this.loadRetries}/${this.maxLoadRetries})...`);
+        
+        setTimeout(() => {
+          if (this.isDestroyed || !this.video) return;
+          
+          // Resetear el video
+          const currentSrc = this.video.querySelector('source')?.getAttribute('src') || '/videos/synuptic-video.mp4';
+          
+          // Añadir un cache-buster para forzar nueva petición
+          const cacheBuster = `?t=${Date.now()}`;
+          const source = this.video.querySelector('source');
+          if (source) {
+            source.setAttribute('src', currentSrc.split('?')[0] + cacheBuster);
+          }
+          
+          this.video.load();
+        }, 1000 * this.loadRetries); // Backoff exponencial
+      } else {
+        console.error('[HeroCtrl] Max reintentos alcanzados. El video no pudo cargarse.');
+        // Opcional: mostrar un mensaje o imagen de fallback
+        this.video?.classList.add('video-error');
+      }
+    }
+
+    private clearPlayInterval() {
+      if (this.playInterval) {
+        clearInterval(this.playInterval);
+        this.playInterval = null;
+      }
     }
 
     private startForceLoop() {
-      if (!this.preloaderFinished) return;
+      if (!this.preloaderFinished || this.isDestroyed) return;
+      
+      this.clearPlayInterval();
+      this.attempts = 0;
       
       // Intentamos reproducir inmediatamente
       this.forcePlay();
 
-      // Y programamos reintentos rápidos
-      const interval = setInterval(() => {
+      // Y programamos reintentos
+      this.playInterval = setInterval(() => {
+        if (this.isDestroyed) {
+          this.clearPlayInterval();
+          return;
+        }
+
         if (this.video && !this.video.paused) {
-          console.log('[HeroCtrl] Video arrancado correctamente. Deteniendo loop.');
-          clearInterval(interval);
+          console.log('[HeroCtrl] ✓ Video arrancado correctamente.');
+          this.clearPlayInterval();
           this.video.classList.add('is-playing');
           return;
         }
 
         if (this.attempts >= this.maxAttempts) {
-          console.warn('[HeroCtrl] Autoplay timeout. Esperando interacción.');
-          clearInterval(interval);
+          console.warn('[HeroCtrl] Autoplay timeout. Se requiere interacción del usuario.');
+          this.clearPlayInterval();
           return;
         }
 
         this.forcePlay();
         this.attempts++;
-      }, 150);
+      }, 200);
     }
 
     private async forcePlay() {
-      if (!this.video || !this.video.paused || !this.preloaderFinished) return;
+      if (!this.video || this.isDestroyed) return;
+      if (!this.video.paused) return; // Ya está reproduciendo
+      if (!this.preloaderFinished) return;
       
-      // Re-asegurar mute en cada intento (vital para Chrome/Safari)
-      this.video.muted = true; 
+      // Re-asegurar mute (vital para Chrome/Safari autoplay policy)
+      this.video.muted = true;
       
       try {
-        if (this.video.readyState >= 1) {
-             const playPromise = this.video.play();
-             if (playPromise !== undefined) {
-                 await playPromise;
-             }
-        } else {
-             this.video.load();
+        // Verificar readyState suficiente
+        if (this.video.readyState >= 2) { // HAVE_CURRENT_DATA o superior
+          const playPromise = this.video.play();
+          if (playPromise !== undefined) {
+            await playPromise;
+          }
+        } else if (this.video.readyState === 0) {
+          // No hay datos, forzar carga
+          console.log('[HeroCtrl] Video sin datos, forzando carga...');
+          this.ensureVideoLoaded();
         }
-      } catch (err) {
-        // Silenciamos errores de consola
+        // Si readyState es 1, esperar a que cargue más datos
+      } catch (err: any) {
+        // Solo loguear errores que no sean de autoplay
+        if (err.name !== 'NotAllowedError' && err.name !== 'AbortError') {
+          console.warn('[HeroCtrl] Error al reproducir:', err.message);
+        }
       }
+    }
+
+    // Método público para destruir el controlador (útil en navegación)
+    public destroy() {
+      this.isDestroyed = true;
+      this.clearPlayInterval();
+      console.log('[HeroCtrl] Controlador destruido.');
     }
   }
 
@@ -236,10 +401,26 @@
 
   // --- Inicialización ---
   const launch = () => {
+    // Destruir controlador anterior si existe (navegación interna Astro)
+    // @ts-ignore
+    if (window.heroCtrl && typeof window.heroCtrl.destroy === 'function') {
+      // @ts-ignore
+      window.heroCtrl.destroy();
+    }
+    
     initLightbox();
     // @ts-ignore
     window.heroCtrl = new HeroVideoController('main-hero-video');
   };
+
+  // Limpiar al navegar fuera de la página
+  document.addEventListener('astro:before-swap', () => {
+    // @ts-ignore
+    if (window.heroCtrl && typeof window.heroCtrl.destroy === 'function') {
+      // @ts-ignore
+      window.heroCtrl.destroy();
+    }
+  });
 
   document.addEventListener('astro:page-load', launch);
   document.addEventListener('DOMContentLoaded', launch);
@@ -282,6 +463,42 @@
     /* Aseguramos que el video ocupe espacio incluso si no ha cargado */
     display: block; 
     background: #0a1628;
+    transition: opacity 0.5s ease;
+  }
+  
+  /* Estado de error - fallback visual con gradiente animado */
+  #main-hero-video.video-error {
+    opacity: 0;
+  }
+  
+  .video-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      #0a1628 0%,
+      #122a4d 25%,
+      #1a3865 50%,
+      #122a4d 75%,
+      #0a1628 100%
+    );
+    background-size: 400% 400%;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.5s ease;
+  }
+  
+  .video-container:has(.video-error)::after,
+  .video-container.show-fallback::after {
+    opacity: 1;
+    animation: gradientShift 15s ease infinite;
+  }
+  
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
   
   /* Responsive adjustments if needed */

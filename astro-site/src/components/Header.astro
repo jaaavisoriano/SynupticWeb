@@ -2,9 +2,14 @@
 import { Image } from 'astro:assets';
 import logoImage from '../assets/logo.webp';
 
-const navItems = [
+// Servicios dropdown items
+const serviciosItems = [
   { href: '/medical-writing/', label: 'Medical Writing' },
   { href: '/estrategia-healthcare/', label: 'Estrategia Healthcare' },
+];
+
+// Regular nav items
+const navItems = [
   { href: '/asi-trabajamos/', label: 'Así Trabajamos' },
   { href: '/synupteam/', label: 'SynupTeam' },
   { href: '/blog/', label: 'Blog' },
@@ -12,6 +17,7 @@ const navItems = [
 ];
 
 const currentPath = Astro.url.pathname;
+const isServiciosActive = serviciosItems.some(item => currentPath === item.href);
 ---
 
 <div id="header_container" class="cesis_opaque_header">
@@ -39,6 +45,23 @@ const currentPath = Astro.url.pathname;
         <nav id="site-navigation" class="tt-main-navigation logo_left menu_center">
           <div class="menu-main-ct">
             <ul id="main-menu" class="main-menu sm smart_menu">
+              <!-- Servicios Dropdown -->
+              <li class={`menu-item-has-children servicios-dropdown ${isServiciosActive ? 'current-menu-item' : ''}`}>
+                <a href="#" class="dropdown-trigger">
+                  <span>Servicios</span>
+                  <svg class="dropdown-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </a>
+                <ul class="sub-menu">
+                  {serviciosItems.map((item) => (
+                    <li class={currentPath === item.href ? 'current-menu-item' : ''}>
+                      <a href={item.href}><span>{item.label}</span></a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+              
               {navItems.map((item) => (
                 <li class={currentPath === item.href ? 'current-menu-item' : ''}>
                   <a href={item.href}><span>{item.label}</span></a>
@@ -143,6 +166,23 @@ const currentPath = Astro.url.pathname;
       <nav id="mobile-navigation" class="tt-mobile-navigation">
         <div class="menu-mobile-ct">
           <ul id="mobile-menu" class="mobile-menu">
+            <!-- Servicios Dropdown Mobile -->
+            <li class={`menu-item-has-children mobile-servicios-dropdown ${isServiciosActive ? 'current-menu-item' : ''}`}>
+              <a href="#" class="mobile-dropdown-trigger">
+                <span>Servicios</span>
+                <svg class="mobile-dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </a>
+              <ul class="mobile-sub-menu">
+                {serviciosItems.map((item) => (
+                  <li class={currentPath === item.href ? 'current-menu-item' : ''}>
+                    <a href={item.href}><span>{item.label}</span></a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+            
             {navItems.map((item) => (
               <li class={currentPath === item.href ? 'current-menu-item' : ''}>
                 <a href={item.href}><span>{item.label}</span></a>
@@ -263,13 +303,59 @@ const currentPath = Astro.url.pathname;
     }, { passive: true });
   }
   
+  // Desktop & Mobile Dropdown Logic
+  function initDropdowns() {
+    // Desktop dropdown - hover behavior
+    const desktopDropdown = document.querySelector('.servicios-dropdown') as HTMLElement;
+    if (desktopDropdown) {
+      const trigger = desktopDropdown.querySelector('.dropdown-trigger');
+      
+      // Prevent default link behavior
+      trigger?.addEventListener('click', (e) => {
+        e.preventDefault();
+      });
+      
+      // Hover events for desktop
+      desktopDropdown.addEventListener('mouseenter', () => {
+        desktopDropdown.classList.add('is-open');
+      });
+      
+      desktopDropdown.addEventListener('mouseleave', () => {
+        desktopDropdown.classList.remove('is-open');
+      });
+    }
+    
+    // Mobile dropdown - click behavior
+    const mobileDropdown = document.querySelector('.mobile-servicios-dropdown') as HTMLElement;
+    if (mobileDropdown) {
+      const mobileTrigger = mobileDropdown.querySelector('.mobile-dropdown-trigger');
+      const mobileSubMenu = mobileDropdown.querySelector('.mobile-sub-menu') as HTMLElement;
+      
+      mobileTrigger?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isOpen = mobileDropdown.classList.toggle('is-open');
+        
+        // Animate submenu height
+        if (isOpen && mobileSubMenu) {
+          mobileSubMenu.style.maxHeight = mobileSubMenu.scrollHeight + 'px';
+        } else if (mobileSubMenu) {
+          mobileSubMenu.style.maxHeight = '0';
+        }
+      });
+    }
+  }
+  
   // Initialize
   initMobileMenu();
   initHeaderScroll();
+  initDropdowns();
   
   document.addEventListener('astro:page-load', () => {
     initMobileMenu();
     initHeaderScroll();
+    initDropdowns();
     initTheme();
   });
 
@@ -428,4 +514,222 @@ const currentPath = Astro.url.pathname;
   :global([data-theme="dark"]) .mobile-menu-logo img {
     filter: brightness(0) invert(1);
   }
+
+  /* ===== DESKTOP DROPDOWN STYLES ===== */
+  .servicios-dropdown {
+    position: relative;
+  }
+
+  .servicios-dropdown > a.dropdown-trigger {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .dropdown-arrow {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.7;
+  }
+
+  .servicios-dropdown.is-open .dropdown-arrow {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+
+  .servicios-dropdown .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    min-width: 220px;
+    padding: 12px 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 16px;
+    box-shadow: 
+      0 4px 25px rgba(0, 0, 0, 0.08),
+      0 10px 40px rgba(0, 0, 0, 0.04),
+      0 0 0 1px rgba(0, 0, 0, 0.03);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    list-style: none;
+    margin: 0;
+  }
+
+  :global([data-theme="dark"]) .servicios-dropdown .sub-menu {
+    background: rgba(30, 30, 35, 0.98);
+    box-shadow: 
+      0 4px 25px rgba(0, 0, 0, 0.3),
+      0 10px 40px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .servicios-dropdown.is-open .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .servicios-dropdown .sub-menu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid rgba(255, 255, 255, 0.98);
+  }
+
+  :global([data-theme="dark"]) .servicios-dropdown .sub-menu::before {
+    border-bottom-color: rgba(30, 30, 35, 0.98);
+  }
+
+  .servicios-dropdown .sub-menu li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .servicios-dropdown .sub-menu li a {
+    display: block;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .servicios-dropdown .sub-menu li a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    transform: scaleY(0);
+    transition: transform 0.25s ease;
+  }
+
+  .servicios-dropdown .sub-menu li a:hover {
+    background: rgba(var(--color-primary-rgb, 0, 95, 115), 0.08);
+    padding-left: 28px;
+  }
+
+  .servicios-dropdown .sub-menu li a:hover::before {
+    transform: scaleY(1);
+  }
+
+  .servicios-dropdown .sub-menu li.current-menu-item a {
+    color: var(--color-primary);
+    background: rgba(var(--color-primary-rgb, 0, 95, 115), 0.05);
+  }
+
+  .servicios-dropdown .sub-menu li.current-menu-item a::before {
+    transform: scaleY(1);
+  }
+
+  /* ===== MOBILE DROPDOWN STYLES ===== */
+  .mobile-servicios-dropdown {
+    position: relative;
+  }
+
+  .mobile-servicios-dropdown > a.mobile-dropdown-trigger {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .mobile-dropdown-arrow {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.6;
+  }
+
+  .mobile-servicios-dropdown.is-open .mobile-dropdown-arrow {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+
+  .mobile-sub-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(var(--color-primary-rgb, 0, 95, 115), 0.05);
+    border-radius: 12px;
+    margin-top: 8px;
+  }
+
+  .mobile-servicios-dropdown.is-open .mobile-sub-menu {
+    padding: 8px 0;
+  }
+
+  .mobile-sub-menu li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-sub-menu li a {
+    display: block;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.25s ease;
+    position: relative;
+  }
+
+  .mobile-sub-menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(var(--color-primary-rgb, 0, 95, 115), 0.2), transparent);
+  }
+
+  .mobile-sub-menu li:last-child a::after {
+    display: none;
+  }
+
+  .mobile-sub-menu li a:hover,
+  .mobile-sub-menu li a:active {
+    color: var(--color-primary);
+    background: rgba(var(--color-primary-rgb, 0, 95, 115), 0.08);
+  }
+
+  .mobile-sub-menu li.current-menu-item a {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  /* Subtle pulse animation for dropdown arrow on hover */
+  @keyframes arrowPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  .servicios-dropdown:hover .dropdown-arrow {
+    animation: arrowPulse 1.5s ease-in-out infinite;
+  }
+
+  .servicios-dropdown.is-open .dropdown-arrow {
+    animation: none;
+    opacity: 1;
+  }
+
 </style>
