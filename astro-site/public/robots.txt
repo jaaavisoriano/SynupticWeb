@@ -1,4 +1,72 @@
+# ==============================================
+# Robots.txt - Synuptic.com
+# Medical Writing & Healthcare Strategy
+# ==============================================
+
+# Permite acceso a todos los bots de búsqueda
 User-agent: *
 Allow: /
 
+# Disallow administrative or private paths (if any exist)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Disallow assets directories (no need to crawl these)
+Disallow: /assets/
+
+# Allow important resources for rendering
+Allow: /images/
+Allow: /videos/
+Allow: /styles/
+
+# Crawl delay suggestion (optional, respected by some bots)
+# Crawl-delay: 1
+
+# ==============================================
+# Sitemaps
+# ==============================================
 Sitemap: https://synuptic.com/sitemap-index.xml
+
+# ==============================================
+# Specific bot rules
+# ==============================================
+
+# Google Bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Googlebot-Video
+Allow: /videos/
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# AI/LLM crawlers that respect robots.txt
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Social Media Bots (for Open Graph previews)
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /

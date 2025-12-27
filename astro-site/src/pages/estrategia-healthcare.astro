@@ -38,21 +38,76 @@ const services = [
 const strategySchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "Consultoría Estratégica Healthcare",
+  "@id": "https://synuptic.com/estrategia-healthcare/#service",
+  "name": "Consultoría Estratégica Healthcare para Agencias",
+  "serviceType": "Healthcare Consulting",
+  "category": "Strategic Healthcare Consulting",
+  "description": "Estrategia de marketing farmacéutico, posicionamiento de marca y coaching científico. Convertimos la ciencia en la mejor aliada de tus proyectos healthcare.",
+  "url": "https://synuptic.com/estrategia-healthcare/",
   "provider": {
     "@type": "Organization",
-    "name": "Sinergias en Salud S.L."
+    "@id": "https://synuptic.com/#organization",
+    "name": "Sinergias en Salud S.L.",
+    "alternateName": "Synuptic",
+    "url": "https://synuptic.com",
+    "logo": "https://synuptic.com/images/logo.png",
+    "sameAs": [
+      "https://www.linkedin.com/company/synuptic"
+    ]
   },
-  "description": "Asesoramos desde el conocimiento científico de la salud. Convertimos la ciencia en la mejor aliada de tus proyectos healthcare.",
+  "areaServed": [
+    {
+      "@type": "Country",
+      "name": "España",
+      "sameAs": "https://en.wikipedia.org/wiki/Spain"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Latinoamérica"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Europa"
+    }
+  ],
+  "serviceAudience": {
+    "@type": "Audience",
+    "audienceType": "Business",
+    "name": "Agencias de comunicación healthcare, Laboratorios farmacéuticos, Departamentos de marketing de salud"
+  },
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://synuptic.com/estrategia-healthcare/",
+    "serviceLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle Zurbano, 48",
+        "addressLocality": "Madrid",
+        "postalCode": "28010",
+        "addressCountry": "ES"
+      }
+    },
+    "availableLanguage": ["Spanish", "English"]
+  },
+  "termsOfService": "https://synuptic.com/aviso-legal/",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Servicios de Estrategia",
+    "name": "Servicios de Estrategia Healthcare",
     "itemListElement": services.map((service, index) => ({
       "@type": "Offer",
       "itemOffered": {
         "@type": "Service",
         "name": service.title,
         "description": service.items.join(' ')
+      },
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "priceCurrency": "EUR",
+        "eligibleQuantity": {
+          "@type": "QuantitativeValue",
+          "unitText": "proyecto"
+        }
       }
     }))
   }
@@ -60,8 +115,8 @@ const strategySchema = {
 ---
 
 <Layout 
-  title="Estrategia Healthcare"
-  description="Asesoramos desde el conocimiento científico de la salud. Convertimos la ciencia en la mejor aliada de tus proyectos healthcare."
+  title="Consultoría Estratégica Healthcare para Agencias"
+  description="Estrategia de marketing farmacéutico, posicionamiento de marca y coaching científico. Convertimos la ciencia en la mejor aliada de tus proyectos healthcare."
   jsonld={strategySchema}
 >
   <div id="wrap_all">

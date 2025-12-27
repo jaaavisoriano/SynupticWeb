@@ -59,34 +59,66 @@
   const preloader = document.getElementById('premium-preloader');
   
   if (preloader) {
-    const minTime = 2000; // 2 seconds
-    const fadeOutDuration = 800; // CSS transition duration (0.8s)
-    const startTime = Date.now();
-
-    const finishAnimation = () => {
+    // Check if this is a navigation within the site (not first load)
+    const isInternalNavigation = sessionStorage.getItem('synuptic_visited') === 'true';
+    
+    if (isInternalNavigation) {
+      // Skip preloader on internal navigation - hide immediately
       preloader.classList.add('fade-out');
+      preloader.style.display = 'none';
+    } else {
+      // First visit - show preloader animation
+      sessionStorage.setItem('synuptic_visited', 'true');
       
-      // Emitir evento casi inmediatamente al iniciar el fade-out
-      // Esto permite que el video arranque MIENTRAS el preloader se desvanece
-      setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('preloaderComplete'));
-        console.log('[Preloader] Signal to start video sent.');
-      }, 100);
-    };
+      const minTime = 2000; // 2 seconds
+      const startTime = Date.now();
 
-    const handleLoad = () => {
+      const finishAnimation = () => {
+        preloader.classList.add('fade-out');
+        
+        // Emit event to start video while preloader fades
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('preloaderComplete'));
+          console.log('[Preloader] Signal to start video sent.');
+        }, 100);
+        
+        // Remove from DOM after animation completes
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 900);
+      };
+
+      const handleLoad = () => {
         const now = Date.now();
         const elapsed = now - startTime;
         const remaining = Math.max(0, minTime - elapsed);
         setTimeout(finishAnimation, remaining);
-    };
+      };
 
-    if (document.readyState === 'complete') {
+      if (document.readyState === 'complete') {
         handleLoad();
-    } else {
+      } else {
         window.addEventListener('load', handleLoad);
+      }
     }
   }
+  
+  // Handle View Transitions - ensure preloader doesn't flash
+  document.addEventListener('astro:before-preparation', () => {
+    const preloader = document.getElementById('premium-preloader');
+    if (preloader) {
+      preloader.classList.add('fade-out');
+      preloader.style.display = 'none';
+    }
+  });
+  
+  document.addEventListener('astro:after-swap', () => {
+    const preloader = document.getElementById('premium-preloader');
+    if (preloader) {
+      preloader.classList.add('fade-out');
+      preloader.style.display = 'none';
+    }
+  });
 </script>
 
 <style>

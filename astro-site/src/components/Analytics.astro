@@ -1,0 +1,195 @@
+---
+/**
+ * Google Analytics 4 Component
+ * - Cumple con GDPR (IP anonimization incluida por defecto en GA4)
+ * - Eventos de conversión configurados
+ * - Carga diferida para no afectar performance
+ * 
+ * IMPORTANTE: Reemplazar 'G-XXXXXXXXXX' con tu ID de medición real
+ */
+
+interface Props {
+  measurementId?: string;
+}
+
+const { measurementId = 'G-XXXXXXXXXX' } = Astro.props;
+
+// En producción, verificar que no sea el ID de placeholder
+const isConfigured = measurementId !== 'G-XXXXXXXXXX';
+---
+
+{isConfigured && (
+  <>
+    <!-- Google Analytics 4 - Carga asíncrona -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}></script>
+    
+    <script is:inline define:vars={{ measurementId }}>
+      // Inicialización de GA4
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      // Configuración con cumplimiento GDPR
+      gtag('config', measurementId, {
+        // GA4 anonimiza IPs por defecto, pero lo hacemos explícito
+        'anonymize_ip': true,
+        // Desactivar publicidad personalizada por defecto (GDPR)
+        'allow_google_signals': false,
+        'allow_ad_personalization_signals': false,
+        // Configuración de cookies
+        'cookie_flags': 'SameSite=None;Secure',
+        // No enviar datos hasta consentimiento (si implementas banner)
+        // 'consent_mode': 'default'
+      });
+      
+      // Exponer función de tracking global
+      window.gtag = gtag;
+      
+      /**
+       * Eventos de Conversión Personalizados
+       * Usar: window.trackEvent('event_name', { param: 'value' })
+       */
+      window.trackEvent = function(eventName, params = {}) {
+        if (typeof gtag === 'function') {
+          gtag('event', eventName, params);
+        }
+      };
+      
+      /**
+       * Evento: generate_lead (Envío de formulario de contacto)
+       * Se activa cuando el usuario envía el formulario correctamente
+       */
+      window.trackContactForm = function(formData = {}) {
+        gtag('event', 'generate_lead', {
+          'event_category': 'Contact',
+          'event_label': 'Contact Form Submission',
+          'value': 1,
+          ...formData
+        });
+      };
+      
+      /**
+       * Evento: Clic en teléfono
+       */
+      window.trackPhoneClick = function(phoneNumber) {
+        gtag('event', 'contact', {
+          'event_category': 'Contact',
+          'event_label': 'Phone Click',
+          'contact_method': 'phone',
+          'phone_number': phoneNumber
+        });
+      };
+      
+      /**
+       * Evento: Clic en email
+       */
+      window.trackEmailClick = function(email) {
+        gtag('event', 'contact', {
+          'event_category': 'Contact',
+          'event_label': 'Email Click',
+          'contact_method': 'email'
+        });
+      };
+      
+      /**
+       * Evento: Descarga de material
+       */
+      window.trackDownload = function(fileName, fileType) {
+        gtag('event', 'file_download', {
+          'event_category': 'Downloads',
+          'event_label': fileName,
+          'file_name': fileName,
+          'file_extension': fileType
+        });
+      };
+      
+      /**
+       * Evento: Clic en CTA
+       */
+      window.trackCTA = function(ctaName, ctaLocation) {
+        gtag('event', 'cta_click', {
+          'event_category': 'Engagement',
+          'event_label': ctaName,
+          'cta_location': ctaLocation
+        });
+      };
+      
+      /**
+       * Evento: Scroll profundo (75% de la página)
+       */
+      let scrollTracked = false;
+      window.addEventListener('scroll', function() {
+        if (!scrollTracked) {
+          const scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+          if (scrollPercent >= 75) {
+            gtag('event', 'scroll', {
+              'event_category': 'Engagement',
+              'event_label': '75% Scroll',
+              'percent_scrolled': 75
+            });
+            scrollTracked = true;
+          }
+        }
+      }, { passive: true });
+      
+      /**
+       * Auto-tracking de clics en enlaces de teléfono y email
+       */
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (!link) return;
+        
+        const href = link.getAttribute('href') || '';
+        
+        // Tracking de teléfono
+        if (href.startsWith('tel:')) {
+          const phone = href.replace('tel:', '');
+          window.trackPhoneClick(phone);
+        }
+        
+        // Tracking de email
+        if (href.startsWith('mailto:')) {
+          const email = href.replace('mailto:', '').split('?')[0];
+          window.trackEmailClick(email);
+        }
+        
+        // Tracking de descargas
+        const downloadExtensions = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'zip'];
+        const ext = href.split('.').pop()?.toLowerCase();
+        if (ext && downloadExtensions.includes(ext)) {
+          const fileName = href.split('/').pop();
+          window.trackDownload(fileName, ext);
+        }
+      });
+      
+      /**
+       * Compatibilidad con View Transitions de Astro
+       * Reinicializa tracking en navegación SPA
+       */
+      document.addEventListener('astro:page-load', function() {
+        // Resetear tracking de scroll en nuevas páginas
+        scrollTracked = false;
+        
+        // Enviar pageview para SPA navigation
+        gtag('event', 'page_view', {
+          'page_location': window.location.href,
+          'page_title': document.title
+        });
+      });
+    </script>
+  </>
+)}
+
+{!isConfigured && (
+  <!-- GA4 no configurado - Reemplaza G-XXXXXXXXXX con tu ID de medición -->
+  <script is:inline>
+    // Placeholder para funciones de tracking cuando GA4 no está configurado
+    window.gtag = function() {};
+    window.trackEvent = function() {};
+    window.trackContactForm = function() {};
+    window.trackPhoneClick = function() {};
+    window.trackEmailClick = function() {};
+    window.trackDownload = function() {};
+    window.trackCTA = function() {};
+  </script>
+)}

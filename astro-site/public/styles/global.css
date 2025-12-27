@@ -101,6 +101,595 @@
     --shadow-glow: 0 0 30px rgba(149, 204, 165, 0.2);
 }
 
+/* ==========================================================================
+   TEXT SELECTION CONTROL - Prevent selecting empty spaces
+   ========================================================================== */
+
+/* Disable selection on decorative and structural elements */
+*::before,
+*::after,
+img,
+svg,
+video,
+canvas,
+iframe,
+.btn,
+.btn *,
+button,
+button *,
+[role="button"],
+.icon,
+.icon *,
+.line-divider,
+.separator,
+.divider,
+.decorative,
+.background-pattern,
+.floating-particles,
+.hero-gradient,
+.pattern-overlay,
+.cta-pattern,
+.cta-bg,
+.abstract-decoration,
+.shape,
+.circle,
+.blob,
+.wave,
+.grid-pattern,
+.dots-pattern,
+.premium-bg,
+.bg-elements,
+.bg-decoration,
+.animated-bg,
+.gradient-overlay,
+.section-bg,
+.hero-bg,
+.particle,
+.glow,
+.pulse-ring,
+.orbit,
+.decoration,
+.visual-element,
+.badge,
+.tag,
+.pill,
+.chip,
+.cesis_menu_button,
+.theme-toggle,
+.close-btn,
+.nav-arrow,
+.scroll-indicator,
+.progress-bar,
+.reading-progress,
+.page-transition-overlay,
+#premium-preloader,
+.preloader-content,
+.preloader-logo,
+.preloader-particles,
+.header_logo,
+#logo_img,
+.timeline-line,
+.timeline-progress,
+.step-indicator,
+.step-number,
+.card-icon,
+.service-icon,
+.feature-icon,
+.stat-icon,
+.check-icon,
+.arrow-icon,
+.quote-icon,
+.social-icon,
+.contact-icon,
+.flipper,
+.card-inner,
+/* Hero section containers - prevent selecting empty spaces */
+.page-hero,
+.blog-hero,
+.premium-hero,
+.video-intro,
+.hero-overlay,
+.hero-content,
+.hero-content-wrapper,
+.hero-headline,
+.hero-title,
+.hero-divider,
+.hero-label,
+.hero-cta-link,
+.hero-cta-group,
+.hero-play-btn,
+.hero-decoration,
+.deco-circle,
+.scroll-mouse,
+.scroll-wheel,
+.scroll-text,
+/* Quote section elements */
+.quote-bg-pattern,
+.quote-content-wrapper,
+.quote-mark,
+.author-dash,
+.premium-quote-section,
+/* Newsletter and CTA sections */
+.newsletter-bg,
+.newsletter-pattern,
+.newsletter-particles,
+.cta-section,
+/* Team flip cards */
+.team-flip-box,
+.team-flip-box__inner,
+.team-flip-box__front,
+.team-flip-box__back,
+.team-flip-box__image,
+/* Categories and filters */
+.categories-nav,
+.category-btn {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Allow selection ONLY on actual text content */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span:not(.icon):not(.btn-icon):not(.decorative),
+a:not(.btn),
+li,
+td,
+th,
+label,
+blockquote,
+cite,
+q,
+figcaption,
+.text-content,
+.description,
+.subtitle,
+.title-text,
+.content-text,
+article,
+.article-content,
+.blog-content,
+.post-content,
+.entry-content {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Style the text selection highlight */
+::selection {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+}
+
+::-moz-selection {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+}
+
+/* Dark mode selection colors */
+[data-theme="dark"] ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+}
+
+[data-theme="dark"] ::-moz-selection {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+}
+
+/* Prevent selection on empty containers and layout wrappers */
+.container:empty,
+.wrapper:empty,
+.section:empty,
+.row:empty,
+.col:empty,
+div:empty,
+section:empty {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Prevent selecting padding/margin areas - use on containers */
+.section,
+.wrapper,
+.container,
+.row,
+.col,
+header,
+footer,
+nav,
+aside,
+main {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Re-enable selection for text within containers */
+.section p,
+.section h1,
+.section h2,
+.section h3,
+.section h4,
+.section h5,
+.section h6,
+.section span:not(.icon):not(.btn-icon),
+.section a:not(.btn),
+.section li,
+.wrapper p,
+.wrapper h1,
+.wrapper h2,
+.wrapper h3,
+.wrapper h4,
+.wrapper h5,
+.wrapper h6,
+.wrapper span:not(.icon):not(.btn-icon),
+.container p,
+.container h1,
+.container h2,
+.container h3,
+.container h4,
+.container h5,
+.container h6,
+.container span:not(.icon):not(.btn-icon),
+.container a:not(.btn),
+.container li,
+main p,
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6,
+main span:not(.icon):not(.btn-icon),
+main a:not(.btn),
+main li,
+article p,
+article h1,
+article h2,
+article h3,
+article h4,
+article h5,
+article h6,
+article span:not(.icon):not(.btn-icon),
+article a:not(.btn),
+article li {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Re-enable selection for text within hero sections */
+.page-hero h1,
+.page-hero p,
+.blog-hero h1,
+.blog-hero p,
+.premium-hero h1,
+.premium-hero p,
+.video-intro h1,
+.video-intro p,
+.headline-line,
+.headline-accent,
+.hero-subline,
+.hero-subtitle,
+.page-hero__subtitle,
+.blog-hero__subtitle,
+.title-line,
+.premium-quote-text,
+.author-name,
+.team-flip-box__name,
+.team-flip-box__role,
+.team-flip-box__bio,
+.leader-quote,
+.newsletter-title,
+.newsletter-text,
+.empty-state__title,
+.empty-state__text {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* ==========================================================================
+   PREMIUM VIEW TRANSITIONS - Smooth Page Navigation
+   ========================================================================== */
+
+/* Root view transition - FAST crossfade to minimize flash */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+}
+
+/* Old page fades out */
+::view-transition-old(root) {
+    animation-name: page-fade-out;
+}
+
+/* New page fades in */
+::view-transition-new(root) {
+    animation-name: page-fade-in;
+}
+
+/* Simple fade keyframes - FAST to minimize flash */
+@keyframes page-fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes page-fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* CRITICAL: Ensure view transition has correct background color */
+::view-transition-group(root) {
+    background-color: var(--color-bg-body);
+}
+
+/* Light mode background for transitions */
+html:not([data-theme="dark"])::view-transition-group(root) {
+    background-color: #ffffff !important;
+}
+
+/* Dark mode background for transitions */
+html[data-theme="dark"]::view-transition-group(root),
+[data-theme="dark"]::view-transition-group(root) {
+    background-color: #1a3865 !important;
+}
+
+/* Ensure the transition images fill properly */
+::view-transition-image-pair(root) {
+    isolation: isolate;
+    background-color: var(--color-bg-body);
+}
+
+/* Light mode image pair */
+html:not([data-theme="dark"])::view-transition-image-pair(root) {
+    background-color: #ffffff;
+}
+
+/* Dark mode image pair */
+html[data-theme="dark"]::view-transition-image-pair(root) {
+    background-color: #1a3865;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    object-fit: none;
+    width: 100%;
+    height: 100%;
+}
+
+/* Fallback for browsers without View Transitions API */
+@supports not (view-transition-name: none) {
+    body {
+        transition: opacity 0.3s ease;
+    }
+
+    body.page-transition-out {
+        opacity: 0;
+    }
+}
+
+/* Transition overlay - theme-aware */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background: #1a3865;
+    z-index: 99998;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+/* Light mode overlay - use dark color for smooth contrast with dark heroes */
+html:not([data-theme="dark"]) .page-transition-overlay {
+    background: #1a3865;
+}
+
+/* Dark mode overlay */
+[data-theme="dark"] .page-transition-overlay {
+    background: #1a3865;
+}
+
+.page-transition-overlay.active {
+    opacity: 0.4;
+}
+
+/* Ensure smooth animations during transitions */
+html.is-animating {
+    pointer-events: none;
+}
+
+html.is-animating .header_mobile,
+html.is-animating #site-navigation {
+    transition: none !important;
+}
+
+/* ===== During swap - ensure correct backgrounds ===== */
+
+/* Light mode swapping */
+html.is-swapping:not([data-theme="dark"]) {
+    background-color: #ffffff !important;
+}
+
+html.is-swapping:not([data-theme="dark"]) body {
+    background-color: #ffffff !important;
+}
+
+html.is-swapping:not([data-theme="dark"]) #cesis_header,
+html.is-swapping:not([data-theme="dark"]) #header_container {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+}
+
+/* Dark mode swapping */
+html.is-swapping[data-theme="dark"] {
+    background-color: #1a3865 !important;
+}
+
+html.is-swapping[data-theme="dark"] body {
+    background-color: #1a3865 !important;
+}
+
+html.is-swapping[data-theme="dark"] #cesis_header,
+html.is-swapping[data-theme="dark"] #header_container {
+    background-color: #1a3865 !important;
+    background: #1a3865 !important;
+}
+
+/* ===== During animation - ensure correct backgrounds ===== */
+
+/* Light mode animating */
+html.is-animating:not([data-theme="dark"]) {
+    background-color: #ffffff !important;
+}
+
+html.is-animating:not([data-theme="dark"]) body {
+    background-color: #ffffff !important;
+}
+
+/* Dark mode animating */
+html.is-animating[data-theme="dark"] {
+    background-color: #1a3865 !important;
+}
+
+html.is-animating[data-theme="dark"] body {
+    background-color: #1a3865 !important;
+}
+
+/* Header should persist during transitions - NO animation */
+#cesis_header {
+    view-transition-name: header;
+}
+
+::view-transition-group(header) {
+    animation: none;
+    z-index: 1000;
+}
+
+::view-transition-old(header),
+::view-transition-new(header) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+/* Ensure header has correct background during transition */
+::view-transition-group(header) {
+    background-color: var(--color-bg-header);
+}
+
+/* Light mode header during transitions */
+html:not([data-theme="dark"]) ::view-transition-group(header) {
+    background-color: #ffffff !important;
+}
+
+/* Dark mode header during transitions */
+html[data-theme="dark"] ::view-transition-group(header) {
+    background-color: #1a3865 !important;
+}
+
+/* Footer stability during transitions */
+#cesis_footer {
+    view-transition-name: footer;
+}
+
+::view-transition-group(footer) {
+    animation: none;
+}
+
+::view-transition-old(footer),
+::view-transition-new(footer) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+/* Reading progress bar stays fixed */
+.reading-progress {
+    view-transition-name: reading-progress;
+}
+
+::view-transition-old(reading-progress),
+::view-transition-new(reading-progress) {
+    animation: none;
+}
+
+/* Preloader should not participate in transitions */
+#premium-preloader {
+    view-transition-name: none;
+}
+
+/* ===== Hero Sections with dark backgrounds ===== */
+/* These sections should transition smoothly regardless of theme */
+
+/* Ensure dark backgrounds are preserved during transitions in light mode */
+html:not([data-theme="dark"]) .page-hero,
+html:not([data-theme="dark"]) .premium-hero,
+html:not([data-theme="dark"]) .hero-section,
+html:not([data-theme="dark"]) .section--primary {
+    /* Force dark backgrounds to not flash during transition */
+    will-change: opacity;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* During swap - ensure dark hero sections maintain their background */
+html.is-swapping:not([data-theme="dark"]) .page-hero,
+html.is-swapping:not([data-theme="dark"]) .premium-hero,
+html.is-swapping:not([data-theme="dark"]) .hero-section,
+html.is-swapping:not([data-theme="dark"]) .section--primary {
+    opacity: 1 !important;
+}
+
+/* During animation - ensure dark hero sections maintain their background */
+html.is-animating:not([data-theme="dark"]) .page-hero,
+html.is-animating:not([data-theme="dark"]) .premium-hero,
+html.is-animating:not([data-theme="dark"]) .hero-section,
+html.is-animating:not([data-theme="dark"]) .section--primary {
+    opacity: 1 !important;
+}
+
+/* Main content area - smoother transitions */
+#main-content,
+main {
+    will-change: opacity;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* ==========================================================================
+   END VIEW TRANSITIONS
+   ========================================================================== */
+
 /* --------------------------------------------------------------------------
    Reset & Base
    -------------------------------------------------------------------------- */
@@ -351,7 +940,18 @@ h3 {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark mode header - forzar fondo azul en todo momento */
+/* Light mode header - force white background */
+html:not([data-theme="dark"]) #cesis_header {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+html:not([data-theme="dark"]) #cesis_header.scrolled {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+/* Dark mode header - force blue background */
 [data-theme="dark"] #cesis_header {
     background: #1a3865 !important;
     background-color: #1a3865 !important;
@@ -1828,4 +2428,256 @@ html {
 
 [data-theme="dark"] #contact .form-control::placeholder {
     color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY STYLES (A11y)
+   WCAG 2.1 AA Compliance
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Focus States - Visibles para navegación por teclado
+   -------------------------------------------------------------------------- */
+
+/* Focus outline visible para todos los elementos interactivos */
+:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Focus específico para enlaces */
+a:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Focus para botones */
+button:focus-visible,
+.btn:focus-visible,
+[role="button"]:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px rgba(149, 204, 165, 0.3);
+}
+
+/* Focus para inputs y textareas */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 0;
+    border-color: var(--color-accent) !important;
+}
+
+/* Focus para checkboxes */
+input[type="checkbox"]:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Focus en modo oscuro */
+[data-theme="dark"] :focus-visible {
+    outline-color: #95cca5;
+}
+
+[data-theme="dark"] button:focus-visible,
+[data-theme="dark"] .btn:focus-visible {
+    box-shadow: 0 0 0 6px rgba(149, 204, 165, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   Skip to Content Link - Para navegación por teclado
+   -------------------------------------------------------------------------- */
+.skip-to-content {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 12px 24px;
+    border-radius: 0 0 8px 8px;
+    font-weight: 700;
+    font-size: 14px;
+    z-index: 10001;
+    transition: top 0.3s ease;
+    text-decoration: none;
+}
+
+.skip-to-content:focus {
+    top: 0;
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Mejoras de Contraste (WCAG AA: 4.5:1 para texto normal, 3:1 para grande)
+   -------------------------------------------------------------------------- */
+
+/* Texto placeholder con mejor contraste */
+::placeholder {
+    color: #757575;
+    /* Contraste mínimo 4.5:1 sobre blanco */
+    opacity: 1;
+}
+
+[data-theme="dark"] ::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+    /* Contraste mínimo sobre azul oscuro */
+}
+
+/* Links en texto con subrayado para diferenciación (no solo color) */
+p a,
+.content-text a,
+article a {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 3px;
+}
+
+p a:hover,
+.content-text a:hover,
+article a:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Reduced Motion - Respeto por preferencias del usuario
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Mantener algunas transiciones críticas para UX */
+    .modal-overlay,
+    .header_mobile {
+        transition: opacity 0.1ms !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Utilidades de Accesibilidad
+   -------------------------------------------------------------------------- */
+
+/* Oculto visualmente pero accesible para lectores de pantalla */
+.visually-hidden,
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Focus visible override para elementos con visually-hidden */
+.visually-hidden:focus,
+.sr-only:focus {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: normal !important;
+}
+
+/* Para ocultar elementos de lectores de pantalla, usar aria-hidden="true" en HTML */
+
+/* --------------------------------------------------------------------------
+   Estados de Error Accesibles
+   -------------------------------------------------------------------------- */
+.error-message,
+[aria-invalid="true"] {
+    border-color: #d32f2f !important;
+}
+
+.error-message {
+    color: #d32f2f;
+    font-size: 14px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+[data-theme="dark"] .error-message,
+[data-theme="dark"] [aria-invalid="true"] {
+    border-color: #ff6b6b !important;
+}
+
+[data-theme="dark"] .error-message {
+    color: #ff6b6b;
+}
+
+/* --------------------------------------------------------------------------
+   Mejoras específicas de contraste por sección
+   -------------------------------------------------------------------------- */
+
+/* Footer text - mejorar contraste de enlaces legales */
+.footer-legal-links a {
+    color: #555555;
+    /* Mejor contraste que gris claro */
+}
+
+.footer-legal-links a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+[data-theme="dark"] .footer-legal-links a {
+    color: rgba(255, 255, 255, 0.85);
+    /* Mejor contraste */
+}
+
+[data-theme="dark"] .footer-legal-links a:hover {
+    color: var(--color-accent);
+}
+
+/* Navegación - mejorar contraste del hover */
+.main-menu li a,
+.mobile-menu li a {
+    color: var(--color-nav-link);
+}
+
+/* Botón de menú móvil - asegurar contraste */
+.cesis_menu_button:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Alto Contraste - para usuarios que lo prefieran
+   -------------------------------------------------------------------------- */
+@media (prefers-contrast: high) {
+    :root {
+        --color-text-muted: #333333;
+        --color-text-muted-light: #444444;
+        --color-border: #333333;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    button,
+    .btn {
+        border-width: 2px;
+    }
+
+    :focus-visible {
+        outline-width: 4px;
+    }
 }

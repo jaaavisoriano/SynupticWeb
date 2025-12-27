@@ -1,5 +1,7 @@
 ---
 // About section - "Más que tu medical writer de confianza" - Premium version
+import { Image } from 'astro:assets';
+import aboutImage from '../../assets/Multidisci_800x600-1.jpg';
 ---
 
 <section class="section about-section" id="about">
@@ -28,13 +30,15 @@
       </div>
       <div class="about-section__image reveal-scale">
         <div class="image-glow"></div>
-        <img 
-          src="/images/Multidisci_800x600-1.jpg" 
-          alt="Equipo multidisciplinar de Synuptic"
-          width="800"
-          height="600"
+        <Image 
+          src={aboutImage}
+          alt="Equipo multidisciplinar de Synuptic trabajando en proyectos de medical writing y estrategia healthcare"
+          width={800}
+          height={600}
           loading="lazy"
-        >
+          format="webp"
+          quality={85}
+        />
       </div>
     </div>
   </div>

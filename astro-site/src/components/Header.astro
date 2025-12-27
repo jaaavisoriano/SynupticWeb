@@ -356,21 +356,16 @@ const isServiciosActive = serviciosItems.some(item => currentPath === item.href)
     initMobileMenu();
     initHeaderScroll();
     initDropdowns();
-    initTheme();
+    initThemeToggle();
   });
 
-  // Theme Toggle Logic
-  function initTheme() {
+  // Theme Toggle Logic - Only handles toggle buttons, theme is set in Layout
+  function initThemeToggle() {
     const desktopToggle = document.getElementById('theme-toggle-desktop');
     const mobileToggle = document.getElementById('theme-toggle-mobile');
     
-    const storedTheme = localStorage.getItem('theme');
-    
-    if (storedTheme === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
+    // NOTE: Theme is already applied via inline script in Layout.astro
+    // We DON'T re-apply it here to prevent flash during transitions
 
     const handleToggle = () => {
       const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -378,8 +373,10 @@ const isServiciosActive = serviciosItems.some(item => currentPath === item.href)
       
       if (newTheme === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.style.setProperty('--instant-bg', '#1a3865');
       } else {
         document.documentElement.removeAttribute('data-theme');
+        document.documentElement.style.setProperty('--instant-bg', '#ffffff');
       }
       
       localStorage.setItem('theme', newTheme);
@@ -396,7 +393,7 @@ const isServiciosActive = serviciosItems.some(item => currentPath === item.href)
     });
   }
 
-  initTheme();
+  initThemeToggle();
 </script>
 
 <style>

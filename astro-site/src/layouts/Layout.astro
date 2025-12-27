@@ -4,6 +4,7 @@ import ContactModal from '../components/ContactModal.astro';
 import SEO from '../components/SEO.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import Preloader from '../components/Preloader.astro';
+import Analytics from '../components/Analytics.astro';
 
 
 interface Props {
@@ -48,10 +49,133 @@ const {
   <!-- Global Styles -->
   <link rel="stylesheet" href="/styles/global.css">
   
+  <!-- CRITICAL: Apply theme BEFORE any rendering to prevent flash -->
+  <script is:inline>
+    (function() {
+      // Apply saved theme immediately (before any paint)
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+      
+      // Also set a CSS custom property for instant background
+      document.documentElement.style.setProperty(
+        '--instant-bg', 
+        savedTheme === 'dark' ? '#1a3865' : '#ffffff'
+      );
+    })();
+  </script>
+  
+  <!-- Inline critical CSS to prevent flash -->
+  <style is:inline>
+    /* Prevent flash of wrong theme - CRITICAL */
+    html {
+      background-color: var(--instant-bg, #ffffff);
+    }
+    
+    /* ===== LIGHT MODE (default) ===== */
+    html:not([data-theme="dark"]) {
+      background-color: #ffffff;
+    }
+    
+    html:not([data-theme="dark"]) body {
+      background-color: #ffffff;
+      color: #1e1e1e;
+    }
+    
+    /* Light mode header - ensure white background */
+    html:not([data-theme="dark"]) #cesis_header,
+    html:not([data-theme="dark"]) #header_container,
+    html:not([data-theme="dark"]) .header_main {
+      background-color: #ffffff !important;
+      background: #ffffff !important;
+    }
+    
+    /* Light mode mobile menu */
+    html:not([data-theme="dark"]) .header_mobile {
+      background-color: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    
+    /* ===== DARK MODE ===== */
+    html[data-theme="dark"] {
+      background-color: #1a3865;
+    }
+    
+    html[data-theme="dark"] body {
+      background-color: #1a3865;
+      color: #ffffff;
+    }
+    
+    /* Dark mode header - prevent white flash */
+    html[data-theme="dark"] #cesis_header,
+    html[data-theme="dark"] #header_container,
+    html[data-theme="dark"] .header_main {
+      background-color: #1a3865 !important;
+      background: #1a3865 !important;
+    }
+    
+    /* Dark mode mobile menu */
+    html[data-theme="dark"] .header_mobile {
+      background-color: rgba(26, 56, 101, 0.95) !important;
+    }
+    
+    /* ===== DURING PAGE TRANSITIONS ===== */
+    /* Light mode swap */
+    html.is-swapping:not([data-theme="dark"]),
+    html.is-swapping:not([data-theme="dark"]) body {
+      background-color: #ffffff !important;
+    }
+    
+    /* Dark mode swap */
+    html.is-swapping[data-theme="dark"],
+    html.is-swapping[data-theme="dark"] body {
+      background-color: #1a3865 !important;
+    }
+    
+    /* ===== DARK HERO SECTIONS IN LIGHT MODE ===== */
+    /* Ensure dark hero sections don't flash during transitions */
+    html:not([data-theme="dark"]) .page-hero,
+    html:not([data-theme="dark"]) .premium-hero,
+    html:not([data-theme="dark"]) .hero-section {
+      background-color: #0a1628;
+    }
+    
+    html.is-swapping:not([data-theme="dark"]) .page-hero,
+    html.is-swapping:not([data-theme="dark"]) .premium-hero {
+      background-color: #0a1628 !important;
+      opacity: 1 !important;
+    }
+    
+    html.is-animating:not([data-theme="dark"]) .page-hero,
+    html.is-animating:not([data-theme="dark"]) .premium-hero {
+      background-color: #0a1628 !important;
+    }
+    
+    /* ===== TRANSITION OVERLAY ===== */
+    /* Use dark overlay for both modes for uniform smooth transitions */
+    .page-transition-overlay {
+      background: #1a3865 !important;
+    }
+    
+    /* Ensure preloader doesn't flash */
+    #premium-preloader {
+      background: radial-gradient(circle at center, #1f4275 0%, #1a3865 100%);
+    }
+  </style>
+  
+  <!-- Google Analytics 4 (GDPR Compliant) -->
+  <!-- IMPORTANTE: Reemplazar G-XXXXXXXXXX con tu ID de medición real de GA4 -->
+  <Analytics measurementId="G-XXXXXXXXXX" />
+  
   <!-- View Transitions for smooth page navigation -->
   <ClientRouter />
 </head>
 <body>
+  <!-- Skip to Content Link (A11y) -->
+  <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+  
   <Preloader />
   <ReadingProgress />
   <slot />
@@ -59,5 +183,84 @@ const {
 
   <script src="/scripts/animations.js" is:inline></script>
   <script src="/scripts/smooth-scroll.js" is:inline></script>
+  
+  <!-- Premium Page Transitions -->
+  <div class="page-transition-overlay" aria-hidden="true"></div>
+  
+  <script>
+    // Premium Page Transition Handler with Theme Preservation
+    (function() {
+      const overlay = document.querySelector('.page-transition-overlay');
+      
+      // Preserve theme during View Transitions
+      document.addEventListener('astro:before-swap', (event) => {
+        // Get current theme
+        const currentTheme = localStorage.getItem('theme');
+        const isDark = currentTheme === 'dark';
+        
+        // Apply theme to the new document BEFORE it's swapped in
+        if (isDark) {
+          event.newDocument.documentElement.setAttribute('data-theme', 'dark');
+          event.newDocument.documentElement.style.setProperty('--instant-bg', '#1a3865');
+        } else {
+          // Explicitly set light mode properties
+          event.newDocument.documentElement.removeAttribute('data-theme');
+          event.newDocument.documentElement.style.setProperty('--instant-bg', '#ffffff');
+        }
+        
+        // Ensure overlay is active during swap
+        if (overlay) overlay.classList.add('active');
+        
+        // Add class to manage swap state
+        document.documentElement.classList.add('is-swapping');
+      });
+      
+      // Handle transition start
+      document.addEventListener('astro:before-preparation', () => {
+        document.documentElement.classList.add('is-animating');
+        if (overlay) overlay.classList.add('active');
+      });
+      
+      // Handle transition complete
+      document.addEventListener('astro:after-swap', () => {
+        // Remove swapping class
+        document.documentElement.classList.remove('is-swapping');
+        
+        // Reapply theme just to be safe
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.style.setProperty('--instant-bg', '#1a3865');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          document.documentElement.style.setProperty('--instant-bg', '#ffffff');
+        }
+        
+        if (overlay) {
+          setTimeout(() => {
+            overlay.classList.remove('active');
+          }, 50);
+        }
+      });
+      
+      document.addEventListener('astro:page-load', () => {
+        document.documentElement.classList.remove('is-animating');
+        document.documentElement.classList.remove('is-swapping');
+        if (overlay) overlay.classList.remove('active');
+      });
+      
+      // Fallback for browsers without View Transitions API
+      if (!document.startViewTransition) {
+        document.querySelectorAll('a[href^="/"]').forEach(link => {
+          link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('#') && !link.target) {
+              document.body.classList.add('page-transition-out');
+            }
+          });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

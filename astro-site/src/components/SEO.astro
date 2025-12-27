@@ -3,20 +3,32 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  imageAlt?: string;
   type?: 'website' | 'article';
   jsonld?: any;
+  noIndex?: boolean;
 }
 
 const {
   title,
   description,
-  image = '/images/logo.png',
+  image = '/images/logo.webp',
+  imageAlt = 'Synuptic - Medical Writing & Healthcare Strategy',
   type = 'website',
-  jsonld
+  jsonld,
+  noIndex = false
 } = Astro.props;
 
+// Canonical URL
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const formattedTitle = `${title} | Synuptic - Medical Writing`;
+
+// Formateo inteligente del título (evita duplicación si ya contiene "Synuptic")
+const brandSuffix = ' | Synuptic';
+const formattedTitle = title.toLowerCase().includes('synuptic') 
+  ? title 
+  : `${title}${brandSuffix}`;
+
+// URLs de imágenes para redes sociales
 const socialImageURL = new URL(image, Astro.site);
 
 // Esquema de Organización Global
@@ -24,17 +36,22 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": ["Organization", "MedicalBusiness"],
   "name": "Sinergias en Salud S.L.",
+  "alternateName": "Synuptic",
   "url": Astro.site?.toString(),
   "logo": new URL('/images/logo.png', Astro.site).toString(),
-  "image": new URL('/images/logo.png', Astro.site).toString(),
+  "image": socialImageURL.toString(),
   "sameAs": [
-    "https://www.linkedin.com/company/synuptic", // Placeholder, verificar si existe enlace real
+    "https://www.linkedin.com/company/synuptic"
   ],
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer service",
     "areaServed": "ES",
-    "availableLanguage": "Spanish"
+    "availableLanguage": ["Spanish", "English"]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "ES"
   }
 };
 
@@ -44,25 +61,37 @@ const finalSchema = jsonld
   : organizationSchema;
 ---
 
-<!-- SEO Global -->
+<!-- SEO Core -->
 <title>{formattedTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
+{noIndex && <meta name="robots" content="noindex, nofollow" />}
 
-<!-- Open Graph / Facebook -->
+<!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={formattedTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={socialImageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={imageAlt} />
 <meta property="og:site_name" content="Synuptic" />
+<meta property="og:locale" content="es_ES" />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={canonicalURL} />
-<meta property="twitter:title" content={formattedTitle} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={socialImageURL} />
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={formattedTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImageURL} />
+<meta name="twitter:image:alt" content={imageAlt} />
+
+<!-- Additional SEO -->
+<meta name="author" content="Synuptic - Sinergias en Salud S.L." />
+<meta name="geo.region" content="ES" />
+<meta name="geo.country" content="Spain" />
+<meta name="language" content="Spanish" />
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />

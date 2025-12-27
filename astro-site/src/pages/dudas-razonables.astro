@@ -37,20 +37,45 @@ const faqs = [
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
+  "@id": "https://synuptic.com/dudas-razonables/#faq",
+  "name": "Preguntas Frecuentes sobre Medical Writing Externo",
+  "description": "Resuelve tus dudas sobre contratar servicios de medical writing: confidencialidad, tarifas, modelos de colaboración y cómo trabajamos con agencias y laboratorios.",
+  "url": "https://synuptic.com/dudas-razonables/",
+  "about": {
+    "@type": "Thing",
+    "name": "Servicios de Medical Writing",
+    "description": "Servicios de redacción científica y consultoría estratégica para agencias de comunicación healthcare y laboratorios farmacéuticos"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://synuptic.com/#organization",
+    "name": "Sinergias en Salud S.L.",
+    "alternateName": "Synuptic",
+    "url": "https://synuptic.com",
+    "logo": "https://synuptic.com/images/logo.png"
+  },
+  "inLanguage": "es-ES",
+  "datePublished": "2024-01-15",
+  "dateModified": "2024-12-27",
   "mainEntity": faqs.map(faq => ({
     "@type": "Question",
     "name": faq.question,
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": faq.answer
+      "text": faq.answer,
+      "dateCreated": "2024-01-15",
+      "author": {
+        "@type": "Organization",
+        "name": "Synuptic"
+      }
     }
   }))
 };
 ---
 
 <Layout 
-  title="Dudas Razonables"
-  description="Resuelve tus dudas sobre agencia de medical writing, confidencialidad, tarifas y colaboración externa."
+  title="Preguntas Frecuentes sobre Medical Writing Externo"
+  description="Resuelve tus dudas sobre contratar servicios de medical writing: confidencialidad, tarifas, modelos de colaboración y cómo trabajamos con agencias y laboratorios."
   jsonld={faqSchema}
 >
   <div id="wrap_all">

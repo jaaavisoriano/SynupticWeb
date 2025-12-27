@@ -1,5 +1,7 @@
 ---
 // Partner section - Styled like "Así Trabajamos" social proof but with image
+import { Image } from 'astro:assets';
+import partnerImage from '../../assets/Ilustracion_30-768x542.jpg';
 ---
 
 <section class="section partner-section" id="partner">
@@ -28,14 +30,16 @@
         
         <!-- Image Column -->
         <div class="image-wrapper animate-fade-in">
-          <img 
-            src="/images/Ilustracion_30-768x542.jpg" 
-            alt="Ilustración confianza clientes"
-            width="768"
-            height="542"
+          <Image 
+            src={partnerImage}
+            alt="Ilustración representando la confianza y colaboración con agencias de comunicación healthcare desde 2015"
+            width={768}
+            height={542}
             loading="lazy"
+            format="webp"
+            quality={85}
             class="feature-image"
-          >
+          />
           <div class="image-glow"></div>
         </div>
 

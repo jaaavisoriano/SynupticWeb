@@ -39,12 +39,59 @@ const services = [
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
+  "@id": "https://synuptic.com/medical-writing/#service",
+  "name": "Servicios de Medical Writing para Agencias Healthcare",
   "serviceType": "Medical Writing",
+  "category": "Healthcare Communication Services",
+  "description": "Redacción científica y contenidos médicos para agencias y laboratorios. Textos regulatorios, materiales promocionales, formaciones en salud y cobertura de congresos médicos.",
+  "url": "https://synuptic.com/medical-writing/",
   "provider": {
     "@type": "Organization",
-    "name": "Sinergias en Salud S.L."
+    "@id": "https://synuptic.com/#organization",
+    "name": "Sinergias en Salud S.L.",
+    "alternateName": "Synuptic",
+    "url": "https://synuptic.com",
+    "logo": "https://synuptic.com/images/logo.png",
+    "sameAs": [
+      "https://www.linkedin.com/company/synuptic"
+    ]
   },
-  "description": "Desarrollamos contenido científico para proyectos healthcare, textos médicos y estrategias de comunicación.",
+  "areaServed": [
+    {
+      "@type": "Country",
+      "name": "España",
+      "sameAs": "https://en.wikipedia.org/wiki/Spain"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Latinoamérica"
+    },
+    {
+      "@type": "AdministrativeArea", 
+      "name": "Europa"
+    }
+  ],
+  "serviceAudience": {
+    "@type": "Audience",
+    "audienceType": "Business",
+    "name": "Agencias de comunicación healthcare, Laboratorios farmacéuticos, Consultoras de salud"
+  },
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://synuptic.com/medical-writing/",
+    "serviceLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle Zurbano, 48",
+        "addressLocality": "Madrid",
+        "postalCode": "28010",
+        "addressCountry": "ES"
+      }
+    },
+    "availableLanguage": ["Spanish", "English"]
+  },
+  "termsOfService": "https://synuptic.com/aviso-legal/",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Servicios de Medical Writing",
@@ -54,6 +101,14 @@ const serviceSchema = {
         "@type": "Service",
         "name": service.title,
         "description": service.items.map(item => item.replace(/<\/?[^>]+(>|$)/g, "")).join(' ')
+      },
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "priceCurrency": "EUR",
+        "eligibleQuantity": {
+          "@type": "QuantitativeValue",
+          "unitText": "proyecto"
+        }
       }
     }))
   }
@@ -61,8 +116,8 @@ const serviceSchema = {
 ---
 
 <Layout 
-  title="Medical Writing"
-  description="Desarrollamos contenido científico para proyectos healthcare. Medical writing, formaciones en salud y cobertura de eventos médicos."
+  title="Medical Writing para Agencias de Comunicación Healthcare"
+  description="Redacción científica y contenidos médicos para agencias y laboratorios. Textos regulatorios, materiales promocionales, formaciones en salud y cobertura de congresos médicos."
   jsonld={serviceSchema}
 >
   <div id="wrap_all">

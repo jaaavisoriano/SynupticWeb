@@ -2,11 +2,25 @@
 import { Image } from 'astro:assets';
 import logoSvg from '../assets/logo.svg';
 
+// Servicios principales (SEO: distribuir link juice)
+const serviceLinks = [
+  { href: '/medical-writing/', label: 'Medical Writing' },
+  { href: '/estrategia-healthcare/', label: 'Estrategia Healthcare' },
+];
+
+// Navegación secundaria
+const navLinks = [
+  { href: '/asi-trabajamos/', label: 'Así Trabajamos' },
+  { href: '/synupteam/', label: 'Nuestro Equipo' },
+  { href: '/dudas-razonables/', label: 'Preguntas Frecuentes' },
+  { href: '/blog/', label: 'Blog' },
+];
+
+// Enlaces legales
 const legalLinks = [
   { href: '/aviso-legal/', label: 'Aviso legal' },
   { href: '/politica-privacidad/', label: 'Política de privacidad' },
   { href: '/politica-de-cookies-ue/', label: 'Política de cookies (UE)' },
-  { href: '/enlaces/', label: 'Enlaces' },
 ];
 
 const currentYear = new Date().getFullYear();
@@ -19,28 +33,28 @@ const currentYear = new Date().getFullYear();
         <!-- Contact Info -->
         <div class="col-sm-6 footer-col footer-contact">
           <h3 class="text-center">¿Quieres conocernos?</h3>
-          <div class="contact-list">
-            <div class="contact-item">
-              <span class="contact-item__icon">
+          <div class="contact-list" role="list">
+            <div class="contact-item" role="listitem">
+              <span class="contact-item__icon" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
               </span>
-              <a href="tel:+34690009731" class="contact-item__text">+34 690009731</a>
+              <a href="tel:+34690009731" class="contact-item__text" aria-label="Llamar a Synuptic: +34 690 009 731">+34 690009731</a>
             </div>
-            <div class="contact-item email-container">
-              <span class="contact-item__icon">
+            <div class="contact-item email-container" role="listitem">
+              <span class="contact-item__icon" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
               </span>
-              <a href="mailto:hola@synuptic.es" id="email-copy" class="contact-item__text" title="Clic para copiar email">hola@synuptic.es</a>
-              <span id="email-tooltip" class="copy-tooltip">¡Copiado!</span>
+              <a href="mailto:hola@synuptic.es" id="email-copy" class="contact-item__text" aria-label="Enviar email a hola@synuptic.es, clic para copiar" title="Clic para copiar email">hola@synuptic.es</a>
+              <span id="email-tooltip" class="copy-tooltip" role="status" aria-live="polite">¡Copiado!</span>
             </div>
-            <div class="contact-item location-trigger" id="location-trigger" role="button" tabindex="0" title="Ver en mapa">
-              <span class="contact-item__icon">
+            <div class="contact-item location-trigger" id="location-trigger" role="button" tabindex="0" aria-label="Ver ubicación de Synuptic en el mapa: Calle Zurbano 48, Madrid" title="Ver en mapa">
+              <span class="contact-item__icon" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
               </span>
               <span class="contact-item__text">c/ Zurbano, 48 <span>- 28010 Madrid</span></span>
             </div>
-            <div class="contact-item">
-              <span class="contact-item__icon">
+            <div class="contact-item" role="listitem">
+              <span class="contact-item__icon" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-4.42 0-8 3.58-8 8v7c0 1.1.9 2 2 2h2v3h2v-3h8v3h2v-3h2c1.1 0 2-.9 2-2v-7c0-4.42-3.58-8-8-8zM6 10c0-3.31 2.69-6 6-6s6 2.69 6 6v3H6v-3zm12 5H6v-2h12v2zm-4.5 1.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm-7 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
               </span>
               <span class="contact-item__text">Metro Rubén Darío // Gregorio Marañón // Iglesia</span>
@@ -65,12 +79,32 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
 
-      <!-- New Bottom Section: Logo & Legal Links -->
+      <!-- Navigation Links Section (SEO: Link Juice Distribution) -->
+      <div class="footer-nav-section">
+        <div class="footer-nav-column">
+          <h4 class="footer-nav-title">Servicios</h4>
+          <ul class="footer-nav-links">
+            {serviceLinks.map((link) => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div class="footer-nav-column">
+          <h4 class="footer-nav-title">Navegación</h4>
+          <ul class="footer-nav-links">
+            {navLinks.map((link) => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Section: Logo & Legal Links -->
       <div class="footer-bottom-section">
         <div class="footer-logo-container">
           <Image 
             src={logoSvg} 
-            alt="Synuptic" 
+            alt="Synuptic - Agencia de Medical Writing y Estrategia Healthcare" 
             class="footer-logo-bottom"
             width={150}
           />
@@ -255,6 +289,73 @@ const currentYear = new Date().getFullYear();
   
   .map-iframe {
     border: 0;
+  }
+
+  /* Navigation Links Section */
+  .footer-nav-section {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .footer-nav-column {
+    text-align: center;
+  }
+
+  .footer-nav-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-heading, #1a3865);
+    margin-bottom: 16px;
+  }
+
+  .footer-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-nav-links li a {
+    color: #666;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+  }
+
+  .footer-nav-links li a:hover {
+    color: var(--color-primary, #1a3865);
+  }
+
+  :global([data-theme="dark"]) .footer-nav-title {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  :global([data-theme="dark"]) .footer-nav-links li a {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  :global([data-theme="dark"]) .footer-nav-links li a:hover {
+    color: var(--color-accent, #95cca5);
+  }
+
+  :global([data-theme="dark"]) .footer-nav-section {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: 767px) {
+    .footer-nav-section {
+      flex-direction: column;
+      gap: 30px;
+    }
   }
 
   /* Bottom Section Styles */

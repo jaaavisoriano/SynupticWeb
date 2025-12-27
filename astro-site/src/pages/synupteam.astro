@@ -84,8 +84,8 @@ const leader = {
 ---
 
 <Layout 
-  title="SynupTeam"
-  description="Conoce al equipo de Synuptic. El SynupTeam es gente maravillosa, de formación científica, pero con un puntito de creatividad."
+  title="Nuestro Equipo Científico | Medical Writers Expertos"
+  description="Conoce al SynupTeam: profesionales con formación científica en biotecnología, farmacia y medicina. Expertos en redacción médica y comunicación healthcare."
 >
   <div id="wrap_all">
     <Header />
@@ -312,6 +312,43 @@ const leader = {
 </script>
 
 <style>
+  /* ===== TEXT SELECTION CONTROL FOR HERO ===== */
+  /* Disable selection on hero containers and decorative elements */
+  .page-hero,
+  .hero-gradient,
+  .floating-particles,
+  .hero-overlay,
+  .hero-content,
+  .hero-headline,
+  .hero-divider,
+  .hero-label,
+  .scroll-indicator,
+  .scroll-mouse,
+  .scroll-wheel,
+  .scroll-text,
+  .hero-cta-link,
+  .quote-bg-pattern,
+  .quote-content-wrapper,
+  .quote-mark,
+  .author-dash {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Allow selection ONLY on the actual text content */
+  .headline-line,
+  .headline-accent,
+  .hero-subtitle,
+  .premium-quote-text,
+  .author-name {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+
   /* ===== PREMIUM HERO SECTION ===== */
   .page-hero {
     position: relative;

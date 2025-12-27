@@ -107,8 +107,8 @@ const ventajas = [
 ---
 
 <Layout 
-  title="Así Trabajamos | Activa la Sinapsis"
-  description="Descubre cómo es trabajar con Synuptic: un proceso sencillo en 4 pasos para activar la sinapsis creativa con tu agencia. Medical writing y estrategia healthcare sin complicaciones."
+  title="Cómo Trabajamos | Proceso de Colaboración Sencillo"
+  description="Descubre nuestro proceso en 4 pasos para colaborar con agencias. Presupuesto por proyecto, bolsa de horas o implant científico. Medical writing sin complicaciones."
 >
   <div id="wrap_all">
     <Header />
@@ -516,6 +516,15 @@ const ventajas = [
       step.classList.remove('is-visible', 'is-active');
     });
     
+    // Helper function to check if element is in viewport
+    const isElementInViewport = (el) => {
+      const rect = el.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      // Element is considered visible if at least 30% is in viewport
+      const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
+      return visibleHeight >= rect.height * 0.3;
+    };
+    
     // Intersection Observer for steps visibility
     timelineObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -571,8 +580,20 @@ const ventajas = [
     timelineScrollHandler = updateProgressAndNodes;
     timelineResizeHandler = updateProgressAndNodes;
     
-    // Initial call and scroll listener
-    updateProgressAndNodes();
+    // Initial setup with delay to ensure layout is ready
+    // First mark visible elements, then update progress line
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        // Mark elements already in viewport as visible
+        timelineSteps.forEach((step) => {
+          if (isElementInViewport(step)) {
+            step.classList.add('is-visible');
+          }
+        });
+        // Then update progress line and active states
+        updateProgressAndNodes();
+      });
+    });
     window.addEventListener('scroll', timelineScrollHandler, { passive: true });
     window.addEventListener('resize', timelineResizeHandler, { passive: true });
   }
