@@ -47,11 +47,13 @@ const currentYear = new Date().getFullYear();
               <a href="mailto:hola@synuptic.es" id="email-copy" class="contact-item__text" aria-label="Enviar email a hola@synuptic.es, clic para copiar" title="Clic para copiar email">hola@synuptic.es</a>
               <span id="email-tooltip" class="copy-tooltip" role="status" aria-live="polite">¡Copiado!</span>
             </div>
-            <div class="contact-item location-trigger" id="location-trigger" role="button" tabindex="0" aria-label="Ver ubicación de Synuptic en el mapa: Calle Zurbano 48, Madrid" title="Ver en mapa">
-              <span class="contact-item__icon" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              </span>
-              <span class="contact-item__text">c/ Zurbano, 48 <span>- 28010 Madrid</span></span>
+            <div role="listitem">
+              <div class="contact-item location-trigger" id="location-trigger" role="button" tabindex="0" aria-label="Ver ubicación de Synuptic en el mapa: Calle Zurbano 48, Madrid" title="Ver en mapa">
+                <span class="contact-item__icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </span>
+                <span class="contact-item__text">c/ Zurbano, 48 <span>- 28010 Madrid</span></span>
+              </div>
             </div>
             <div class="contact-item" role="listitem">
               <span class="contact-item__icon" aria-hidden="true">
@@ -438,8 +440,12 @@ const currentYear = new Date().getFullYear();
     color: var(--color-accent);
   }
 
+  :global([data-theme="dark"]) .footer-contact h3 {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
   :global([data-theme="dark"]) .footer-legal-links li a {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.85);
   }
 
   :global([data-theme="dark"]) .footer-legal-links li a:hover {
@@ -456,7 +462,7 @@ const currentYear = new Date().getFullYear();
   }
 
   :global([data-theme="dark"]) .footer_sub__text span {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.85);
   }
 
   /* Email Copy Tooltip */

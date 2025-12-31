@@ -8,7 +8,10 @@ export default defineConfig({
   output: 'static',
 
   build: {
-    assets: 'assets'
+    assets: 'assets',
+    // Force ALL stylesheets to be inlined to eliminate render-blocking CSS
+    // This removes /assets/index.*.css, /assets/asi-trabajamos.*.css from critical path
+    inlineStylesheets: 'always'
   },
 
   compressHTML: true,

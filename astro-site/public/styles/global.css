@@ -1702,7 +1702,7 @@ textarea.form-control {
 }
 
 .footer-contact h3 {
-    color: var(--color-accent);
+    color: var(--color-primary);
     margin-bottom: var(--spacing-sm);
 }
 
@@ -1764,7 +1764,7 @@ textarea.form-control {
 
 .footer_sub__text {
     font-size: 14px;
-    color: var(--color-gray-dark);
+    color: #555555;
 }
 
 /* --------------------------------------------------------------------------

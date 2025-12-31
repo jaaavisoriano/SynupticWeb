@@ -46,7 +46,10 @@ const links = [
         title="Enlaces" 
         description="Conecta con Synuptic: Medical Writing y Estrategia Healthcare."
     />
-    <link rel="stylesheet" href="/styles/global.css">
+    <!-- Global Styles - Async load to prevent render blocking -->
+    <link rel="preload" href="/styles/global.css" as="style">
+    <link rel="stylesheet" href="/styles/global.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/styles/global.css"></noscript>
     
     <style>
         body {

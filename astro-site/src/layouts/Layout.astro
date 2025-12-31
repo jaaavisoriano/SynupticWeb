@@ -41,13 +41,18 @@ const {
     jsonld={jsonld}
   />
   
-  <!-- Google Fonts -->
+  <!-- Google Fonts - Async loading to prevent render blocking -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Raleway:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Preload fonts with high priority but load async -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Raleway:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Raleway:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Raleway:wght@300;400;500;700&family=Roboto:wght@400;500;700&display=swap"></noscript>
   
-  <!-- Global Styles -->
-  <link rel="stylesheet" href="/styles/global.css">
+  <!-- Global Styles - Preload and async load to prevent render blocking -->
+  <link rel="preload" href="/styles/global.css" as="style">
+  <link rel="stylesheet" href="/styles/global.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/styles/global.css"></noscript>
   
   <!-- CRITICAL: Apply theme BEFORE any rendering to prevent flash -->
   <script is:inline>
@@ -68,6 +73,23 @@ const {
   
   <!-- Inline critical CSS to prevent flash -->
   <style is:inline>
+    /* ===== CRITICAL TYPOGRAPHY - Prevent FOUT ===== */
+    :root {
+      --font-main: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-alt: 'Raleway', 'Lato', sans-serif;
+      --color-primary: #1a3865;
+      --color-accent: #95cca5;
+    }
+    
+    body {
+      margin: 0;
+      font-family: var(--font-main);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
     /* Prevent flash of wrong theme - CRITICAL */
     html {
       background-color: var(--instant-bg, #ffffff);

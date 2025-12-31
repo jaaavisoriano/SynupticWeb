@@ -19,6 +19,24 @@
       <!-- Fallback message -->
       Tu navegador no soporta video HTML5.
     </video>
+    <!-- Script inline inmediato para forzar reproducción -->
+    <script is:inline>
+      (function() {
+        var v = document.getElementById('main-hero-video');
+        if (v) {
+          v.muted = true;
+          v.play().catch(function() {});
+          // Segundo intento con delay
+          setTimeout(function() {
+            if (v.paused) { v.muted = true; v.play().catch(function() {}); }
+          }, 100);
+          // Tercer intento
+          setTimeout(function() {
+            if (v.paused) { v.muted = true; v.play().catch(function() {}); }
+          }, 500);
+        }
+      })();
+    </script>
   </div>
   
   <!-- Premium Overlay with Content -->
@@ -108,41 +126,39 @@
     private init() {
       if (!this.video) return;
 
-      // 1. Configuración Hardware-Level (Propiedades directas)
+      // 1. Configuración Hardware-Level (Propiedades directas) - Vital para autoplay policies
       this.video.muted = true;
       this.video.defaultMuted = true;
       this.video.playsInline = true;
       
-      // 2. Configuración DOM-Level (Atributos)
+      // 2. Configuración DOM-Level (Atributos) - Refuerzo para navegadores exigentes
       this.video.setAttribute('muted', '');
       this.video.setAttribute('playsinline', '');
-      this.video.removeAttribute('autoplay');
+      this.video.setAttribute('autoplay', '');
       
-      // 3. Pausar el video para asegurarnos de que no se reproduzca
-      this.video.pause();
+      // 3. NO pausar - dejamos que el autoplay nativo funcione
+      // El video debería reproducirse automáticamente con los atributos HTML
 
       // 4. Registrar listeners de eventos del video para diagnóstico y recuperación
       this.setupVideoEventListeners();
       
-      // 5. Comprobar si el preloader existe
-      const preloader = document.getElementById('premium-preloader');
-      const preloaderVisible = preloader && !preloader.classList.contains('fade-out');
+      // 5. Marcar como listo para reproducir inmediatamente
+      // El preloader ya no controla la reproducción del video
+      this.preloaderFinished = true;
       
-      if (preloaderVisible) {
-        console.log('[HeroCtrl] Esperando a que el preloader termine...');
-        window.addEventListener('preloaderComplete', () => {
-          if (this.isDestroyed) return;
-          console.log('[HeroCtrl] Preloader terminado. Iniciando reproducción del video.');
-          this.preloaderFinished = true;
-          this.ensureVideoLoaded();
-        }, { once: true });
-      } else {
-        console.log('[HeroCtrl] No hay preloader activo. Iniciando video inmediatamente.');
-        this.preloaderFinished = true;
-        this.ensureVideoLoaded();
-      }
+      // 6. Intentar reproducción inmediata como respaldo si autoplay falla
+      // Pequeño delay para dar tiempo a que el DOM esté listo
+      requestAnimationFrame(() => {
+        if (this.isDestroyed) return;
+        if (this.video?.paused) {
+          console.log('[HeroCtrl] Autoplay nativo no funcionó. Forzando reproducción...');
+          this.forcePlay();
+        } else {
+          console.log('[HeroCtrl] ✓ Video reproduciéndose via autoplay nativo.');
+        }
+      });
 
-      // 6. Listeners de respaldo
+      // 7. Listeners de respaldo por si el navegador bloquea autoplay
       this.setupFallbackListeners();
     }
 
