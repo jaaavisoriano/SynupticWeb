@@ -142,9 +142,31 @@
       // 4. Registrar listeners de eventos del video para diagnóstico y recuperación
       this.setupVideoEventListeners();
       
-      // 5. Marcar como listo para reproducir inmediatamente
-      // El preloader ya no controla la reproducción del video
-      this.preloaderFinished = true;
+      // 5. Sincronización con Preloader
+      // Verificamos si el preloader está activo y visible
+      const preloader = document.getElementById('premium-preloader');
+      const isPreloaderVisible = preloader && 
+                                 getComputedStyle(preloader).display !== 'none' && 
+                                 !preloader.classList.contains('fade-out');
+
+      if (isPreloaderVisible) {
+        this.preloaderFinished = false;
+        console.log('[HeroCtrl] Preloader detectado y activo. Esperando señal...');
+        
+        // Listener único para cuando el preloader termine
+        window.addEventListener('preloaderComplete', () => {
+          console.log('[HeroCtrl] Preloader completado. Iniciando video...');
+          this.preloaderFinished = true;
+          this.forcePlay();
+          // Si el video ya estaba listo (canplaythrough ocurrió antes), iniciamos el loop
+          if (this.video?.readyState && this.video.readyState >= 3) {
+             this.startForceLoop();
+          }
+        }, { once: true });
+      } else {
+        // En navegaciones internas o si no hay preloader, listo inmediatamente
+        this.preloaderFinished = true;
+      }
       
       // 6. Intentar reproducción inmediata como respaldo si autoplay falla
       // Pequeño delay para dar tiempo a que el DOM esté listo
@@ -225,15 +247,21 @@
         }
       };
 
+      // Aggressive interaction handler - tries to unlock audio/video context ASAP
       const interactionHandler = () => {
         if (this.isDestroyed) return;
-        if (this.preloaderFinished) this.forcePlay();
+        if (this.preloaderFinished && this.video?.paused) {
+          console.log('[HeroCtrl] Interacción detectada. Intentando forzar play...');
+          this.forcePlay();
+        }
       };
 
       document.addEventListener('visibilitychange', visibilityHandler);
-      document.addEventListener('click', interactionHandler, { once: true, passive: true });
-      document.addEventListener('scroll', interactionHandler, { once: true, passive: true });
-      document.addEventListener('touchstart', interactionHandler, { once: true, passive: true });
+      
+      // Use capture true to get the event asap
+      ['click', 'touchstart', 'scroll', 'mousemove', 'keydown'].forEach(event => {
+        document.addEventListener(event, interactionHandler, { once: true, capture: true, passive: true });
+      });
     }
 
     private ensureVideoLoaded() {

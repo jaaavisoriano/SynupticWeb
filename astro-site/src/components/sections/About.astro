@@ -130,6 +130,13 @@ import aboutImage from '../../assets/Multidisci_800x600-1.jpg';
     align-items: center;
   }
   
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr 1.1fr;
+      gap: 30px;
+    }
+  }
+
   @media (min-width: 992px) {
     .about-grid {
       grid-template-columns: 1fr 1.2fr;
@@ -191,7 +198,7 @@ import aboutImage from '../../assets/Multidisci_800x600-1.jpg';
     padding-right: 0;
   }
   
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     .about-section__content {
       padding-right: 20px;
     }
@@ -290,9 +297,12 @@ import aboutImage from '../../assets/Multidisci_800x600-1.jpg';
     .about-section {
       padding: 60px 0;
     }
-    
+  }
+
+  @media (max-width: 767px) {
     .about-section__image {
-      max-width: 75%;
+      width: 75%;
+      max-width: 400px;
       margin: 0 auto;
     }
   }

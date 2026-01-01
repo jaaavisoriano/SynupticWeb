@@ -60,17 +60,27 @@
   
   if (preloader) {
     // Check if this is a navigation within the site (not first load)
-    const isInternalNavigation = sessionStorage.getItem('synuptic_visited') === 'true';
+    const sessionVisited = sessionStorage.getItem('synuptic_visited') === 'true';
     
-    if (isInternalNavigation) {
-      // Skip preloader on internal navigation - hide immediately
+    // Check if it's a reload
+    const navEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
+    const isReload = navEntry && navEntry.type === 'reload';
+
+    if (sessionVisited && !isReload) {
+      // Internal navigation or revisited tab (not reload) - hide immediately
       preloader.classList.add('fade-out');
       preloader.style.display = 'none';
+      
+      // Safety: Emit event so listeners (like Hero) don't hang
+      requestAnimationFrame(() => {
+        window.dispatchEvent(new CustomEvent('preloaderComplete'));
+      });
     } else {
-      // First visit - show preloader animation
+      // First visit OR Reload - show preloader animation
       sessionStorage.setItem('synuptic_visited', 'true');
       
-      const minTime = 2000; // 2 seconds
+      // Shorter time for reloads to feel responsive but premium
+      const minTime = isReload ? 800 : 2000; 
       const startTime = Date.now();
 
       const finishAnimation = () => {
@@ -79,7 +89,6 @@
         // Emit event to start video while preloader fades
         setTimeout(() => {
           window.dispatchEvent(new CustomEvent('preloaderComplete'));
-          console.log('[Preloader] Signal to start video sent.');
         }, 100);
         
         // Remove from DOM after animation completes

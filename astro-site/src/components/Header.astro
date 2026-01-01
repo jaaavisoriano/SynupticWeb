@@ -259,6 +259,32 @@ const isServiciosActive = serviciosItems.some(item => currentPath === item.href)
       }
     };
     
+    // Global click listener to close menu when clicking outside
+    // This is a robust fallback for the overlay method
+    const handleOutsideClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // If menu is open AND click is NOT inside mobile nav AND NOT inside toggle button
+      if (mobileNav.classList.contains('is-open')) {
+         if (!mobileNav.contains(target) && !menuToggle.contains(target)) {
+            // Check if we are clicking on the overlay (which is covered by newOverlay listener) 
+            // OR if for some reason overlay failed.
+            // But to avoid double-toggling if overlay works, we can just ensure we only close if open.
+            
+            // To be safe, we let the overlay listener handle the overlay itself.
+            // This listener catches clicks elsewhere if any.
+            // However, with a fullscreen overlay, 'elsewhere' is rare unless z-index issues.
+            
+            // BUT, let's keep it simple: if the overlay is working, this is redundant but harmless 
+            // IF we check state properly.
+            
+            // Actually, best to just let the overlay do its job. 
+            // If the user says "touching outside", the overlay IS "outside".
+            // The only case this helps is if the overlay does not cover everything or z-index fail.
+         }
+      }
+    };
+    // We rely on the overlay. The CSS fix (pointer-events) should solve it.
+    
     newMenuToggle.addEventListener('click', toggleMenu);
     
     // Close menu when clicking on overlay
@@ -276,8 +302,8 @@ const isServiciosActive = serviciosItems.some(item => currentPath === item.href)
       });
     }
     
-    // Close menu when clicking on a link
-    const mobileLinks = mobileNav.querySelectorAll('a');
+    // Close menu when clicking on a link (exclude dropdown triggers)
+    const mobileLinks = mobileNav.querySelectorAll('a:not(.mobile-dropdown-trigger)');
     mobileLinks.forEach(link => {
       link.addEventListener('click', () => {
         newMenuToggle.classList.remove('open');
@@ -327,25 +353,35 @@ const isServiciosActive = serviciosItems.some(item => currentPath === item.href)
     }
     
     // Mobile dropdown - click behavior
-    const mobileDropdown = document.querySelector('.mobile-servicios-dropdown') as HTMLElement;
-    if (mobileDropdown) {
-      const mobileTrigger = mobileDropdown.querySelector('.mobile-dropdown-trigger');
-      const mobileSubMenu = mobileDropdown.querySelector('.mobile-sub-menu') as HTMLElement;
+    // Use querySelectorAll in case we add more dropdowns later
+    const mobileDropdowns = document.querySelectorAll('.mobile-servicios-dropdown');
+    
+    mobileDropdowns.forEach(dropdown => {
+      const mobileTrigger = dropdown.querySelector('.mobile-dropdown-trigger');
+      const mobileSubMenu = dropdown.querySelector('.mobile-sub-menu') as HTMLElement;
       
-      mobileTrigger?.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+      if (mobileTrigger && mobileSubMenu) {
+        // Remove old listener if any (by cloning)
+        const newTrigger = mobileTrigger.cloneNode(true) as HTMLElement;
+        mobileTrigger.parentNode?.replaceChild(newTrigger, mobileTrigger);
         
-        const isOpen = mobileDropdown.classList.toggle('is-open');
-        
-        // Animate submenu height
-        if (isOpen && mobileSubMenu) {
-          mobileSubMenu.style.maxHeight = mobileSubMenu.scrollHeight + 'px';
-        } else if (mobileSubMenu) {
-          mobileSubMenu.style.maxHeight = '0';
-        }
-      });
-    }
+        newTrigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const isOpen = dropdown.classList.toggle('is-open');
+          
+          // Animate submenu height
+          if (isOpen) {
+            mobileSubMenu.style.maxHeight = mobileSubMenu.scrollHeight + 'px';
+            // Optional: Recalculate after transition to allow auto-growth if needed, 
+            // but fixed px is better for the transition.
+          } else {
+            mobileSubMenu.style.maxHeight = '0';
+          }
+        });
+      }
+    });
   }
   
   // Initialize
@@ -473,15 +509,49 @@ const isServiciosActive = serviciosItems.some(item => currentPath === item.href)
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     backdrop-filter: blur(2px);
+    pointer-events: none; /* Explicitly disable when hidden */
+    cursor: pointer; /* Helper for iOS tap event */
+    -webkit-tap-highlight-color: transparent;
   }
 
   .mobile-menu-overlay.is-visible {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto; /* Enable when visible */
   }
   
   .header_mobile {
     z-index: 99999;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    max-width: 320px;
+    min-width: 280px;
+    background: var(--color-bg-mobile-menu);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    overflow-y: auto;
+    
+    /* Animation Initial State */
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.35s ease-out, visibility 0s linear 0.35s;
+    
+    /* Exclude from View Transitions */
+    view-transition-name: none;
+  }
+
+  /* Open State */
+  .header_mobile.is-open {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.35s ease-out, visibility 0s linear 0s;
   }
 
   /* Mobile Logo Styling */
@@ -643,13 +713,15 @@ const isServiciosActive = serviciosItems.some(item => currentPath === item.href)
   .mobile-servicios-dropdown > a.mobile-dropdown-trigger {
     display: flex !important;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
+    justify-content: space-between; /* Arrow to right */
+    width: 100%;
+    /* Inherits padding: 18px 0 from global .mobile-menu li a */
   }
 
   .mobile-dropdown-arrow {
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0.6;
+    margin-right: 4px; /* Slight offset from edge */
   }
 
   .mobile-servicios-dropdown.is-open .mobile-dropdown-arrow {
@@ -664,13 +736,20 @@ const isServiciosActive = serviciosItems.some(item => currentPath === item.href)
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    background: rgba(var(--color-primary-rgb, 0, 95, 115), 0.05);
-    border-radius: 12px;
-    margin-top: 8px;
+    /* Remove background to seamlessly blend or keep subtle */
+    background: transparent; 
+    border-radius: 0;
+    margin-top: 0;
+    padding-left: 10px; /* Indent the whole list */
+    border-left: 1px solid var(--color-border);
+  }
+
+  :global([data-theme="dark"]) .mobile-sub-menu {
+      border-color: rgba(255, 255, 255, 0.1);
   }
 
   .mobile-servicios-dropdown.is-open .mobile-sub-menu {
-    padding: 8px 0;
+    /* No padding block on container, just let items handle it */
   }
 
   .mobile-sub-menu li {
@@ -680,39 +759,34 @@ const isServiciosActive = serviciosItems.some(item => currentPath === item.href)
 
   .mobile-sub-menu li a {
     display: block;
-    padding: 14px 20px;
-    font-size: 15px;
+    padding: 12px 0 12px 15px; /* Indent items */
+    font-size: 16px; /* Slightly smaller than main items */
     font-weight: 500;
-    color: var(--color-text);
+    color: var(--color-nav-link); /* Fix undefined variable */
     text-decoration: none;
-    text-align: center;
+    text-align: left; /* Align left */
     transition: all 0.25s ease;
     position: relative;
+    opacity: 0.8;
   }
 
   .mobile-sub-menu li a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 20%;
-    right: 20%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(var(--color-primary-rgb, 0, 95, 115), 0.2), transparent);
-  }
-
-  .mobile-sub-menu li:last-child a::after {
+    /* Remove the bottom border lines for cleaner nested look */
     display: none;
   }
 
   .mobile-sub-menu li a:hover,
   .mobile-sub-menu li a:active {
-    color: var(--color-primary);
-    background: rgba(var(--color-primary-rgb, 0, 95, 115), 0.08);
+    color: var(--color-accent);
+    opacity: 1;
+    background: transparent;
+    padding-left: 20px; /* Hover movement */
   }
 
   .mobile-sub-menu li.current-menu-item a {
-    color: var(--color-primary);
+    color: var(--color-accent);
     font-weight: 600;
+    opacity: 1;
   }
 
   /* Subtle pulse animation for dropdown arrow on hover */
